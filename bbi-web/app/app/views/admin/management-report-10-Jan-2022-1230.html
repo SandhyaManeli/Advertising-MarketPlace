@@ -1,0 +1,263 @@
+
+<style>
+    th {
+        padding-top: 15px;
+        padding-left: 5px;
+    }
+    td {
+        padding-top: 15px;
+        padding-right: 7px;
+    }
+    tr {
+    border-bottom: 1px solid #e4e4e4;
+    }
+    table{
+        width: 100%;
+    }
+    .headertitle{
+        padding-bottom: 4px;
+    color: slategray;
+    padding-left: 3rem;
+    padding-top: 1rem;
+    }
+    .userIcon{
+    border: 1px solid #cbcbcb;
+    border-radius: 30px;
+    width: 35px;
+    height: 35px;
+    background: #ecbb08;
+    padding-top: 8px;
+    font-size: 16px;
+    color: white;
+    }
+    .title{
+        padding-bottom: 0px;
+    padding-left: 10px;
+    font-size: small;
+    color: slategray;
+    }
+    .count {
+        padding-left: 6px;
+    font-size: 30px;
+    }
+    .svg.highcharts-root {
+        width: 550px !important;
+    }
+
+
+</style>
+<div class="profile-details contbg" style=" padding-bottom: 20px">
+<!-- <div class="user Campaigns__info p-0" style="border-bottom: unset;" layout="column" flex-offset-gt-sm="5" flex="90" flex-xs="100" flex-sm="100"> -->
+    <div class="user Campaigns__info p-0 register-users-width" style="border-bottom: 1px solid #fff;">
+    <h5 class="headertitle">Registered Users</h5>
+    <md-divider></md-divider>
+    <div layout-padding class="profile-icons p-0">
+        <md-list flex layout="row" layout-xs="column" class="p-0 admin-mg-report">
+            <md-list-item>
+                <div>
+                    <div class="md-grid-item-content p-0" style="text-align:center" layout="row" layout-xs="row"
+                        layout-margin>
+                        <span>
+                            <md-icon style="margin-top: 20px;">
+                                <i class="fa fa-user userIcon" aria-hidden="true"></i>
+                            </md-icon>
+                        </span>
+                        <span>
+                        <div class="md-body-1 title">Users</div>
+                        <h4 class="count">{{reportCount.Buyers}}</h4>
+                        </span>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item>
+                <div>
+                    <div class="md-grid-item-content p-0" style="text-align:center" layout="row" layout-xs="row"
+                        layout-margin>
+                        <span>
+                            <md-icon style="margin-top: 20px;">
+                                <i class="fas fa-user-cog userIcon" aria-hidden="true" style="background-color:#ec0871;"></i>
+                            </md-icon>
+                        </span>
+                        <span>
+                        <div class="md-body-1 title">Owners</div>
+                        <h4 class="count">{{reportCount.Owners}}</h4>
+                        </span>
+                    </div>
+                </div>
+            </md-list-item>
+            <md-list-item>
+                <div>
+                    <div class="md-grid-item-content p-0" style="text-align:center" layout="row" layout-xs="row"
+                        layout-margin>
+                        <span>
+                            <md-icon style="margin-top: 20px;">
+                                <i class="fa fa-users userIcon" aria-hidden="true" style="background-color:#3ecb91;"></i>
+                            </md-icon>
+                        </span>
+                        <span>
+                        <div class="md-body-1 title">Total</div>
+                        <h4 class="count">{{reportCount.Total}}</h4>
+                        </span>
+                    </div>
+                </div>
+            </md-list-item>
+            <!-- <md-list-item>
+                <div>
+                    <div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row" layout-margin>
+                        <span>
+                            <md-icon>
+                                <i class="material-icons">card_travel</i>
+                            </md-icon>
+                        </span>
+                        <div class="md-body-1"> Invested </div>
+                        <h4>N/A</h4>
+
+                    </div>
+                </div>
+            </md-list-item> -->
+        </md-list>
+    </div>
+    <md-divider></md-divider>
+    <div class="text-center p-3">
+        <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px; padding: 8px;" type="button" ng-click="navigateToDetailPage(10)"> View All Users </button>
+    </div>
+</div>
+    <div class="productsData">
+        <div class="row" style="box-shadow: 0px 2px 5px #0000002e;">
+            <div class="col-lg-7 col-xl-7 col-sm-12 col-md-12 col-xs-12" style="max-width: 100%;width: 500px;">
+                <div id="container" class="admin-graph-wid"></div>
+                <div class="text-center" style="font-size: 15px;padding-bottom: 20px;">
+                <span>Total: </span><span style="cursor: pointer;" ng-click="navigateToDetailPage(11)"> <b>{{reportCount.TotalProducts}}</b></span>
+            </div>
+            </div>
+            <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-xs-12" class="admin-stripe-width" style="width: 500px;">
+                <div id="container1" class="stripe-inner"></div>
+            </div>
+            <md-divider></md-divider>
+            <div class="clearfix"></div>
+          
+        </div>
+        <div class="row mt-2">
+            <div class="col-12">
+        <div class="text-center p-3 admin-viewall">
+            <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px; padding: 8px;" type="button" ng-click="navigateToDetailPage(11)"> View All Products </button>
+        </div>
+    </div>
+       </div>
+    </div>
+    <div class="productsData">
+        <div class="row" style="box-shadow: 0px 2px 5px #0000002e;">
+            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6" style="padding-bottom: 20px;">
+                <h4 style="padding-top: 20px;color: slategrey;">Campaigns</h4>
+                <div style="border-left: 5px solid #abb6c2;border-right: 1px solid #e9e9e9;">
+                    <table class="">
+                        <tbody>
+                            <tr style="border-top: 1px solid #e4e4e4;">
+                                <th colspan="2">Find</th>
+                                <td style="float: right;">{{reportCount.Find}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Cart</th>
+                                <td style="float: right;">{{reportCount.Cart}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">RFP</th>
+                                <td style="float: right;">{{reportCount.RFPBeforeLogin}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Saved Campaigns</th>
+                                <td style="float: right;">{{reportCount.SavedCampaigns}}</td>
+                              </tr>
+                            <tr>
+                                <th rowspan="3" scope="rowgroup">Offer</th>
+                                <th scope="row">Requested</th>
+                                <td style="float: right;">{{reportCount.RequestedOffers}}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Accepted</th>
+                                <td style="float: right;">{{reportCount.AcceptedOffers}}</td>
+                              </tr>
+                              <tr>
+                                <th scope="row">Rejected</th>
+                                <td style="float: right;">{{reportCount.RejectedOffers}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">I/O</th>
+                                <td style="float: right;">{{reportCount.RequestedCampaigns}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Scheduled</th>
+                                <td style="float: right;">{{reportCount.ScheduledCampaigns}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Running</th>
+                                <td style="float: right;">{{reportCount.RunningCampaigns}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Closed</th>
+                                <td style="float: right;">{{reportCount.ClosedCampaigns}}</td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6" style="padding-bottom: 20px;">
+                <h4 style="padding-top: 20px;color: slategrey;">Admin</h4>
+                <div style="border-left: 5px solid #abb6c2;border-right: 1px solid #e9e9e9;">
+                    <table class="">
+                        <tbody>
+                            <tr style="border-top: 1px solid #e4e4e4;">
+                                <th colspan="2">Notices</th>
+                                <td style="float: right;">{{reportCount.Notices}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Todo (Red)</th>
+                                <td style="float: right;">0</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Todo (Black)</th>
+                                <td style="float: right;">6</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">My Campaigns</th>
+                                <td style="float: right;">{{reportCount.MyCampaigns}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Feedback</th>
+                                <td style="float: right;">{{reportCount.Feedback}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Payments
+                                </th>
+                                <td style="float: right;">{{reportCount.Payments}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Cancellations</th>
+                                <td style="float: right;">{{reportCount.Cancellations}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Bulk Uploads</th>
+                                <td style="float: right;">{{reportCount.BulkUploads}}</td>
+                              </tr>
+                              <tr>
+                                <th colspan="2">Referrals</th>
+                                <td style="float: right;">{{reportCount.Referrals}}</td>
+                              </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <md-divider></md-divider>
+          
+            </div>
+            <div class="row">
+                <div class="col-12">
+            <div class="text-center p-3">
+                <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px; padding: 8px;" type="button" ng-click="navigateToDetailPage(12)"> View All Campaigns </button>
+            </div>
+             </div>
+            </div>
+            </div>
+        </div>
+</div>

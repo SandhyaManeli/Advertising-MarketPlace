@@ -1,0 +1,1078 @@
+<style>
+	.Pdf2-view {
+		transition: .5s ease;
+		opacity: 0;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		text-align: center;
+		bottom: 66%;
+		left: 72%;
+	}
+
+	.column:hover .Pdf2-view {
+		opacity: 1;
+	}
+
+
+	.middle {
+		transition: .5s ease;
+		opacity: 0;
+		position: absolute;
+		bottom: 67%;
+		left: 28%;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		text-align: center;
+	}
+
+	.column:hover .middle {
+		opacity: 1;
+	}
+
+
+	.column:hover .image {
+		opacity: 0.3;
+	}
+
+	.middle1 {
+		transition: .5s ease;
+		opacity: 0;
+		position: absolute;
+		left: 18%;
+		top: 73%;
+		text-align: center;
+
+	}
+
+	.column:hover .middle1 {
+		opacity: 1;
+	}
+
+	.text {
+		background-color: #4346458a;
+		color: white;
+		font-size: 16px;
+		padding: 6px 20px;
+		border: 1px solid black;
+	}
+
+	.image {
+		opacity: 1;
+		width: 90%;
+		height: auto;
+		transition: .5s ease;
+		backface-visibility: hidden;
+	}
+
+	.banner-head {
+		max-width: 250px;
+		font-family: 'Ubuntu';
+		font-weight: 700;
+	}
+
+	.banner-head-bg {
+		color: #727272;
+	}
+
+	.banner-bg-grey {
+		background-color: #D7D9DC;
+	}
+
+	.bg-grey {
+		background-color: #D7D9DC;
+	}
+
+	.adv-para1 {
+		max-width: 850px;
+		Font-family: 'Noto Sans';
+	}
+
+	.banner-txt-para {
+		max-width: 450px;
+		Font-size: 17px;
+		font-weight: 400;
+		color: #1D1D1D;
+		Font-family: 'Noto Sans';
+	}
+
+	.overall-para p {
+		font-size: 17px;
+	}
+
+	.banner-image img {
+		padding: 0.7rem;
+		border: 1px solid;
+		background: black;
+		position: relative;
+		overflow: hidden;
+		border-top-right-radius: 30px;
+		border-bottom-left-radius: 30px;
+		border-bottom-right-radius: 10px;
+		border-top-left-radius: 10px;
+		transition: 0.5s all ease-in-out;
+	}
+
+	.banner-imgRight img {
+		padding: 0.7rem;
+		background: black;
+		position: relative;
+		overflow: hidden;
+		border-top-left-radius: 25px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 30px;
+		border-top-right-radius: 10px;
+	}
+
+	.banner-imgleft img {
+		padding: 0.7rem;
+		border: 1px solid;
+		background: black;
+		position: relative;
+		overflow: hidden;
+		border-top-right-radius: 30px;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 30px;
+		border-bottom-right-radius: 8px;
+	}
+
+	.banner-bg {
+		background-color: #ffffff;
+		padding-top: 60px !important;
+	}
+
+	.caursel-head {
+		font-family: ubuntu;
+		font-weight: 700;
+		font-size: 40px;
+	}
+
+	/* 
+	 li::marker {
+		content: "\2022";
+		color:#EB2222;
+		font-weight: bold;
+		display: inline-block;
+		width: 1em;
+		margin-left: -1em;
+	} */
+
+	/* #cards_landscape_wrap-2 .card-flyer .image-box {
+		background: #ffffff;
+		overflow: hidden;
+		box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
+		border-radius: 5px;
+	} */
+
+	.buyer-seller-bg {
+		background-color: #D7D9DC;
+	}
+
+	.section-txt {
+		Font-family: 'Ubuntu';
+		Font-style: 'Bold';
+		Font-size: 50px;
+		Line-height: 65px;
+	}
+
+	.head-text {
+		Font-family: 'Noto Sans';
+		Font-size: 25px;
+		font-weight: 700;
+	}
+
+	.head-text1 {
+		Font-family: 'Noto Sans';
+		Font-size: 24px;
+		font-weight: 700;
+	}
+
+	.sel-text {
+		Font-family: 'Noto Sans';
+		Font-size: 17px;
+	}
+
+	.evertthing-head {
+		font-weight: 600;
+		font-size: 30px;
+		font-family: ubuntu;
+	}
+
+	.evertthing-para {
+		font-size: 17px;
+		max-width: 480px;
+	}
+
+	.buysel-head {
+		text-align: center;
+		font-size: 30px;
+		font-weight: 600;
+	}
+
+	.request-para {
+		font-size: 17px;
+		font-weight: 400;
+		font-family: Noto Sans;
+	}
+
+	.theme-red {
+		color: #EB2222;
+	}
+
+	.BuySell-para {
+		font-size: 17px;
+		text-align: center;
+	}
+
+	/*  */
+
+	.hidden {
+		display: none;
+	}
+
+	.abcd {
+		padding-left: 522px;
+	}
+
+	.click-buySell .active {
+		border-bottom: 3px solid transparent;
+	}
+
+	.everything-one-place-bg {
+		background-color: #D7D9DC;
+	}
+
+	.carousel .carousel-indicators li {
+		/* position: relative;
+    	width: 23px;
+    	height: 6px;
+    	border-radius: 35px; */
+		border-radius: 50%;
+		height: 10px;
+		width: 12px;
+		background-color: #EB2222;
+	}
+
+	.carousel-indicators .active {
+		margin-top: 4px;
+		border-radius: 15px;
+		width: 23px !important;
+		height: 6px !important;
+		background-color: #EB2222;
+	}
+
+	.carousel-indicators {
+		bottom: -45px;
+	}
+
+	.organe-bg {
+		background: rgb(235, 34, 34);
+		background: linear-gradient(90deg, rgba(235, 34, 34, 1) 0%, rgba(255, 139, 54, 1) 100%);
+		border-radius: 30px;
+	}
+
+	.organe-bg img {
+		position: relative;
+		margin-bottom: -115px;
+		margin-top: -90px;
+		/* margin-left: -104px; */
+	}
+
+	.plus-icon {
+		width: 25px;
+		line-height: 25px;
+		border-radius: 50%;
+		text-align: center;
+		font-size: 15px;
+		border: 2px solid #000;
+	}
+
+	span.circle {
+		background: #96D44C;
+		border-radius: 50%;
+		-moz-border-radius: 50%;
+		-webkit-border-radius: 50%;
+		color: #ffffff;
+		display: inline-block;
+		font-weight: bold;
+		line-height: 40px;
+		margin-right: 5px;
+		text-align: center;
+		font-size: 17px;
+		width: 40px;
+	}
+
+	span.circle1 {
+		background: #6E93E8;
+		border-radius: 50%;
+		-moz-border-radius: 50%;
+		-webkit-border-radius: 50%;
+		color: #ffffff;
+		display: inline-block;
+		font-weight: bold;
+		line-height: 40px;
+		margin-right: 5px;
+		text-align: center;
+		font-size: 17px;
+		width: 40px;
+	}
+
+	.img-respe {
+		display: flex;
+		margin-left: 45px;
+	}
+
+	.boder-img {
+		border-top-right-radius: 30px;
+		border-bottom-left-radius: 30px;
+		transition: 0.5s all ease-in-out;
+		width: 80%;
+	}
+
+	.right-boder-img {
+		border-top-left-radius: 30px;
+		border-bottom-right-radius: 30px;
+		transition: 0.5s all ease-in-out;
+		padding: 6px;
+		width: 80%;
+	}
+
+
+	.contactUs-btn {
+		font-size: 17px;
+		width: 120px;
+		background: linear-gradient(89.8deg, #EB2222 2.28%, #FF8B36 99.83%);
+		color: #ffff;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		padding: 8px 5px;
+	}
+
+	/***** Global Slide *****/
+	.slide-right,
+	.slide-left {
+		width: 100%;
+	}
+
+	/***** Slide Right *****/
+	.slide-right {
+		animation: 5s slide-right;
+	}
+
+	@keyframes slide-right {
+		from {
+			margin-left: -100%;
+		}
+
+		to {
+			margin-left: 0%;
+		}
+	}
+
+	/***** Slide Left *****/
+	.slide-left {
+		animation: 5s slide-left;
+	}
+
+	@keyframes slide-left {
+		from {
+			margin-left: 100%;
+		}
+
+		to {
+			margin-left: 0%;
+		}
+	}
+
+	.advertise-txt {
+		font-size: 38px;
+		color: #1D1D1D;
+		font-weight: 700;
+		font-family: Ubuntu;
+	}
+
+	.automated-txtbg {
+		font-size: 38px;
+		color: #EB2222;
+		font-weight: 600;
+	}
+
+	.boardig-img {
+		margin: 9rem;
+	}
+
+	.boardig-para1 {
+		max-width: 427px;
+		font-size: 28px;
+		color: #ECF0F3
+	}
+
+	.boardig-para2 {
+		max-width: 453px;
+		font-size: 15px;
+		/* max-width: 500px;
+		font-size: 17px; */
+		color: #FFFFFF;
+	}
+
+	.viewinfo-para {
+		font-size: 17px;
+		color: #FFFFFF;
+	}
+
+	.carousel-caret {
+		font-size: 24px;
+		padding: 2.5rem;
+		border: 15px solid #FFFFFF;
+		border-radius: 60px;
+		background: radial-gradient(136.27% 109.59% at 51.07% 54.29%, #FF8B36 0%, #EB2222 100%)
+	}
+
+	.carousel-control-next,
+	.carousel-control-prev {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		z-index: 1;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-align: center;
+		align-items: center;
+		-ms-flex-pack: center;
+		justify-content: center;
+		width: 0%;
+		color: #fff;
+		text-align: center;
+		opacity: 1;
+		transition: opacity 0.15s ease;
+	}
+
+
+	@media screen and (max-width: 600px) {
+		.column {
+			width: 100%;
+			display: block;
+		}
+
+		.mini-text {
+			Font-size: 14px;
+		}
+
+		.content-padding {
+			margin-left: 0px !important;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		.adv-para1 {
+			Font-size: 17px;
+		}
+
+		.banner-txt-para {
+			font-size: 13px;
+		}
+
+		.advertise-txt .advertise-txt {
+			font-size: 28px;
+		}
+
+		.head-text {
+			font-size: 20px !important;
+		}
+
+		.head-text1 {
+			font-size: 20px !important;
+		}
+
+		.overall-para p {
+			font-size: 15px !important;
+		}
+
+		.header-text {
+			font-size: 30px;
+		}
+
+		.buysel-head {
+			font-size: 26px;
+			font-weight: 600;
+		}
+
+		.everything-img {
+			width: 100%;
+		}
+
+		.evertthing-para {
+			font-size: 14px;
+		}
+
+		.caursel-head {
+			font-size: 24px !important;
+		}
+
+		.organe-bg img {
+			position: relative;
+			margin-bottom: -70px;
+			margin-top: -65px;
+		}
+
+		.boarding-green-img {
+			width: 45%;
+		}
+
+		.boardig-para1 {
+			font-size: 18px !important;
+			margin-top: 1rem !important;
+		}
+
+		.buyer1 img {
+			width: 100%;
+			margin-bottom: 20px;
+		}
+
+		.sel-text {
+			Font-size: 14px;
+		}
+
+		.text {
+			padding: 0px 12px;
+		}
+		
+	.middle1 {
+		left: 15%;
+	}
+	}
+
+	@media screen and (max-width: 575px) {
+		.content-padding {
+			margin-left: 0px !important;
+		}
+
+		.caursel-head {
+			font-size: 22px !important;
+		}
+	}
+
+	@media screen and (max-width: 425px) {
+		.evertthing-head {
+			font-size: 26px !important;
+		}
+
+		.organe-bg img {
+			width: 25%;
+		}
+
+		.boardig-para1 {
+			font-size: 16px;
+			margin-top: 1rem;
+		}
+
+		.boarding-green-img2 {
+			width: 35% !important;
+		}
+
+	}
+
+	@media screen and (max-width: 1024px) {
+		.head-text {
+			font-size: 28px;
+		}
+
+		.caursel-head {
+			font-size: 28px;
+		}
+
+		.boardig-para1 {
+			max-width: 421px;
+			font-size: 25px;
+			color: #ECF0F3;
+		}
+
+		.boardig-para2 {
+			max-width: 410px;
+			font-size: 14px;
+			color: #FFFFFF;
+		}
+
+		.carousel-caret {
+			/* font-size: 24px; */
+			padding: 1.5rem;
+			border: 12px solid #FFFFFF;
+			border-radius: 60px;
+			background: radial-gradient(136.27% 109.59% at 51.07% 54.29%, #FF8B36 0%, #EB2222 100%);
+		}
+
+		.boarding-green-img {
+			width: 43%;
+		}
+
+		.boarding-green-img2 {
+			width: 43%;
+		}
+
+		.organe-bg img {
+			position: relative;
+			margin-bottom: -70px;
+			margin-top: -58px;
+			/* margin-left: -104px; */
+		}
+
+		.carousel-listType {
+			font-size: 13px !important;
+		}
+
+	}
+
+	.column {
+		float: left;
+		width: 50%;
+		padding: 5px;
+	}
+
+	.align-img {
+		text-align: right;
+	}
+
+	/* Create an active/current tablink class */
+	.tab span.active {
+		border-bottom: 3px solid #EB2222;
+		color: #EB2222;
+	}
+
+	/* Change background color of buttons on hover */
+	.tab span:hover {
+		border-bottom: 3px solid #EB2222;
+		color: #EB2222;
+	}
+
+	.tablinks {
+		cursor: pointer;
+	}
+
+	@media screen and (max-width: 575px) {
+
+		.carouselmage img {
+			display: none !important;
+		}
+
+		.boardig-img {
+			margin: 5rem;
+		}
+
+	}
+
+	@media screen and (max-width: 426px) {
+		.carousel-caret {
+			font-size: 14px !important;
+			padding: 0.9rem !important;
+			border: 4px solid #FFFFFF !important;
+		}
+	}
+
+	@media screen and (max-width: 321px) {
+
+		.boardig-para2 {
+			margin-left: 10px;
+			font-size: 12px;
+		}
+
+		.boardig-para1 {
+			font-size: 14px !important;
+		}
+
+		.organe-bg {
+			border-radius: 15px;
+		}
+	}
+
+	@media screen and (max-width: 376px) {
+
+
+		.boardig-para2 {
+			margin-left: 10px !important;
+			font-size: 12px !important;
+		}
+
+		.organe-bg {
+			border-radius: 15px;
+		}
+	}
+
+	@media screen and (max-width: 426px) {
+		.boardig-img {
+			margin: 3rem;
+		}
+
+		.boardig-para2 {
+			margin-left: 10px !important;
+			font-size: 12px !important;
+		}
+
+		.organe-bg {
+			border-radius: 15px;
+		}
+	}
+
+	.carousel-listType {
+		font-size: 15px;
+		color: #fff;
+	}
+</style>
+<div class="conatiner-fluid">
+	<div class="banner-bg">
+		<div class="banner-bg-top"></div>
+		<div class="container mt-4">
+			<div class="row py-4">
+				<div class="col-md-6 my-4">
+					<h1 class="banner-head"><span class="banner-head-bg">Connecting</span> Advertising Buyers
+						& Sellers !</h1>
+					<p class="banner-txt-para">
+						Advertising Marketplace, or AMP is an advertising buying and selling
+						platform for everyone! </p>
+
+					<p class="banner-txt-para">We’re pulling back the curtain and bringing
+						access to the world of non-publishers. We’ve built a tool similar to those previously only used
+						by trade desks and now these tools are available to everyone.
+					</p>
+					<p class="banner-txt-para">From the newest entrepreneur looking to introduce their brand to their
+						local community, to the most seasoned
+						ad executive or agency, everyone can be a pro with AMP.
+					</p>
+					<p class="banner-txt-para">Buy and sell with confidence! </p>
+					<div class="mt-4">
+
+					</div><a href="#contactInfo" class="smooth"><button type="button" class="contactUs-btn"
+							onclick="scrollFunction()">Request Demo</button></a>
+				</div>
+				<div class="col-md-6 my-auto">
+					<div class="row">
+						<div class="column align-img banner-image">
+							<img src="../assets/images/CS-AMP1.png" width="90%" class="image">
+							<div class="middle">
+								<a href="../assets/excelFile/CanyonSpringsDigitalInfoSheet.pdf"
+									class="text view_more_btn" type="button" target="_blank">View more</a>
+							</div>
+						</div>
+						<div class="column banner-imgRight ">
+							<img src="../assets/images/626-logo.png" width="90%" class="image">
+							<div class="Pdf2-view">
+								<!-- <a href="../assets/excelFile/626InfoforAMP.pdf" class="text view_more_btn" type="button"
+									target="_blank">View more</a> -->
+								<a href="../assets/excelFile/626NightMarkets2023Presentation.pdf" class="text view_more_btn" type="button"
+									target="_blank">View more</a>
+							</div>
+
+						</div>
+						<div class="column align-img banner-imgRight">
+							<!--<img src="../assets/images/advertise-img3.png" width="90%" class="">-->
+							<img src="../assets/images/BLDOpportunity.png" width="90%" class="image">
+							<div class="middle1">
+								<a href="../assets/excelFile/BLDOpportunity.pdf" class="text view_more_btn" type="button"
+									target="_blank">View more</a>
+							</div>
+							<!-- <div class="middle1">
+								<a href="../assets/excelFile/MDRSalesOneSheet.pdf" class="text view_more_btn" type="button"
+									target="_blank">View more</a>
+							</div> -->
+						</div>
+						<div class="column banners-images banner-imgleft">
+							<img src="../assets/images/advertise-img4.png" width="90%">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid p-0">
+		<div class="col-12 p-0">
+			<img src="../assets/images/splashbg-img1.png" width="100%">
+		</div>
+	</div>
+	<div class="container-fluid p-0">
+		<div class="banner-bg-grey">
+			<div class="container pt-5">
+				<h1 class="text-center advertise-txt">Advertising <span class="automated-txtbg">At Your
+						Fingertips</span></h1>
+				<h3 class="text-center mt-3">No subscription or membership fee!</h3>
+				<div class="col-lg-10 col-sm-12 m-auto">
+					<h3 class="text-center adv-para1  mt-4">AMP is bringing today’s technology to all buyers and sellers
+						to provide a truly inclusive marketplace.</h3>
+				</div>
+				<div class="col-md-12">
+					<h2 class="tab text-center py-4">
+						<span class="tablinks active" ng-class="{'dcactive':dcactive === true}"
+							onclick="openCity(event, 'Servers')">Buy</span>
+						<span class="tablinks mx-4" onclick="openCity(event, 'Fruits')">Sell</span>
+					</h2>
+					<!-- <h2 class="text-center buySellTab py-4">
+						<span>
+							<a type="button" class=" buySell active"
+						 ng-class="{'dcactive':dcactive === true}" onclick="openCity(event, 'Servers')">Buy</a>
+						</span> 
+						 <span>
+							<a class="mx-4 buySell" type="button" onclick="openCity(event, 'Fruits')">Sell</a>
+						 </span>
+						
+					</h2> -->
+				</div>
+				<div class="row py-4">
+					<div id="Servers" class="tabcontent">
+						<div class="row slide-right pb-5">
+							<div class="col-md-6 buyer1">
+								<img src="../assets/images/banner-img(latest).png" width="90%">
+							</div>
+							<div class="col-md-6 my-auto px-5">
+								<h6 class="head-text mb-0">Reach Your Audience <span style="font-size: 16px;">- Do it
+										yourself, or we can assist. It’s up to you.</span></h6>
+								<hr width="95px" align="left" style=" border-top: 2px solid #EB2222;">
+								<p class="sel-text">Select your DMA, your target, and browse the available media for
+									free. From OOH (Out of Home) including billboards and onsite at
+									conventions/festivals/events to online, TV, radio and social media. All the info is
+									at your fingertips.
+								</p>
+								<p class="sel-text">Stack it! Group it! You build your campaign flights, your way.</p>
+								<div class="mt-3">
+									<!-- <a href="#contactInfo" style="color: #000;"><p class="request-para mb-0" onclick="scrollFunction()">Request for Demo</p></a>
+									<hr width="130px" align="left"
+										style="border-top: 1px solid #1D1D1D; margin-top: 0;"> -->
+									<a href="#contactInfo" class="smooth"><button type="button" class="reqbtn-lanPage"
+											onclick="scrollFunction()">Request Demo</button></a>
+								</div>
+							</div>
+						</div>
+						<div class="row py-4 slide-left">
+							<div class="col-md-6 my-auto mb-3">
+								<h1 class="head-text mb-0" align="right">Manage it with ease</h1>
+								<hr width="95px" align="right" style=" border-top: 2px solid #EB2222;">
+								<p class="sel-text mb-5" align="right">From Insertion Order status to Scheduled,
+									Running, Closed and/or Canceled. And you can submit Change Orders to Sellers and
+									manage all your activity in your own private dashboard.
+								</p>
+								<div class="mt-3 text-right">
+									<!-- <a href="#contactInfo" style="color: #000;"><p class="request-para mb-0 text-right" onclick="scrollFunction()">Request for Demo</p></a>
+									<hr width="130px" align="right"
+										style="border-top: 1px solid #1D1D1D; margin-top: 0;"> -->
+									<a href="#contactInfo" class="smooth"><button type="button" class="reqbtn-lanPage"
+											onclick="scrollFunction()">Request Demo</button></a>
+								</div>
+								<div class="overall-para mt-4">
+									<p align="right" style="font-size: 17px;"> <strong>Overall Result : </strong><Span
+											style="color:#EB2222;">More control and shorter buying cycle</Span></p>
+								</div>
+							</div>
+							<div class="col-md-6 text-center">
+								<img src="../assets/images/banner-img2(latest).png" class="" width="100%" alt="image">
+							</div>
+						</div>
+					</div>
+					<div id="Fruits" class="tabcontent  hidden">
+						<div class="row ">
+							<div class="row py-4 slide-right">
+								<div class="col-md-6">
+									<img src="../assets/images/banner-img1.png" width="90%">
+								</div>
+								<div class="col-md-6 my-auto px-5">
+									<h4 class="head-text1 mb-0">Expand your sales staff without adding employees</h4>
+									<hr width="95px" align="left" style=" border-top: 2px solid #EB2222;">
+									<p class="sel-text">AMP reaches businesses actively looking to buy media. Add a
+										layer of exposure to your opportunities. List your ad space with AMP and let the
+										advertisers come to you! There’s never a fee or cost for you to list. </p>
+									<p class="sel-text">AMP allows you to provide your rate card and all the details the
+										Buyers need in order to purchase.</p>
+									<p class="sel-text">We give you all the tools to manage the sale. Best of all, you
+										control your price and your inventory.</p>
+									<div class="mt-3">
+										<!-- <a href="#contactInfo" style="color: #000;"><p class="request-para mb-0 text-right" onclick="scrollFunction()">Request for Demo</p></a>
+											<hr width="130px" align="right"
+												style="border-top: 1px solid #1D1D1D; margin-top: 0;"> -->
+										<a href="#contactInfo" class="smooth"><button type="button"
+												class="reqbtn-lanPage" onclick="scrollFunction()">Request
+												Demo</button></a>
+									</div>
+								</div>
+							</div>
+							<div class="row py-4 slide-left">
+								<div class="col-md-6 my-auto px-5">
+									<h1 class="head-text mb-0" align="right">We make it easy for buyers, which means
+										stress-free selling for you!
+									</h1>
+									<hr width="95px" align="right" style=" border-top: 2px solid #EB2222;">
+									<p class="sel-text mb-5" align="right">It’s your sale. You control approvals on
+										bookings and creative. AMP provides Scheduling tools where you can see the
+										inventory purchased and track it from Insertion Order, Scheduled, Running,
+										Closed and Paid statuses.
+									</p>
+									<div class="text-right">
+										<!-- <a href="#contactInfo" style="color: #000;"><p class="request-para mb-0 text-right" onclick="scrollFunction()">Request for Demo</p></a>
+										<hr width="130px" align="right"
+											style="border-top: 1px solid #1D1D1D; margin-top: 0;"> -->
+										<a href="#contactInfo" class="smooth"><button type="button"
+												class="reqbtn-lanPage" onclick="scrollFunction()">Request
+												Demo</button></a>
+									</div>
+									<div class="overall-para mt-3">
+										<p align="right"> <strong>Overall Result : </strong><Span
+												style="color:#EB2222;">More control and shorter buying cycle</Span></p>
+									</div>
+								</div>
+								<div class="col-md-6 text-center">
+									<img src="../assets/images/banner-img2.png" class="" width="80%" alt="image">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid p-0">
+		<div class="bg-grey">
+			<div class="container">
+				<div class="row py-4">
+					<div class="col-md-6">
+						<img src="../assets/images/everything-oneplace-img.png" width="80%" class="everything-img">
+					</div>
+					<div class="col-md-6 my-auto">
+						<h2 class="evertthing-head">Everything in <span style="color:#EB2222;">One Place</span></h2>
+						<!-- <p class="evertthing-para mt-4">Advertising Marketplace (AMP) allows you to manage all your
+							activity in
+							one place over any device; Server, PC, Laptop or mobile / handheld. And
+							your Dashboard provides you and your team an easy way to update your
+							account Profile, watch for Notices and determine individual access and
+							permissions.
+						</p>
+						<p class="evertthing-para mt-2">AMP also provides Scheduling tools where you can see the
+							Campaigns
+							purchased by Users, and if you are a Seller, you can see Campaigns
+							purchased by you and your Seller team.</p> -->
+						<p class="evertthing-para mt-3">
+							Advertising Marketplace (AMP) allows you to manage all your activity in one place over ANY
+							device. At your desk or on the go. Your Dashboard makes it easy for you and your team to see
+							important details and make edits, listings, or campaigns accordingly.
+						</p>
+						<li style="font-size:17px;"> <strong>Overall Result: </strong><span style="color: #EB2222;">
+								Saves time</span>
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row mt-5">
+				<div class="col-12 text-center">
+					<h1 class="caursel-head"> A Must-haves for high performing <span style="color:#EB2222;"> media
+							departments</span></h1>
+				</div>
+			</div>
+		</div>
+		<div class="conatiner">
+			<div class="col-md-10 m-auto">
+				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+							<div class="row mx-auto boardig-img">
+								<div class="col-md-12 m-auto organe-bg">
+									<div class="d-flex carouselmage">
+										<img src="../assets/images/boarding-green-img.png" width="50%"
+											class="boarding-green-img">
+										<div class="my-auto">
+											<h2 class="boardig-para1 mb-4">
+												Pro or novice, start to finish, it has a workflow that works for your
+												company.
+											</h2>
+											<p class="boardig-para2">Whether you need assistance or prefer self-serve,
+												Advertising Marketplace allows you to choose as much or as little as you
+												would like.
+											</p>
+											<ul class="carousel-listType">
+												<li>Nationwide search</li>
+												<li>Real time Avails</li>
+												<li>Export to Excel </li>
+												<li>Compare / Contrast</li>
+												<li>Geo fencing </li>
+												<li>RFP assist </li>
+												<li>Purchase on demand </li>
+											</ul>
+
+											<!-- <hr width="160px" align="Left" style=" border-top: 2px solid #FFFFFF;"> -->
+
+											<!-- <div class="mt-5">
+												<p class="viewinfo-para"><span class="circle">+</span> View more info
+												</p>
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item">
+							<div class="row mx-auto boardig-img">
+								<div class="col-md-12 m-auto organe-bg">
+									<div class="d-flex carouselmage">
+										<img src="../assets/images/boarding-img2.png" width="50%"
+											class="boarding-green-img2">
+										<div class="my-auto">
+											<h3 class="boardig-para1 mb-4">
+												The media buying and selling world is changing.
+											</h3>
+											<p class="boardig-para2">AMP is here to make advertising accessible to
+												businesses of any size or budget. Request a demo today.
+											</p>
+											<ul class="carousel-listType">
+												<li>Buy direct </li>
+												<li>Open pricing </li>
+												<li>See it buy it </li>
+												<li>Mobile 24/7 </li>
+												<li>Link and stack </li>
+												<li>On-line negotiation </li>
+												<li>Automation - not programatic </li>
+											</ul>
+
+											<!-- <hr width="160px" align="Left" style=" border-top: 2px solid #FFFFFF;"> -->
+											<!-- <div class="mt-5">
+												<p class="viewinfo-para"><span class="circle1">+</span> View more info
+												</p>
+											</div> -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+						<!-- <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+						<i style='font-size:24px' class='fas carousel-caret'>&#xf060;</i>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+						<!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+						<i style='font-size:24px' class='fas carousel-caret'>&#xf061;</i>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<script>
+	function openCity(evt, cityName) {
+		var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		}
+
+		tablinks = document.getElementsByClassName("tablinks");
+		for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace("active", "");
+		}
+
+		document.getElementById(cityName).style.display = "block";
+		evt.currentTarget.className += " active";
+	}
+</script>

@@ -1,0 +1,126 @@
+<div id="id01" class="sign_bgcolor">
+    <!-- <div><span onclick="document.getElementById('id01').style.display='none'" 
+    class="w3-button w3-display-topright md-whiteframe-z3" style="float: right;padding: 20px;margin: 20px;color:#fff;">X</span></div> -->
+<md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+  <md-dialog-content>
+    <div class="card card-signin m-2" ng-if="!forgotPasswordpage">
+      <div class="card-body">
+          <button class="md-icon-button md-button ng-scope md-ink-ripple" type="button" aria-label="Close Side Panel" ng-click="closeMdDialog()" style="float: right;padding: 5px;margin: -20px;">
+              <md-icon class="md-default-theme close_mb ng-scope material-icons" role="img" aria-hidden="true"><i class="material-icons">close</i></md-icon>
+            <div class="md-ripple-container"></div>
+          </button>
+        <div class="mb-4 banner_img">
+          <img src="assets/images/BBA.png" class="login_img" alt="Smiley face">
+        </div>
+        <hr class="my-4">
+        <form class="form-signin mt-4" name="loginForm" novalidate>
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label md-body-2 user_font">User Name</label>
+            <div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+              <input type="email" class="form-control form_border"  placeholder="Email"  name="email" ng-model="user.email" maxlength="50"
+                required/>
+                <p class="help-block" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="Password" class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+            <div class="col-sm-9" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+              <input  type="password" class="form-control form_border" placeholder="Password" name="password"  ng-model="user.password"  
+              maxlength="15" required/>
+              <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 15 characters</p>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="row">
+              <div class="col-sm-6 offset-md-2 col-md-4 offset-lg-2 col-lg-4">
+                <button class="btn login_margin all_button" type="submit" ng-click="signInUser(loginForm)"
+                ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid" layout-fill="layout-fill" md-autofocus>Login</button>
+              </div>
+              <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="forgot">                  
+                    <a class="md-primary udrlin alrhvacc" style="cursor:pointer; float:right;color: #000;font-size: 11px;" ng-click="showForgotPasswordDialog()">Forgot password ?</a><br>                  
+                    <!-- <a class="md-primary udrlin alrhvacc" style="cursor:pointer; text-decoration:none;color: #000;font-size: 11px;" ng-click="showRegisterDialog()">New User? Register Here</a> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4">
+          <p class="text-center power_by">Powered by PeopleTech Group</p>
+        </form>
+      </div>
+    </div>
+    <div class="card card-signin m-2" ng-if="forgotPasswordpage" ng-controller="AuthCtrl">
+        <div class="card-body">
+          <div class="mb-4 banner_img">
+            <img src="assets/images/BBA.png" class="login_img" alt="Smiley face">
+          </div>
+          <hr class="my-4">
+          <form class="form-signin mt-4" name="forgotPassword" novalidate="novalidate">
+              <h4 class="text-center mb-3" style="margin-bottom:0px;">Reset Password</h4>
+              <div class="form-group row">
+                  <label for="paymentType" class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+                  <div class="col-sm-9">
+                      <input type="email" class="form-control form_border" id="" ng-model="forgotPwd.email">
+                  </div>
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="row">
+                      <div class="offset-lg-3 offset-md-3 col-sm-6 col-md-6 col-lg-6">
+                          <a><button class="btn reset_passowrd all_button"
+                                  type="submit" ng-click="requestResetPassword(forgotPwd)">Reset Password</button></a>
+                      </div>
+                  </div>
+              </div>
+              <hr class="my-4">
+              <p class="text-center power_by"><b>Powered by PeopleTech Group</b></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="card card-signin my-5">
+          <div class="card-body">
+              <div class="mb-4 banner_img">
+                  <img src="assets/images/core/Adrs_Logo.png" class="login_img" alt="Smiley face">
+              </div>
+              <hr class="my-4">
+              <form class="form-signin mt-4">
+                  <p class="text-center mb-3 md-title" style="margin-bottom:0px;">Congratulations!<br>
+                      Your account has been created.<br>
+                      Let's work together
+                  </p>
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="row">
+                          <div class="offset-lg-3 offset-md-3 col-sm-6 col-md-6 col-lg-6">
+                              <a ng-href="#/owner/{{clientSlug}}/loginpage"><button class="btn btn-lg btn-danger btn-block text-uppercase"
+                                      type="submit">Login</button></a>
+                          </div>
+                      </div>
+                  </div>
+                  <hr class="my-4">
+                  <p class="text-center font-weight-light power_by">Powered By
+                      Bill Boards India Pvt Ltd</p>
+              </form>
+          </div>
+      </div> -->
+
+    </md-dialog-content>
+</md-dialog>
+</div>
+
+
+
+<!-- <script>
+    
+    var modal = document.getElementById('id01');
+    
+    
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function refreshPage(){
+    window.location.reload();
+} 
+    </script> -->

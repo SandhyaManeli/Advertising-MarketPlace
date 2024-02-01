@@ -1,0 +1,476 @@
+<style>
+    /* .collapsible {
+            background-color: #fff;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            color: #000;
+        }
+    
+        .active,
+        .collapsible:hover {
+            background-color: #fff;
+        }
+    
+        .collapsible:after {
+            content: '\002B';
+            color: #000;
+            font-weight: bold;
+            float: right;
+            margin-left: 5px;
+        }
+    
+        .active:after {
+            content: "\2212";
+        }
+    
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #fff;
+        } */
+    .collapsible {
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        color: #000;
+        font-weight: 500;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: #000;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .productfull_card {
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .btn_strength {
+        border: none !important;
+    }
+
+    .productfull_cardheader {
+        background-color: #fff;
+        border-bottom: 1px solid #000;
+    }
+</style>
+
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+    <div class="ml-4 mr-4 mt-4 mb-2 md-whiteframe-2dp contbg">
+        <!-- <div class="text-right mt-3 mr-3 pt-2">
+            <a class="close-btn">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </a>
+          </div> -->
+          <div class="container pt-3">
+            <div class="row">
+              <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+              </div>
+            </div>
+          </div>
+        <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div class="col-xl-6 col-lg-6 col-md-6  col-sm-12 col-xs-12" style="margin-top:14px;margin-bottom:14px;">
+                <div id="accordion">
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Product Details 
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row for_scroll">
+                                    <label class="col-md-4 control-label" for="name"><b>Title</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: <b>{{productDetails.title}}</b></p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>AMP Product</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.siteNo}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Type</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.type}}</p>
+                                    </div>
+                                   
+                                    
+                                    <label class="col-md-4 control-label" for="name"><b>Address 1</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.address}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Address 2</b></label>
+                                    <div class="col-md-6">
+                                        <!--<p class="">:  {{productDetails.city}},&nbsp;{{productDetails.zipcode}},&nbsp; {{productDetails.state}},
+                                            &nbsp;{{productDetails.country_name}} 
+                                        </p>-->
+                                        <p class="">: {{productDetails.city}},&nbsp; {{productDetails.state}},
+                                           &nbsp;{{productDetails.zipcode}}
+                                        </p>
+                                    </div>
+                                    <!--<label class="col-md-4 control-label" for="name"><b>Start Date</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">:  {{((productDetails.from_date.$date.$numberLong)) | date: "dd-MM-yyyy"}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>End Date</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">:  {{((productDetails.to_date.$date.$numberLong)) | date: "dd-MM-yyyy"}}</p>
+                                    </div> -->
+                                   
+									<label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Static' || productDetails.type == 'Digital' || productDetails.type == 'Digital/Static'"><b>Height</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Static' || productDetails.type == 'Digital' || productDetails.type == 'Digital/Static'">
+                                        <p class="">: {{productDetails.height}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Minimum Days</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.minimumdays}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Length</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.length}}</p>
+                                    </div>
+									<label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Static' || productDetails.type == 'Digital' || productDetails.type == 'Digital/Static'"><b>Width</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Static' || productDetails.type == 'Digital' || productDetails.type == 'Digital/Static'">
+                                        <p class="">: {{productDetails.width}}</p>
+                                    </div>
+                                    <!-- <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Cost Per Point</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">:  {{productDetails.costperpoint}}</p>
+                                    </div> -->
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type != 'Media'"><b>Panel Size</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type != 'Media'">
+                                        <p class="">: {{productDetails.panelSize}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Audited</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.audited}}</p>
+                                    </div>
+                                    <!-- <label class="col-md-4 control-label" for="name"><b>Vendor</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">:  {{productDetails.vendor}}</p>
+                                    </div> -->
+                                    <label class="col-md-4 control-label" for="name"><b>Seller Id</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.sellerId}}</p>
+                                    </div>
+                                    <!--<label class="col-md-4 control-label" for="name"><b>UnitQty</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">:  {{productdetails.unitQty}}</p>
+                                    </div>-->
+                                    <label class="col-md-4 control-label" for="name"><b>Unit Qty</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.unitQty}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Media HHI</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.mediahhi}}</p>
+                                    </div>
+                                    <!--<label class="col-md-4 control-label" for="name"><b>Price</b></label>-->
+                                    <label class="col-md-4 control-label" for="name"><b>4-week Price Net Cost</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.rateCard || '0' | number : 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Install Cost</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.installCost || '0' | number : 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b># of 4-week periods</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.weekPeriod || '0' | number : 2}}</p>
+                                    </div>
+									<label class="col-md-4 control-label" for="name"><b>4-week Negotiated Net Cost</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.negotiatedCost || '0' | number : 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Production Cost</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.productioncost || '0' | number : 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>AMP Bills</b></label>
+						            <div class="col-md-6">
+							           <p class="">: {{productDetails.billingNo == ''?productDetails.billingYes:productDetails.billingNo}}</p>
+						            </div>
+                                    <label class="col-md-4 control-label" for="name"><b>AMP Services</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.servicingNo == ''?productDetails.servicingYes:productDetails.servicingNo}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Network</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.network}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>National/Local</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.nationloc}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Genre</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.genre}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Day Part</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.daypart}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Fixed/Variable</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.fix}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Impression 18 - 49</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.firstImpression || '0' | number : 0}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>CPM A 18 - 49</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.firstcpm | number: 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Impression 18 - Plus</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.secondImpression || '0' | number : 0}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>CPM A 18 - Plus</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.cpm | number: 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Impression 25 - 54</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.thirdImpression || '0' | number : 0}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>CPM A 25 - 54</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.thirdcpm | number: 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Impression (HA25 - HA54)</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.forthImpression || '0' | number : 0}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>CPM H 25 - 54</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: ${{productDetails.forthcpm | number: 2}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Product Direction</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.imgdirection}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Cancellation policy</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.cancellation_policy}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Payment terms</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.cancellation_terms}}</p>
+                                    </div>
+                                    <!--<label class="col-md-4 control-label" for="name"><b>Notes</b></label>-->
+                                    <label class="col-md-4 control-label" for="name"><b>Restrictions</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.notes}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Description</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.description}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type != 'Media'"><b>Facing</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type != 'Media'">
+                                        <p class="">: {{productDetails.direction}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Latitude</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.lat}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name"><b>Longitude</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.lng}}</p>
+                                    </div>      
+                                    <!-- <label class="col-md-4 control-label adjust_space" for="name" ng-if="productDetails.type == 'Media'"><b>Reach</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">:  {{productDetails.reach}}</p>
+                                    </div> -->
+                                    <label class="col-md-4 control-label adjust_space" for="name" ng-if="productDetails.type == 'Media'"><b>Ad Type</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.placement}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Digital' || productDetails.type == 'Media'"><b>Spot Length</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Digital' || productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.spotLength}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Digital'"><b>Loop Length</b></label>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Break/Loop Length</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Digital' || productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.ageloopLength}}</p>
+                                    </div> 
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type== 'Digital/Static'"><b>Flip Length</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Digital/Static'">
+                                        <p class="">: {{productDetails.fliplength}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Digital/Static'"><b>Loop Length</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Digital/Static'">
+                                        <p class="">: {{productDetails.ageloopLength}}</p>
+                                    </div>		
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Static Motion</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.staticMotion}}</p>
+                                    </div>
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Sound</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.sound}}</p>
+                                    </div>							
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Medium</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.medium}}</p>
+                                    </div> 
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>Product</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.product_newMedia}}</p>
+                                    </div> 
+                                    
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Media'"><b>File Type</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Media'">
+                                        <p class="">: {{productDetails.file_type}}</p>
+                                    </div> 
+                                    <label class="col-md-4 control-label adjust_space" for="name"><b>Location Description</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">: {{productDetails.locationDesc}}</p>
+                                    </div>
+                                    <!--<label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Static'"><b>Light</b></label>-->
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type == 'Static'"><b>Illumination</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type == 'Static'">
+                                        <p class="">: {{productDetails.lighting}}</p>
+                                    </div>      
+                                    <label class="col-md-4 control-label" for="name" ng-if="productDetails.type != 'Media'"><b>Comments</b></label>
+                                    <div class="col-md-6" ng-if="productDetails.type != 'Media'">
+                                        <p class="">: {{productDetails.Comments}}</p>
+                                    </div>
+                                    
+                                    
+                                  
+                                    
+                                   
+
+                                   
+                                   
+                                    <!-- <label class="col-md-4 control-label" for="name"><b>Vendor</b></label>
+                                    <div class="col-md-6">
+                                        <p class="">:  {{productDetails.vendor}}</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Strengths
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label"
+                                        for="name">Impressions</label>
+                                    <div class="col-md-6">
+                                        <p class="">: 64,000 per week</p>
+                                    </div>
+                                    <label class="col-md-4 control-label"
+                                        for="name">Visiblity Score</label>
+                                    <div class="col-md-6">
+                                        <p class="">: 8/10 - Good</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Previous Campaign Details
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-md-8">
+                                        <ol>
+                                            <li>Aries</li>
+                                            <li>Bingo</li>
+                                            <li>Leo</li>
+                                            <li>Oracle</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <ol start="5">
+                                            <li>Aries</li>
+                                            <li>Bingo</li>
+                                            <li>Leo</li>
+                                            <li>Oracle</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse"
+                                    data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    Map
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-md-4 control-label"
+                                        for="name">Impressions</label>
+                                    <div class="col-md-6">
+                                        <p class="">: 64,000 per week</p>
+                                    </div>
+                                    <label class="col-md-4 control-label"
+                                        for="name">Visiblity Score</label>
+                                    <div class="col-md-6">
+                                        <p class="">: 8/10 - Good</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 order-xl-1" style="margin-top:14px;">
+                <!-- <img class="ng-scope" src="assets/images/product/Image-5.png" alt="images" style="width:100%;"> -->
+                <img class="mb-3" ng-src="{{config.serverUrl + productDetails.image[0]}}" alt="Smiley face"
+                    style="width:100%;">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div layout="column" layout-fill="layout-fill">
+    <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+
+        <!-- <div><h3>List Of Subscribers</h3></div> -->
+
+        <div>
+            <label>Export Email Ids as  <input type="radio" name="gender" value="male"> pdf / <input type="radio" name="gender" value="male">csv</label>
+            <button ng-click="export()">Export</button>
+        </div>
+    </div>
+    <!-- <div style="margin-top: 1em;">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered ">
+                    <thead>
+                        <tr>
+                            <th>Email Id</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="Subscribers in Subscribersdata | limitTo:limit">                            
+                            <td>{{Subscribers.email}}</td>
+                            <td>
+                                <span>
+                                    <a ng-click="ShowConfirm(Subscribers)">
+                                        <md-icon style="cursor: pointer;">
+                                            <i class="material-icons">unsubscribe</i>
+                                        </md-icon>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div> -->
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr class="text_color">
+                    <th>Email Id</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="">
+                <tr ng-repeat="Subscribers in Subscribersdata | limitTo:limit">
+                    <td class="table_vertical">{{Subscribers.email}}</td>
+                    <!-- <td>
+                        <span>
+                            <a ng-click="ShowConfirm(Subscribers)">
+                                <md-icon style="cursor: pointer;">
+                                    <i class="material-icons">unsubscribe</i>
+                                </md-icon>
+                            </a>
+                        </span>
+                    </td> -->
+                    <td class="table_vertical">
+                            <!-- <input type="radio" name="gender" value="male"> Subscribe / <input type="radio" name="gender" value="male">Unsubscribe</label> -->
+                            <div class="sub_font_size">
+                                    <input type="radio" id="huey" name="drone" value="Subscribe"
+                                           >
+                                    <label for="huey">Subscribe</label>
+                                    <input type="radio" id="huey" name="drone" value="Unsubscribe"
+                                           >
+                                    <label for="huey">Unsubscribe</label>
+                                  </div>
+                                  <!-- <form>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="optradio" checked>Option 1
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="optradio">Option 2
+                                    </label>
+                                    <label class="radio-inline">
+                                      <input type="radio" name="optradio">Option 3
+                                    </label>
+                                  </form> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

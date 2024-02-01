@@ -1,0 +1,138 @@
+<style>
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  .slush-wrapper{
+    width: 100%;
+    height: auto;
+    /* //border: 1px solid red; */
+    padding: 5px;
+    font-size: 14px;
+    user-select: none;
+    /* font-color: #555; */
+  }
+  .slush-container{
+    margin: auto;
+    width: 100%;
+    min-width: 420px;
+    max-width: 600px;
+    /* //border: 1px solid green; */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto;
+    align-items: center;
+  }
+
+  .slush-container button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .slush-box{
+    width: auto;
+    display: block;
+    height: auto;
+  }
+  .slush-box:first-child{
+    float: left;
+  }
+  .slush-box:nth-child(2){
+    float: right;
+  }
+  .label{
+    padding: 5px 0px;
+    font-weight: bold;
+  }
+  .available-container, .selected-container{
+    width: 210px;
+    height: 270px;
+    overflow-y: scroll;
+    border: 1px solid #ddd;
+    background: white;
+  }
+  .options{
+    background: white;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    padding: 7px 5px;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: -1px;
+    transition: 200ms;
+  }
+  .options:hover{
+    background: #ddd;
+  }
+
+  .active-option {
+    background-color: blue;
+    color: #fff;
+  }
+
+  .bottom-buttons {
+    margin-top: 1rem;
+  }
+  .bottom-buttons-test {
+    margin-top: 1rem;
+  }
+</style>
+<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="80">
+  <md-dialog-content>
+    <md-content class="md-padding">
+      <div layout="row" layout-margin style="border-bottom: 1px solid grey;">
+        <h4>Export CSV</h4>
+        <div flex></div>
+        <md-button class="md-icon-button md-button" type="button">
+          <i class="material-icons" ng-click="closeMdDialog()">close</i>
+          <div class="md-ripple-container"></div>
+        </md-button>
+      </div>
+      <div class="slush-wrapper">
+        <div class="slush-container">
+          <div class="slush-box">
+            <div class="label">Available Columns</div>
+            <div class="available-container">
+              <div ng-click="changeSelection(true, option)" ng-class="{'active-option': (activeOption.isAvailable === true && option.field_name === activeOption.option.field_name)}" class="options" ng-repeat="option in personalizeColumns.available_columns | orderBy : 'label' track by $index">{{option.label}}</div>
+            </div>
+          </div>
+          <div class="left-right-buttons">
+            <md-button Class="md-raised register_btn" ng-disabled="activeOption.isAvailable || !activeOption.option" ng-click="changePosition('left')"><i class="material-icons">arrow_back</i>Move Left</md-button>
+            <md-button Class="md-raised register_btn" ng-disabled="!activeOption.isAvailable || !activeOption.option" ng-click="changePosition('right')">Move Right<i class="material-icons">arrow_forward</i></md-button>
+          </div>
+          <div class="slush-box">
+            <div class="label">Selected Columns</div>
+            <div class="selected-container">
+              <div ng-click="changeSelection(false, choice)" ng-class="{'active-option': (activeOption.isAvailable === false && choice.label === activeOption.option.label)}" class="options" ng-repeat="choice in personalizeColumns.selected_columns track by $index">{{choice.label}}</div><!--| orderBy : 'label'-->
+            </div>
+          </div>
+          <div class="up-down-buttons">
+            <md-button Class="md-raised register_btn" ng-disabled="activeOption.isAvailable || !activeOption.option" ng-click="changePosition('up')">Move Up<i class="material-icons">arrow_upwards</i></md-button>
+            <md-button Class="md-raised register_btn" ng-disabled="activeOption.isAvailable || !activeOption.option" ng-click="changePosition('down')">Move Down<i class="material-icons">arrow_downward</i></md-button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div layout="row" layout-align="center center" class="bottom-buttons">
+        <hr>
+        <md-button Class="md-raised register_btn" ng-click="closeMdDialog()">Cancel</md-button>
+        <md-button style=" display: flex;
+        justify-content: center;
+        align-items: center;" type="submit" Class="md-raised md-primary register_btn" ng-click="saveColumns()">Export CSV<i style="color: #fff" class="material-icons down_icon_res">file_download</i></md-button>
+      </div>
+    </md-content>
+  </md-dialog-content>
+</md-dialog>

@@ -1,0 +1,60 @@
+<div class="">
+        <div layout="column">
+          <div layout="row" layout-align="space-between center">
+            <div layout="column" layout-padding>
+              <h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
+            </div>
+      
+            <div class="active-cyan-4 mr-2 search_width">
+              <input class="form-control" type="text" ng-model="search" placeholder="Search by Campaign ID" aria-label="Search">
+            </div>
+          </div>
+          <!-- status of hoarding list html start-->
+      
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead class="text_color">
+                <tr>
+                  <!-- <th>CIDdddddddddddd</th> -->
+                  <th>Campaign ID</th>
+                  <th class="">Campaign Name</th>
+                  <th>Paid</th>
+                  <th class="text-center">Pending</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">Action</th>
+                  <th class=""></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="Adminpay in adminpayments | filter : search">
+                  <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
+                  <td class="table_vertical">{{Adminpay.name || "N/A" | capitalize}}</td>
+                  <td class="table_vertical">{{Adminpay.total_paid}}</td>
+                  <td class="text-center table_vertical">{{Adminpay.est_budget - Adminpay.total_paid || "N/A"}}</td>
+                  <td class="text-center table_vertical">{{Adminpay.est_budget || "N/A"}}</td>
+                  <td class="text-center table_vertical">
+                    <md-menu md-position-mode="target-right target" id="width_popup">
+                      <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                        <!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+                        <md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon> 
+                      </md-button>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button class="pop_view" ng-href="/admin/received-payment-details/{{Adminpay.id}}">
+                            <div layout="row">
+                              <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                              <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                            </div>
+                          </md-button>
+                        </md-menu-item>
+                      </md-menu-content>
+                    </md-menu>
+                  </td>
+                  <!-- <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+                  <td class="text-center table_vertical">21-09-2018, 9:00 Am</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>

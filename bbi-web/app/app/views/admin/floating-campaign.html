@@ -1,0 +1,95 @@
+<div layout="row" layout-align="left center" layout-margin>
+  <div class="">Campaign Details</div>
+</div>
+
+<!-- 
+  //////// Dynamically added form rows to add products
+-->
+
+<div layout="column" ng-repeat="formRow in formRows">
+  <form ng-cloak name="{{formRow.name}}" novalidate>
+    <div layout="row" layout-margin="layout-margin">
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Tab id</label>
+          <input ng-model="formRow.site_no" type="text" name="site-no" required/>
+          <!-- <div ng-messages="addEmptyCampaignForm.name.$error">
+            <div ng-message="required">Campaign Name is required.</div>
+            <div ng-message="minlength">Campaign Name must have 2 characters.</div>
+            <div ng-message="maxlength">Campaign Name shouldn't exceed 20 characters. </div>
+            <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+          </div> -->
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Site type</label>
+          <input ng-model="formRow.type" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Address</label>
+          <input ng-model="formRow.address" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Panel size</label>
+          <input ng-model="formRow.size" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Direction</label>
+          <input ng-model="formRow.direction" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Lighting</label>
+          <input ng-model="formRow.lighting" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Impression</label>
+          <input ng-model="formRow.impressions" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>Price</label>
+          <input ng-model="formRow.price" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>From</label>
+          <input ng-model="formRow.from_date" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <md-input-container class="md-block">
+          <label>To</label> 
+          <input ng-model="formRow.to_date" type="text" name="type" required/>
+        </md-input-container>
+      </div>
+      <div layout="column" flex="10">
+        <input type="file" class="floating_cmp" ngf-select ng-model="formRow.image" name="formRow.image" accept="image/*" ngf-max-size="2MB" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<md-dialog-actions layout="row" layout-align="center center">
+  <md-button Class="md-raised md-primary all_button" type="submit" ng-click="generateFloatingCampaignPdf()">
+    Submit
+  </md-button>
+  <md-button Class="md-raised register_btn" ng-click="addNewFormRow()">
+    Add Row
+  </md-button>
+</md-dialog-actions>
+<!-- 
+  //////// Dynamically added form rows to add products ends
+-->

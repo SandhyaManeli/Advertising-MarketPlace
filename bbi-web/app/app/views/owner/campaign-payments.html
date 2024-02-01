@@ -1,0 +1,269 @@
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+    </div>
+  </div>
+</div>
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+    <!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+        <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+    </md-button> -->
+    <!-- <div layout="colmun" layout-align="end center" class="hide-xs campaign_search mt-3 mr-3"> -->
+      <div layout="colmun" layout-align="end center" class="campaign_search mt-3 mr-3">
+        <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="md-whiteframe-2dp bbi_campsearch"/>
+        <div class="dropdown" style="float: right;">
+            <!-- <md-button class="md-raised md-primary all_button update_mrg hide-xs" onclick="paymentaddPayment()" class="dropbtn"> -->
+            <md-button class="md-raised md-primary all_button update_mrg" onclick="paymentaddPayment()" class="dropbtn">
+              Purchase
+          </md-button>
+          <div id="addpaydrop" class="dropdown-content contbg animated fadeInDown add_paymentowner">
+            <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+              <div layout="colmun">
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="paymentaddPayment()">
+                  <md-icon class="md-default-theme">
+                    <i class="material-icons">close</i>
+                  </md-icon>
+                </md-button>
+              </div>
+              <li>
+                <div class="">
+                  <div class="col-md-12">
+                        <div class="form-group row">
+                                <label for="amount" class="col-sm-4 col-form-label md-body-2">Campaign :</label>
+                                <div class="col-sm-8">
+                                  <select id="paymentType" ng-model="campaignPayment.id" name="mode" class="form-control md-whiteframe-3dp" 
+                                    ng-change="payAmount(campaignPayment.id)" required="required">
+                                    <option ng-repeat="ownerCampName in ownerSaved" value={{ownerCampName.cid}}>{{ownerCampName.cid}} {{ownerCampName.name}}</option>
+                                  </select>
+                                  <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                                    Campaign Is required!!
+                                  </span>                        
+                                </div>
+                              </div>
+                      <div class="form-group row">
+                        <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
+                        <div class="col-sm-8">
+                          <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
+                            <option selected>Select Payment Mode</option>
+                            <option ng-repeat="paymentType in paymentTypes">{{paymentType.name}}</option>
+                          </select>
+                          <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                            Mode Is required!!
+                          </span>                        
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" name="amount" required="required" only-numeric id="amount" ng-model="campaignPayment.amount">
+                          <div ng-messages="forms.ownerCampaignForm.amount.$error" style="color:red" ng-if="forms.ownerCampaignForm.amount.$touched">
+                              <div ng-message="required">Amount is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference Number:</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" only-numeric required="required" ng-model="campaignPayment.reference_no">
+                          <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
+                              <div ng-message="required">Reference Number is required.</div>
+                            </div>
+                        </div>
+                      </div>                                       
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By :</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input  name="recived" required="required" ng-model="campaignPayment.received_by">
+                          <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
+                              <div ng-message="required">Received By is required.</div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                        <div class="col-sm-8">
+                          <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"
+                            ng-model="campaignPayment.comment"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                        <div class="col-sm-8">
+                          <span class="input-group-btn">
+                            <span class="">
+                              <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                                accept="image/*" ngf-max-size="1MB">
+                            </span>
+                          </span>
+                          <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                            style="color:red">
+                            <div ng-message="required">Image is required.</div>
+                          </div>
+                        </div>
+                      </div>
+                        <span>Paid : ${{amountPay[0].paid |number : 2 || 0 }}</span><br>
+                        <span>Pending : ${{amountPay[0].act_budget - amountPay[0].paid | number:2 || 0}}</span><br>
+                        <span>Total :  ${{amountPay[0].act_budget}}</span>                   
+                      <div class="form-group row">
+                        <div flex></div>
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4">
+                          <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="autopayOwnerCampaignPayment(campaignPaymentDetails.id,campaignPayment.id)">Submit</md-button>
+                        </div>                        
+                      </div>
+                  </div>
+                </div>
+              </li>
+            </form>
+          </div>
+        </div>       
+    </div>
+    
+    <md-tabs md-dynamic-height class="padding_cmp">
+        <md-tab label="My Campaign Payments">
+            <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text_color">
+                                <!-- <th>CID</th> -->
+                                <th>Campaign ID</th>
+                                <th class="feeds_width">Campaign Name</th>
+                                <th class="text-right padding-20">Paid</th>
+                                <th class="text-right padding-20">Pending</th>
+                                <th  class="text-right padding-20">Total</th>
+                                <th>Action</th>
+                                <!-- <th class=""></th> -->
+                                <th class="">Date Entered</th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr ng-repeat="campaign in ownerCampaigns  | filter:search" ng-if="campaign.status > 600">
+                                <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
+                                <td class="table_vertical">{{campaign.name| capitalize}}</td>
+                                <td class="table_vertical text-right padding-20 text-nowrap"><span>$</span>{{campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="table_vertical text-right padding-20 text-nowrap"><span>$</span>{{campaign.total_price - campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="table_vertical text-right padding-20 text-nowrap"><span>$</span>{{campaign.total_price || '0' |number : 2 }}</td>
+                                <td class="table_vertical payments_eye_res">
+                                    <a style="cursor:pointer;" ng-href="/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
+                                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                            <i class="material-icons">remove_red_eye</i>
+                                        </md-icon>
+                                    </a>
+                                </td>
+                                <!-- <td class="text-center table_vertical">
+                        <md-button class="md-raised md-primary all_button" ng-if="campaign.total_paid == 0">Payment Alert</md-button> -->
+                        <!-- <md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
+                        <md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button>									 -->
+                        <!-- <button type="button" class="btn btn-danger" ng-if="campaign.total_paid == 0">Payment Alert</button>
+                        <button type="button" class="btn btn-warning" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</button>									
+                        <button type="button" class="btn btn-success" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</button> -->
+                        <!-- </td> -->
+                        <!-- <td class="text-center table_vertical">{{campaign.updated_at | dateFormat}}</td> -->
+                        <td class="table_vertical">{{campaign.updated_at | dateFormat}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="Advertiser Campaign Payments">
+            <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text_color">
+                                <!-- <th>CID</th> -->
+                                <th>Campaign ID
+                                  <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("cid","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("cid","string")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                                <th class="feeds_width">Campaign Name
+                                  <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"  ng-click='sortAsc("name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                                <th class="text-right padding-20">Paid
+                                  <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                                <th class="text-right padding-20">Pending
+                                  <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                                <th class="text-right padding-20">Total
+                                  <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                                <th>Action</th>
+                                <!-- <th class=""></th> -->
+                                <th class="">Date Entered
+                                  <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                                  </span> 
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr ng-repeat="campaign in userCampaignPayments | filter:search" ng-if="campaign.status > 600 && campaign.total_paid > 0">
+                                <td class="table_vertical">{{campaign.cid|| "N/A"}}</td>
+                                <td class="table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="table_vertical text-right text-nowrap padding-20"><span>${{campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="table_vertical text-right text-nowrap padding-20"><span>$</span>{{campaign.total_price - campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="table_vertical text-right text-nowrap padding-20"><span>$</span>{{campaign.total_price || '0' |number : 2 }}</td>
+                                <td class="table_vertical payments_eye_res">
+                                    <a style="cursor:pointer;" ng-href="/owner/{{clientSlug}}/updatepayment/{{campaign.id}}">
+                                        <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                            <i class="material-icons">remove_red_eye</i>
+                                        </md-icon>
+                                    </a>
+                                </td>
+                                <!-- <td class="text-center table_vertical">									
+                        <md-button class="md-raised md-primary all_button" ng-if="campaign.total_paid == 0">Payment Alert</md-button> -->
+                        <!-- <md-button class="md-raised md-primary payment_yellow" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</md-button>
+                        <md-button class="md-raised md-primary payment_green" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</md-button> -->
+                        <!-- <button type="button" class="btn btn-danger" ng-if="campaign.total_paid == 0">Payment Alert</button>
+                                <button type="button" class="btn btn-warning" ng-if="(campaign.total_price - campaign.total_paid) != campaign.total_price && (campaign.total_price - campaign.total_paid)!=0">Partial Paid</button>									
+                                <button type="button" class="btn btn-success" ng-if="(campaign.total_price - campaign.total_paid) == 0 && campaign.total_paid!=0">Amount Paid</button> -->
+                        <!-- </td> -->
+                        <!-- <td class="text-center table_vertical">{{campaign.updated_at | dateFormat}}</td> -->
+                        <td class="table_vertical">{{campaign.updated_at | dateFormat}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </md-tab>
+    </md-tabs>
+</div>
+
+<style>
+  .highlight {
+      color: black;
+  }
+.nonhighlight{
+  color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+</style>
+<script>
+   function paymentaddPayment() {
+     document.getElementById("addpaydrop").classList.toggle("show");
+   }
+ </script>

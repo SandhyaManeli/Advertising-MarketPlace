@@ -1,0 +1,217 @@
+<style>
+  .form-group{
+    margin-bottom: 0px;
+  }
+</style>
+<md-dialog flex="50" flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70">
+  <form ng-cloak name="addEmptyCampaignForm" novalidate>
+    <input type="hidden" ng-model="campaign.id" />
+    <!-- <md-toolbar>
+      <div  class="md-toolbar-tools md-whiteframe-4dp">
+      <button class="md-icon-button md-button show-xs md-ink-ripple hide-gt-xs" type="button"  ng-click="closeMdDialog()" show-xs="show-xs" hide-gt-xs="hide-gt-xs"><md-icon md-svg-icon="images/1493121180_Arrow_Back.svg" class="ng-scope" aria-hidden="true"></md-icon></button>
+      <span  class="md-title">Add Campaign</span>
+      <span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
+      <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button"  ng-click="openOffscreen()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X<div class="md-ripple-container"></div></button>
+    </div>
+    </md-toolbar> -->
+    <div layout="row" layout-margin>
+      <h4 class="text_color">Enter New Campaign Details</h4>
+      <div flex></div>
+      <md-button class="md-icon-button md-button" type="button" >
+        <i class="material-icons" ng-click="close()">close</i>
+        <div class="md-ripple-container"></div>
+      </md-button>
+    </div>
+    <md-dialog-content>
+      <!-- <div layout="row" layout-sm="row" layout-lg="row" layout-md="row" layout-xs="column" layout-margin="layout-margin">
+        <div layout="column" flex="50" flex-xs="100" flex-sm=50 flex-md="50" flex-lg="50">
+          <md-input-container class="md-block">
+            <label>Campaign Name</label>
+            <input ng-model="campaign.name" type="text" name="name" minlength="2" md-maxlength="50" ng-pattern="/[A-Za-z0-9\-]$/" required/>
+            <div ng-messages="addEmptyCampaignForm.name.$error">
+              <div ng-message="required">Campaign Name is required.</div>
+              <div ng-message="minlength">Campaign Name must have 2 characters.</div>
+              <div ng-message="maxlength">Campaign Name shouldn't exceed 50 characters. </div>
+              <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Organization Name</label>
+            <input ng-model="campaign.org_name" type="text" name="org_name" minlength="2" md-maxlength="50" />
+            <div ng-messages="signup.uname.$error">
+              <div ng-message="required">Organization Name is required.</div>
+              <div ng-message="minlength">Organization Name must have 2 characters.</div>
+              <div ng-message="maxlength">Organization Name shouldn't exceed 50 characters. </div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+         
+            <div flex-gt-xs="">
+              <label>Start date</label>
+              <md-datepicker ng-model="campaign.start_date"  onkeydown="return false"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Client Email</label>
+            <input ng-model="campaign.org_contact_email" name="user_email" type="email" minlength="8" md-maxlength="100" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <div ng-messages="signup.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="minlength">Email must have at least 8 characters.</div>
+              <div ng-message="maxlength">Email shouldn't exceed 100 characters. </div>
+              <div ng-message="pattern">Enter a valid Email Id.</div>
+            </div>
+          </md-input-container>
+        </div>
+        
+        <div layout="column" flex="50" flex-xs="100" flex-sm=50 flex-md="50" flex-lg="50">
+          <md-input-container class="md-block">
+            <label>Contact Name</label>
+            <input ng-model="campaign.org_contact_name" type="text" name="user_full_name" minlength="2" md-maxlength="40" required="required"/>
+            <div ng-messages="signup.cname.$error">
+              <div ng-message="required">Contact Name is required.</div>
+              <div ng-message="minlength">Contact Name must have at least 2 characters.</div>
+              <div ng-message="maxlength">Contact Name shouldn't exceed 40 characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Phone No</label>
+            <input ng-model="campaign.org_contact_phone" only-numeric type="text"  name="pno" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required" />
+            <div ng-messages="signup.pno.$error">
+              <div ng-message="required">Phone No is required.</div>
+              <div ng-message="minlength">Phone No must have 10 characters.</div>
+              <div ng-message="maxlength">Phone No shouldn't exceed 10 characters.</div>
+              <div ng-message="pattern">Phone No should be only number.</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+            
+            <div flex-gt-xs="">
+              <label>End date</label>
+              <md-datepicker ng-model="campaign.end_date"  onkeydown="return false"  md-placeholder="Enter date" md-min-date="fromMinDate"></md-datepicker>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Estimated Budget</label>
+            <input ng-model="campaign.est_budget" type="text" name="budget" only-numeric required="required" maxlength="11" />
+            <div ng-messages="signup.budget.$error">
+              <div ng-message="required">Estimated budget required.</div>
+            </div>
+          </md-input-container>
+        </div>
+      </div>  -->
+      
+      <div table-responsive>
+				<table class="table table-striped table-bordered">
+					<tbody flex="100">
+						<tr >
+							<td flex="50">
+                <div class="form-group">
+                  <input ng-model="campaign.name" name="name" class="form-control" type="text" minlength="3" maxlength="60" required="required"
+                    ng-pattern="/^[A-Za-z]+[\sA-Za-z0-9._-]*$/" placeholder="Campaign Name">
+                  <div ng-messages="addEmptyCampaignForm.name.$error" style="color:red" ng-if="addEmptyCampaignForm.name.$touched">
+                    <div ng-message="required">Campaign Name is required.</div>
+                    <div ng-message="minlength">Campaign Name must have 3 characters.</div>
+                    <div ng-message="maxlength">Campaign Name shouldn't exceed 30 characters. </div>
+                    <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+                  </div>
+                </div>
+							</td>
+							<td flex="50">
+								<div class="form-group">
+                  <input ng-model="campaign.org_contact_name" name="org_contact_name" class="form-control" type="text" required="required" placeholder="Contact Name">
+                  <div ng-messages="addEmptyCampaignForm.org_contact_name.$error" style="color:red" ng-if="addEmptyCampaignForm.org_contact_name.$touched">
+                    <div ng-message="required">Contact Name is required.</div>
+                  </div>
+							</td>
+						
+						</tr>
+						<tr >
+							<td flex="50">
+								<div class="form-group">
+                  <input ng-model="campaign.org_name" name="org_name" class="form-control" type="text" minlength="3" maxlength="60" required="required" placeholder="Organization Name">
+                  <div ng-messages="addEmptyCampaignForm.org_name.$error" style="color:red" ng-if="addEmptyCampaignForm.org_name.$touched">
+                    <div ng-message="required">Organization Name is required.</div>
+                    <div ng-message="minlength">Organization Name must have 3 characters.</div>
+                    <div ng-message="maxlength">Organization Name shouldn't exceed 30 characters. </div>
+                  </div>
+                </div>
+							</td>
+							<td flex="50">
+								<div class="form-group">
+                  
+                  <input ng-model="campaign.org_contact_email" name="org_contact_email" class="form-control" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" placeholder="enter your email">
+                  <div ng-messages="addEmptyCampaignForm.org_contact_email.$error" style="color:red" ng-if="addEmptyCampaignForm.org_contact_email.$touched">
+                    <div ng-message="required">Email is required.</div>
+                    <div ng-message="pattern">Enter a valid EmailId.</div>
+                  </div>
+                </div>
+							</td>
+						
+						</tr>
+						<tr>
+							<td flex="50">
+								<div class="form-group">
+                  <!-- <label class="control-label">Phone Number</label>
+                  <br> -->
+                  <input ng-model="campaign.org_contact_phone" name="org_contact_phone" only-numeric class="form-control" type="text" maxlength="10"
+                    required="required" placeholder="Phone Number">
+                  <div ng-messages="addEmptyCampaignForm.org_contact_phone.$error" style="color:red" ng-if="addEmptyCampaignForm.org_contact_phone.$touched">
+                    <div ng-message="required">Phone Number is required.</div>
+                    <div ng-message="maxlength">Phone Number must have 10 characters.</div>
+                  </div>
+                </div>
+							</td>
+							<td flex="50">
+                <div class="form-group">
+                  
+                  <input ng-model="campaign.est_budget" type="text" name="est_budget" class="form-control" only-numeric required="required" maxlength="11" placeholder="Estimated budget" />
+                  <div ng-messages="addEmptyCampaignForm.est_budget.$error" style="color:red" ng-if="addEmptyCampaignForm.est_budget.$touched">
+                    <div ng-message="required">Estimated budget required.</div>
+                  </div>
+                </div>
+							</td>
+						
+						</tr>
+						<tr>
+							<td flex="50">
+								<div >
+      
+                  <md-datepicker ng-model="campaign.start_date" name="start_date"  onkeydown="return false"  md-placeholder="start date" md-min-date="fromMinDate"  required="required"></md-datepicker>
+                  <div ng-messages="addEmptyCampaignForm.start_date.$error" style="color:red" ng-if="addEmptyCampaignForm.start_date.$touched">
+                    <div ng-message="required">Start date is required.</div>
+                  </div>
+                </div>
+							</td>
+							<td flex="50">
+                <div flex-gt-xs="">
+                 
+                  <md-datepicker ng-model="campaign.end_date" name="end_date" onkeydown="return false"  md-placeholder="end date" md-min-date="fromMinDate"  required="required"></md-datepicker>
+                  <div ng-messages="addEmptyCampaignForm.end_date.$error" style="color:red" ng-if="addEmptyCampaignForm.end_date.$touched">
+                    <div ng-message="required">End date is required.</div>
+                  </div>
+                </div>
+							</td>
+						
+						</tr>
+						
+					</tbody>
+				</table>
+			</div>
+      <div class="serverErrors" ng-if = "campaignDetailsErrorEessages">
+        <ul>
+            <li ng-repeat="error in campaignDetailsErrorEessages">
+              {{error}}
+            </li>
+        </ul>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center">
+      <md-button Class="md-raised md-primary" type="submit" ng-disabled="addEmptyCampaignForm.$invalid" ng-click="saveCampaignByAdmin()">
+        SUBMIT
+      </md-button>
+      <md-button Class="md-raised" ng-click="closeMdDialog()">
+        CANCEL
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

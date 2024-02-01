@@ -1,0 +1,288 @@
+<style>
+    .metro_pack {
+        background: rgb(255, 255, 255);
+        position: absolute !important;
+        width: 35%;
+        top: 5% !important;
+        left: 31%;
+        padding: 10px 10px 0px 10px;
+        z-index: 99 ;
+    }
+    .start_daterv{
+        background:#ededed;
+        padding:6px;
+        margin-left:42px;
+        border-radius: 3px;
+    }
+    .lnt_caln{
+        margin-top: 15px;
+    }
+    .lnt_caln md-datepicker-button .md-button.md-icon-button{display:none}
+    .lnt_caln .md-datepicker-input-container {
+        border-bottom-color: rgb(255, 255, 255) !important;
+    }
+    .lnt_caln .md-datepicker-input-container ::placeholder {
+        color: #fff !important;
+    }
+    .md-icon-button+.md-datepicker-input-container {
+        margin-left:0px !important;
+    }
+    .lnt_caln .md-datepicker-button{
+        display:none;
+    }
+    .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+        border-top-color: #fff !important;
+    }
+    .left_side_pack	md-datepicker {   white-space: unset;}
+    .font_size {
+        font-size: 18px !important;
+    }
+    .metro_page{
+        padding:0px;
+        padding-left:5px;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:portrait) {
+        h3 {
+            font-size: 1.50rem;
+        }
+        .metro_pack {
+            width: 90%;
+            top: 17% !important;
+            left: 5%;
+            z-index: 0 !important;
+        }
+    }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation:landscape) {
+        .metro_pack {
+            width: 60%;
+            top: 20% !important;
+            left: 25%;
+            z-index: 0 !important;
+        }
+    }
+    
+    @media only screen and (max-width: 768px) and (min-width: 560px){
+        .metro_pack {
+			width: 80%;
+			top: 30% !important;
+			left: 10%;
+			z-index: 0 !important;
+		}
+    }
+    @media screen and (min-width: 1025px) and (max-width: 1365px){
+        .metro_pack {
+			width: 65%;
+			top: 15% !important;
+			left: 25%;
+			z-index: 0 !important;
+		}
+	}
+    @media screen and (min-width: 1366px) and (max-width: 1439px){
+        .metro_pack {
+			position: absolute !important;
+        	top: 15% !important;
+            width: 50%;
+            left: 24%;
+            z-index: 99;
+        }
+    }
+    @media screen and (min-width: 1440px) and (max-width: 1599px) {
+        .metro_pack {
+            width: 55%;
+            top: 15% !important;
+            left: 29%;
+            z-index: 99 !important;
+        }
+    }
+    @media screen and (min-width: 1600px) and (max-width: 1919px) {
+        .metro_pack {
+            width: 40%;
+            left: 29%;
+            top: 15% !important;
+            z-index: 99 !important;
+        }
+
+    }
+    @media screen and (max-width:575px){
+        .img_logo{
+            width: 114%;
+        }
+        .metro_pack {
+            width: 100%;
+            top: 30% !important;
+            left: 1%;
+           
+        }
+        .back_red{
+            margin-bottom: 11px;
+        }
+    }
+    .date_slc .md-datepicker-button {
+        display: none !important;
+    }
+    .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+        border-top-color: #ededed00 !important;
+    }
+    .md-datepicker-triangle-button {
+        position: absolute;
+        width: 125px !important;
+        bottom: -2.5px;
+        -webkit-transform: translateX(45%);
+        transform: translateX(45%);
+        left: -60px;
+    }
+    .md-datepicker-input {
+        min-width: 133px !important;
+    }
+    .md-datepicker-input{
+        text-align: center;
+    }
+    .md-button:not([disabled]).md-icon-button:hover {
+        background-color: transparent;
+    }
+    .md-button.md-icon-button {
+        border-radius: 0% !important;
+    }
+</style>
+<div layout="column" style="position:relative;height:90vh;">
+
+    <img src="assets/images/maps/Map_BG.jpg" width="100%" height="100%" alt="metro map">
+
+
+
+    <div id="mydiv" class="map_filters metro_new">
+        <div id="mydivheader">
+            <h3 class="md-body-2 pt-1">L&T Metro</h3>
+            <h4>Digital Signage - Inside Train</h4>
+        </div>
+
+
+
+        <!--SHORTLIST html start -->
+        <div layout="column" class="saved_camp_block md-whiteframe-2dp mt-2">
+            <a class=" main-part" layout="column" style="cursor:pointer;padding: 5px 10px;" ng-click="shortlistDiv()">
+                <div layout="row">
+                    <div class="md-body-1 text-white txt-mrng">Shortlisted Product</div>
+                    <div flex></div>
+                    <div class="md-body-1 text-white">
+                        ({{shortlistedPackages.length}})
+                    </div>
+                </div>
+            </a>
+
+            <div ng-show="shortlist" class="short-list">
+                <div class="shortlistscrollbar" id="shortlistscrollbar-style">
+                    <div layout="column">
+                        <div layout="row" flex>
+                            <md-list flex style="padding:0px">
+                                <md-list-item class="md-3-line list-img" style="" ng-repeat="slPkg in shortlistedPackages">
+                                    <div class="md-list-item-text list-item-text" layout="column" flex>
+                                        <h3 class="md-body-2">{{slPkg.name}}</h3>
+                                        <p class="md-caption">Budget For {{slPkg.months =='0.5'? ' 15 Days ': slPkg.months+' Months'}}, {{slPkg.selected_trains}} Train(s)</p>
+                                        <h3 class="md-title">Rs.{{slPkg.price}}</h3>
+                                    </div>
+                                    <div class="md-list-item-text" layout="column" layout-align="space-between center" layout-margin>
+                                        <md-button class="md-icon-button" ng-click="deleteShortlistedMetroPackage(slPkg.package_id)">
+                                            <md-icon>
+                                                <i class="material-icons">delete_forever</i>
+                                            </md-icon>
+                                        </md-button>
+                                    </div>
+                                    <md-divider></md-divider>
+                                </md-list-item>
+
+                            </md-list>
+                        </div>
+                        <md-divider></md-divider>
+                    </div>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row">
+                    <div flex></div>
+                    <md-button class="md-raised md-primary" ng-click="showSaveCampaignPopup = true;">SAVE </md-button>
+                </div>
+            </div>
+        </div>
+        <!--Shortlisted Product html end -->
+
+    </div>
+
+    <div class="metro_pack md-whiteframe-z2">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6" ng-repeat="metroPackage in metroPackages track by $index">
+                <div class="back_red" style="padding:10px;border-radius:10px;" ng-style="{'background-color': colors[$index]}">
+                    <h3 class="text-white">{{metroPackage.corridor}}</h3>
+                    <h5 class="text-white">{{metroPackage.format}}</h5>
+                    <hr style="padding:1px;background-color: #fff;">
+                    <p class="text-white mb-0" ng-repeat="desc in (metroPackage.description| customSplitString)">
+                        <i class="fa fa-check-square-o" aria-hidden="true" ></i>
+                        {{desc}}
+                    </p>
+
+                    <hr style="padding:1px;background-color: #fff;">
+                    <p class="text-white">Number of Trains: 
+                        <span style="background:#ededed;padding:6px;border-radius: 3px;margin-left: 30px;"><input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="-"  ng-click="Trcount = (Trcount > 1 ? (Trcount - 1) : 1);" ng-init="Trcount = 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+                            <input type="text" size="10" readonly="" value="{{Trcount}} Trains"  ng.model="metroPackage.selected_trains" style="border: none;background:none;text-align:center;">
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="+" id="plus"   ng-click="Trcount = Trcount + 1" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+
+                    <p class="text-white">Durations: 
+                        <span style="background:#ededed;padding:6px;margin-left: 45px;border-radius: 3px;">
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="-"  ng-click="(Mocount = (Mocount<= 1?.5:Mocount - 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" ng-init="Mocount = .5; Days = 'Days'"  style="border: none;background: rgba(44, 62, 80,.8);color: #fff;">
+                            <input type="text" size="10" readonly="" value="{{(Mocount<1)?15:Mocount}} {{Days}}" id="count" style="border: none;background:none;text-align:center;">
+                            <input type="button" ng-disabled="isAlreadySelected(metroPackage.id)" value="+" ng-click="(Mocount = (Mocount == .5?Mocount + .5:Mocount + 1)); (Days = (Mocount < 1 ? 'Days' : 'Months'));" style="border: none;background: rgba(44, 62, 80,.8);color: #fff;"></span></p>
+
+                    <p class="text-white">Start Date: 
+                        <span class="start_daterv" style="">
+                            <md-datepicker  ng-model="metroPackage.start_date" md-min-date="today1"  md-placeholder="Start From" style="border: none;background:none;text-align: center;" class="date_slc" ng-disabled="isAlreadySelected(metroPackage.id)"></md-datepicker>
+                        </span>
+                    </p>
+                    <p class="text-white">Total: <span style="margin-left: 91px;font-size:20px;font-weight:700;">Rs. {{ metroPackage.price_new = (metroPackage.price * Mocount * Trcount)}}</span></p>
+                    <div style="display:none;">
+                        {{ metroPackage.selected_trains = Trcount}}
+                        {{ metroPackage.months = Mocount}}
+                    </div>
+                    <p class="text-center" ng-style="{'color': colors[$index]}" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Shortlist This</p>
+                    <p class="text-center" ng-style="{'color': colors[$index]}" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)" style="margin: 0px 50px 0px 50px;background: #fff;padding: 5px;border-radius: 5px;font-size: 20px;font-weight: 500;cursor: pointer;">Deselect This</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-12 col-sm-12 col-md-6 show_bug">
+                <p class="md-caption">
+                    Estimated Budget for {{getEstBudgetForSelectedPackages().months == '0.5'? ' 15 Days ': getEstBudgetForSelectedPackages().months + ' Months'}}, {{getEstBudgetForSelectedPackages().selected_trains}} Trains
+                </p>
+                <h2 class="text_color">
+                    Rs. {{getEstBudgetForSelectedPackages().price}}
+                </h2>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 logo_lnt">
+                <p class="md-caption">We are oﬃcial Partners to</p>
+                <img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="prodct_save md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" style="width:320px;position: absolute;right: 0px;margin-bottom:50px; ">
+        <div layout="row">
+            <div flex></div>
+            <a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup()">
+                <i class="material-icons">close</i>
+            </a>
+        </div>
+        <div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+        <div class="md-title  m-2">Let's work Together!</div>
+        <form name="metroCampaignForm" role="form" novalidate="novalidate">
+            <div class="form-group mt-3 mr-2 ml-2">
+                <input type="text" class="form-control" id="text" ng-model="campaign.name" placeholder="Campaign Name ">
+            </div>
+            <div layout="column" class="mr-2 ml-2 mb-3">
+                <md-button class="md-raised all_button" layout-fill ng-click="saveMetroCampaign(campaign)">
+                    Save Campaign
+                </md-button>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- map html start (left side controls) ends -->

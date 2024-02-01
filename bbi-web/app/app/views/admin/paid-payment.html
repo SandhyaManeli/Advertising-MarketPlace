@@ -1,0 +1,149 @@
+<div class="">
+  <div layout="column">
+    <div class="container pt-3">
+      <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+          <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+        </div>
+      </div>
+    </div>
+    <div layout="row" layout-align="space-between center">
+      <div layout="column" layout-padding>
+        <h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
+      </div>
+
+      <div class="active-cyan-4 mr-2 search_width">
+        <input class="form-control" type="text" ng-model="search" placeholder="Search by Campaign ID" aria-label="Search">
+      </div>
+    </div>
+    <!-- status of hoarding list html start-->
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="text_color">
+          <tr>
+            <!-- <th>CID</th> -->
+            <th class="adjust_space">Campaign ID
+              <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("cid","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("cid","string")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+            <th class="adjust_space text-center">Campaign Name
+              <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("name","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("name","string")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+            <th class="text-right adjust_space">Paid
+              <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("total_paid","number")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("total_paid","number")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+            <th class="text-right adjust_space">Pending
+              <span class="d-inline" ng-class="'pending' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("pending","number")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'pending' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("pending","number")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+            <th class="text-right adjust_space">Total
+              <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("total_price","number")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("total_price","number")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+            <th class="text-center adjust_space">Action</th>
+            <th class="text-center adjust_space">Date Entered
+              <span class="d-inline" ng-class="'created_at' == upArrowColour && sortType == 'Asccrfqa'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqa("created_at","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'created_at' == downArrowColour && sortType == 'Dsccrfqa'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqa("created_at","string")'><i class="fas fa-arrow-down"></i>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody  style="display:none">
+          <tr ng-repeat="Adminpay in adminpayments | filter : search"  style="color: red;">
+            <td class="table_vertical">{{Adminpay.cid || "N/A"}}</td>
+            <td class="table_vertical"  style="text-align: center !important;">{{Adminpay.name || "N/A" | capitalize}}</td>
+            <td class="table_vertical text-right text-nowrap padding-20"><span>$</span>{{Adminpay.total_paid}}</td>
+            <td class="table_vertical text-right text-nowrap padding-20"><span>$</span>{{Adminpay.total_price - Adminpay.total_paid || '0' | number:2}}</td>
+            <td class="text-right text-nowrap padding-20 table_vertical"><span>$</span>{{Adminpay.total_price || '0' | number:2}}</td>
+            <!-- <td class="text-center table_vertical">
+              <md-menu md-position-mode="target-right target" id="width_popup">
+                <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                  <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                </md-button>
+                <md-menu-content width="2">
+                  <md-menu-item>
+                    <md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{Adminpay.id}}">
+                      <div layout="row">
+                        <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                        <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                      </div>
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
+            </td> -->
+            <td class="text-center table_vertical">
+              <md-menu md-position-mode="target-right target">
+                <div class="dropdown dropleft">
+                  <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                    <!-- <i class="fa fa-ellipsis-v"></i> -->
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-payment-details/{{Adminpay.id}}" style="font-size:11px;">
+                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                    </a>
+                  </div>
+                </div>
+              </md-menu>
+            </td>
+            <!-- <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+            <td class="text-center table_vertical">{{Adminpay.created_at | dateFormat }}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr ng-repeat="Userpay in userpayments | filter : search" ng-If="Userpay.total_paid  > 0">
+            <td class="table_vertical">{{Userpay.cid || "N/A"}}</td>
+            <td class="table_vertical"  style="text-align: center !important;">{{Userpay.name || "N/A" | capitalize}}</td>
+            <td class="text-right text-nowrap padding-20 table_vertical"><span>$</span>{{Userpay.total_paid|number : 2}}</td>
+            <td class="text-right text-nowrap padding-20 table_vertical"><span>$</span>{{Userpay.pending || '0' | number:2}}</td>
+            <td class="text-right text-nowrap padding-20 table_vertical"><span>$</span>{{Userpay.total_price || '0' | number:2}}</td>
+            
+            <td class="text-center table_vertical">
+              <md-menu md-position-mode="target-right target">
+                <div class="dropdown dropleft">
+                  <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                    <!-- <i class="fa fa-ellipsis-v"></i> -->
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  </button>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-payment-details/{{Userpay.id}}" style="font-size:11px;">
+                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                    </a>
+                  </div>
+                </div>
+              </md-menu>
+            </td>
+            <!-- <td class="table_vertical hide-xs"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+            <td class="text-center table_vertical">{{Userpay.created_at | dateFormat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<style>
+  .highlight {
+      color: black;
+  }
+.nonhighlight{
+  color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+</style>

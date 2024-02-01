@@ -1,0 +1,62 @@
+<md-dialog flex-xs="95" flex="40" flex-md="50" flex-sm="50">
+	<md-dialog-content>
+		<md-content class="">
+			<!-- <div layout="column" layout-align="center center">
+				<img ng-src="assets/images/billboard_popup.png">
+			</div> -->
+
+			<div layout="row" layout-margin>
+				<h4>Add Formats Details</h4>
+				<div flex></div>
+				<md-button class="md-icon-button md-button" type="button" ng-click="cancel()">
+					<i class="material-icons">close</i>
+					<div class="md-ripple-container"></div>
+				</md-button>
+			</div>
+			
+			<!-- <div layout="column" layout-align="center center">
+				<div class="md-title">
+					<h3>Enter Formats Details</h3>
+				</div>
+			</div> -->
+			<form name="addFormatForm" novalidate="novalidate">
+				<input type="hidden" ng-model="format.id" />
+				<input type="hidden" ng-model="format.type" ng-init="format.type = (formatPopupType ? formatPopupType : 'ooh')" />
+				<div layout="column" flex="80" flex-offset-gt-sm="10" layout-padding>
+					<md-input-container class="md-block  add-formatstype">
+						<label>Format</label>
+						<input ng-model="format.name" type="text" name="name" required="required" />
+						<div ng-messages="addFormatForm.name.$error">
+							<div ng-message="required">Format Name is required.</div>
+						</div>
+					</md-input-container>
+					<div layout="row" class="add-formatimage">
+						<div flex="50" class="format-label"> <label for="dob">Icon Image</label></div>
+						<div class="format-image">
+							<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="2MB" required />
+							<br /><br />
+						</div>
+					</div>
+				</div>
+				<div class = "serverErrors" ng-if ="addFormatErrors">
+						<ul>
+							<li ng-repeat="error in addFormatErrors">
+								{{error}}
+							</li>
+						</ul>
+					</div>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised all_button md-primary" ng-click="addFormat(format)">SUBMIT</md-button>
+					<md-button Class="md-raised Upload_font" ng-click="closeMdDialog()">CANCEL</md-button>
+				</div>
+			</form>
+			<!-- <ul>
+				<li ng-repeat="(key, errors) in addFormatForm.$error track by $index"> <strong>{{ key }}</strong> errors
+					<ul>
+						<li ng-repeat="e in errors">{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+					</ul>
+				</li>
+			</ul> -->
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

@@ -1,0 +1,90 @@
+<!-- Campaign details pages-->
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+  <md-dialog-content>
+    <md-content class="md-padding">
+      <!-- <div layout="column" layout-align="center center">
+        <img ng-src="assets/images/campaign_popup_icon.png" >
+      </div> -->
+      <div layout="row" layout-align="center center" layout-margin="layout-margin" class="md-block">
+       
+        <h4>Campaign Details</h4>
+				<div flex></div>
+				<md-button class="md-icon-button md-button" type="button" ng-click="closeMdDialog()">
+					<i class="material-icons">close</i>
+					<div class="md-ripple-container"></div>
+				</md-button>
+      </div>
+      <div class="md-dialog-content" layout="row" layout-align="center center" layout-margin="layout-margin">
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>
+              <td>Campaign Name:</td>
+              <td>{{selectedRequestDetails.name || "N/A"}}</td>
+            </tr>
+            <tr>
+              <td>Contact Name:</td>
+              <td>{{selectedRequestDetails.contact_name}}</td>
+            </tr>
+            <tr>  
+              <td>Mobile Number:</td>            
+              <td>{{selectedRequestDetails.phone}}</td>
+            </tr>
+            <tr>
+              <td>Start Date:</td>
+              <td ng-show="!selectedRequestDetails.area_time_zone_type">{{selectedRequestDetails.start_date | dateify | date: "dd-MMM-yyyy"}}</td>
+              <td ng-show="selectedRequestDetails.area_time_zone_type">{{selectedRequestDetails.startDate}}</td>
+            </tr>
+            <tr>
+              <td>End Date:</td>
+              <td ng-show="!selectedRequestDetails.area_time_zone_type">{{selectedRequestDetails.end_date | dateify | date: "dd-MMM-yyyy"}}</td>
+              <td ng-show="selectedRequestDetails.area_time_zone_type">{{selectedRequestDetails.endDate}}</td>
+            </tr>
+            <!-- <tr ng-if="selectedRequestDetails.status">
+              <td>Start Date:</td>
+              <td>{{selectedRequestDetails.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+            </tr>
+            <tr ng-if="selectedRequestDetails.status">
+              <td>End Date:</td>
+              <td>{{selectedRequestDetails.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+            </tr> -->
+            <tr ng-if="!selectedRequestDetails.status">
+              <td>Expected start/end date:</td>
+              <td>{{selectedRequestDetails.start_end_date}}</td>
+            </tr>
+            <tr>
+                <td>Contact Email:</td>
+              <td>{{selectedRequestDetails.email}}</td>
+            </tr>
+            <!-- <tr>
+              <td>Estimated Budget:</td>
+              <td><span>$</span>{{selectedRequestDetails.est_budget || '0' | number:2 }}</td>
+            </tr> -->
+          </tbody>
+        </table>
+        <div layout="column" layout-margin="layout-margin" layout-align="center end" ng-if="selectedRequestDetails.status == 5">
+          {{}}
+        </div>
+        <!-- <div layout="column" layout-margin="layout-margin">
+        
+        </div> -->
+      </div>
+      <div layout-align="center center" layout="column">
+        <md-input-container>
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  all_button regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Pending ADMIN</md-button>
+        </md-input-container>
+        <!-- <md-input-container ng-if="selectedRequestDetails.status == 300">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  all_button regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Prepare Quote</md-button>
+        </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 400">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="prepareQuoteForCampaign(selectedRequestDetails.id)">Revise Quote</md-button>
+        </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 500">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-click="viewAndLaunchCampaign(selectedRequestDetails.id)">View and Launch Campaign</md-button>
+        </md-input-container>
+        <md-input-container ng-if="selectedRequestDetails.status == 121">
+          <md-button layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-href="#/admin/metro-campaign/{{selectedRequestDetails.id}}">View Details</md-button>
+        </md-input-container> -->
+      </div>
+    </md-content>
+  </md-dialog-content>
+</md-dialog>

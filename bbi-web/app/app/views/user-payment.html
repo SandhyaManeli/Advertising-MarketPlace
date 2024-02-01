@@ -1,0 +1,374 @@
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+  .group {
+    background: white;
+    box-shadow: 0 7px 14px 0 rgba(49, 49, 93, 0.10), 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    position: relative;
+    color: #8898AA;
+    font-weight: 300;
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .group label:not(:last-child) {
+    border-bottom: 1px solid #F0F5FA;
+  }
+
+  label>span {
+    width: 120px;
+    text-align: right;
+    margin-right: 30px;
+  }
+
+  .field {
+    background: transparent;
+    font-weight: 300;
+    border: 0;
+    color: #31325F;
+    outline: none;
+    flex: 1;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: text;
+  }
+
+  .field::-webkit-input-placeholder {
+    color: #CFD7E0;
+  }
+
+  .field::-moz-placeholder {
+    color: #CFD7E0;
+  }
+
+  button {
+    float: left;
+    display: block;
+    border-radius: 4px;
+    border: 0;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 38px;
+    outline: none;
+  }
+
+  .outcome {
+    float: left;
+    width: 100%;
+    padding-top: 8px;
+    min-height: 24px;
+    text-align: center;
+  }
+
+  .success,
+  .error {
+    display: none;
+    font-size: 13px;
+  }
+
+  .success.visible,
+  .error.visible {
+    display: inline;
+  }
+
+  .error {
+    color: #E4584C;
+  }
+
+  .success {
+    color: #666EE8;
+  }
+
+  .success .token {
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .campaign-container {
+    border: 1px solid gray;
+    margin-top: 35px;
+    outline: 1px solid black;
+    outline-offset: 5px;
+  }
+
+  .container_mt {
+    margin-top: 5rem;
+  }
+  .fee-container {
+    justify-content: space-between;
+    margin: 0 0 10px 0;
+  }
+</style>
+
+<body>
+  <div class="container-fluid container_mt">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12 mt-3">
+        <button type="button" class="btn btn-link" onclick="goBack()">
+          << Back</button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <!-- Campaign Details Container -->
+      <div class="col-lg-6 col-xl-6 col-xs-12 col-sm-12 col-md-12">
+        <h1><span class="badge" style="color: #566777;">Campaign Details</span></h1>
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>
+              <th scope="col">Campaign ID</th>
+              <td>{{campaignDetails.cid|| "N/A"}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Campaign Name</th>
+              <td>{{campaignDetails.name| capitalize}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Client Name</th>
+              <td>{{campaignDetails.first_name || "N/A" | capitalize}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Contact Number</th>
+              <td>{{campaignDetails.phone}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Email</th>
+              <td>{{campaignDetails.email| capitalize}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-striped table-bordered">
+          <tbody>
+            <tr>
+              <th scope="col">Number of Products</th>
+              <td>{{campaignDetails.products.length}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Date</th>
+              <td>{{(campaignDetails.created_at| dateify | date: "dd-MM-yyyy") || "N/A"}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Total Amount <span ng-if="campaignDetails.gross_fee_percentage > 0"> (+ Gross fee Amount) </span></th>
+              <td><span>$</span>{{campaignDetails.totalamount || '0' | number : 2}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Paid Amount</th>
+              <td><span>$</span>{{campaignDetails.total_paid || '0' | number : 2}}</td>
+            </tr>
+            <tr>
+              <th scope="col">Status</th>
+              <td>{{campaignDetails.status| stringifyCampaignStatus }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex">
+          <h4 class="badge font-adjust badge-warning">Impressions Total - {{campaignDetails.impressionSum || '0' |
+            number : 0}}</h4>
+          <h4 class="badge font-adjust badge-warning mr-3 ml-3">CPM Total - <span>$</span>{{campaignDetails.cpmval ||
+            '0' | number :2}}</span></h4>
+          <h4 class="badge font-adjust badge-warning">Net Total - <span>$</span>{{campaignDetails.shortlistedsum || '0' |
+            number :2}}</span></h4>
+        </div>
+        <div ng-if="offerDetails.isAccepted" class="d-flex">
+          <h4 class="badge font-adjust badge-warning">Impressions Total - {{campaignDetails.impressionSum || '0' | number : 0}}
+          </h4>
+          <h4 class="badge font-adjust badge-warning mr-3 ml-3">CPM Total - <span>$</span>{{campaignDetails.offercpmval || '0' |
+            number :2}}</h4>
+          <h4 class="badge font-adjust badge-warning">OfferTotal - <span>$</span>{{campaignDetails.offershortlistedsum || '0' | number
+            :2}}</h4>
+        </div>
+        <div ng-if="campaignDetails.gross_fee_percentage > 0" class="d-flex">
+          <h4 class="badge font-adjust badge-warning">Impressions Total - {{campaignDetails.impressionSum || '0' | number : 0}}
+          </h4>
+          <h4 class="badge font-adjust badge-warning mr-3 ml-3">CPM Total - <span>$</span>{{campaignDetails.grosscpmval || '0' |
+                      number :2}}</h4>
+          <h4 class="badge font-adjust badge-warning">Gross Total - <span>$</span>{{campaignDetails.grossshortlistedsum || '0' | number
+                      :2}}</h4>
+          </div>
+        <!-- Offer Details -->
+        <div class="row ml-0 mr-0 mb-4 mt-4" ng-show="offerDetails.offers && offerDetails.offers.length">
+          <div class="contbg md-whiteframe-3dp p-2">
+            <div class="table-responsive">
+              <table class="table table-bordered mb-0 table_user">
+                <tbody class="offer_price_status">
+                  <tr ng-if="offerDetails.offers && offerDetails.offers.length">
+                    <td class="text-center">
+                      <span><b>First Offer Details</b></span>
+                    </td>
+                    <td class="text-center" ng-if="offerDetails.offers.length && offerDetails.offers.length>1">
+                      <span><b>Second Offer Details</b></span>
+                    </td>
+                  </tr>
+                  <tr ng-if="offerDetails.offers && offerDetails.offers.length">
+                    <td class="text-center">
+                      <h2><span class="badge font-adjust ">Offer Price - ${{offerDetails.offers[0].price ||
+                          '0' | number :2}}</span></h2><br>
+                      <h2><span class="badge font-adjust ">Offer Status -
+                          {{offerDetails.status[offerDetails.offers[0].status]}}</span></h2>
+                      <h5 ng-show="offerDetails.offers[0].message">
+                        <span>({{offerDetails.offers[0].message}})</span>
+                      </h5>
+                    </td>
+                    <td class="text-center" ng-if="offerDetails.offers.length && offerDetails.offers.length>1">
+                      <h2><span class="badge font-adjust ">Offer Price - ${{offerDetails.offers[1].price ||
+                          '0' | number :2}}</span></h2><br>
+                      <h2><span class="badge font-adjust ">Offer Status -
+                          {{offerDetails.status[offerDetails.offers[1].status]}}</span></h2>
+                      <h5 ng-show="offerDetails.offers[1].message">
+                        <span>({{offerDetails.offers[1].message}})</span>
+                      </h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Product Details -->
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Product Details</th>
+              <th>Starting Date</th>
+              <th>Ending Date</th>
+              <th>Unit Price in $</th>
+              <th>Quantity Selected</th>
+              <th>Product Price in $</th>
+			  <th>Tax Amount $</th>
+              <th>Total Price in $</th>
+              <th ng-if="offerDetails.isAccepted">New Price in $</th>
+            </tr>
+            <tr ng-repeat="campaignProduct in campaignDetails.products"> 
+              <td>Title: {{campaignProduct.title || "N/A"}}</td>
+              <td>{{campaignProduct.date.startDate| dateify | date: "dd-MM-yyyy"}}</td>
+              <td>{{campaignProduct.date.endDate| dateify | date: "dd-MM-yyyy"}}</td>
+              <td><span>$</span>{{campaignProduct.price || '0' | number :2}}</td>
+              <td>{{campaignProduct.quantity}}</td>
+              <td><span>$</span>{{campaignProduct.price * campaignProduct.quantity || '0' | number : 2}}</td>
+			  <td>({{campaignProduct.tax_percentage || '0'}}%)<br>{{campaignProduct.tax_percentage_amount || '0' | number : 2}}</td>
+              <td><span>$</span>{{(campaignProduct.price+campaignProduct.tax_percentage_amount_shortlist) *
+                    campaignProduct.quantity || '0' | number : 2}}</td>
+              <td class="table_vertical text-right padding-20" ng-if="offerDetails.isAccepted">
+                <p ng-if="offerDetails.isAccepted"><span>$</span>{{campaignProduct.offerpriceperselectedDates || '0'
+                    | number :2}}</p>
+             </td>
+            </tr>
+          </thead>
+        </table>
+        </div>
+      </div>
+
+      <!-- Payments Details Container -->
+      <div class="col-lg-6 col-xl-6 col-xs-12 col-sm-12 col-md-12">
+        <h1><span class="badge" style="color: #566777;">Payment</span></h1>
+        <div class="row fee-container">
+          <div>
+            <span class="badge badge-success p-3" style="font-weight: 600; font-size: 1rem;">
+              {{campaignDetails.percentagevalue | number : 2 }}% Amount - $
+              {{campaignDetails.newofferStripepercentamtSum
+              | number : 2}}</span>
+          </div>
+          <div>
+            <span class="badge badge-success p-3" style="font-weight: 600; font-size: 1rem;">
+              Card
+              Processing Fee - $ {{campaignDetails.newprocessingfeeamtSum | number : 2}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <form action="{{config.apiPath + '/stripePost'}}" method="POST" id="payment-form"></form>
+            <input type="hidden" name="token" />
+            <div class="group">
+              <label>
+                <span style="font-weight: 500; color: black;">Card</span>
+                <div id="card-element" class="field"></div>
+              </label>
+            </div>
+
+            <div class="group">
+              <label>
+                <span style="font-weight: 500; color: black;">First name</span>
+                <input id="first-name" name="first-name" class="field" placeholder="First Name" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">Last name</span>
+                <input id="last-name" name="last-name" class="field" placeholder="Last Name" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">Address</span>
+                <input id="address-line1" name="address_line1" class="field" placeholder="Address" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">Address (cont.)</span>
+                <input id="address-line2" name="address_line2" class="field" placeholder="">
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">City</span>
+                <input id="address-city" name="address_city" class="field" placeholder="City" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">State</span>
+                <input id="address-state" name="address_state" class="field" placeholder="State" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">ZIP</span>
+                <input id="address-zip" name="address_zip" class="field" placeholder="Zip Code" required>
+              </label>
+              <label>
+                <span style="font-weight: 500; color: black;">Country</span>
+                <select name="address_country" id="address-country" class="field" required>
+                  <option value="IN">India</option>
+                  <option value="US" selected>US</option>
+                </select>
+              </label>
+            </div>
+            <button ng-click="payNow()" class="btn btn-primary btn-lg btn-block">Pay $
+              {{campaignDetails.finalpurchasepayment | number : 2}}</button>
+            <div class="outcome">
+              <div class="error"></div>
+              <div class="success">
+                Success! Your Stripe token is <span class="token"></span>
+              </div>
+            </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <div class="d-flex h-100 justify-content-center align-items-center">
+              <div>
+                <h4>Information</h4>
+                <p>AMP uses Stripe <img src="assets/images/stripe.png"> payment system and Stripe rounds up to the
+                  next
+                  dollar.
+
+                  <!--Stripe also accepts ACH payments.--> If you need support or have questions about your payment or
+                  our
+                  payment policies please email us at info@advertisingmarketplace.com
+                </p>
+                <p>Note, until your payment has been made, or AMP has approved other terms for your campaign, the
+                  products
+                  you have selected are not purchased and or held and are available to other BUYERS.</p>
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function goBack() {
+    window.history.back();
+  }
+</script>

@@ -1,0 +1,83 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+    <div class="container pt-3">
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+          </div>
+        </div>
+      </div>
+    <div layout="colmun" layout-align="end center" class="campaign_search">
+        <input type="text" ng-model="search" placeholder="search here ..." class="camp_seachowner mt-3 mr-2" />
+    </div>
+    <md-tabs md-dynamic-height class="padding_cmp">
+        <md-tab label="Referred By">
+            <div class="">
+                <div layout="column">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text_color">
+                                <tr>
+                                    <!-- <th>CID</th> -->
+                                    <th class="adjust_space">Campaign ID
+                                        <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asccr'?'highlight': 'nonhighlight'" ng-click='sortAsccr("cid","string")'><i class="fas fa-arrow-up"></i>
+                                        </span>
+                                        <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsccr'?'highlight': 'nonhighlight'" ng-click='sortDsccr("cid","string")'><i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </th>
+                                    <th class="adjust_space">Referred By
+                                        <span class="d-inline" ng-class="'referred_by' == upArrowColour && sortType == 'Asccr'?'highlight': 'nonhighlight'" ng-click='sortAsccr("referred_by","string")'><i class="fas fa-arrow-up"></i>
+                                        </span>
+                                        <span class="d-inline" ng-class="'referred_by' == downArrowColour && sortType == 'Dsccr'?'highlight': 'nonhighlight'" ng-click='sortDsccr("referred_by","string")'><i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </th>
+                                    <th class="text-right padding-20 adjust_space">Paid
+                                        <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Asccr'?'highlight': 'nonhighlight'" ng-click='sortAsccr("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                                        </span>
+                                        <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dsccr'?'highlight': 'nonhighlight'" ng-click='sortDsccr("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </th>
+                                    <th class="text-right padding-20 adjust_space">Price
+                                        <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Asccr'?'highlight': 'nonhighlight'" ng-click='sortAsccr("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                        </span>
+                                        <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dsccr'?'highlight': 'nonhighlight'" ng-click='sortDsccr("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                        </span>
+                                    </th>
+                                    <th class="adjust_space">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in referredByData | limitTo:limit | filter: {referred_by: search}">
+                                    <td class="table_vertical adjust_space">{{item.cid}}</td>
+                                    <td class="table_vertical adjust_space">{{item.referred_by | capitalize}}</td>
+                                    <td class="table_vertical text-nowrap text-right padding-20 adjust_space">${{item.total_paid || '0' | number : 2 }}</td>
+                                    <td class="table_vertical text-nowrap text-right padding-20 adjust_space">${{item.total_price || '0' | number : 2 }}</td>
+                                    <td class="table_vertical icon_res adjust_space">
+                                        <a style="cursor:pointer;" ng-click="showCampaignDetails($event, item)">
+                                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                                <i class="material-icons">remove_red_eye</i>
+                                            </md-icon>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr ng-if="referredByData == 0">
+                                    <td colspan="5" class="text-center"><b>No Record Found</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </md-tab>
+    </md-tabs>
+</div>
+<style>
+    .highlight {
+        color: black;
+    }
+.nonhighlight{
+    color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+</style>

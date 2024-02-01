@@ -1,0 +1,38 @@
+<div layout="column" layout-fill="layout-fill"> 
+
+	<div layout="row" layout-align="center center" layout-fill="layout-fill" class="owrbg owrhg"> 
+		<md-whiteframe layout="column" layout-align="center center" style="margin:4.6% 0" flex="45" 
+		layout-padding="layout-padding" class=" md-whiteframe-5dp" flex-sm="60" flex-xs="100" flex-md="45">
+			<md-content layout-fill="layout-fill" class="contbg" style="padding:30px">
+							
+				<form name="feedback" novalidate="novalidate">
+					<div layout="column" layout-padding>
+						
+						<input type="email" placeholder="Enter your Email" style="margin-bottom:10px"/>
+						<input type="text" placeholder="Enter phone number" style="margin-bottom:10px"/>
+						
+						<textarea placeholder="Write your comments" rows="5"></textarea>
+ 						
+						<div layout="row" layout-align="center center" style="margin-top:20px">
+							<div flex="20"><label for="files.image" class="md-title">Image</label></div>
+							<div flex>
+								<input type="file" ngf-select ng-model="files.image" name="files.image" accept="image/*" ngf-max-size="10MB" required></div>
+						</div> 
+						<!-- <md-button class="md-raised md-primary" ngf-select="uploadFiles($files, $invalidFiles)" multiple
+          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+      Select Files</md-button> -->
+
+					</div>
+				</form>	
+				<div layout="column"  layout-margin  >
+					<div layout="row"  layout-fill layout-align="center center">
+						<md-button Class="md-raised md-primary" ng-click="save()">Send Feedback</md-button>
+						<!-- <md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+					</div> -->
+				</div>
+				
+			</md-content>
+		</md-whiteframe>
+	</div>
+ 	
+</div>

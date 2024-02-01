@@ -1,0 +1,25 @@
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="column" layout-align="center center">
+			</div>
+			<form name="editProposedProductForm" novalidate="novalidate">
+        <div flex-gt-xs="">
+          <label>Start date:</label>
+          <md-datepicker ng-model="product.start_date" ng-init="product.start_date = AdminProposalStartDate" onkeydown="return false"
+            md-placeholder="Enter date" md-min-date="AdminProposalFromMinDate" ></md-datepicker>
+        </div>
+      <md-input-container class="md-block margin-input" style="    margin-top: 24px!important;">
+        <label style="    font-size: 16px;color:#000;">Price:</label>
+        <input ng-model="product.price" type="number" name="price" required="required" />
+        <div ng-messages="editProposedProductForm.price.$error">
+          <div ng-message="required">md-input-container is required.</div>
+        </div>
+      </md-input-container>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised all_button" ng-click="updateProposedProduct(product)" ng-disabled="editProposedProductForm.$invalid">Save</md-button>
+					<md-button Class="md-raised Upload_font" ng-click="closeMdDialog()">Cancel</md-button>
+				</div>
+      </form>
+	</md-dialog-content>
+</md-dialog>

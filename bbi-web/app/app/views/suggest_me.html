@@ -1,0 +1,482 @@
+<style>
+        .nav-tabs--vertical {
+            border-bottom: none;
+            border-right: 2px solid #ddd;
+            display: flex;
+            flex-flow: column nowrap;
+            padding-right: 30px;
+        }
+        .about_sideicon {
+            width: 30px;
+        }
+        .nav-tabs .nav-item {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .nav-item a {
+            color: #000;
+        }
+        .nav-tabs--left {
+            margin: 0 15px;
+        }
+    
+        .nav-tabs--left .nav-item+.nav-item {
+            margin-top: .25rem;
+        }
+    
+        .nav-tabs--left .nav-link {
+            transition: border-color .125s ease-in;
+            white-space: nowrap;
+        }
+    
+        .nav-tabs--left .nav-link:hover {
+            background-color: #f7f7f7;
+            border-color: transparent;
+        }
+    
+        .nav-tabs--left .nav-link.active {
+            border-radius: 0.25rem;
+            margin-right: -1px;
+            background: #BC2535;
+            color: #fff;
+            padding: 10px 20px;
+        }
+    </style>
+<section class="product_sec">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <h3 class="title"><b class="first_word"><span class="first_letter">S</span>uggest Me</b></h3>
+        <div class="mt-5">
+                <p>This is a platform that results in extensive industry research and executive team’s vast experience in media and advertising, marketing and information technology.</p>
+                <p>Billboards India presents a streamlined interface for ‘Clients’ that allows to Cart and ad-space, create campaigns, request Insertion Order from multiple vendors and negotiate pricing in real-time. With just a few clicks of a mouse customers can share their campaign info and apply for discounted billboards. Geo- tagging of ad-spaces in an innovative format in maps which can be easy to access, find hoardings location.</p>
+            </div>
+    </div>
+</section>
+    <div class="pt-5 mb-5 footer_1" id="">
+            <div class="container p-0">
+                <div class="d-flex flex-row mt-2">
+                    <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left m-0" role="navigation">
+                        <li class="nav-item">
+                            <a data-target="#ProductDetails" class="nav-link active" data-toggle="tab" role="tab" aria-controls="Product"><b>Product Details</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-target="#Marketing" class="nav-link" data-toggle="tab" role="tab" aria-controls="Marketing"><b>Marketing Objectives</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-target="#Advertising" class="nav-link" data-toggle="tab" role="tab" aria-controls="Advertising"><b>Advertising Objectives</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a data-target="#OtherInfo" class="nav-link" data-toggle="tab" role="tab" aria-controls="OtherInfo"><b>Other BUYERS</b></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content tab-left m-4">
+                        <div class="tab-pane fade show active" id="ProductDetails" role="tabpanel">
+                            <div layout="row" layout-sm="column" layout-xs="column" class="name-suggest">
+                                    <div flex="100"  flex-sm="100" flex-xs="100">
+                                        <form name="suggestMeform" novalidate layout-fill>
+                                            <div layout="row" layout-xs="column">
+                                                    <div flex="50" flex-xs="100">
+                                                        <md-input-container class="md-block">
+                                                            <label>Organization Name</label>
+                                                            <input md-no-asterisk name="org_name" ng-model="suggestionRequest.org_name" required>
+                                                            <div ng-messages="suggestMeform.org_name.$error">
+                                                                <div ng-message="required">This is required.</div>
+                                                                <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+                                                            </div>
+                                                        </md-input-container>
+                                                    </div>
+                                                    <div flex="50" flex-xs="100">
+                                                        <md-input-container class="md-block">
+                                                            <label>Product</label>
+                                                            <input md-no-asterisk name="product" ng-model="suggestionRequest.product" required>
+                                                            <div ng-messages="suggestMeform.org_name.$error">
+                                                                <div ng-message="required">This is required.</div>
+                                                                <div ng-message="md-maxlength">The Campaign Name must be less than 30 characters long.</div>
+                                                            </div>
+                                                        </md-input-container>
+                                                    </div>
+                                                    </div>
+                                            
+                                            
+                                            <h3 class="md-body-2">
+                                                Describe your product, this will help us in innovating your ad campaign:
+                                            </h3>
+                                            <textarea class="suggest_test" rows="3" ng-model="suggestionRequest.product_desc"></textarea>
+                                                       
+                                    <div class="form-group row pull-right">
+                                        <a class="btn btn-block btn-info" ng-click="#Marketing">
+                                            Next Section 
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                                    </div>
+                        </div>
+                        <div class="tab-pane fade" id="Marketing" role="tabpanel">
+                                <div layout="row" layout-sm="column" layout-xs="column" class="name-suggest" flex>
+                                        <form name="suggestMeform" novalidate>
+                                        <div flex="100" flex-sm="100" flex-xs="100">
+                                        <div class="md-body-2" style="margin-bottom:15px">What is your goal to reach your market?</div>
+                                        
+                                        <div>
+                                            <md-checkbox ng-model="suggestionRequest.market_reach.solution_to_problem" aria-label="Checkbox 1">
+                                            <!--Are you providing a solution for the current problem-->
+					      Impressions / Awareness
+                                            </md-checkbox>
+                                        </div>
+                                        <!--<div>
+                                            <md-checkbox ng-model="suggestionRequest.market_reach.cost_effective" aria-label="Checkbox 1">
+                                            Are you providing cost effective 
+                                            </md-checkbox>
+                                        </div>-->
+                                        <div>
+                                            <md-checkbox ng-model="suggestionRequest.market_reach.brand_awareness" aria-label="Checkbox 1">
+                                            <!--To increase brand awareness or sales -->
+                                            Increase Sales 
+                                            </md-checkbox>
+                                        </div>
+                                        <div>
+                                            <md-checkbox ng-model="suggestionRequest.market_reach.raise_market_value" aria-label="Checkbox 1">
+                                            <!--To increase market value -->
+                                            Increase Engagement / Trial 
+                                            </md-checkbox>
+                                        </div>
+                                        </div>
+                                    </form>           
+                                    </div>
+                                    
+                                    <!-- <div class="form-group row">
+                                        <div class="col-xs-6 col-xs-offset-3">
+                                            <a ui-sref="index.suggest.product-detail" class="btn btn-block btn-info">
+                                            Back Section 
+                                            </a>
+                                        </div>
+                                        <div flex></div>
+                                        <div class="col-xs-6 col-xs-offset-3 pull-right">
+                                            <a class="btn btn-block btn-info" ng-click="goToAddAdvert($event)">
+                                            Next Section 
+                                            </a>
+                                        </div>
+                                        
+                                    </div> -->
+                        </div>
+                        <div class="tab-pane fade" id="Advertising" role="tabpanel">
+                                <div layout="row" layout-sm="column" layout-xs="column" class="name-suggest" flex>
+                                        <div flex="100" flex-sm="100" flex-xs="100">
+                                            <div flex="100" flex-sm="100" flex-xs="100" class="motive">
+                                                <p class="md-body-2" style="margin-bottom:15px">What is the motive of the ad campaign?</p>
+                                               
+                                                <md-checkbox ng-model="suggestionRequest.adv_objective.new_product" aria-label="Checkbox 1">
+                                                To showcase a new product
+                                                </md-checkbox>
+                                        
+                                                <md-checkbox ng-model="suggestionRequest.adv_objective.market_existing_product" aria-label="Checkbox 1">
+                                                To market an existing product
+                                                </md-checkbox>
+                                    
+                                                <md-checkbox ng-model="suggestionRequest.adv_objective.offer" aria-label="Checkbox 1">
+                                                Any new offers or season specific offers 
+                                                </md-checkbox>
+                                           
+                                            </div>
+                                            <div flex-xs="100" class="medias">
+                                                <p class="md-body-2" style="margin-bottom:15px">
+                                                What is your preferred medium?
+                                                </p>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.unipoles" aria-label="Checkbox 1">
+						<!--Unipole-->
+						   Static Billboard
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.billboards" aria-label="Checkbox 1">
+                                                    Billboards
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.bus_shelter" aria-label="Checkbox 1">
+                                                    Bus shelter
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.metro_pillers" aria-label="Checkbox 1">
+                                                    <!--Metro pillars-->
+							Digital Billboard
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.center_mediums" aria-label="Checkbox 1">
+                                                    Center mediums
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="35" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.digital_screens_metro" aria-label="Checkbox 1">
+                                                    Digital screening in metro stations
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.smart_bins" aria-label="Checkbox 1">
+                                                    Smart bins
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.retail" aria-label="Checkbox 1">
+                                                    Retail
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.airport" aria-label="Checkbox 1">
+                                                    Airport
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.medium.transit" aria-label="Checkbox 1">
+                                                    Transit
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div flex-xs="100" class="people">
+                                                <p class="md-body-2" style="margin-bottom:15px">
+                                                    What is the ideal customer/target market for this ad campaign
+                                                </p>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.it_people" aria-label="Checkbox 1">
+                                                    IT people
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.students" aria-label="Checkbox 1">
+                                                    Students
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.children" aria-label="Checkbox 1">
+                                                    Children
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.logistics_transport" aria-label="Checkbox 1">
+                                                    Logistics and transport 
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.manufacturers" aria-label="Checkbox 1">
+                                                    Manufacturers
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="35" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.dealers" aria-label="Checkbox 1">
+                                                    Dealers
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.cinema" aria-label="Checkbox 1">
+                                                    Cinema
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.real_state" aria-label="Checkbox 1">
+                                                    Real estate
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.target_audience.event_organizers" aria-label="Checkbox 1">
+                                                    Event organizer
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                    
+                                            </div>
+                                            <div class="Gender">
+                                                <p class="md-body-2" style="margin-bottom:15px">
+                                                    Please specify the gender to the whom the ad is intended?
+                                                </p>
+                                               
+                                                <md-checkbox ng-model="suggestionRequest.gender_group.male" aria-label="Checkbox 1">
+                                                    Male
+                                                </md-checkbox>
+                                                
+                                        
+                                                <md-checkbox ng-model="suggestionRequest.gender_group.female" aria-label="Checkbox 1">
+                                                    Female
+                                                </md-checkbox>
+                                               
+                                                <md-checkbox ng-model="suggestionRequest.gender_group.other" aria-label="Checkbox 1">
+                                                    Others
+                                                </md-checkbox>
+                                                
+                                            </div>
+                                            <div flex-xs="100" class="Age">
+                                                <p class="md-body-2" style="margin-bottom:15px">
+                                                    What would be the age group of the people who are interested in this product
+                                                </p>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.age_group.four_ten" aria-label="Checkbox 1">
+                                                    4-10
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.age_group.ten_fifteen" aria-label="Checkbox 1">
+                                                    10-15
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.age_group.fifteen_twentyfive" aria-label="Checkbox 1">
+                                                    15-25
+                                                    </md-checkbox>
+                                                </div>
+                                                </div>
+                                                <div layout="row" layout-xs="column">
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.age_group.twentyfive_fourty" aria-label="Checkbox 1">
+                                                    25-40
+                                                    </md-checkbox>
+                                                </div>
+                                                <div flex="30" flex-xs="100">
+                                                    <md-checkbox ng-model="suggestionRequest.age_group.fourty_above" aria-label="Checkbox 1">
+                                                    40 and above
+                                                    </md-checkbox>
+                                                </div>                              
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group row">
+                                        <div class="col-xs-6 col-xs-offset-3">
+                                            <a ui-sref="index.suggest.marketingobjects" class="btn btn-block btn-info"  >
+                                            Back Section 
+                                            </a>
+                                        </div>
+                                        <div flex></div>
+                                        <div class="col-xs-6 col-xs-offset-3 pull-right">
+                                            <a class="btn btn-block btn-info" ng-click="goToOtherInfo($event)">
+                                            Next Section 
+                                            </a>
+                                        </div>
+                                        
+                                    </div> -->
+                        </div>
+                        <div class="tab-pane fade" id="OtherInfo" role="tabpanel">
+                                <div layout="row" layout-sm="column" layout-xs="column" class="name-suggest" flex>
+                                        <div flex="100" flex-sm="100" flex-xs="100" >
+                                        <h3 class="md-body-2" style="margin:15px 0">
+                                            What Geographic region will we be advertising to with this Ad campaign?
+                                        </h3>
+                                        <textarea class="suggest_testarea" rows="3" ng-model="suggestionRequest.geo_region"></textarea>
+                                        <p class="md-caption">
+                                            Tip:I would to place my advertisements in Hyderabad and Bangalore cities and in these cities I would like to advertise in the commercial areas etc. 
+                                        </p>
+                                        <div class="prefer">
+                                            <h3 class="md-body-2" style="margin-bottom:15px">
+                                                Would you prefer your own design for your ad-campaign or would you want us to design it?
+                                            </h3>
+                                            <md-input-container layout-fill> 
+                                            <label>Select</label>
+                                            <md-select name="ad_design" ng-model="suggestionRequest.ad_design" required>
+                                                <md-option value="client">My own</md-option>
+                                                <md-option value="bbi">You design it</md-option>
+                                            </md-select>
+                                            <div class="errors" ng-messages="suggestMeform.ad_design.$error">
+                                                <div ng-message="required">Required</div>
+                                            </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="duration" style="margin-top: 15px;">
+                                            <h3 class="md-body-2" style="margin-bottom:15px">
+                                                what would be your campaign duration?
+                                            </h3>
+                                            <md-input-container  layout-fill> 
+                                            <label>Select</label>
+                                            <md-select name="duration" ng-model="suggestionRequest.duration" required>
+                                                <md-option value="15">15 days</md-option>
+                                                <md-option value="30">1 month</md-option>
+                                                <md-option value="60">2 month</md-option>
+                                                <md-option value="90">3 month</md-option>
+                                                <md-option value="180">6 month</md-option>
+                                                <md-option value="360">12 month</md-option>
+                                                <md-option value="360+">more than 12 months (specify)</md-option>
+                                            </md-select>
+                                            <div class="errors" ng-messages="suggestMeform.duration.$error">
+                                                <div ng-message="required">Required</div>
+                                            </div>
+                                            </md-input-container>
+                                        </div>
+                                        <div class="adcamapgin" style="margin-top: 15px;">
+                                            <h3 class="md-body-2" style="margin-bottom:15px">
+                                                when would you like to start your ad campaign
+                                            </h3>
+                                            <textarea class="suggest_testarea" rows="3" ng-model="suggestionRequest.start_end_date"></textarea>
+                                            <p class="md-caption">
+                                                Tip: In the first quarter of 2018. (OR) 14-jan-2018
+                                            </p>
+                                        </div>
+                                        <div class="bugest" style="margin-top: 15px;">
+                                            <h3 class="md-body-2" style="margin-bottom:15px">
+                                                what would be your approximate budget for this campaign? 
+                                            </h3>
+                                            <p class="caption">
+                                                Tip:based on your budget we will strategically plan your ad campaign
+                                            </p>
+                                            <md-input-container  layout-fill> 
+                                            <label>Select budget Range</label>
+                                            <md-select name="est_budget" ng-model="suggestionRequest.est_budget" required>
+                                                <md-option value="below 1 lakh">below 1 lakh</md-option>
+                                                <md-option value="1-5 lakhs">1-5 lakhs</md-option>
+                                                <md-option value="5-10 lakhs">5-10 lakhs</md-option>
+                                                <md-option value="10-20 lakhs">10-20 lakhs</md-option>
+                                                <md-option value="20-50 lakhs">20- 50 lakhs</md-option>
+                                                <md-option value="more than 50 lakhs">more than 50 lakhs</md-option>    
+                                            </md-select>
+                                            <div class="errors" ng-messages="suggestMeform.est_budget.$error">
+                                                <div ng-message="required">Required</div>
+                                            </div>
+                                            </md-input-container>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div ng-repeat="suggestError in suggestCampaignErrors" ng-if="suggestCampaignErrors.length >= 1" style="color:red;margin-left:15em">{{suggestError}}</div>
+                                    <div class="form-group row">
+                                        <!-- <div class="col-md-4">
+                                            <a ui-sref="index.suggest.advertisingobjects" class="btn btn-block btn-info" >
+                                            <span>Back Section </span>
+                                            </a>
+                                        </div> -->
+                                        <div class="offset-lg-8 offset-md-8 col-md-2">
+                                            <a class="suggest_btnreset btn btn-block btn-info" ng-click="resetSuggestionForm()">
+                                            Reset 
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="col-md-2 pull-right">
+                                            <a ng-click="sendSuggestionRequest($event)" class="suggest_btnsubmit btn btn-block btn-info" style="color: #fff">
+                                            Submit 
+                                            </a>
+                                        </div>
+                                        
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- footer -->
+    
+
+        
+        
+           

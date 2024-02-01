@@ -1,0 +1,49 @@
+<div class="row"  class="name-suggest mr-0 ml-0" >
+    <form name="suggestMeform" novalidate>
+        <!-- <div flex="25" flex-sm="100" flex-xs="100" layout="colmun">
+            <h3div class="md-subhead">Marketing objective</h3>
+        </div> -->
+        <div class="col-12 col-md-8">
+            <div class="md-body-2" style="margin-bottom:15px">
+                What is your goal to reach your market?</div>
+
+            <div>
+                <md-checkbox ng-model="suggestionRequest.market_reach.solution_to_problem" aria-label="Checkbox 1">
+                    <!--Are you providing a solution for the current problem-->
+                    Impressions / Awareness
+                </md-checkbox>
+            </div>
+           <!-- <div>
+                <md-checkbox ng-model="suggestionRequest.market_reach.cost_effective" aria-label="Checkbox 1">
+                    Are you providing cost effective
+                </md-checkbox>
+            </div>-->
+            <div>
+                <md-checkbox ng-model="suggestionRequest.market_reach.brand_awareness" aria-label="Checkbox 1">
+                    <!--To increase brand awareness or sales-->
+                    Increase Sales
+                </md-checkbox>
+            </div>
+            <div>
+                <md-checkbox ng-model="suggestionRequest.market_reach.raise_market_value" aria-label="Checkbox 1">
+                    <!--To increase market value-->
+                    Increase Engagement / Trial
+                </md-checkbox>
+            </div>
+            <div class="form-group row mt-5">
+                <div class="col-6">
+                    <a ui-sref="index.suggest.product-detail" class="suggest__btn suggest_btn_back  float-left">
+                        Back Section
+                    </a>
+                </div>
+                
+                <div class="col-6">
+                    <a class="suggest__btn suggest_btn_next float-right" ng-click="goToAddAdvert($event)">
+                        Next Section
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,98 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page"> 
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+  <!--button-->
+  <div class="ml-5">
+    <md-button ng-disabled="bulkSelect || (selectedids && !selectedids.length)" class="md-raised all_button" ng-click="bulkUplodData()">
+       Mark Notification As Read
+    </md-button>
+</div>
+    <md-tabs md-dynamic-height class="padding_cmp">
+       <md-tab label="RFP Request Without Login">
+   <div class="">
+       <div layout="column">
+           <div class="table-responsive">
+               <table class="table">
+                   <thead class="text_color">
+                       <tr>
+                           <!-- <th style="width:10%;">Price</th>
+                           <th style="width:40%;">Comments</th>
+                           <th style="width:40%;">User Name</th>
+                           <th style="width:40%;">User Email</th>
+                           <th style="width:40%;">Action</th>
+                           <th class="">Date</th> -->
+                           <th><input type="checkbox" ng-model="$root.selectAllChk" ng-click="selectAll($event, selectAllChk)"> Select Unread</th>
+                           <th class="adjust_space">Campaign ID
+                            <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("cid","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("cid","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+                           <th class="adjust_space">Campaign Name
+                            <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("name","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("name","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                          </th>
+                           <th class="adjust_space">Email
+                            <span class="d-inline" ng-class="'user_email' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("user_email","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'user_email' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("user_email","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+                           <th class="adjust_space">Due Date
+                            <span class="d-inline" ng-class="'due_date' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("due_date","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'due_date' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("due_date","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+                           <!-- <th>Created Date</th> -->
+                           <!-- <th>Offer Status</th>-->
+                           <th class="adjust_space">View Details</th>
+                           <th>Status</th>
+                           <!-- <th class="">Date</th> -->
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="Rfp in RfpData | limitTo:limit" ng-class ="{unReadNotifications : Rfp.status_read == 0}">
+                        <td class="table_vertical"><input type="checkbox" ng-model="Rfp.valueChecked" ng-click="selectSingle(Rfp.id,Rfp.status_read)"></td> 
+                        <td class="table_vertical">{{Rfp.cid}}</td>
+                         <td class="table_vertical">{{Rfp.name}}</td>
+                         <td class="table_vertical">{{Rfp.user_email}}</td>
+                         <td class="table_vertical">{{Rfp.due_date | date: "MM-dd-yyyy"}}</td>
+                         <!-- <td class="table_vertical">{{Rfp.created_at | date:"MM/dd/yyyy 'at' h:mma"}}</td> -->
+                         <!-- <td class="table_vertical">{{Rfp[Offers.status] | capitalize}}</td> -->
+                         <td class="table_vertical icon_res">
+                           <a style="cursor:pointer;" ng-click="showRfpCampaignDetails($event, Rfp)">
+                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                               <i class="material-icons">remove_red_eye</i>
+                             </md-icon>
+                           </a>
+                         </td>
+                         <td class="table_vertical">{{Rfp.status| stringifyCampaignStatus }}</td>
+                         <!-- <td class="table_vertical">{{Offers.updated_at | dateFormat}}</td> -->
+                       </tr>
+                     </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+   </div>
+       </md-tab>
+     </md-tabs>
+     <style>
+      .highlight {
+          color: black;
+      }
+  .nonhighlight{
+      color: #808080c2;
+  }
+  .unReadNotifications {
+            background-color: #f2f3f2;
+        }
+  </style>

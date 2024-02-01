@@ -1,0 +1,77 @@
+<div class="md-toolbar-tools owner_tool_bar" md-whiteframe="3">
+			<md-button aria-label="menu" class="md-icon-button menubtn" ng-click="toggleOwnerLeftSidenav()" hide-gt-sm>
+				<md-icon md-svg-icon="assets/images/menu_24px.svg"> </md-icon>
+			</md-button>
+			<a href="#/owner/{{clientSlug}}/feeds" class="md-icon bill_img">
+				<img class="png-icon logo_image" src="assets/images/owner/logo.png" alt="images">
+			</a>
+			<span flex></span>
+			<button class="btn btn-default metro_btn hide-xs">Metro Train</button>
+			<div class="profile_details_left"><!--notifications of menu start -->
+				<ul class="nofitications-dropdown">
+					<li class="dropdown head-dpdn"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">{{ownerNotifs.length}}</span></a>
+					<ul class="dropdown-menu arrrow_box animated fadeInDown mt-5">
+						<li>
+						<div class="notification_header">
+							<h3 class="text_color">You have {{ownerNotifs.length}} new notification</h3>
+						</div>
+						</li>
+						<li ng-repeat="notif in ownerNotifs" ng-click="viewNotification(notif)">
+							<div class="notification_desc pl-3">
+							<p>{{notif.message}}</p>
+							<p><span>{{notif.updated_at | dateify:'DD-MM-YYYY hh:mm:ss a'}}</span></p>
+							</div>
+							<div class="clearfix"></div>
+						</li>
+						<div class="notification_bottom"> <a ng-href="#/owner/{{clientSlug}}/notifications">See all notifications</a> </div>
+						</li>
+					</ul>
+					</li>
+					<li class="dropdown head-dpdn hide-xs" ng-if="isAuthenticated"> 
+						<a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved Campaign ({{activeUserCampaigns.length}})</a>
+						<ul class="dropdown-menu animated fadeInDown dropdown-saved">
+						<li>
+						  <div class="notification_header ">
+						  <h3 class="text_color">You have {{activeUserCampaigns.length}} Campaigns</h3>
+						</div>
+						</li>
+						<li ng-repeat="activeUserCampaign in activeUserCampaigns.slice(0,3)"><a ng-href="#/campaign-details/{{activeUserCampaign.id}}">
+						<div class="notification_desc pl-3">
+						  <p>{{activeUserCampaign.name}}</p>
+						  <!-- <p><span>1 hour ago</span></p> -->
+						</div>
+						<div class="clearfix"></div> 
+						</a>
+						</li>
+						<li>
+						  <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns">See all campaigns</a> </div>
+						  </li>
+					  </ul>
+					  </li>
+					<li class="dropdown head-dpdn"> 
+						<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<img src="assets/images/man.png" class="hide-xs"/>
+							<i class="fa fa-ellipsis-v lnr"></i>
+						</a> -->
+						<a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A
+
+						<ul class="dropdown-menu drp-mnu pl-4 animated fadeIn delay-.5s">
+							<li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
+							<li> <a ng-href="#/owner/{{clientSlug}}/campaigns"> Campaigns</a> </li>
+							<li> <a ng-href="#/payments"> Payments</a> </li>
+							<li> <a ng-href="#/reset_password"> Change Password</a> </li>
+							<li> <a ng-href="#/location"> Switch to Map view</a> </li>
+							<li> <a ng-href="#"> Team</a> </li>
+							<li> <a ng-click="logout()"> Logout</a> </li>
+						</ul>
+					
+					</li>
+				</ul>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<script>
+			function goBack() {
+			  window.history.back();
+			}
+		</script>

@@ -1,0 +1,209 @@
+<div layout="column">
+    <div layout="row" layout-margin class="md-whiteframe-3dp">
+        <p class="mb-0 mt-3">Campaign Name:<span class="text_color"> Uber Pvt Ltd</span></p>
+        <p class="mb-0 mt-2">No.of packages:<span class="text_color md-title"> 3</span></p>
+        <p class="mb-0 mt-3">Estimated Budget : 158,000</p>
+        <p class="mb-0 mt-3 text_color"> Total Price : 190,000</p>
+        <p class="mb-0 mt-3"><span class="text_color">Created On</span> :12-08-2018 - 11.30 am</p>
+        <span flex></span>
+        <md-button class="md-raised md-primary">VIEW CAMPAIGN</md-button>
+    </div>
+    <!-- filters-->
+    <form class="form-inline camp_filters" action="" style="padding:0 0 0 10px">
+
+        <label for="pwd">Hyderabad L&T Metro:</label>
+        <div class="form-group">
+            <select class="form-control" id="sel1">
+                <option selected>Digital Signage Inside Train</option>
+                <option>Digital</option>
+                <option>Train wrap</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" id="sel1">
+                <option selected>Corridor 1 Nagole to Miyapur</option>
+                <option>Corridor 2 Nagole to Miyapur</option>
+                <option>Corridor 3 Nagole to Miyapur</option>
+            </select>
+        </div>
+        <md-button class="md-raised md-primary" style="background-color:#44596D">Apply Filters</md-button>
+        <p class="text_color mb-0 mt-2">24" Digital Screen Packages - Inside Metro Train</p>
+        <p flex></p>
+        <md-button style="text-transform: capitalize;">About Metro</md-button>
+    </form>
+    <section class="metro_map">
+        <img src="assets/images/owner/metro.png" alt="metro images" width="100%" />
+        <div class="row mr-0 ml-0 metro_packge">
+            <div class="col-md-5 mb-3">
+                <div class="merto_pkg_details md-whiteframe-3dp p-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="left_side_pack metro_package_bg0">
+                                <p class="md-caption mb-0">1 Year - 6120 Spots, 1 Slot</p>
+                                <h3> 8,56,800</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="mt-2 md-caption">Select Trains</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%">
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group mt-2">
+                                <span class="mt-2 md-caption">Select Slot</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%" ng-disable>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout="row" layout-align="space-between center">
+                        <div class="form-group">
+                            <div flex-gt-xs="">
+                                <md-datepicker ng-model="metroPackage.start_date" onkeydown="return false"
+                                    md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+                            </div>
+                        </div>
+                        <md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)"
+                            ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'add to campagin')}}
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="merto_pkg_details md-whiteframe-3dp p-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="left_side_pack metro_package_bg4">
+                                <p class="md-caption mb-0">1 Year - 6120 Spots, 1 Slot</p>
+                                <h3> 8,56,800</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="mt-2 md-caption">Select Trains</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%">
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group mt-2">
+                                <span class="mt-2 md-caption">Select Slot</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%">
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div layout="row" layout-align="space-between center">
+                        <div class="form-group">
+                            <div flex-gt-xs="">
+                                <md-datepicker ng-model="metroPackage.start_date" onkeydown="return false"
+                                    md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+                            </div>
+                        </div>
+                        <md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)"
+                            ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select
+                            this')}}</md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="merto_pkg_details md-whiteframe-3dp p-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="left_side_pack metro_package_bg2">
+                                <p class="md-caption mb-0">1 Year - 6120 Spots, 1 Slot</p>
+                                <h3> 8,56,800</h3>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="mt-2 md-caption">Select Trains</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%">
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div class="input-group mt-2">
+                                <span class="mt-2 md-caption">Select Slot</span>
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="minus" data-field="">
+                                        <i class="material-icons">remove</i>
+                                    </button>
+                                </span>
+                                <input type="text" id="quantity" name="quantity" class="form-control mtero_input_number"
+                                    value="10" style="width:30%">
+                                <span class="input-group-btn">
+                                    <button type="button" class="metro_btns btn-number" data-type="plus" data-field="">
+                                        <i class="material-icons"> add </i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div layout="row" layout-align="space-between center">
+                        <div class="form-group">
+                            <div flex-gt-xs="">
+                                <md-datepicker ng-model="metroPackage.start_date" onkeydown="return false"
+                                    md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+                            </div>
+                        </div>
+                        <md-button class="md-raised md-primary slect_btn" ng-disabled="isAlreadySelected(metroPackage.id)"
+                            ng-click="shortlistMetroPackage(metroPackage)">{{(isAlreadySelected(metroPackage.id)?'Selected':'select
+                            this')}}</md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

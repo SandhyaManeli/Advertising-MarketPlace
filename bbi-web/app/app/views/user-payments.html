@@ -1,0 +1,172 @@
+<div class="container resp-padtop">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+<div layout="column">
+	<div layout="row" layout-align="space-between center">
+		<div layout="column" layout-padding>
+			<h3 class="md-title text_color" style="padding-left:10px;">Payments</h3>
+		</div>
+		<!-- <div layout="column" layout-padding>
+			<a ng-href="/owner/{{clientSlug}}/update-payments" class="add_paymt_btn">Add new payment</a>
+		</div> -->
+		<div class="active-cyan-4 mr-2 payment_search" style="width:20%;">
+			<input class="form-control" ng-model="search" type="text" placeholder="Search" aria-label="Search">
+		</div>
+	</div>
+	<div class="table-responsive" id="payments-table"> 
+		<table class="table table-hover">
+				<thead class="text_color">
+				  <tr>
+					<!-- <th>CID</th> -->
+					<th class="payments_align">Campaign ID
+						<span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("cid","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("cid","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+					<th class="payments_align">Campaign Name
+						<span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("name","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("name","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+					<th class="text-right padding-20 payments_align">Paid
+						<span class="d-inline" ng-class="'paid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("paid","number")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'paid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("paid","number")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+					<th class="text-right padding-20 payments_align">Pending
+						<span class="d-inline" ng-class="'pendingPayment' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("pendingPayment","number")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'pendingPayment' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("pendingPayment","number")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+					<th class="text-right padding-20 payments_align">Total
+						<span class="d-inline" ng-class="'act_budget' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("act_budget","number")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'act_budget' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("act_budget","number")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+					<th class="text-center payments_align">Action</th>
+					<!-- <th></th> -->
+					<th class="text-center payments_align">Date Entered
+						<span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+					</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<tr	class="" ng-repeat="payments in userPayments | filter:search"  ng-if="payments.status > 500 && payments.paid > 0"> 
+					<td class="table_vertical">{{payments.cid}}</td>
+					<td class="table_vertical">{{payments.name | capitalize}}</td>
+					<td class="text-right text-nowrap padding-20 table_vertical">${{payments.paid | number:2}}</td>
+					<td class="text-right text-nowrap padding-20 table_vertical">${{payments.pendingPayment | number:2}}</td>
+					<td class="text-right text-nowrap padding-20 table_vertical">${{payments.act_budget | number:2}}</td>
+					<td class="text-center table_vertical">
+					  <a style="cursor:pointer;" ng-href="/update-user-payments/{{payments.id}}">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<!-- <td class="text-center table_vertical">									
+						<button type="button" class="btn btn-danger" ng-if="payments.paid == 0">Payment Alert</button> -->
+						<!-- <button type="button" class="btn btn-warning" ng-if="(payments.act_budget - payments.paid) != payments.act_budget && (payments.act_budget - payments.paid)!=0">Partial Paid</button>									
+						<button type="button" class="btn btn-success" ng-if="(payments.act_budget - payments.paid) == 0 && payments.paid!=0">Amount Paid</button> -->
+					<!-- </td> -->
+					<!-- <td class="table_vertical"><button type="button" class="btn btn-danger">Payment Alert</button></td> -->
+					<td class="text-center table_vertical">{{payments.updated_at | dateFormat}}</td>
+				  </tr>
+				  <!-- <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr>
+				  <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr>
+				  <tr>
+					<td>BB283</td>
+					<td>Uber Pvt Ltd</td>
+					<td>55,800</td>
+					<td>55,850</td>
+					<td>55,800</td>
+					<td>
+					  <a style="cursor:pointer;" ng-click="">
+						  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+							<i class="material-icons">remove_red_eye</i>
+						  </md-icon>
+						</a>
+					</td>
+					<td><button type="button" class="btn btn-danger">Payment Alert</button></td>
+					<td>21-09-2018, 9:00 Am</td>
+				  </tr> -->
+				</tbody>
+			  </table>
+	  </div>
+</div>
+<style>
+    .highlight {
+      color: black;
+  }
+.nonhighlight{
+  color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+
+  .table-responsive{
+	max-height: 570px;
+  }
+
+  @media only screen and (min-width: 992px) and (max-width: 1024px) {
+        .table-responsive{
+             max-height: 570px;
+         }
+    }
+     @media only screen and (min-width: 1025px) and (max-width: 1440px) {
+       .table-responsive{
+             max-height: 650px;
+         }
+    }
+	@media only screen and (min-width: 1441px) and (max-width: 2560px) {
+       .table-responsive{
+             max-height: 650px;
+         }
+    }
+	.resp-padtop {
+    	padding-top: 8rem;
+	}
+</style>

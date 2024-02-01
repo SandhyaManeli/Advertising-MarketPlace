@@ -1,0 +1,93 @@
+<div layout="column" layout-fill="layout-fill">
+  <form name="addCorridorform" novalidate >
+    <input ng-model="corridor.id" type="hidden" name="id"/>
+    <div layout="column" class="hide-xs">
+      <div layout="row" layout-margin layout-padding>
+        <div flex="50">
+          <md-autocomplete style="width:100%;margin-top:-8px;" ng-disabled="isDisabled" md-selected-item="selectedCorridorCity" md-search-text="searchText" md-items="item in citySearch(searchText)" md-item-text="item.name" md-min-length="3" placeholder="Search City..."  md-clear-button="true">
+            <md-item-template>
+              {{item.name}}, {{item.state_name}}, {{item.country_name}}
+            </md-item-template>
+            <md-not-found>
+              No matches found.
+            </md-not-found>
+          </md-autocomplete>
+        </div>
+        <md-input-container class="md-block" flex="50">
+          <label>Corridor Name</label>          
+          <input ng-model="corridor.name" type="text" name="name" required />
+          <div ng-messages="addCorridorform.name.$error">
+            <p ng-message="required">Corridor Name is required</p>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex="50">
+            <label>From</label>          
+            <input ng-model="corridor.from" type="text" name="From" required />
+            <div ng-messages="addCorridorform.From.$error">
+              <p ng-message="required">From is required</p>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block" flex="50">
+              <label>To</label>          
+              <input ng-model="corridor.to" type="text" name="To" required />
+              <div ng-messages="addCorridorform.To.$error">
+                <p ng-message="required">To is required</p>
+              </div>
+            </md-input-container>
+      </div>
+      <div class="serverErrors" ng-show="stateErrors && !addCorridorErrors.length == 0">
+        <ul>
+          <li ng-repeat="error in addCorridorErrors">
+            {{error}}
+          </li>
+        </ul>
+      </div>
+      <div layout="row" layout-align="center center">
+        <md-button Class="md-raised md-primary register_btn" type="submit" ng-click="saveCorridor(corridor)" ng-disabled="addCorridorform.$invalid">Submit</md-button>        
+      </div>
+    </div>
+  </form>
+
+  <!-- ===== table new code start=======-->
+  <div style="margin-top: 1em;">
+    <div class="table-responsive">
+				<table class="table table-hover call_center">
+				  <thead>
+					<tr class="text_color">
+					  <th class="">Sr.No</th>
+					  <th class="">City</th>
+					  <th class="">Corridor Name</th>
+					  <th class="">From</th>
+					  <th class="">To</th>
+					  <th class="">Actions</th>
+					</tr>
+				  </thead>
+				  <tbody class="">
+              <tr ng-repeat="corr in metroCorridorList track by $index">
+                  <td class="table_vertical">{{$index + 1}}</td>
+                  <td class="table_vertical">{{corr.city_name}}</td>
+                  <td class="table_vertical">{{corr.name}}</td>
+                  <td class="table_vertical">{{corr.from || "N/A"}} </td>
+                  <td class="table_vertical">{{corr.to || "N/A"}} </td>
+                  <td class="table_vertical">
+                    <span>
+                      <a style="cursor:pointer;" ng-click="editcorridors(corr)">
+                        <md-icon>
+                          <i class="material-icons">mode_edit</i>
+                        </md-icon>
+                      </a>
+                    </span>
+                    <span>
+                      <a style="cursor:pointer;" ng-click="deleteState(corr)">
+                        <md-icon>
+                          <i class="material-icons" ng-click="deleteCorridors(corr.id)">delete</i>
+                        </md-icon>
+                      </a>
+                    </span>
+                  </td>
+                </tr>
+				  </tbody>
+				</table>
+			  </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<style>
+    .unReadNotifications {
+        background-color: #f2f3f2;
+    }
+    </style>
+<div layout="column" layout-padding>
+    <div class="container pt-3">
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+          </div>
+        </div>
+      </div>
+    <p class="text_color md-title">Notifications</p>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Details</th>
+                    <!-- <th>CID</th> -->
+                    <th>Campaign ID
+                        <span class="d-inline" ng-class="'c_id' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("c_id","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'c_id' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("c_id","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+                    </th>
+                    <th>Campaign Name
+                        <span class="d-inline" ng-class="'c_name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("c_name","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'c_name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("c_name","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+                    </th>
+                    <th>Action</th>
+                    <th class="text-center">Date Entered
+                        <span class="d-inline" ng-class="'created_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("created_at","string")'><i class="fas fa-arrow-up"></i>
+						</span>
+						<span class="d-inline" ng-class="'created_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("created_at","string")'><i class="fas fa-arrow-down"></i>
+						</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="notifictaion in getUserNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
+                    <td class="table_vertical" >{{notifictaion.message }}</td>
+                    <td class="table_vertical" >{{notifictaion.c_id }}</td>
+                    <td class="table_vertical" >{{notifictaion.c_name }}</td>
+                    <td class="table_vertical notifications_eye_res">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'"
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/campaigns">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'offer_rejected'"
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/user-saved-campaigns">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'offer_accepted'"
+                        ng-click="updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/user-saved-campaigns">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical text-center text_color">{{notifictaion.created_at | dateFormat}}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<style>
+    .highlight {
+      color: black;
+  }
+.nonhighlight{
+  color: #808080c2;
+}
+</style>

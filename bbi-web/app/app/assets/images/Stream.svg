@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <g id="Group_13" data-name="Group 13" transform="translate(-1144 -751)">
+    <g id="Group_12" data-name="Group 12" transform="translate(-23.19 6.039)">
+      <g id="smartphone" transform="translate(1175 751)">
+        <path id="Path_9" data-name="Path 9" d="M286.051,24H44A36.772,36.772,0,0,0,7.334,60.67V487.237A36.785,36.785,0,0,0,44,523.922H286.051a36.762,36.762,0,0,0,36.67-36.67V60.67A36.772,36.772,0,0,0,286.051,24Zm-159.7,476.574h77.435a4.444,4.444,0,0,1,0,8.888H126.349a4.444,4.444,0,0,1,0-8.888Zm170.855-12.7H32.851V52.059H297.2Z" transform="translate(-7.334 -24)"/>
+      </g>
+      <g id="play" transform="translate(1240.349 904.915)">
+        <g id="Group_3" data-name="Group 3">
+          <path id="Path_10" data-name="Path 10" d="M162.934,27.955A95.445,95.445,0,0,0,27.955,162.934,95.445,95.445,0,0,0,162.934,27.955ZM149.463,100.1,77.581,148.019a5.592,5.592,0,0,1-8.694-4.653V47.524a5.592,5.592,0,0,1,8.694-4.653l71.882,47.921a5.592,5.592,0,0,1,0,9.307Z"/>
+        </g>
+      </g>
+    </g>
+    <text id="LIVE" transform="translate(1487 1057)" font-size="85" font-family="Gilroy-ExtraBold, Gilroy" font-weight="800" letter-spacing="0.01em"><tspan x="0" y="0">LIVE</tspan></text>
+    <text id="STREANUBG" transform="translate(1493 1084)" fill="#e33134" font-size="28" font-family="GillSansMT, Gill Sans MT" letter-spacing="0.01em"><tspan x="0" y="0">STREANUBG</tspan></text>
+    <g id="wifi" transform="translate(1514.407 895.232)">
+      <g id="Group_5" data-name="Group 5" transform="translate(47.336 67.842)">
+        <g id="Group_4" data-name="Group 4">
+          <path id="Path_11" data-name="Path 11" d="M220.879,361.693a10.176,10.176,0,1,0,10.176,10.176A10.188,10.188,0,0,0,220.879,361.693Z" transform="translate(-210.703 -361.693)" fill="#e33134"/>
+        </g>
+      </g>
+      <g id="Group_7" data-name="Group 7" transform="translate(32.063 45.228)">
+        <g id="Group_6" data-name="Group 6">
+          <path id="Path_12" data-name="Path 12" d="M168.169,261.033a32.74,32.74,0,0,0-25.449,12.138l11.058,11.058s5.157-7.358,14.392-7.358c9.046,0,14.392,7.358,14.392,7.358l11.058-11.058A32.742,32.742,0,0,0,168.169,261.033Z" transform="translate(-142.72 -261.033)" fill="#e33134"/>
+        </g>
+      </g>
+      <g id="Group_9" data-name="Group 9" transform="translate(0 0)">
+        <g id="Group_8" data-name="Group 8">
+          <path id="Path_13" data-name="Path 13" d="M57.512,59.713A77.977,77.977,0,0,0,0,85.016L11.228,96.244a62.093,62.093,0,0,1,92.569,0l11.228-11.228A78.1,78.1,0,0,0,57.512,59.713Z" transform="translate(0 -59.713)" fill="#e33134"/>
+        </g>
+      </g>
+      <g id="Group_11" data-name="Group 11" transform="translate(16.031 22.614)">
+        <g id="Group_10" data-name="Group 10">
+          <path id="Path_14" data-name="Path 14" d="M112.838,160.373a55.283,55.283,0,0,0-41.481,18.72L82.573,190.31a39.519,39.519,0,0,1,60.53,0l11.216-11.216A55.282,55.282,0,0,0,112.838,160.373Z" transform="translate(-71.357 -160.373)" fill="#e33134"/>
+        </g>
+      </g>
+    </g>
+    <rect id="Rectangle_5" data-name="Rectangle 5" width="512" height="512" transform="translate(1144 751)" fill="none" opacity="0"/>
+  </g>
+</svg>

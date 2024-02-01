@@ -1,0 +1,211 @@
+<div>
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="Call Center Info">
+        <md-content class="md-padding">
+          <style>
+          .callinfoview{
+            background-color:limegreen;
+          }
+          </style>
+          <div layout="column" layout-fill="layout-fill">
+            <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+              <div style="margin: 5px 0 0 15px;">Call Center Info</div>
+            </div>
+            <!-- <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+                  <div>
+                    <h3>List Of Information</h3>
+                  </div>
+                </div> -->
+            <!-- <div layout-margin layout="column">
+                  <div ui-grid="gridcallCenter" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns
+                    ui-grid-auto-resize class="grid"></div>
+                </div> -->
+            <!-- ========new code for tables html start ========= -->
+            <div style="margin-top: 1em;">
+              <div class="table-responsive">
+                <table class="table table-striped table-bordered ">
+                  <thead>
+                    <tr>
+                      <th>Sr.no</th>
+                      <th>Phone Number</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="callinfo in callCenterData | limitTo:limit">
+                      <td>{{$index +1}}</td>
+                      <td>{{callinfo.phoneNo}}</td>
+                      <td>
+                        <button class="btn btn-small" ng-click="CallFeedback(callinfo.id)" ng-class="{callinfoview: callinfo.viewed || callinfoviewed}">Call Feedback</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- ========new code for tables html end ========= -->
+          </div>
+          <script type="text/ng-template" id="templateId">
+                <md-dialog flex="50" flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70">
+                  <form ng-cloak name="callFeedback" novalidate>
+                      <md-toolbar>
+                      <div  class="md-toolbar-tools md-whiteframe-4dp">
+                      <span  class="md-title">Call Feedback</span>
+                      <span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
+                      <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button"  ng-click="cancelFeedbackBox()">X</button>
+                    </div>
+                    </md-toolbar> 
+                    <md-dialog-content>
+                      <div layout="row" layout-sm="row" layout-lg="row"  layout-md="row" layout-xs="column" layout-margin="layout-margin">
+                        <div layout="column" flex-lg="100">
+                          <md-input-container class="md-block" >
+                            <label>Call Feedback</label>
+                            <textarea ng-model="response.call_feedback" name="call_feedback" minlength="10"  required></textarea>
+                            <div ng-messages="callFeedback.call_feedback.$error">
+                              <div ng-message="required">Please add Feedback</div>
+                              <div ng-message="minlength">Its must have 10 characters.</div>
+                            </div>
+                          </md-input-container>
+                        </div>
+                      </div>
+                    </md-dialog-content>
+                    <md-dialog-actions layout="row" layout-align="center center" >
+                      <md-button Class="md-raised md-primary" type="submit" ng-disabled="callFeedback.$invalid" ng-click="savefeedback(response)">
+                        save
+                      </md-button>
+                      <md-button Class="md-raised" ng-click="cancelFeedbackBox()">
+                        CANCEL
+                      </md-button>
+                    </md-dialog-actions>
+                  </form>
+                </md-dialog>
+              </script>
+        </md-content>
+      </md-tab>
+      <md-tab label="Subscribers">
+        <md-content class="md-padding">
+          <div layout="column" layout-fill="layout-fill">
+            <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+              <div>
+                <h3>Subscribers</h3>
+              </div>
+            </div>
+            <div layout-margin layout="column" style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+
+              <!-- <div><h3>List Of Subscribers</h3></div> -->
+              <form ng-submit="selected_rows()">
+                <select name="action">
+                  <option value="">Action</option>
+                  <option value="delete">Unsubscribe</option>
+                </select>
+                <button type="submit">Submit</button>
+              </form>
+              <div>
+                <label>Which rows should we export?</label>
+                <select ng-model="export_row_type" </select>
+                  <option value='all'>All</option>
+                  <option value='visible'>Visible</option>
+                  <option value='selected'>Selected</option>
+                </select>
+                <label>What format would you like?</label>
+                <select ng-model="export_format" </select>
+                  <option value='csv'>CSV</option>
+                  <option value='pdf'>PDF</option>
+                </select>
+                <button ng-click="export()">Export</button>
+                <div class="custom-csv-link-location">
+                  <label>Your CSV will show below:</label>
+                  <span class="ui-grid-exporter-csv-link">&nbsp</span>
+                </div>
+              </div>
+              <!-- <div layout-margin layout="column">
+                    <div ui-grid="gridSubscribers" ui-grid-exporter  ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+                </div> -->
+              <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                  <table class="table table-striped table-bordered ">
+                    <thead>
+                      <tr>
+                        <th>Email Id</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="Subscribers in Subscribersdata | limitTo:limit">
+                        <td>{{Subscribers.email}}</td>
+                        <td>
+                          <span>
+                            <a ng-click="ShowConfirm(Subscribers)">
+                              <md-icon style="cursor: pointer;">
+                                <i class="material-icons">unsubscribe</i>
+                              </md-icon>
+                            </a>
+                          </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Queries">
+        <md-content class="md-padding">
+          <style>
+            .querieview {
+              color: limegreen;
+            }
+          </style>
+          <div layout="column" layout-fill="layout-fill">
+            <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+              <divstyle="margin: 5px 0 0 15px;">Queries</div>
+          </div>
+          <!-- <div layout-margin layout="column"  style="background: #fff;color:#000;" class="md-whiteframe-2dp">
+                  <div class="md-title">List Of Queries</div>
+              </div> -->
+          <!-- <div layout-margin layout="column">
+                  <div ui-grid="gridQueries" ui-grid-selection ui-grid-pagination ui-grid-edit ui-grid-resize-columns ui-grid-cellnav ui-grid-move-columns ui-grid-auto-resize class="grid"></div>
+              </div> -->
+          <div style="margin-top: 1em;">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered ">
+                <thead>
+                  <tr>
+                    <th>Sr.no</th>
+                    <th>Name</th>
+                    <th>Email Id</th>
+                    <th>Company name</th>
+                    <th>Message</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="Queries in QueriesData | limitTo:limit">
+                    <td>{{$index +1}}</td>
+                    <td>{{Queries.name}}</td>
+                    <td>{{Queries.email}}</td>
+                    <td>{{Queries.companyName}}</td>
+                    <td>{{Queries.message}}</td>
+                    <td>
+                      <span>
+                        <a ng-click="">
+                          <md-icon style="cursor: pointer;">
+                            <i class="material-icons" ng-click="showConfirm(Queries)" ng-class="{querieview: Queries.viewed || qerieviewed}">remove_red_eye</i>
+                          </md-icon>
+                        </a>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+</div>
+</md-content>
+</md-tab>
+</md-tabs>
+</md-content>
+</div>

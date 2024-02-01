@@ -1,0 +1,16 @@
+h1{
+	font-size: 60px;
+	font-family: sans-serif;
+	opacity: 0.5;
+}
+
+.bbsco{
+  background: #eee;
+}
+.bbscb{
+  color: #980000;
+  font-size: 24px;
+}
+.bbscl{
+font-size: 30px;
+}

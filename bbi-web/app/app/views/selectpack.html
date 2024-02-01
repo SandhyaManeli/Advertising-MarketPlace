@@ -1,0 +1,215 @@
+<!-- <md-dialog flex="50" flex-lg="60" flex-md="60" flex-sm="70" id="myDialog">
+    <div layout="row" layout-margin>
+    <h4 class="md-body-2">24" Digital Screen Packages - Inside Metro Train - Corridor 1
+        </h4>
+    <div flex></div>
+    <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
+        <md-icon class="md-default-theme">
+            <i class="material-icons">close</i>
+        </md-icon>
+    </md-button>
+    </div>
+    <md-dialog-content>
+        <div layout="row" layout-margin>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week oneweek_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                1Week-119 Slots
+                            </p>
+                            <h3>27500</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week part_two_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                15Days-225 Slots
+                            </p>
+                            <h3>57,375</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week part_three_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                1Month-510Slots
+                            </p>
+                            <h3>1,02,000</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-margin>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week part_four_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                3 Months - 1530 Spots
+                            </p>
+                            <h3>2,67,750</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week part_five_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                6Months - 3060 Spots
+                            </p>
+                            <h3>4,59,000</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div layout-margin flex="33" class="md-whiteframe-2dp">
+                <div class="one_week part_six_bg">
+                    <div layout="row">
+                        <div class="left_side_pack">
+                            <p class="md-caption">
+                                1 Year - 6120 Spots 
+                            </p>
+                            <h3>8,56,800</h3>
+                            <md-button class="md-raised md-primary slect_btn">select this</md-button>
+                        </div>
+                        <div flex></div>
+                        <div class="right_side_pack">
+                            <div class="slect_train">
+                                <p class="md-caption">select train </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                            <div class="slect_slot">
+                                <p class="md-caption">select slot </p>
+                                <input type="number" min="1" max="18">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pack_sdate">
+                        <md-datepicker ng-model="campaign.start_date" onkeydown="return false"   md-placeholder="Starting  From" md-min-date="fromMinDate" style="color:#fff !important"></md-datepicker>          
+                        <div ng-messages="forms.ownerCampaignForm.start_date.$error" style="color:red" ng-if="!forms.ownerCampaignForm.start_date.$pristine">
+                            <div ng-message="required">Start date is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-margin>
+            <div class="show_bug">
+                <p class="md-caption">
+                   Estimated Budged for 1 Month, 2 Train, 2 Slots
+                </p>
+                <h2 class="text_color">
+                    Rs2,55,550
+                </h2>
+                <md-button class="md-raised md-primary slect_btn">Shortlist Campaign</md-button>
+            </div>
+            <div flex></div>
+            <div class="logo_lnt" style="    margin-top: 50px;">
+                <p class="md-caption">We are oﬃcial  Partners to</p>
+                <img src="assets/images/landt_logo.jpg" alt="landt_logo"/>
+            </div>
+        </div>
+    </md-dialog-content>
+  </md-dialog> -->

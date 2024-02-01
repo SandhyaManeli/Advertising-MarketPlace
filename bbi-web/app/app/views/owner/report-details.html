@@ -1,0 +1,70 @@
+<div class="p-5">
+    <div class="table-responsive">
+        <table class="table table_user mb-0" style="border: 1px solid #d7d3d3;border-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="width: 600px;"><h3>{{getPageTitle()}}</h3></td>
+                        <td class="" style="width: 170px;">
+                        <md-datepicker class="form-control adjust_calender" name="startDate" ng-model="startDate" ng-change="onChangeStartEndDate()"
+                            onkeydown="return false" md-placeholder="From" layout-fill
+                            style="border: none;padding: 0px;"></md-datepicker>
+                    </td>
+                        <td class="" style="width: 170px;">
+                        <md-datepicker class="form-control adjust_calender" name="endDate" ng-model="endDate"
+                            onkeydown="return false" md-placeholder="To" md-min-date="product.start_date" ng-change="onChangeStartEndDate()"
+                            layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                    </td>
+                    <td class="" style="width:550px;">
+                        <input type="search" class="form-control md-whiteframe-3dp" ng-change="searchText(searchtxt)" ng-model="searchtxt" ng-model-options="{ debounce: 200 }" placeholder="type here to search..">
+                    </td>
+                    <td style="width: 330px;">
+                        <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="clearFilters()" Clear><i class="fa fa-close" aria-hidden="true" style="padding-right: 5px;"></i> Clear Filters </button>
+                    </td>
+                    <td style="width: 340px;">
+                            <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="downloadPdf()" download><i class="fa fa-download" aria-hidden="true" style="padding-right: 5px;"></i> Download PDF</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive" style="margin-bottom:50px !important">
+        <table class="table" style="border: 1px solid #e4e4e4;">
+            <thead class="text_color">
+                <tr>
+                    <th>SNo.</th>
+                    <th ng-repeat="item in tableHeader" >{{ item.heading }}
+                        <div class="d-inline" ng-if="item.heading != 'Lat' && item.heading != 'Zipcode' && item.heading != 'Approved' && item.heading != 'Phone' && item.heading != 'Long' && item.heading != 'Status'" ng-class="item.field == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc(item.field, item.type)'><i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="d-inline" ng-if="item.heading != 'Lat' && item.heading != 'Zipcode' && item.heading != 'Approved' && item.heading != 'Phone' && item.heading != 'Long' && item.heading != 'Status'" ng-class="item.field == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc(item.field, item.type)'><i class="fas fa-arrow-down"></i>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody ng-if="!dataErrorMsg" class="contbg">
+                <tr ng-repeat="row in tableRows | limitTo: limit" in-view="loadMore($last, $inview)">
+                    <td>{{$index + 1}}</td>
+                    <td ng-repeat="item in tableHeader">
+                        {{ item.field == 'rateCard'?('$&nbsp;'+(row[item.field] | number:2)):item.field=='status'?getCampaignStatusString(row[item.field]):item.field=='created_at'?(row[item.field]['date'] | dateify | date:'dd-MM-yyyy'):row[item.field] }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-if="dataErrorMsg">
+                <tr>
+                    <td>
+                        <p style="color:red;">{{dataErrorMsg}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <style>
+        .highlight {
+            color: black;
+        }
+    .nonhighlight{
+        color: #808080c2;
+    }
+
+    </style>
+</div>

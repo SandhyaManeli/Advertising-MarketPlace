@@ -1,0 +1,277 @@
+<style>
+	.padding-20 {
+		padding-left: 20px;
+	}
+
+	.shortlist_product {
+		width: 15%;
+	}
+
+	.spinner-border {
+    	width: 2.4rem;
+    	height: 2.4rem;
+		margin-right: 0.3rem;
+	}
+
+	.responsive_top{
+		padding-top: 6rem;
+	}
+
+	@media screen and (max-width: 1440px) {
+		.select_res {
+			white-space: nowrap;
+		}
+	}
+
+	@media screen and (max-width: 1323px) {
+		.shortlist_responsive {
+			white-space: nowrap;
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		.shortlist_responsive_size {
+			white-space: nowrap;
+		}
+	}
+
+	.PopupTop.prodct_savecamp {
+		top: 147px !important;
+		height: fit-content !important;
+	}
+</style>
+<div class="contbg" ng-cloak flex="100" flex-xs="100" flex-sm="100" style="padding-bottom:50px">
+	<!--  <div ng-if="shortListedProducts.length == 0" layout="colmun" layout-align="center center" class="short_imagecenter" >
+		<img src="assets/images/owner/Group 383.png" class="rounded mx-auto d-block" alt="...">
+	</div> -->
+	<div class="container responsive_top">
+		<div class="row">
+			<div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+				<button type="button" class="btn btn-link back-btn" onclick="goBack()">
+					<< Back</button>
+			</div>
+		</div>
+	</div>
+	<div ng-if="shortListedProducts.length == 0" class="d-flex justify-content-center mt-5">
+		<h1 style="color: #BC2535;">
+			<!-- You haven't Shortlisted any Product, Please Cart Product -->
+			No products in Cart
+		</h1>
+	</div>
+	<div class="table-responsive contbg" ng-if="shortListedProducts.length > 0">
+		<table class="table">
+			<h2><span class="badge badge-warning float-right mt-2 mr-3 mb-1">Total -
+					<span>$</span>{{shortlistProductsTotal || '0' | number :2}}</span></h2>
+			<h2><span class="badge badge-warning float-right mr-3 mb-1">CPM Total - <span>$</span>{{totalCpm || '0' |
+					number :2}}</span></h2>
+			<h2><span class="badge badge-warning float-right mr-3 mb-1">Impressions Total -
+					{{impressionTotal || '0' | number : 0}}</span></h2>
+			<thead class="text_color">
+				<tr>
+					<th class="select_res"><input type="checkbox" ng-model="selectAll"
+							ng-click="shortlistedProductcheckAll(selectAll)">&nbsp;Select All</th>
+					<th class="shortlist_responsive">Product Details</th>
+					<th class="shortlist_responsive"></th>
+					<th class="shortlist_responsive">Size</th>
+					<th class="shortlist_responsive">Length</th>
+					<!-- <th >Cost Per Point</th> -->
+					<th class="text-right padding-20 shortlist_responsive">Impressions</th>
+					<th class="text-right padding-20">CPM</th>
+					<th class="shortlist_responsive">Starting Date</th>
+					<th class="shortlist_responsive">Ending Date</th>
+					<th class="shortlist_responsive">Quantity Selected</th>
+					<th class="text-right padding-20 shortlist_responsive adjust_space">Unit Price $</th>
+					<th class="text-right padding-20 shortlist_responsive adjust_space">Tax Price $</th>
+					<th class="text-right padding-20 shortlist_responsive adjust_space">Total Price $</th>
+					<th>
+						<a data-toggle="modal" ng-show="selected && selected.length" data-target="#exampleModalCenter"
+							ng-click='bulkDelete()' style="cursor: pointer;"><i
+								class="material-icons">delete_forever</i></a>
+						<!-- <md-button class="md-raised add_blue" ng-click="bulkDelete()">Bulk Delete</md-button> -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault" role="document">
+								<div class="modal-content">
+									<div class="modal-header modal_bottom">
+										<!--<h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to
+											cancel this booking ?</h5>-->
+										<h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to
+											delete this product ?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer modal_top align_center_btns popup_shortlist"
+										style="padding-top: 20px;">
+										<button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal"
+											ng-click="deleteShortlisted($event)">Yes</button>
+										<button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th>
+					<th class="" style="text-align: end;">
+						<md-button class="md-raised add_blue" style="margin:0px; background-color: #44596D !important;"
+							ng-click="gotoLocationPage()">Add Product</md-button>
+					</th>
+					<th class="" style="border-bottom: 2px solid #e9ecef;">
+						<div class="campaign_payment_inner" ng-if="shortListedProducts.length > 0">
+							<div class="align-self-end">
+								<div class="d-flex justify-content-end align-self-end" id="savecampdropdown">
+									<div class="d-flex justify-content-end">
+										<div class="spinner-border text-muted" ng-if="!activeUserCampaignsLoaded"></div>
+										<md-button class="md-raised md-warn Upload_font"
+											style="margin:0px; min-width: 65px;"
+											ng-disabled="!activeUserCampaignsLoaded"
+											ng-click="toggleSaveCampaignPopup('addClassTop')">Save Campaign
+										</md-button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="shortlisted in shortListedProducts">
+				<tr>
+					<td class="table_vertical text-center">
+						<input type="checkbox" ng-model="shortlisted.selected" ng-checked="exist(shortlisted)"
+							ng-click="toggleSelection(shortlisted)">
+					</td>
+					<td class="image_tdwidth">
+						<!--<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face"
+							class="requ_size img-thumbnail" ng-click="gotoProductDetails(shortlisted.id)" />-->
+						<img ng-src="{{config.serverUrl + shortlisted.image}}" alt="Smiley face"
+							class="requ_size img-thumbnail" ng-click="gotoProductDetails(shortlisted.product_id)" />
+					</td>
+					<td class="table_address shortlist_product">
+						<p class="">
+							<b>Title</b>: <b>{{shortlisted.title}}</b><br>
+							{{shortlisted.siteNo}}<br>
+							<b>Address</b>: {{ shortlisted.address || "N/A"}}<br>
+							<!-- <b style="color: #44596D;">Views :</b> {{shortlisted.impressions || '0'}} Per Week<br> -->
+							<b>Type</b>: {{shortlisted.type || "N/A"}}<br>
+							<b>Product Direction</b>: {{shortlisted.imgdirection || "N/A"}}<br>
+							<!-- <span ng-if="shortlisted.type === 'Digital Bulletin' && 'Transit'"><b style="color: #44596D;">No Of Slots :</b> {{shortlisted.booked_slots || "N/A"}}</span>			 -->
+							<!-- Live Traffic:
+							<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;">
+								<i class="fa fa-eye"></i>{{shortlisted.impressions}}</button> -->
+						</p>
+					</td>
+					<td class="table_vertical shortlist_responsive_size">{{shortlisted.type !=
+						'Media'?shortlisted.panelSize : "N/A"}}</td>
+					<td class="table_vertical shortlist_responsive">{{shortlisted.type == 'Media'?shortlisted.length :
+						"N/A"}}</td>
+					<!-- <td class="table_vertical" >{{shortlisted.type == 'Media'?shortlisted.costperpoint : "N/A"}}</td> -->
+					<td class="table_vertical text-right padding-20 shortlist_responsive">{{shortlisted.secondImpression
+						|| '0' | number : 0}}</td>
+					<td class="table_vertical text-right padding-20 shortlist_responsive">
+						<span>$</span>{{shortlisted.cpm || '0' | number : 2}}</td>
+					<!-- <td class="table_vertical shortlist_responsive">{{shortlisted.from_date | dateify | date:
+						"dd-MMM-yyyy"}}
+					</td> -->
+					<td class="table_vertical shortlist_responsive">{{shortlisted.date.startDate}}</td>
+					<!-- <td class="table_vertical shortlist_responsive">{{shortlisted.to_date | dateify | date:
+						"dd-MMM-yyyy"}}
+					</td> -->
+					<td class="table_vertical shortlist_responsive">{{shortlisted.date.endDate}}</td>
+					<td class="table_vertical shortlist_responsive">{{shortlisted.quantity}}
+					</td>
+					<td class="table_vertical text-right padding-20 shortlist_responsive">
+						<span>$</span>{{shortlisted.fix == 'Fixed'?shortlisted.price:shortlisted.price || '0' | number
+						:2}}</td>
+					<td class="table_vertical text-right padding-20 shortlist_responsive">
+						({{shortlisted.tax_percentage_amount != 0?shortlisted.tax_percentage:0 || 0 }}%)<br><span>$</span>{{shortlisted.fix == 'Fixed'?shortlisted.tax_percentage_amount:shortlisted.tax_percentage_amount || '0' | number
+						:2}}</td>
+					<td class="table_vertical text-right padding-20 shortlist_responsive">
+						<span>$</span>{{(shortlisted.price+shortlisted.tax_percentage_amount) * shortlisted.quantity | number :2}}</td>
+					<td></td>
+					<td></td>
+					<!-- <td class="table_vertical text-center">
+						<a data-toggle="modal" data-target="#exampleModalCenter"
+							ng-click='conformDeleteShortlisted(shortlisted.id)'><i
+								class="material-icons">delete_forever</i></a>
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+								<div class="modal-content">
+									<div class="modal-header modal_bottom">
+										<h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to
+											cancel this booking ?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer modal_top" style="padding-top: 20px;">
+										<button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal"
+											ng-click="deleteShortlisted($event)">Yes</button>
+										<button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td> -->
+					<!-- <td class="table_vertical text-center">
+						<p class="text_color md-caption">This Inventory Campaign Completed</p>
+					</td> -->
+			</tbody>
+		</table>
+	</div>
+	<!-- table grid end -->
+	<div class="campaign_payment_inner mb-2" ng-if="shortListedProducts.length > 0">
+		<div class="p-2 align-self-end">
+			<div class="d-flex justify-content-end pt-4 align-self-end" id="savecampdropdown">
+				<div class="d-flex justify-content-end pt-4">
+					<!-- <div id="loader" class="d-flex "></div> -->
+					<div class="spinner-border text-muted" ng-if="!activeUserCampaignsLoaded"></div>
+					<md-button class="md-raised md-warn Upload_font" ng-disabled="!activeUserCampaignsLoaded"
+						ng-click="toggleSaveCampaignPopup('addClassBottom')">Save Campaign
+					</md-button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="prodct_savecamp md-whiteframe-2dp  float-right" ng-show="showSaveCampaignPopup" id="showDetails">
+
+		<form ng-submit="saveCampaign(product.id, selectedDateRanges)">
+			<div layout="row">
+				<div class="md-body-2 m-2 ">We are excited to see your Campaign</div>
+				<div flex></div>
+				<div>
+					<a class="md-icon-button close-btn" ng-click="toggleSaveCampaignPopup('close')">
+						<i class="material-icons" style="margin-top: 5px;background: #eee;padding: 5px;">close</i>
+					</a>
+				</div>
+			</div>
+			<div class="md-title  m-2">Let's work Together!</div>
+			<div class="form-group mt-3 mr-2 ml-2">
+				<input ng-disabled="hasCampaignId" type="text" class="form-control" id="text" ng-model="campaign.name"
+					ng-disabled="existingCampaign.id" placeholder="Campaign Name " ng-keyup="EnableDisable()">
+			</div>
+			<!-- <div class="form-group mt-3 mr-2 ml-2">
+			<input type="text" class="form-control" id="text" ng-model="campaign.est_budget" ng-disabled="existingCampaign.id" placeholder="Estimated budget">
+		</div> -->
+			<div layout="column" class="mr-2 ml-2 mb-3">
+				<md-button class="md-raised all_button" layout-fill type="submit" ng-disabled="IsDisabled">
+					Save Campaign
+				</md-button>
+			</div>
+		</form>
+		<p class="text-center md-body-2">(OR)</p>
+		<div class="form-group mr-2 ml-2">
+			<select class="form-control" ng-model="existingCampaign.id" ng-value="existingCampaign.id"
+				ng-disabled="IsDisabled" required="required" ng-disabled="campaign.name">
+				<option value="" selected>Select your option</option>
+				<option ng-value="campaign.id" ng-selected="existingCampaign.id == campaign.id"
+					ng-repeat="campaign in activeUserCampaigns">{{campaign.name}}</option>
+			</select>
+		</div>
+		<div layout="column" class="mr-2 ml-2 mb-3">
+			<md-button class="md-raised all_button" layout-fill
+				ng-click="addProductToExistingCampaign(existingCampaign.id)" ng-disabled="!existingCampaign.id">
+				add to existing or save Campaign
+			</md-button>
+		</div>
+	</div>
+</div>

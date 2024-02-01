@@ -1,0 +1,87 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page"> 
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+ <md-tabs md-dynamic-height class="padding_cmp">
+    <md-tab label="User Requested Offers">
+<div class="">
+    <div layout="column">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="text_color">
+                    <tr>
+                        <!-- <th style="width:10%;">Price</th>
+                        <th style="width:40%;">Comments</th>
+                        <th style="width:40%;">User Name</th>
+                        <th style="width:40%;">User Email</th>
+                        <th style="width:40%;">Action</th>
+                        <th class="">Date</th> -->
+                        <th class="text-right padding-20 adjust_space" style="width:10%;">Price
+                        <span class="d-inline" ng-class="'price' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"  ng-click='sortAsc("price","number")'><i class="fas fa-arrow-up"></i>
+                        </span>
+                        <span class="d-inline" ng-class="'price' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("price","number")'><i class="fas fa-arrow-down"></i>
+                        </span>
+                        </th>
+                        <th class="adjust_space">Comments</th>
+                        <th class="adjust_space">User Name
+                        <span class="d-inline" ng-class="'firstName' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("firstName","string")'><i class="fas fa-arrow-up"></i>
+                        </span>
+                        <span class="d-inline" ng-class="'firstName' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("firstName","string")'><i class="fas fa-arrow-down"></i>
+                        </span>
+                         </th>
+                        <th class="adjust_space">User Email
+                        <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("email","string")'><i class="fas fa-arrow-up"></i>
+                        </span>
+                        <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("email","string")'><i class="fas fa-arrow-down"></i>
+                        </span>
+                        </th>
+                        <th class="adjust_space">Offer Status</th>
+                        <th class="adjust_space">Action</th>
+                        <th class="adjust_space">Date Entered
+                          <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                          </span>
+                          <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                          </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Offers in OffersData | limitTo:limit">
+                      <td class="table_vertical text-nowrap text-right padding-20"><span>$</span>{{Offers.price || '0' | number:2}}</td>
+                      <!-- <td class="table_vertical">{{Offers.comments | capitalize}}</td> -->
+                      <td class="offer_comm">{{Offers.comments | capitalize}}<md-tooltip md-direction="right" ng-if="Offers.comments.length >50">{{Offers.comments | capitalize}}</md-tooltip></td>
+                      <td class="table_vertical">{{Offers.loggedinUser.firstName | capitalize}}</td>
+                      <td class="table_vertical">{{Offers.loggedinUser.email | capitalize}}</td>
+                      <td class="table_vertical">{{offerStatus[Offers.status] | capitalize}}</td>
+                      <td class="table_vertical icon_res">
+                        <a style="cursor:pointer;" ng-click="showCampaignDetails($event, Offers)">
+                          <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                          </md-icon>
+                        </a>
+                      </td>
+                      <td class="table_vertical">{{Offers.updated_at | dateFormat}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+    </md-tab>
+  </md-tabs>
+  <style>
+    .highlight {
+        color: black;
+    }
+.nonhighlight{
+    color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+</style>

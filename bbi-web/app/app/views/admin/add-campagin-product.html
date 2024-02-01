@@ -1,0 +1,259 @@
+<style>
+    .red-blocked {
+      color: #f00 !important;
+      font-weight: bold;
+    }
+  /* .addWeekColor{
+    background-color: #f00;
+    color:white;
+  }
+  .selectedWeekColor {
+    background-color: green;
+  } */
+  .addBlockedColor {
+    background-color: gray !important;
+    cursor: not-allowed !important;
+  }
+  .productAdded {
+    background-color :grey !important;
+  }
+@media screen and (min-width:768px) and (max-width:  991px){
+   
+  .daterangepicker.openscenter:before {
+    left: 210px;
+  }
+  .daterangepicker.openscenter:after {
+    left: 210px;
+  }
+}
+  </style>
+<div class="">
+    <div layout="column" class="owner_hoarding_list">
+      <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
+          <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Campaign Name</p>
+              <p class="md-caption mob_span"><b><span class="text_color">{{campaignDetails.name || "N/A"}}</span></b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Product Added</p>
+              <p class="md-caption mob_span"><b><span class="text_color md-title">{{campaignDetails.no_of_products ||
+                  "0"}}</span></b></p>
+            </div>
+            <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Estimated Budget</p>
+              <p class="md-caption mob_span mob_5"><b><span>$</span>{{campaignDetails.est_budget || '0' | number:2 }}</b></p>
+            </div> -->
+            <!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Total Amount</p>
+              <p class="md-caption mob_span mob_5"><b><span>$</span>{{campaignDetails.total_budget || '0' | number:2}}</b></p>
+            </div> -->
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+             style="margin-top:14px;">
+              <p class="cmp_bottom">Created On</p>
+              <p class="md-caption mob_span mob_5"><b>{{campaignDetails.created_at}}</b></p>
+            </div>
+            <div class="offset-xl-4  col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+             style="margin-top:1.5em;text-align: end" >
+             <md-button class="md-raised md-primary all_button" ng-href="/admin/campaign-proposal-summary/{{campaignDetails.id}}">view campaign</md-button>
+            </div>
+          </div>
+        </div>
+      
+      <!-- filters-->
+
+      <div class="table-responsive">
+          <table class="table table_user">
+            <tbody>
+              <tr>
+                  <!-- <td  class="hide-xs"> -->
+                    <td  class="">
+                      <!-- <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+                        md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+                        md-min-length="4" placeholder="Search..." md-clear-button="true">
+                        <md-item-template>
+                          <span class="item-title">
+                            <span> {{item.siteNo}} </span>
+                          </span>
+                          <span class="item-metadata">
+                            <span>
+                              <strong>{{item.address}}</strong>
+                            </span>
+                          </span>
+                        </md-item-template>
+                      </md-autocomplete> -->
+                      <input type="text" placeholder="Search for DMA" class="inventory_search" ng-model="search.city_name">
+                  </td>
+                  <td class="adjust_space">
+                    <label class="pt-2">Filter by :</label>
+                </td>
+                  <td>
+                      <!-- <label for="pwd" class="add_filterby hide-xs">Filter By:</label> -->
+                      <!-- <label for="pwd" class="add_filterby">Filter By:</label> -->
+                        <div class="form-group all_formfilter">
+                          <select id="productType" ng-options="format.id as format.name for format in formatList" ng-model="product.type"
+                          class="form-control md-whiteframe-3dp all_filtermobile res_all" ng-change="getProductByFormat(product.type)"  data-md-container-class="selectdemoSelectHeader" required="required"
+                          name="productType">
+                          <option value=""  selected>All</option>
+                        </select>
+                        </div>
+                  </td>
+                  <!-- <td class="hide-xs" style="width: 170px;"> -->
+                    <td class="" style="width: 170px;">
+                      <md-datepicker  class="" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                  </td>
+
+                  <td class="" style="width: 170px;">
+                  <!-- <td class="hide-xs" style="width: 170px;"> -->
+                      <md-datepicker  class="" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date"  layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                  </td>
+
+                  <td class="" style="width: 170px;">
+                  <!-- <td class="hide-xs" style="width: 170px;"> -->
+                      <select class="form-control bud_res_wid" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+                          <!-- <option selected value="1">Budget High to Low</option> -->
+                          <option selected value="">Budget High to Low</option>
+                          <option value="0">Budget Low to High </option>
+                        </select>
+                  </td>
+                  <td class="apply_mob  apply_clear_btn">
+                    <md-button class="md-raised md-primary register_btn" style="background-color:#44596D;margin: 0px;color: #fff;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button>
+                    <!-- <md-button class="md-raised all_button hide-xs" ng-click="clearAdminProductFi(product)" onClick="onClickHandler(this)" >Clear Filters</md-button> -->
+                    <md-button class="md-raised all_button" ng-click="clearAdminProductFi(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+
+      <!-- <form class="form-inline camp_filters" action="">
+        
+        <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+      </form> -->
+    
+    
+      <!-- product list -->
+      <div class="table-responsive">
+        <md-button class="md-raised md-primary all_button" ng-disabled="!product.start_date || !product.end_date || !isFiltered" ng-if="!ownerProduct.alreadyAdded" ng-click="addToCampaign(productList)" style="float: right; margin-right: 15px;">Add All to Campaign</md-button>
+        <table class="table">
+          <thead class="text_color">
+            <tr>
+              <th>Product Details</th>
+              <th></th>
+              <!-- <th>Views</th> -->
+              <th>Lit</th>
+              <th>Listed in</th>
+              <!--<th class="hide-xs">Price Given</th>
+              <th class="hide-xs">Price Received</th>-->
+              <th>Price</th>
+              
+              <th class="text-center">Calender
+                <!-- <md-button  class="md-raised md-primary" style="background:#6888F3;">Add Another Product</md-button> -->
+              </th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="adminprod in productList | filter:search">
+                <td class="image_tdwidth">
+                <img ng-src="{{serverUrl + adminprod.image}}" alt="Smiley face" class="requ_size img-thumbnail">
+              </td>
+              <td class="table_address">
+                <p class="">
+                  <b>Title</b>: <b>{{adminprod.title}} </b>
+                  <br>{{adminprod.siteNo}}
+                  <br><b>Address</b>: {{adminprod.address}}
+                  <br><b>City</b>: {{adminprod.city_name}}
+                  <br><b>Facing</b>: {{adminprod.direction}}
+                  <br><b>Type</b>: {{adminprod.type}}
+                  <br><b>Size</b>: {{adminprod.panelSize}}
+                  <br><b>Product Direction </b>: {{adminprod.imgdirection}}
+              </td>
+              <!-- <td class="table_vertical">{{adminprod.impressions}}</td> -->
+              <td class="table_vertical">
+                <span class="md-caption">{{adminprod.lighting || "NA"}}</span>
+              </td>
+              <td class="table_vertical">
+                <a  ng-href="/admin/product-shortlist-campagin/{{adminprod.id}}">{{adminprod.camapigns_count}} Campaigns</a>
+              </td>
+              <td class="table_vertical">
+                  <span>$</span>{{adminprod.rateCard}}
+              </td>
+              <td class="table_vertical text-center">
+                <input date-range-picker ng-model="ranges.selectedDateRanges" class="form-control md-whiteframe-3dp date-picker"
+                custom-options="customOptions" placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+                  style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+                <a ng-click="getProductUnavailableDates(adminprod, $event);">
+                 
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                </a>
+              </td>
+              <!-- <td class="table_vertical text-center">
+                <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="adminprod.booking_dates" ng-click = "getProductUnavailableDates(adminprod.id, $event,adminprod.default_price)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                        <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                    <div class="modal-content text-left">
+                                        <div class="modal-header modal_bottom">
+                                        <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button> 
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-muted mb-1">This Bulletin minimum booking is 4 weeks.</p>
+                                            <p class="text-muted mb-1">There after you can select your bookings in multiples of two weeks.</p>
+                                            <p class="text-muted ">Price includes all taxes and productions charges</p>
+                                            <div layout="row" class="mt-2  mb-2 mostly-customized-scrollbar">
+                                              <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+                                              ng-click="selectHordingWeeks(weeks)"
+                                              ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+                                                <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
+                                                <h3 class="md-body-2 setect_padbottom">{{weeks.default_price}}</h3>
+                                              </a>
+                                            </div>
+                            
+                                            <h5 class="font-weight-bold  mt-3">Select Campaign Start Date :</h5>
+                                            <p class="text-muted mb-1">The posters will be placed between Monday and Friday of your first selected week.
+                                              </p>
+                                              <p class="text-muted mb-1">A specific day cannot be guaranteed.</p>
+                                              <p class="text-muted mb-1">However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+                                            <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" >
+                                              <button class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                                                ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+                                                ng-disabled="week.isBlocked && week.isBlocked == true">
+                                                <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                                                <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                                              </button>
+                                            </div> 
+                                        </div>
+                                        <div class="modal-body modal_top">
+                                            <div class="row" style="margin-right:0px;">
+                                                <div class="col-md-8">
+                                                    <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <md-button class="md-raised md-primary popup_yes all_button" style="margin-left: 2px;" ng-disabled="false"
+                                                    ng-click="suggestProductForAdminCampaign(adminprod,weeksArray)">Add to campaign</md-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            </td> -->
+    
+              <td class=" table_vertical text-right">
+                <md-button class="md-raised all_button" ng-if="!adminprod.alreadyAdded" ng-click="suggestProductForAdminCampaign(adminprod)">Add to campaign</md-button>
+                <md-button class="md-raised Upload_font" ng-if="adminprod.alreadyAdded" >Added</md-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>     
+    </div>
+    <!-- <p>pagination</p> -->
+    </div>

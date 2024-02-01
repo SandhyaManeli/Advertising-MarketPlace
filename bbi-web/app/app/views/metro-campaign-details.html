@@ -1,0 +1,376 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="add-metro-product-sidenav"
+ style="width:400px !important">
+	<md-toolbar layout="row">
+		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
+			<h2>
+				<span>Add Packages</span>
+			</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()">
+				<md-tooltip>Close Side Panel</md-tooltip>
+				<md-icon class="md-default-theme">
+					<i class="material-icons" style="color:#fff !important;">close</i>
+				</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding="">
+		<form role="form">
+			<div class="form-group row">
+				<label for="productType" class="col-sm-4 col-form-label">Product Type</label>
+				<div class="col-sm-8">
+					<select name="package" class="form-control" id="package" ng-model="selectedFormat" ng-options="foramt as format.name for format in formatList"
+					 required>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="area" class="col-sm-4 col-form-label">Select Corridor</label>
+				<div class="col-sm-8">
+					<select name="corridor" class="form-control" id="corridor" ng-model="selectedCorridor" ng-options="corr as corr.name for corr in metroCorridors"
+					 ng-change="getMetroPackages(selectedCorridor.id)" required>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pack" class="col-sm-4 col-form-label">Packages</label>
+				<div class="col-sm-8">
+					<select name="corridor" class="form-control" ng-model="selectedPackage" ng-options="pkg as pkg.name for pkg in metroPackages"
+					 required>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="pack" class="col-sm-4 col-form-label">Duration</label>
+				<div class="col-sm-8">
+					<select class="form-control" ng-model="selectedPackage.months" ng-options="opt.label for opt in monthoptions"
+					 required>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label for="hoardingLight" class="col-sm-4 col-form-label">Number Of Trains</label>
+				<div class="col-sm-8">
+					<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}"
+					 min="1" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="" class="col-sm-4 col-form-label">Select Date</label>
+				<div flex-gt-xs="">
+					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date"
+					 md-min-date="today1"></md-datepicker>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="productId" class="col-sm-4 col-form-label">Price</label>
+				<div class="col-sm-8">
+
+					<div style="padding-top:6px;">{{ selectedPackage.price_new = (selectedPackage.price * selectedPackage.months.value
+						* selectedPackage.selected_trains) || "N/A"}} </div>
+				</div>
+			</div>
+			<div class="form-group" style="margin:10px 0">
+				<label class="col-md-3 control-label"></label>
+				<!-- <input class="btn btn-primary" value="Add" type="button" ng-click="addPackageInMetroCampaign()"> -->
+				<md-button class="md-raised all_button" ng-click="addPackageInMetroCampaign()">Add</md-button>
+				<span></span>
+				<!-- <input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()"> -->
+				<md-button class="md-raised Upload_font" ng-click="toggleAddMetroProductSidenav()">Cancel</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-sidenav>
+<div class="ow_campaign_details">
+	<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+		<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+	</md-button>
+	<div class="bg-part">
+			<div layout="row" flex="100" flex-sm="100" flex-xs="100" flex-md="100" layout-xs="column" layout-sm="column"
+			 layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100"
+				 flex-gt-sm="50" layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+					<table class="table table-striped table-bordered" style="width: 98%;">
+						<tbody>
+							<tr>
+								<td><b>Campaign ID</b></td>
+								<td>{{metroCampDetails.cid}}</td>
+							</tr>
+							<tr>
+								<td><b>Campaign Name</b></td>
+								<td>{{metroCampDetails.name | capitalize}}</td>
+							</tr>
+							<tr>
+								<td><b>Client Name</b></td>
+								<td>{{metroCampDetails.user_details.first_name || "N/A" | capitalize}}</td>
+							</tr>
+							<tr>
+								<td><b>Contact</b></td>
+								<td>{{metroCampDetails.user_details.phone}}</td>
+							</tr>
+							<tr>
+								<td><b>Email</b></td>
+								<td>{{metroCampDetails.user_details.email | capitalize}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column"
+				 layout-gt-sm="column" layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+					<table class="table table-striped table-bordered" style="width: 98%;">
+						<tbody>
+							<tr>
+								<td><b>Products</b></td>
+								<td>Metro Digital Screens</td>
+							</tr>
+							<tr>
+								<td><b>Starting From</b></td>
+								<td>{{(metroCampDetails.start_date | date: "dd-MM-yyyy") || "N/A"}}</td>
+							</tr>
+							<tr>
+								<td><b>Total Price</b></td>
+								<td>
+									<span ng-if="metroCampDetails.act_budget">$.</span>{{TOTAL || "N/A"}}
+								</td>
+							</tr>
+							<tr>
+								<td><b>Pending Price</b></td>
+								<td ng-if="metroCampDetails.status <= 1101">
+									<span ></span>0
+								</td>
+								<td ng-if="metroCampDetails.status >= 1121">
+										<span >$.</span>{{metroCampDetails.pending_payment || "0"}}
+									</td>
+							</tr>
+							<tr>
+								<td><b>Status</b></td>
+								<td>{{metroCampDetails.status | stringifyCampaignStatus }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+	
+			</div>
+			<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
+			 style="float: right;">
+	
+				<div class="">
+					<div class="dropdown">
+						<md-button onclick="sharemetroCampaign()" class="dropbtn Upload_font">
+							Share Campaign
+						</md-button>
+						<div id="sharemetroDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+							<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+								<div layout="colmun">
+									<span flex></span>
+									<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="sharemetroCampaign()">
+										<md-icon class="md-default-theme">
+											<i class="material-icons">close</i>
+										</md-icon>
+									</md-button>
+								</div>
+								<h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+								<form name="shareCampaignForm">
+									<div layout="column" style="padding:10px;">
+										<div class="form-group">
+											<input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name"
+											 required="required" />
+											<div ng-messages="shareCampaignForm.name.$error">
+												<div ng-message="required">Name is required.</div>
+												<div ng-message="pattern">Enter a valid Name.</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email"
+											 required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+											<div ng-messages="shareCampaignForm.email.$error">
+												<div ng-message="required">Email is required.</div>
+												<div ng-message="pattern">Enter a valid Email Id.</div>
+											</div>
+										</div>
+										<div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+											<md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareMetroCampaignToEmail($event, shareCampaign, metroCampDetails.id)">Share
+												Campaign</md-button>
+										</div>
+									</div>
+								</form>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="" style="cursor: pointer;">
+					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+						<md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampDetails.id)" download>
+							Download Quotation
+						</md-button>
+					</div>
+				</div>
+				<div class="col-12 col-sm-12 col-md-6">
+					<div class="contbg box__shadow p-2">
+						<table class="table table-striped table-bordered mb-0">
+							<tbody>
+								<tr>
+									<td><b>Products</b></td>
+									<td>Metro Digital Screens</td>
+								</tr>
+								<tr>
+									<td><b>Starting From</b></td>
+									<td>{{(metroCampDetails.start_date | date: "dd-MM-yyyy") || "N/A"}}</td>
+								</tr>
+								<tr>
+									<td><b>Total Price</b></td>
+									<td>
+										<span ng-if="metroCampDetails.act_budget">Rs.</span>{{TOTAL || "0"}}
+									</td>
+								</tr>
+								<tr>
+									<td><b>Pending Price</b></td>
+									<td ng-if="metroCampDetails.status <= 1101">
+										<span ></span>0
+									</td>
+									<td ng-if="metroCampDetails.status >= 1121">
+											<span >Rs.</span>{{metroCampDetails.pending_payment || "0"}}
+										</td>
+								</tr>
+								<tr>
+									<td><b>Status</b></td>
+									<td>{{metroCampDetails.status | stringifyCampaignStatus }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row ml-0 mr-0 p-3">
+		<div class="col-12 mr-0 d-flex justify-content-end">
+			<div class="dropdown">
+				<md-button onclick="sharemetroCampaign()" class="dropbtn Upload_font">
+					Share Campaign
+				</md-button>
+				<div id="sharemetroDrop" class="dropdown-content contbg animated fadeInDown contant_drop" style="padding:10px;">
+					<form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+						<div layout="colmun">
+							<span flex></span>
+							<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="sharemetroCampaign()">
+								<md-icon class="md-default-theme">
+									<i class="material-icons">close</i>
+								</md-icon>
+							</md-button>
+						</div>
+						<h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+						<form name="shareCampaignForm">
+							<div layout="column" style="padding:10px;">
+								<div class="form-group">
+									<input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name"
+										required="required" />
+									<div ng-messages="shareCampaignForm.name.$error">
+										<div ng-message="required">Name is required.</div>
+										<div ng-message="pattern">Enter a valid Name.</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email"
+										required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+									<div ng-messages="shareCampaignForm.email.$error">
+										<div ng-message="required">Email is required.</div>
+										<div ng-message="pattern">Enter a valid Email Id.</div>
+									</div>
+								</div>
+								<div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+									<md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareMetroCampaignToEmail($event, shareCampaign, metroCampDetails.id)">Share
+										Campaign</md-button>
+								</div>
+							</div>
+						</form>
+					</form>
+				</div>
+			</div>
+			<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+				<md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampDetails.id)" download>
+					Download Quotation
+				</md-button>
+			</div>
+			<div class="md-grid-item-content hoarding-btn">
+				<md-button class="md-grid-item-content add_blue" ng-click="toggleAddMetroProductSidenav()" ng-disabled="metroCampDetails.status >= 1121">
+					<!-- ng-disabled="!metroCampDetails || metroCampDetails.status > 1101" -->
+					Add Package
+				</md-button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- table grid start -->
+	<div class="table-responsive">
+		<table class="table">
+			<div ng-if="metroCampDetails.products.length == 0" style="margin:0 auto;width: 50%;">
+				<img src="assets/images/owner/Group 383.png" alt="short" />
+			</div>
+			<thead class="text_color" ng-if="metroCampDetails.products.length != 0">
+				<tr>
+					<th style="width:250px;">Product Details</th>
+					<th class="hide-xs"></th>
+					<th>Starting Date</th>
+					<th>Ending Date</th>
+					<th class="">Price</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="package in metroCampDetails.packages">
+					<td class="hide-xs image_tdwidth">
+						<img src="assets/images/digital_s.jpg" alt="Smiley face" class="requ_size img-thumbnail">
+					</td>
+					<td class="table_address">
+						<p><b>Corridor Name : {{package.corridor_name || "N/A"}}</b><br>Duration : {{package.months|| "N/A"}}
+							<br>No of Trains : {{package.selected_trains|| "N/A"}}
+					</td>
+					<td class="table_vertical">
+						{{package.start_date| dateify | date: "dd-MMM-yyyy"}}
+					</td>
+					<td class="table_vertical">{{package.end_date| dateify | date: "dd-MMM-yyyy"}}
+					</td>
+					<td class="table_vertical">{{package.price}}
+					</td>
+					<td class="table_vertical ">
+						<a><i class="material-icons" ng-click="deleteProductFromCampaign($event, product.id)" ng-if="metroCampDetails.status == 1101">delete_forever</i></a>
+						<!-- ng-if="metroCampDetails.type != 0 && metroCampDetails.status != 700" -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="row border_quest mr-0 ml-0">
+		<div class="col-12 col-sm-6 col-md-12">
+				<!-- ng-if="metroCampDetails.status >= 1121" -->
+			<!-- ng-if="metroCampDetails.type != 0" -->
+			<div class="mt-3 pull-right sub_total">
+				<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampDetails.act_budget}}</b></span>
+				</p>
+				<p class="text_color" style="text-indent: 173px;"><input type="checkbox" ng-if="metroCampDetails.status == 1101" ng-model="checked" ng-init="checked = true"
+						ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>					
+				<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+						TOTAL | number : 2}}</span>
+				</p>
+			</div>
+		</div>
+		<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampDetails.status < 1121">
+			<md-button class="md-grid-item-content pull-right all_button" ng-disabled="metroCampDetails.status != 1101" ng-click="checkoutMetroCampaign($event, metroCampDetails.id)">
+				<div class="md-caption">Checkout</div>
+			</md-button>
+		</div>
+		<style>
+			.ng-cloak {
+				display: none !important;
+			}
+		</style>
+	</div>
+</div>
+<script>
+	function sharemetroCampaign() {
+		document.getElementById("sharemetroDrop").classList.toggle("show");
+	}
+</script>

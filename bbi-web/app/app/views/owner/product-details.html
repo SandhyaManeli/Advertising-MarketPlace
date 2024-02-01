@@ -1,0 +1,161 @@
+<div style="padding:10px;">
+  <div class="container jumbotron" style="width: 50%;margin-top: 1em;padding: 0;">
+    <img ng-src="{{config.serverUrl + productDetails.image}}" class="img-rounded" style="width: 100%;" ng-if="productDetails">
+  </div>
+  <div class="contbg md-whiteframe-3dp" style="padding-left: 1em;padding-top: 2em;width: 100%;padding-bottom: 1em;">
+      <div flex>
+          <h2 class="md-title text_color">Product Details</h2>
+        </div>
+    <form>
+      <div layout="row">
+        <div flex>
+          <div layout="row">
+            <div flex="50">
+              <b>Site Number*</b>
+            </div>
+            <div flex="50">{{productDetails.siteNo}}</div>
+            <div flex="50">
+              <b>Number of Views</b>
+            </div>
+            <div flex="50">{{productDetails.impressions}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>Site Type</b>
+            </div>
+            <div flex="50">{{productDetails.format_name}}</div>
+            <div flex="50">
+              <b>Panel Size</b>
+            </div>
+            <div flex="50">{{productDetails.panelSize}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>Hoarding Cost</b>
+            </div>
+            <div flex="50">{{productDetails.default_price}}</div>
+            <div flex="50">
+              <b>Lighting</b>
+            </div>
+            <div flex="50">{{productDetails.lighting | boolToYesNo}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>Hoarding Company Address</b>
+            </div>
+            <div flex="50">{{productDetails.address}}</div>
+            <div flex="50">
+              <b>Direction</b>
+            </div>
+            <div flex="50">{{productDetails.direction}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>Country</b>
+            </div>
+            <div flex="50">{{productDetails.country_name}}</div>
+            <div flex="50">
+              <b>State</b>
+            </div>
+            <div flex="50">{{productDetails.state_name}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>City</b>
+            </div>
+            <div flex="50">{{productDetails.city_name}}</div>
+            <div flex="50">
+              <b>Area</b>
+            </div>
+            <div flex="50">{{productDetails.area_name}}</div>
+          </div>
+          <div layout="row">
+            <div flex="50">
+              <b>Latitude</b>
+            </div>
+            <div flex="50">{{productDetails.lat}}</div>
+            <div flex="50">
+              <b>Longitude</b>
+            </div>
+            <div flex="50">{{productDetails.lng}}</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="contbg md-whiteframe-3dp" style="margin-top: 20px;width: 100%;height: 12em; padding-left: 2em;padding-top: 1em;">
+    <form>
+      <div flex>
+        <h2 class="md-title text_color">Running Campaign Details</h2>
+      </div>
+      <div layout="row">
+        <div flex="50">
+          <b>Client Name</b>
+        </div>
+        <div flex="50">{{runningCampaignDetails.org_contact_name}}</div>
+        <div flex="50">
+          <b>Contact</b>
+        </div>
+        <div flex="50">{{runningCampaignDetails.org_contact_phone}}</div>
+      </div>
+      <div layout="row">
+        <div flex="50">
+          <b>Email</b>
+        </div>
+        <div flex="50">{{runningCampaignDetails.org_contact_email}}</div>
+        <div flex="50">
+          <b>Start & End Date</b>
+        </div>
+        <div flex="50">{{runningCampaignDetails.start_date | dateify | date:'dd-MM-yyyy'}} to {{runningCampaignDetails.end_date | dateify | date:'dd-MM-yyyy'}}</div>
+      </div>
+      <div layout="row">
+        <div flex="50">
+          <b>Estimated Budget</b>
+        </div>
+        <div flex="50">Rs. {{runningCampaignDetails.est_budget || "N/A"}}</div>
+        <div flex="50">
+          <b>Actual Budget</b>
+        </div>
+        <div flex="50">Rs. {{runningCampaignDetails.act_budget || "N/A"}}</div>
+      </div>
+      <div layout="row">
+        <div flex="50">
+          <b>Status</b>
+        </div>
+        <div flex="50">{{runningCampaignDetails.status | stringifyCampaignStatus }}</div>
+        <div flex="50"></div>
+        <div flex="50"></div>
+      </div>
+    </form>
+  </div>
+  <div style="margin-top: 20px; width:100%;">
+
+
+    <table class="table table-striped">
+      <thead>
+        <tr class="text_color text-center">
+          <th>Campaign Name</th>
+          <th>Client Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Estimated Budget</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class=" text-center" ng-repeat="campaign in nonRunningCampaigns | limitTo:limit | filter:search">
+          <td>{{campaign.name}}</td>
+          <td>{{campaign.user_full_name}}</td>
+          <td>{{campaign.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+          <td>{{campaign.end_date | dateify | date:'dd-MM-yyyy'}}</td>
+          <td>{{campaign.est_budget}}</td>
+          <td>
+            <a ng-href="/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">view</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <button style="width:120px;text-align:center;margin:auto" class="more btn btn-primary btn-block" ng-click="loadMore()">Load More!</button> -->
+  </div>
+</div>

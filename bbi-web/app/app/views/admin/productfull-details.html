@@ -1,0 +1,201 @@
+<style>
+    /* .collapsible {
+        background-color: #fff;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        color: #000;
+    }
+
+    .active,
+    .collapsible:hover {
+        background-color: #fff;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: #000;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #fff;
+    } */
+    .collapsible {
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        color: #000;
+        font-weight: 500;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: #000;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .productfull_card {
+        border: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .btn_strength {
+        border: none !important;
+    }
+
+    .productfull_cardheader {
+        background-color: #fff;
+        border-bottom: 1px solid #000;
+    }
+</style>
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+    <div class="ml-4 mr-4 mt-4 mb-2 md-whiteframe-2dp contbg">
+        <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6" style="margin-top:14px;margin-bottom:14px;">
+                <div id="accordion">
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    BB238 - Kothaguda
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Address</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: Survey No.6, Whitefield, Kothaguta Post, Kondapur, Hyderabad,
+                                            Telangana 500032</p>
+                                    </div>
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Land Mark</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: Near Cyber Tower</p>
+                                    </div>
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Facing</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: Towards Kothaguda</p>
+                                    </div>
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Details</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: Width: 30Feet Height: 35 Feet Lit: Yes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    Strengths
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Impressions</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: 64,000 per week</p>
+                                    </div>
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Visiblity Score</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: 8/10 - Good</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse" data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                    Previous Campaign Details
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-xl-2 col-lg-2 col-md-8 col-sm-6 col-6">
+                                        <ol>  
+                                            <li>Aries</li>  
+                                            <li>Bingo</li>  
+                                            <li>Leo</li>  
+                                            <li>Oracle</li>  
+                                           </ol>  
+                                    </div>
+                                    <div class="col-xl-2 col-lg-2 col-md-8 col-sm-6 col-6">
+                                        <ol start="5">  
+                                            <li>Aries</li>  
+                                            <li>Bingo</li>  
+                                            <li>Leo</li>  
+                                            <li>Oracle</li>  
+                                           </ol>  
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card productfull_card">
+                        <div class="card-header productfull_cardheader btn_strength" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsible" data-toggle="collapse" data-target="#collapseFour"
+                                    aria-expanded="false" aria-controls="collapseFour">
+                                    Map
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse show" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Impressions</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: 64,000 per week</p>
+                                    </div>
+                                    <label class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6 control-label" for="name">Visiblity Score</label>
+                                    <div class="col-xl-10 col-lg-10 col-md-8 col-sm-6 col-6">
+                                        <p class="">: 8/10 - Good</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 order-xl-1" style="margin-top:14px;">
+                <img class="ng-scope" src="assets/images/product/Image-5.png" alt="images" style="width:100%;">
+            </div>
+        </div>
+    </div>
+</div>

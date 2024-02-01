@@ -1,0 +1,41 @@
+<md-dialog flex="40" flex-lg="40" flex-md="50" flex-xs="100" flex-sm="70">
+  <div layout="row" layout-padding>
+    <h3 class="text_color" flex> Describe Your Comments</h3>
+    <md-button class="md-icon-button" aria-label="Close PopUp" ng-click="close()">
+      <md-tooltip>Close PopUp</md-tooltip>
+      <md-icon class="md-default-theme">
+        <i class="material-icons">close</i>
+      </md-icon>
+    </md-button>
+  </div>
+  <form ng-cloak name="requestQuoteChangeForm" novalidate  layout-padding>
+    <input type="hidden" ng-model="changeRequest.for_campaign_id" />
+    <md-dialog-content>
+      <!-- <div layout="row" layout-sm="row" layout-lg="row" layout-md="row" layout-xs="column" layout-margin="layout-margin">
+        <div layout="column" flex="100" flex-xs="100" flex-sm="100" flex-md="100" flex-lg="100">
+          <md-input-container class="md-block">
+            <label>Please describe what would you like changed.</label>
+            <textarea ng-model="changeRequest.remark" name="remark" md-minlength="20" md-maxlength="2000" rows="10" md-select-on-focus required></textarea>
+            <div ng-messages="requestQuoteChangeForm.remark.$error">
+              <div ng-message="required">Remark is required.</div>
+              <div ng-message="minlength">Remark must have at least 20 characters.</div>
+              <div ng-message="maxlength">Remarks shouldn't exceed 2000 characters. </div>
+            </div>
+          </md-input-container>
+        </div>
+      </div> -->
+      <div class="form-group">
+          <label for="comment">Please describe what would you like changed.</label>
+          <textarea class="form-control" rows="8" id="comment" maxlength="2000" ng-model="changeRequest.remark" required></textarea>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center">
+      <md-button Class="md-raised md-primary" type="submit" ng-click="requestChangeInQuote()">
+        SUBMIT
+      </md-button>
+      <md-button Class="md-raised" ng-click="close()">
+        CANCEL
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

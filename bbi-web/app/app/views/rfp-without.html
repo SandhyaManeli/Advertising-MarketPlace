@@ -1,0 +1,466 @@
+<style>
+    .form_width {
+        max-width: 430px !important;
+        border-radius: 0px;
+        margin-top: 150px;
+    }
+
+    .map_btn_align1 {
+        position: absolute;
+        bottom: 0px;
+        right: -9px;
+        margin-right: 12px;
+    }
+
+    @media screen and (max-width:575px) {
+        md-content {
+            overflow: inherit;
+        }
+
+        .form_mobile {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    .due_date {
+        width: 100%;
+        margin-left: 0px;
+    }
+
+    .dma_text md-chips .md-chips {
+        color: #495057 !important;
+        font-size: 1rem !important;
+        font-weight: 400 !important;
+        padding: 0px !important;
+        background-color: #fff !important;
+    }
+
+    .md-chips .md-chip-input-container {
+        margin-top: 0px;
+    }
+
+    md-content.md-default-theme,
+    md-content {
+        width: 100% !important;
+    }
+
+    @media screen and (max-width:959px) {
+        .form_mobile .form-group {
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .due_date {
+            width: 90%;
+            margin-left: 15px !important;
+        }
+
+        .rfp_submit {
+            width: 90% !important;
+            margin-left: 15px !important;
+        }
+    }
+
+    @media screen and (max-width:575px) {
+        .rfp_md_icon {
+            margin: 0px !important;
+        }
+    }
+
+    @media (min-width: 960px) {
+        .md-padding {
+            padding: 15px;
+        }
+    }
+
+    .rfp_cal {
+        padding: 4px 9px;
+    }
+
+    .rfp_cal_wid {
+        /* width: 30%; */
+        padding: 1px 1px !important;
+    }
+
+    .rfp_city {
+        margin-right: 7px;
+        width: 45%;
+    }
+
+    md-select-menu md-content md-option[selected] {
+         color: rgba(33,33,33,0.87)
+    }
+    .md-checkbox-enabled[selected] .md-icon {
+        background-color: rgb(0 0 0 / 87%);
+    }
+
+   .md-slct{
+        margin: 0px 0 26px
+    }
+
+    md-select .md-select-value {
+         border-bottom: none;
+    }
+
+
+    #main {
+         display: flex;
+    }
+    .rfp_datepick{
+        margin-left: 7px;
+    }
+    .rfpcal{
+        padding: 4px 8px;
+    }
+    /* .cal_wid {
+        padding: 1px 1px !i
+        } */
+   .rfp_plus_minus {
+        right: 0px;
+         margin-bottom: -7px;
+
+    }
+    .rfp_plus_minus2{
+         right: -9px;
+        margin-bottom: 2px;
+    }
+    .widthBox{
+        width: 70%;
+    }
+
+    .md-select-menu-container {
+         z-index: 900;
+    }
+
+    .md-div-show{
+        display:show;
+    }
+    .md-div-none{
+        display:none;
+    }
+
+    .minusButton{
+        margin-left: 10px;
+    }
+    .rowNewBtn{
+        background-color: #b3182d;
+        border-radius: 3px;
+        padding: 2px 8px;
+        color: white;
+        border: none;
+    }
+
+    
+ 
+</style>
+<!-- Register pages-->
+<div id="myDropdow" class="sign_bgcolor">
+    <md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+        <md-dialog-content>
+            <div class="d-flex justify-content-end">
+                <md-button class="md-icon-button rfp_md_icon" aria-label="Close Side Panel" ng-click="resetProduct()">
+                    <md-icon class="md-default-theme close_rg"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+            <div class="popup_img_center pt-0 pb-0 mt-0">
+                <img src="assets/images/logo-png.jpg" class="login_img" alt="Smiley face">
+            </div>
+            <md-content class="md-padding " style="background:#fff; height: 51vh;">
+                <!-- <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+                        <md-nav-item md-nav-click="showUserRegPanel()" name="users">BUYER</md-nav-item>
+                        <md-nav-item md-nav-click="showOwnerRegPanel()" name="owner">SELLER</md-nav-item>
+                        <md-nav-item md-nav-click="showAgencyRegPanel()" name="agency">Agency</md-nav-item>
+                    </md-nav-bar> -->
+                <div>
+                    <md-content class="md-padding" style="background:#fff">
+                        <form class="mt-2 form_mobile" name="forms.registerUser" novalidate="novalidate">
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">Campaign Name*</label>
+                                <div class="col-sm-12"
+                                    ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                                    <input class="form-control md-whiteframe-2dp" ng-model="user.campaign_name"
+                                        name="name" type="text" maxlength="30" placeholder="Campaign Name" required />
+                                    <span ng-show="forms.registerUser.name.$touched && forms.registerUser.name.$invalid"
+                                        style="color:red;">Campaign
+                                        name is required.</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">Demo*</label>
+                                <div class="col-sm-12"
+                                     ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                                    <input class="form-control md-whiteframe-2dp" ng-model="user.demo"
+                                        name="demo" type="text" maxlength="30" placeholder="Demo" required />
+                                        <span ng-show="forms.registerUser.demo.$touched && forms.registerUser.demo.$invalid"
+                                        style="color:red;">Demo is required.</span>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">First Day - Last Day
+                                    Dates</label>
+                                <div class="col-sm-12 input-group">
+                                    <input date-range-picker ng-model="user.date" class="form-control 
+                                        md-whiteframe-3dp date-picker" custom-options="customOptions"
+                                        placeholder="Product date" type="text" name="date" readonly
+                                        options="rqstHrdngsOpts" id="booking_dates_picker" />
+                                    <a class="input-group-addon md-whiteframe-3dp"
+                                        ng-click="getProductUnavailableDate(user,$event);" style="padding: 4px 16px;">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div> -->
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">Product Type*</label>
+                                <div class="col-sm-12 input-group">
+                                    <!-- <md-select  placeholder="" ng-model="user.producttype" class="form-control md-whiteframe-3dp md-slct" multiple>
+                                        <md-option value="Static" >Static</md-option>
+                                        <md-option value="Digital" >Digital</md-option>
+                                        <md-option value="Digital/Static">Digital/Static</md-option>
+                                        <md-option value="Media" >Media</md-option>
+                                    </md-select> -->
+
+                                
+                                        <md-select ng-model="user.producttype"  name="producttype" id="multi-type" placeholder="Select Product Type" required
+                                         ng-click="dirtyFix()" class="form-control md-whiteframe-3dp md-slct" style="padding: 0px 6px;" ng-init="user.producttype ='All'" multiple>
+                                            <md-option value="Static" >Static</md-option>
+                                            <md-option value="Digital" >Digital</md-option>
+                                            <md-option value="Digital/Static">Digital/Static</md-option>
+                                            <md-option value="Media" >Media</md-option>
+                                        </md-select>                             
+                                    <!-- <select ng-model="user.producttype" name="producttype" ng-dropdown-multiselect=""
+                                        class="col-sm-12 form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                        data-md-container-class="selectdemoSelectHeader"
+                                        ng-init="user.producttype ='All'" required>
+                                        <option value="All" selected>All</option>
+                                        <option value="Static">Static</option>
+                                        <option value="Digital">Digital</option>
+                                        <option value="Digital/Static">Digital/Static</option>
+                                        <option value="Media">Media</option>
+                                    </select> -->
+                                </div>
+                                <div class="col-sm-12 input-group" style="padding: 3px 20px;">
+                                    <span ng-show="forms.registerUser.producttype.$touched && forms.registerUser.producttype.$invalid"
+                                    style="color:red;">Product Type is required.</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">BUDGET</label>
+                                <div class="col-sm-12"
+                                    ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                                    <input class="form-control md-whiteframe-2dp" ng-model="user.budget"
+                                        name="budget" type="text" maxlength="30" placeholder="Budget"  />
+                                    <!-- <span ng-show="forms.registerUser.budget.$touched && forms.registerUser.budget.$invalid"
+                                        style="color:red;">Budget is required.</span> -->
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-6 user_font mb-0" style="font-weight: normal;">DMA <span><a
+                                            href="./assets/excelFile/DMA - PDF.pdf" target="_blank" style="cursor:pointer">Download a DMA Map
+                                            (PDF)</a></span>
+                                </label>
+                                <div>
+                                    <button  class="rowNewBtn" ng-model="makeOverline" id="plusClass" ng-click="addNewSearchField()"
+                                    ng-class="{'': searchTermAry.length <= 1}">  + Add New DMA </button>
+                                </div>
+                               
+                            </div>
+                                <!--<div class="col-sm-12 input-group">
+                                        <md-autocomplete md-min-length="3" md-selected-item="areaObj" placeholder="DMA"
+                                            ng-blur="selectSearchedAre()" md-search-text="searchedArea"
+                                            md-items="item in searchableArea(searchedArea)" md-item-text="item.city_name"
+                                            md-clear-button="true" style="min-width: 100% !important" name="Area"
+                                            md-menu-class="col-sm-12 form-control md-whiteframe-3dp" required>
+                                            <md-item-template>
+                                                <span class="item-title">
+                                                </span>
+                                                <span class="item-metadata">
+                                                    <span>
+                                                        <strong>{{item.city_name}}</strong>
+                                                    </span>
+                                                    <span>
+                                                        <strong>{{item.state_name}}</strong>
+                                                    </span>
+                                                    <span>
+                                                    </span>
+                                                </span>
+                                            </md-item-template>
+                                            <md-not-found>
+                                                No matches found.
+                                            </md-not-found>
+                                            <span style="color:red"
+                                                ng-show="hordinglistform.searchedArea.$dirty && hordinglistform.searchedArea.$invalid">
+                                                <span ng-show="hordinglistform.searchedArea.$error.required">Product Area is
+                                                    required.</span>
+                                            </span>
+                                        </md-autocomplete>
+                                    </div>-->
+                                <div class="form-group row">
+                                <div class="col-sm-12 input-group dma_text">
+                                    <!-- <md-content class="md-padding autocomplete" layout="column"> -->
+                                    <!-- <label id="fromLabel">DMA</label> -->
+
+                                    <!-- <md-contact-chips                    
+                                                ng-model="selectedDMAs"
+                                                md-contacts="searchableArea($query)"
+                                                md-contact-name="city_name"
+                                                md-contact-email="state_name"
+                                                md-require-match="true"
+                                                md-highlight-flags="i"
+                                                placeholder="Type City Name"
+                                                secondary-placeholder="Add Another DMA"
+                                                input-aria-label="DMAs">
+                                            </md-contact-chips> -->
+                                    <!-- </md-content> -->
+                                    <div id="main" class="mt-2" ng-repeat="searchObj in searchTermAry">
+                                        <div>
+                                            <md-autocomplete md-min-length="3"  md-items="item in searchableAreas(searchedArea)" md-selected-item="saveDataDMA[$index]" placeholder="DMA"
+                                            md-search-text="searchedArea"  md-item-text="item.city_name"
+                                                md-clear-button="true" style="min-width: 100% !important" name="Area" required>
+                                                <md-item-template>
+                                                    <span class="item-metadata">
+                                                        <span>
+                                                            <strong>{{item.city_name}}</strong>
+                                                        </span>
+                                                        <span>
+                                                            <strong>{{item.state_name}}</strong>
+                                                        </span>
+                                                    </span>
+                                                </md-item-template>
+                                                <md-not-found>
+                                                    No matches found.
+                                                </md-not-found>
+                                                <!-- <span style="color:red"
+                                                    ng-show="hordinglistform.searchedArea.$dirty && hordinglistform.searchedArea.$invalid">
+                                                    <span ng-show="hordinglistform.searchedArea.$error.required">Product Area is
+                                                        required.</span>
+                                                </span> -->
+                                            </md-autocomplete>
+                                        </div>
+                                        <div>
+                                            <div class="input-group" style="padding: 0px 0px 0px 7px;">
+                                                <input date-range-picker ng-model="saveDataDates[$index]" class="form-control md-whiteframe-3dp"
+                                                    custom-options="customOptions" placeholder="Product date" type="text" name="date" readonly
+                                                    options="rqstHrdngsOpts" id="booking_dates_picker" ng-disabled="!saveDataDMA[$index]" />
+                                                <a class="input-group-addon md-whiteframe-3dp cal_wid"
+                                                    ng-click="getProductUnavailableDate(user,$event,$index);">
+                                                    <i class="fa fa-calendar rfpcal" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="input-group">
+                                                <div class="" id="div_plusClass">
+                                                    <span ng-show="searchTermAry.length > 1" class="minusButton" ng-click="removeLastSearchField($index)">
+                                                        <i class="fa fa-trash" aria-hidden="true"
+                                                            style="font-size: 14px; margin-top: 9px; cursor: pointer;"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                      
+
+                                    
+                                </div>
+                            </div>
+                            <!-- <div>
+                                        {{selectedDMAs | json}}
+                                    </div> -->
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">Email*</label>
+                                <div class="col-sm-12"
+                                    ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                                    <input class="form-control md-whiteframe-2dp" ng-model="user.user_email"
+                                        name="email" type="text" maxlength="40" placeholder="Email" required />
+                                    <span
+                                        ng-show="forms.registerUser.email.$touched && forms.registerUser.email.$invalid"
+                                        style="color:red;">Email
+                                        is required.</span>
+                                </div>
+                            </div>
+
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label md-body-2 user_font">Instructions*</label>
+                                <div class="col-sm-12"
+                                    ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                                    <textarea   class="form-control md-whiteframe-2dp" name="instructions"  ng-model="user.instructions"
+                                    id="" style="width: 100%;"   placeholder="Instructions" required></textarea>
+                                    <span
+                                        ng-show="forms.registerUser.instructions.$touched && forms.registerUser.instructions.$invalid"
+                                        style="color:red;">Instructions is required.</span>
+                                </div>
+                            </div>
+
+                            <!-- <label class="col-sm-12 col-form-label md-body-2 user_font pl-0 ml-0">Due Date</label> -->
+                            <!-- <div layout="column" class="filters md-whiteframe-2dp mb-2 mt-1" style="background: #fff !important;">
+                                    <div class="row ml-0 mr-0">
+                                      <div class="col-md-6 text-center mt-0 map_cal">
+                                        <md-datepicker class="form-control"  md-placeholder="Due Date" ng-model="user.due_date"
+                                          required></md-datepicker>                                    
+                                      </div>                                     
+                                    </div>
+                                  </div>      
+                                                      -->
+                            <div class="form-group row due_date">
+                                <div class="col-sm-12 text-center mt-0 map_cal filters md-whiteframe-2dp mb-2 mt-1"
+                                    style="background: #fff !important; border-radius: 4px;">
+                                    <md-datepicker class="form-control" md-placeholder="Due Date"
+                                        ng-model="user.due_date" required></md-datepicker>
+                                </div>
+                            </div>
+                            <!-- <div ng-if="regNewUserErrors.length >=0" style="color:red">
+                                    <ul>
+                                        <li ng-repeat="error in regNewUserErrors">
+                                            {{error}}
+                                        </li>
+                                    </ul>
+                                </div> -->
+                            <md-input-container layout-align="center center" layout-fill="layout-fill"
+                                class="rfp_submit sinbtn mb-2" style="padding:0px;">
+                                <md-button type="submit" layout-fill="layout-fill"
+                                    class="md-raised md-primary regbn register_btn"
+                                    ng-disabled="forms.registerUser.$invalid"
+                                    ng-click="rfpWithoutLogin(user)">Submit</md-button>
+                            </md-input-container>
+
+                            <!-- <hr class="my-4">
+                                <p class="text-center power_by">Powered by PeopleTech Group</p> -->
+                            <!-- <div layout="row" layout-xs="column">
+                                <p>Verify the E-mail address to Sign In </p>
+                            </div> -->
+                        </form>
+                        <!-- <input type="checkbox">
+                                        <label class="col-sm-3 col-form-label md-body-2 user_font">I have Read and agree to the <u>terms of services</u></label> -->
+
+                    </md-content>
+                </div>
+            </md-content>
+        </md-dialog-content>
+    </md-dialog>
+</div>
+
+
+<!-- <md-dialog-content>
+                <md-content layout-fill="layout-fill" class="sucessContent" ng-show="success">
+                    <div layout="column" layout-align="center end">
+    
+                        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+                            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                        </md-button>
+                    </div>
+                    <div layout="column" layout-align="center center" layout-margin layout-padding>
+                        <h1 class="md-title">A Mail As Been Sent To Your Registred Email</h1>
+                        <div class="md-subhead">Go to Your Email and click link into verify...</div>
+    
+    
+                    </div>
+                </md-content>
+            </md-dialog-content> -->

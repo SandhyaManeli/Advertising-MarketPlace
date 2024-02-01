@@ -1,0 +1,135 @@
+<div>
+  <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+      <!-- <p class="mt-4">Total Products<span class="text_color">: {{productList.length}}</span></p> -->
+      <div flex></div>
+      <!-- Add New Product -->
+      <!-- <div class="dropdown hide-xs"> -->
+      <!-- <div class="dropdown hide-xs"> -->
+          <div class="container pt-3">
+              <div class="row">
+                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                  <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+                </div>
+              </div>
+            </div>
+          <div class="dropdown">
+            <md-button class="md-raised md-primary all_button" ng-click="addnewDoc()"  class="dropbtn">Add New Document
+            </md-button>
+            <div id="Contracts" class="dropdown-content_bulk contbg animated fadeInDown uploading_files">
+             
+              <div layout="colmun">
+                <span flex></span>
+                  <md-button class="md-icon-button" aria-label="Close Side Panel">
+                      <md-icon class="md-default-theme"  ng-click="resetnewDoc()">
+                          <i class="material-icons">close</i>
+                      </md-icon>
+                  </md-button>
+                </div>
+                <h3  class="md-body-2" style="margin-top:-31px !important;">Great, <span class="md-title">Let's add new document</span></h3>
+                 <br>
+                 <form name="contractsform" novalidate="novalidate" style="position:relative;">
+              <li style="list-style: none;">
+                      <div class="row">
+                          <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                              <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 pt-4">
+                                  <label class="font-weight-bold for_required">Title<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                              <div class="input-group" style="width: 100%;">
+                                <input type="text" placeholder="Title" class="form-control md-whiteframe-3dp p-1" placeholder="title" name="title"
+                                ng-model="title" required>
+                            </div> 
+                            <div ng-messages="contractsform.title.$error"
+                            ng-if="contractsform.title.$touched" style="color:red">
+                            <div ng-message="required">Title is
+                                required</div>
+                              </div>
+                              </div>
+                          <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 pt-4">
+                              <label class="font-weight-bold for_required">Upload Document<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                              <div class="input-group" style="width: 100%;">
+                                <input type="file" class="form-control md-whiteframe-3dp p-1" ngf-select
+                                ng-model="documnt.file" accept=".pdf" name="documnt" onchange="angular.element(this).scope().clearerrorMsg()"
+                                placeholder="Upload Excel Sheet*" multiple required>
+                                <span class="input-group-addon md-whiteframe-3dp img_align"><i class="fa fa-picture-o"
+                                          aria-hidden="true"></i></span>
+                              </div>
+                          </div>
+                      
+                      <div class="form-group row mt-3 mr-1 justify-content-end">
+                          <md-button type="submit" Class="md-raised md-primary all_button"
+                              ng-click="requestAddDocInvoice(documnt)"  ng-disabled="!title || !documnt.file">
+                              Submit</md-button>
+                      </div>
+                      </div>
+                      </div>
+                      <!-- <div ng-if="displayErrorMsg">
+                          <p class="text-danger pt-2">{{errorMsg}}</p>
+                      </div> -->
+                      
+                    </li>
+              </form>
+        </div>
+      </div>
+      
+  </div>
+  <div class="table-responsive">
+
+    <table class="table">
+        <thead class="text_color">
+            <tr>
+              <th class="text-left adjust_space">S.No 
+              </th>
+                <th class="text-left adjust_space">Title
+                </th>
+                <th class="text-left adjust_space">File Name
+                </th>
+                <th class="text-left adjust_space">Date
+              </th>
+                <th class="text-left text-nowrap padding-20">Action
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-if="invoice.length!=0">
+          <tr ng-repeat="item in invoice track by $index">
+            <td class="image_tdwidth">
+              {{$index + 1}}
+          </td>
+              <td class="adjust_space adjust_space">{{item.title}}</td>
+              <td class="table_address product_detail_res invoice_hover">
+                <a ng-click="downloadPdfInvoice(item.id,item.file_name)"> {{item.file_name}}</a>
+              </td>
+              <td class="table_vertical text-left adjust_space">{{(item.created_at| dateify | date: "dd-MM-yyyy")}}</td>
+              <td>
+                <a data-toggle="modal" data-target="#exampleModaldocument"  ng-click="deleteInvoiceItem(item.id)">
+                  <i class="material-icons">delete_forever</i>
+                </a>
+                
+                <div class="modal fade" id="exampleModaldocument">
+                <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header modal_bottom">
+                            <h5 class="modal-title">Are you Sure! you want to delete this document ?</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-footer modal_top">
+                            <button type="button" class="btn btn-secondary popup_yes"  ng-click="deleteInvoice(item.id)" data-dismiss="modal">Yes</button>
+                            <button type="button" data-dismiss="modal" class="popup_no">No</button>
+    
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+          </td>
+
+          </tr>
+      </tbody>
+    </table>
+    <div ng-if="invoice.length==0"><h5 class="text-center"><b>No Data available</b></h5></div>
+</div>
+</div>
+<script>
+function addnewDoc() {
+    document.getElementById("Contracts").classList.toggle("show");
+} 

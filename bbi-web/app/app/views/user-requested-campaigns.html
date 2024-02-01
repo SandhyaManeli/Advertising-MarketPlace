@@ -1,0 +1,109 @@
+<div layout="column" class="contbg">
+    <div layout="row" class="" layout-padding>
+        <div class="md-title text_color"><b>Requested Campaigns(Approved Campaigns)</b></div>
+        <div flex></div>
+        <div class="form-group saved_camp hide-xs">
+            <input type="search" class="form-control md-whiteframe-3dp" ng-model="activeUserCampaign.name"  placeholder="search campagin">
+        </div>
+    </div>
+    <div>
+        <div class="table-responsive">
+            <table class="table mb-0">
+                <thead>
+                    <tr class="text_color">
+                        <th>Campaign ID</th>
+                        <th>Campaign Name</th>
+                        <!-- <th>Start Date</th> -->
+                        <th class="text-center">Number of Products </th>
+                        <!-- <th>Paid</th> -->
+                        <th class="text-center">Total Price in $</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="contbg">
+                    <tr ng-repeat="activeUserCampaign in userSavedCampaigns | filter : activeUserCampaign.name">
+                        <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.name | capitalize}}</td>
+                        <td class="text-center table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
+                        <td class="text-center table_vertical"><span>$</span>{{activeUserCampaign.act_budget || '0' | number:2}}</td>
+                        <td class="text-center table_vertical">
+                            <md-menu md-position-mode="target-right target">
+                              <div class="dropdown dropleft float-right">
+                                <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                  <!-- <i class="fa fa-ellipsis-v"></i> -->
+                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/campaign-details/{{activeUserCampaign.id}}" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(activeUserCampaign.id)" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" style="font-size:11px;"  ng-click="cancelCampaign(activeUserCampaign.id)">
+                                    <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Cancel Campaign
+                                    </a>
+                                </div>
+                              </div>
+                            </md-menu>
+                          </td>
+                        <td class="text-center table_vertical">
+                            <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateFormat}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+    <div layout="row">
+        <div class="md-toolbar-tools">
+            <div flex></div>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <md-content layout-align="center center" layout-margin layout-padding>
+        <h3 class="md-headline">Share Campaign</h3>
+        <form name="shareCampaignForm">
+            <div layout="column">
+                <md-input-container class="md-block">
+                    <label>Name</label>
+                    <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                    <div ng-messages="shareCampaignForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="pattern">Enter a valid Name.</div>
+                    </div>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                    <div ng-messages="shareCampaignForm.email.$error">
+                        <div ng-message="required">Email is required.</div>
+                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                    </div>
+                </md-input-container>
+                <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentShareCampaign)">Share Campaign</md-button>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>
+<!-- share campaign sidenav ends -->
+</div>
+<script>
+    function UsersaveCampaign() {
+        document.getElementById("usersavedDropdown").classList.toggle("show");
+    }
+</script>
+<script type="text/javascript">
+    function ShowHideDiv() {
+      var chkYes = document.getElementById("chkYes");
+      var dvPassport = document.getElementById("dvPassport");
+      dvPassport.style.display = chkYes.checked ? "block" : "none";
+    }
+  </script>

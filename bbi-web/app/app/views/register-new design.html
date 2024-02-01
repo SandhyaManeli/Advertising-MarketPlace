@@ -1,0 +1,443 @@
+<style>
+	input.ng-pristine + ul#strength {
+    display:none;
+}
+ul#strength {
+    display:inline;
+    list-style:none;
+    margin:0;
+    margin-left:15px;
+    padding:0;
+    vertical-align:2px;
+}
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    margin-right:3px;
+    width:30px;
+}
+.point:first-child {
+	margin-left: -10px;
+}
+#footer {
+    position:fixed;
+    bottom:5px;
+}
+@media screen and (max-width:575px){
+	md-content{
+		overflow: inherit;
+	}
+	.form_mobile{
+		margin-left: 10px;
+    	margin-right: 10px;
+	}
+}
+.md-select-menu-container {
+	position: absolute !important;
+}
+.registerBtn{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+.md-button.md-default-theme.md-fab[disabled], .md-button.md-fab[disabled], .md-button.md-default-theme.md-raised[disabled], .md-button.md-raised[disabled]{
+	color: white !important;
+    background-color: #9497a5 !important;
+    border-radius: 8px !important;
+}
+.reg_checkbox{
+	margin-left: 2.2rem !important;
+}
+</style>
+<!-- Register pages-->
+<div class="sign_bgcolor">
+	<md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+		<md-dialog-content>
+			<div class="d-flex justify-content-end">
+				<md-button class="md-icon-button " aria-label="Close Side Panel" ng-click="closeMdDialog()">
+					<md-icon class="md-default-theme close_rg"><i class="material-icons">close</i></md-icon>
+				</md-button>
+			</div>	
+			<div class="popup_img_center mt-0">
+				<img src="assets/images/logo-png.jpg" class="login_img" alt="Smiley face">
+			</div>
+			<md-content class="md-padding " style="background:#fff; padding-bottom:40px;">
+				<!-- <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+					<md-nav-item md-nav-click="showUserRegPanel()" name="users">BUYER</md-nav-item>
+					<md-nav-item md-nav-click="showOwnerRegPanel()" name="owner">SELLER</md-nav-item>
+					<md-nav-item md-nav-click="showAgencyRegPanel()" name="agency">Agency</md-nav-item>
+				</md-nav-bar> -->
+				<md-select name="myModel" class="mb-0" ng-change="showUserRegPanel()" ng-model="myModel" required >
+					<!-- <md-option value="default">Please select the user</md-option> -->
+					<md-option value="default">Select if you are a Buyer or Seller to proceed</md-option>
+					<md-option  value="users" name="users" >BUYER</md-option>
+					<md-option  value="owner" name="owner">SELLER</md-option>
+				  </md-select>
+				 
+				
+				<div ng-if="showUserForm">
+					<md-content class="md-padding pl-0" style="background:#fff">
+						<form class="mt-2 form_mobile regi_height_res" name="forms.registerUser" novalidate="novalidate">
+							<!-- <div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="user.name" name="name" type="text" maxlength="30"
+								 placeholder="Your Name * " required><br>
+								<span ng-show="forms.registerUser.name.$touched && forms.registerUser.name.$invalid" style="color:red;">The
+									name is required.</span>
+							</div>
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="user.company_name" name="companyName" type="text"
+								 minlength="6" maxlength="30" placeholder="Company Name *" required />
+								<span ng-show="forms.registerUser.companyName.$touched && forms.registerUser.companyName.$invalid" style="color:red;">Company
+									Name is required.</span>
+							</div>
+							<div class="form-group row">
+								
+								<input class="form-control md-whiteframe-2dp" ng-model="user.email" name="email" type="email" maxlength="50"
+								 ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" required="required" placeholder="Email ID *" />
+								<span ng-show="forms.registerUser.email.$touched && forms.registerUser.email.$invalid" style="color:red;">Enter
+									a valid email address.</span>
+							</div>
+							<div class="form-group row">
+								
+								<input class="form-control md-whiteframe-2dp" ng-model="user.password" name="password" type="password"
+								 maxlength="30" placeholder="Password *" required />
+								<span ng-show="forms.registerUser.password.$touched && forms.registerUser.password.$invalid" style="color:red;">Password
+									is required.</span>
+							</div>
+							<div class="form-group row">
+								
+							<input class="form-control md-whiteframe-2dp" ng-model="user.phone" only-numeric name="phone" type="mobile"
+								 minlength="10" maxlength="14" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" placeholder="Mobile Number *" required/>
+								 <span ng-show="forms.registerUser.phone.$touched && forms.registerUser.phone.$invalid" style="color:red;">Mobile Number
+										is required.</span>
+							</div> -->
+
+							<!-- <div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Your Name</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="user.name" name="name" type="text" maxlength="30"
+									placeholder="Your Name * " required />
+									<span ng-show="forms.registerUser.name.$touched && forms.registerUser.name.$invalid" style="color:red;">The
+										name is required.</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Company</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="user.company_name" name="companyName" type="text"
+								 minlength="6" maxlength="30" placeholder="Company Name *" required />
+								 <span ng-show="forms.registerUser.companyName.$touched && forms.registerUser.companyName.$invalid" style="color:red;">Company
+									Name is required.</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Email ID</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="user.email" name="email" type="email" maxlength="50"
+								 ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" required="required" placeholder="Email ID *" />
+								 <span ng-show="forms.registerUser.email.$touched && forms.registerUser.email.$invalid" style="color:red;">Enter
+									a valid email address.</span>
+								</div>
+							</div>
+							<div class="form-group row show-password">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input type="password" class="form-control md-whiteframe-2dp" ng-model="user.password" name="user.password" minlength="8" maxlength="20" ng-attr-type="{{ showPassword ? 'text' : 'password' }}"
+								  placeholder="Password *" id="user.password" required />
+								 <ul id="strength" check-strength="user.password"></ul>
+								 <i ng-show="user.password.length" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+								 <span ng-show="forms.registerUser.password.$touched && forms.registerUser.password.$invalid" style="color:red;">Password
+									is required.</span>
+									
+								</div>
+								
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Mobile</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="user.phone" minlength="10" maxlength="10" only-numeric name="phone" type="mobile"
+								 minlength="10" maxlength="14" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" placeholder="Mobile Number *" required/>
+								 <span ng-show="forms.registerUser.phone.$touched && forms.registerUser.phone.$invalid" style="color:red;">Mobile Number
+									is required.</span>
+								</div>
+							</div> -->
+							<div class="form-group row mr-0 ml-0 mb-0">
+								<label class="col-12 col-form-label md-body-2 user_font signin-label">Your Email</label>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-2">
+								<div class="col-12" ng-class="{'has-error': forms.registerUser.email.$invalid && forms.registerUser.email.$dirty, 'has-success': forms.registerUser.email.$valid }">
+								  <input type="email" class="form-control form_border_signin"  placeholder="Email"  name="email" ng-model="user.email" maxlength="50"
+									required/>
+									<p class="help-block errMsg mb-0" ng-if="forms.registerUser.email.$invalid && forms.registerUser.email.$dirty">Please Enter a valid email address</p>
+								</div>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-0">
+								<label for="Password" class="col-12 col-form-label md-body-2 user_font signin-label">Password</label>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-4">
+								<div class="col-12 show-password" ng-class="{'has-error': forms.registerUser.password.$invalid && forms.registerUser.password.$dirty, 'has-success': forms.registerUser.password.$valid}">
+								  <input  ng-attr-type="{{ showPassword ? 'text' : 'password' }}" class="form-control form_border_signin" placeholder="Password" name="password"  ng-model="user.password"  
+								  maxlength="15" id="user.password" required />
+								  <!-- <ul id="strength" check-strength="user.password"></ul> -->
+								  <i ng-show="user.password.length" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+								  <p class="help-block errMsg mb-0" ng-if="forms.registerUser.password.$invalid && forms.registerUser.password.$dirty">Please Enter at least 15 characters</p>
+								</div>
+							  </div>
+							<div class="form-group row mb-0">
+                               <input class="col-sm-1 pl-2 form-control reg_checkbox" name="checkbox" ng-model="chkselct" type="checkbox" required/>     
+                               <!-- <div class="col-sm-9"> -->
+                                      <span class="pl-0"  style="font-size: 11px;">I have Read and agree to the<a ng-href="/user_agreement" target="_blank" ng-if="!footerhide" class="s-btn-toggler"> terms of services</a></span>	<br/>			
+                                      <span ng-show="forms.registerUser.checkbox.$touched && forms.registerUser.checkbox.$invalid" style="color:red;">Please accept the terms before registering</span>
+
+                                     
+<!-- </div> -->
+                                    </div>
+							<!-- <div class="form-group row">
+								
+							<input class="form-control md-whiteframe-2dp" ng-model="user.address" name="address" type="text" minlength="10"
+								 maxlength="150" placeholder="Address" required />
+								 <span ng-show="forms.registerUser.address.$touched && forms.registerUser.address.$invalid" style="color:red;">Address is required.</span>
+							</div> -->
+							<div layout="column" layout-align="center center" layout-fill="layout-fill" class="pt-3 recaptcham" flex-xs="20">
+								<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+							</div>
+							<div ng-if="regNewUserErrors.length >=0" style="color:red">
+								<ul>
+									<li ng-repeat="error in regNewUserErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
+							<md-input-container class="registerBtn" layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+								<md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="forms.registerUser.$invalid"
+								 ng-click="registerNewUser()">Create My Account</md-button>
+							</md-input-container>
+							<!-- <div layout="row" layout-xs="column">
+							<p>Verify the E-mail address to Sign In </p>
+						</div> -->
+						<!-- <hr class="my-4"> -->
+						<!-- <p class="text-center power_by">Powered by PeopleTech Group</p> -->
+						</form>						 
+                                    <!-- <input type="checkbox">
+                                    <label class="col-sm-3 col-form-label md-body-2 user_font">I have Read and agree to the <u>terms of services</u></label> -->
+                               
+
+					</md-content>
+				</div>
+					<!-- <p class="text-center power_by">Powered by PeopleTech Group</p> -->
+
+				<div ng-if="showOwnerForm">
+					<md-content class="md-padding pb-0 pl-0" style="background:#fff">
+						<form class="mt-2 form_mobile regi_height_res" name="forms.registerClientForm" novalidate="novalidate">
+							<!-- <div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="ownername" type="text" maxlength="30"
+								 placeholder="Your Name * " required><br>
+								<span ng-show="forms.registerClientForm.name.$touched && forms.registerClientForm.name.$invalid" style="color:red;">The
+									name is required.</span>
+							</div>
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.companyName" name="clientName" type="text" maxlength="200"
+								 required="required" placeholder="Company Name *" required />
+								 <span ng-show="forms.registerClientForm.clientName.$touched && forms.registerClientForm.clientName.$invalid" style="color:red;">Company Name
+										is required.</span>
+							</div>
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.contact_name" name="clientContactName" type="text"
+								 maxlength="30" placeholder="Contact Name *" required />
+								 <span ng-show="forms.registerClientForm.clientContactName.$touched && forms.registerClientForm.clientContactName.$invalid" style="color:red;">Contact Name
+										is required.</span>
+							</div> 
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.email" name="email" type="email" maxlength="50" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" placeholder="Email *" required />
+								 <span ng-show="forms.registerClientForm.email.$touched && forms.registerClientForm.email.$invalid" style="color:red;">Email
+										is required.</span>
+							</div>
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.phone" only-numeric name="phone" type="phone"
+								 minlength="10" maxlength="14" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+								 placeholder="Mobile number *" required />
+								 <span ng-show="forms.registerClientForm.phone.$touched && forms.registerClientForm.phone.$invalid" style="color:red;">Mobile Number is required.</span>
+							</div> -->
+
+							<!-- <div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Your Name</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="ownername" type="text" maxlength="30"
+								 placeholder="Your Name * " required />
+								 <span ng-show="forms.registerClientForm.name.$touched && forms.registerClientForm.name.$invalid" style="color:red;">The
+									name is required.</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Company</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="client.companyName" name="clientName" type="text" maxlength="200"
+								 required="required" placeholder="Company Name*" required />
+								 <span ng-show="forms.registerClientForm.clientName.$touched && forms.registerClientForm.clientName.$invalid" style="color:red;">Company Name
+									is required.</span>
+								</div>
+							</div>
+							<div class="form-group row">							
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Company DBA</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="client.contact_name" name="clientContactName" type="text"
+								 maxlength="30" placeholder="Company DBA *" required />
+								 <span ng-show="forms.registerClientForm.clientContactName.$touched && forms.registerClientForm.clientContactName.$invalid" style="color:red;">Company DBA is required.</span>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Email</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="client.email" name="email" type="email" maxlength="50" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" placeholder="Email *" required />
+									<span ng-show="forms.registerClientForm.email.$touched && forms.registerClientForm.email.$invalid" style="color:red;">Email
+										is required.</span>
+								</div>
+							</div>
+							<div class="form-group row show-password">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Password</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input type="password" class="form-control md-whiteframe-2dp" ng-model="client.password" name="client.password" minlength="8" maxlength="20" ng-attr-type="{{ showPassword ? 'text' : 'password' }}"
+								  placeholder="Password *" id="client.password" required />
+								 <ul id="strength" check-strength="client.password"></ul>
+								 <i ng-show="client.password.length" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+								 <span ng-show="forms.registerClient.password.$touched && forms.registerClient.password.$invalid" style="color:red;">Password
+									is required.</span>
+									
+								</div>
+								
+							</div>														
+							<div class="form-group row">
+								<label class="col-sm-3 col-form-label md-body-2 user_font">Mobile</label>
+								<div class="col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+									<input class="form-control md-whiteframe-2dp" ng-model="client.phone" minlength="10" maxlength="10" only-numeric name="phone" type="phone"
+								 minlength="10" maxlength="14" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+								 placeholder="Mobile number *" required />
+								 <span ng-show="forms.registerClientForm.phone.$touched && forms.registerClientForm.phone.$invalid" style="color:red;">Mobile Number is required.</span>
+								</div>
+							</div> -->
+							<div class="form-group row mr-0 ml-0 mb-0">
+								<label class="col-12 col-form-label md-body-2 user_font signin-label">Your Email</label>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-2">
+								<div class="col-12" ng-class="{'has-error': forms.registerClientForm.email.$invalid && forms.registerClientForm.email.$dirty, 'has-success': forms.registerClientForm.email.$valid }">
+								  <input type="email" class="form-control form_border_signin"  placeholder="Email"  name="email" ng-model="client.email" maxlength="50"
+									required/>
+									<p class="help-block errMsg mb-0" ng-if="forms.registerClientForm.email.$invalid && forms.registerClientForm.email.$dirty">Please Enter a valid email address</p>
+								</div>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-0">
+								<label for="Password" class="col-12 col-form-label md-body-2 user_font signin-label">Password</label>
+							  </div>
+							  <div class="form-group row mr-0 ml-0 mb-4">
+								<div class="col-12 show-password" ng-class="{'has-error': forms.registerClientForm.password.$invalid && forms.registerClientForm.password.$dirty, 'has-success': forms.registerClientForm.password.$valid}">
+								  <input  ng-attr-type="{{ showPassword ? 'text' : 'password' }}" class="form-control form_border_signin" placeholder="Password" name="password"  ng-model="client.password"  
+								  maxlength="15" id="client.password" required />
+								  <ul id="strength" check-strength="client.password"></ul>
+								  <i ng-show="client.password.length" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+								  <p class="help-block errMsg mb-0" ng-if="forms.registerClientForm.password.$invalid && forms.registerClientForm.password.$dirty">Please Enter at least 15 characters</p>
+								</div>
+							  </div>
+							<div class="form-group row">
+    <input class="col-sm-1 pl-2 reg_checkbox form-control" name="checkbox" ng-model="chkselct" type="checkbox" required/> 
+                                      <span class="pl-0"  style="font-size: 11px;">I have Read and agree to the<a ng-click="goTo('top')"  ng-href="/user_agreement" target="_blank" ng-if="!footerhide" class="s-btn-toggler"> terms of services</a>
+</span><br/>			
+<span ng-show="forms.registerClientForm.checkbox.$touched && forms.registerClientForm.checkbox.$invalid" style="color:red;">Please accept the terms before registering</span>
+							</div>
+
+							<!-- <div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.address" name="address" type="text" minlength="10"
+								 maxlength="150" placeholder="Address" required/>
+								 <span ng-show="forms.registerClientForm.address.$touched && forms.registerClientForm.address.$invalid" style="color:red;">Address is required.</span>
+							</div> -->
+							<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+								<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+							</div>
+							<div ng-if="clientErrorMessages.length >=0 && !forms.registerClientForm.$dirty" style="color : red">
+								{{clientErrorMessages}}
+							</div>
+							<md-input-container layout-align="center center" layout-fill="layout-fill" class="registerBtn">
+								<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn register_btn" ng-disabled="forms.registerClientForm.$invalid"
+								 ng-click="registerClient(client)">Create My Account</md-button>
+							</md-input-container>
+							
+						</form>
+						<!-- <hr class="my-4"> -->
+						
+					</md-content>
+					<!-- <p class="text-center power_by">Powered by PeopleTech Group</p> -->
+				</div>
+				<!-- <div ng-if="showAgencyForm">
+					<md-content class="md-padding" style="background:#fff">
+						<form class="mt-2" name="forms.registerAgencyForm" novalidate="novalidate">
+							
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="agency.name" name="agencyname" type="text" maxlength="30"
+								 placeholder="Your Name * " required><br>
+								<span ng-show="forms.registerAgencyForm.name.$touched && forms.registerAgencyForm.name.$invalid" style="color:red;">The
+									name is required.</span>
+							</div>
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.name" name="clientName" type="text" maxlength="200"
+								 required="required" placeholder="Agency Name *" required />
+								 <span ng-show="forms.registerAgencyForm.clientName.$touched && forms.registerAgencyForm.clientName.$invalid" style="color:red;">Agency Name
+										is required.</span>
+							</div>
+							
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.contact_name" name="clientContactName" type="text"
+								 maxlength="30" placeholder="Contact Name *" required />
+								 <span ng-show="forms.registerAgencyForm.clientContactName.$touched && forms.registerAgencyForm.clientContactName.$invalid" style="color:red;">Contact Name
+										is required.</span>
+							</div>
+							
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.email" name="email" type="email" maxlength="50" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)" placeholder="Email *" required />
+								 <span ng-show="forms.registerAgencyForm.email.$touched && forms.registerAgencyForm.email.$invalid" style="color:red;">Email
+										is required.</span>
+							</div>
+							
+							<div class="form-group row">
+								<input class="form-control md-whiteframe-2dp" ng-model="client.phone" only-numeric name="phone" type="phone"
+								 minlength="10" maxlength="10" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+								 placeholder="Mobile number *" required />
+								 <span ng-show="forms.registerAgencyForm.phone.$touched && forms.registerAgencyForm.phone.$invalid" style="color:red;">Mobile Number is required.</span>
+							</div>
+							
+							<div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+								<div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+							</div>
+							<div ng-if="clientErrorMessages.length >=0 && !forms.registerAgencyForm.$dirty" style="color : red">
+								{{clientErrorMessages}}
+							</div>
+							<md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+								<md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn register_btn" ng-disabled="forms.registerAgencyForm.$invalid"
+								 ng-click="registerAgency(agency)">Register</md-button>
+							</md-input-container>
+							
+						</form>
+					</md-content>
+				</div> -->
+			</md-content>			
+		</md-dialog-content>
+		<md-dialog-content>
+			<md-content layout-fill="layout-fill" class="sucessContent" ng-show="success">
+				<div layout="column" layout-align="center end">
+
+					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+						<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+					</md-button>
+				</div>
+				<div layout="column" layout-align="center center" layout-margin layout-padding>
+					<h1 class="md-title">A Mail As Been Sent To Your Registred Email</h1>
+					<div class="md-subhead">Go to Your Email and click link into verify...</div>
+
+
+				</div>
+			</md-content>
+		</md-dialog-content>
+	</md-dialog>
+</div>

@@ -1,0 +1,101 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page"> 
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+    <md-tabs md-dynamic-height class="padding_cmp">
+       <md-tab label="Find For Me">
+   <div class="">
+       <div layout="column">
+           <div class="table-responsive">
+               <table class="table">
+                   <thead class="text_color">
+                       <tr>
+                           <!-- <th style="width:10%;">Price</th>
+                           <th style="width:40%;">User Name</th>
+                           <th style="width:40%;">User Email</th>
+                           <th style="width:40%;">Action</th>
+                           <th class="">Date</th> -->
+                           <th style="width:10%;" class="adjust_space">User Query</th>
+                           <th style="width:10%;" class="adjust_space">Budget</th>
+                           <!-- <th>Comments</th> -->
+                           <th class="adjust_space">Campaign Name
+                            <span class="d-inline" ng-class="'campaign_name' == upArrowColour && sortType == 'Asccrf'?'highlight': 'nonhighlight'" ng-click='sortAsccrf("campaign_name","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'campaign_name' == downArrowColour && sortType == 'Dsccrf'?'highlight': 'nonhighlight'" ng-click='sortDsccrf("campaign_name","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+						   <th class="adjust_space">Campaign ID
+                            <span class="d-inline" ng-class="'campaign_cid' == upArrowColour && sortType == 'Asccrf'?'highlight': 'nonhighlight'" ng-click='sortAsccrf("campaign_cid","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'campaign_cid' == downArrowColour && sortType == 'Dsccrf'?'highlight': 'nonhighlight'" ng-click='sortDsccrf("campaign_cid","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+						   <th class="adjust_space">User Name
+                            <span class="d-inline" ng-class="'user_name' == upArrowColour && sortType == 'Asccrf'?'highlight': 'nonhighlight'" ng-click='sortAsccrf("user_name","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'user_name' == downArrowColour && sortType == 'Dsccrf'?'highlight': 'nonhighlight'" ng-click='sortDsccrf("user_name","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+                           <th class="adjust_space">User Email
+                            <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Asccrf'?'highlight': 'nonhighlight'" ng-click='sortAsccrf("email","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dsccrf'?'highlight': 'nonhighlight'" ng-click='sortDsccrf("email","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+						   <th class="adjust_space">Action</th>
+                           <!-- <th>Action</th> -->
+                           <th class="adjust_space">Date Entered
+                            <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asccrf'?'highlight': 'nonhighlight'" ng-click='sortAsccrf("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsccrf'?'highlight': 'nonhighlight'" ng-click='sortDsccrf("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                           </th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="Find in findData | limitTo:limit">
+                         <td class="table_vertical adjust_space">{{Find.user_query}}</td>
+                         <td class="table_vertical adjust_space">{{Find.budget_rfp}}</td>
+                         <td class="table_vertical adjust_space">{{Find.campaign_name}}</td>
+                         <td class="table_vertical adjust_space">{{Find.campaign_cid}}</td>
+                         <!-- <td class="table_vertical">{{Find.loggedinUser.firstName | capitalize}}</td>
+                         <td class="table_vertical">{{Find.loggedinUser.email | capitalize}}</td> -->
+                         <!-- <td class="table_vertical icon_res">
+                           <a style="cursor:pointer;" ng-click="showCampaignDetails($event, Find)">
+                             <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                               <i class="material-icons">remove_red_eye</i>
+                             </md-icon>
+                           </a>
+                         </td> -->
+                         <td class="table_vertical adjust_space">{{Find.user_name}}</td>
+                         <td class="table_vertical adjust_space">{{Find.email}}</td>
+						 <td class="table_vertical icon_res">
+							<a style="cursor:pointer;" ng-click="showCampaignDetails($event, Find)" ng-hide="Find.campaign_cid == null">
+							  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+								<i class="material-icons" ng-if="Find.campaign_cid !== ''">remove_red_eye</i>
+							  </md-icon>
+							</a>
+						 </td>
+                         <td class="table_vertical adjust_space">{{Find.updated_at | dateFormat}}</td> 
+                       </tr>
+                     </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+   </div>
+       </md-tab>
+     </md-tabs>
+     <style>
+      .highlight {
+          color: black;
+      }
+  .nonhighlight{
+      color: #808080c2;
+  }
+  
+  </style>

@@ -1,0 +1,160 @@
+<style>
+  .chat-container {
+    background-color: #FFFFFF;
+    width: auto;
+    height: auto;
+    
+  }
+
+  .chat-header {
+    /* border-bottom: 1px solid black; */
+    background-color: transparent !important;
+    min-height: 37px;
+  }
+
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(240, 230, 230);
+  }
+
+  .close:hover {
+    color: rgb(244, 149, 149);
+  }
+
+  .product-dropdown {
+    background: #44596D;
+    font-size: 18px;
+    display: flex;
+  }
+
+  .product-dropdown select {
+    border-radius: 10px;
+    margin-top: 5px;
+    border: none;
+  }
+
+  .chat-window {
+    color: white;
+    padding: 20px 30px;
+  }
+
+  .message {
+    background-color: #FFFFFF;
+    padding: 10px !important;
+    color: black;
+    width: fit-content;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .user_message {
+    margin-left: auto;
+    background-color: #D9FDD3;
+    color: black;
+  }
+
+  .user-name {
+    color: #69D2F5;
+  }
+
+  .time {
+    margin-right: 50px;
+  }
+
+  .time-user {
+    margin-left: 50px!important;
+    margin-right: 0;
+  }
+
+
+  .input-container {
+    min-width: 30px;
+    min-height: 40px;
+    padding: 0;
+    position: relative;
+    bottom: 0;
+  }
+
+  .footer {
+    display: flex;
+  }
+
+  .footer input {
+    flex: 1;
+    height: 40px;
+    width: 344px;
+    font-size: 16px;
+  }
+
+  .footer button {
+    width: 100px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: dodgerblue;
+    color: white;
+    cursor: pointer;
+  }
+
+  .send-btn {
+    cursor: not-allowed !important;
+    background: gray !important;
+  }
+ 
+</style>
+<md-dialog class="chat-container">
+  <div class="p-4">
+  <md-toolbar class="chat-header">
+   
+    <!-- <a ng-click="closeDialog()" class="close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+   </a> -->
+   <md-icon class="md-default-theme" ng-click="closeDialog()">
+    <i class="material-icons">close</i>
+  </md-icon>
+
+  <h4>Chat</h4>
+   
+  </md-toolbar>
+  <div class="product-dropdown product_height">
+    <div class="chat_prod">
+      <label style="color: white;"><p>Product</p></label>
+      <select ng-model="selectedProductId" ng-options="siteNo for siteNo in uniqueProducts">
+        <option value="" disabled selected><p>Select Product</p></option>
+      </select>
+    </div>
+    <div ng-show="currentUser == 'admin'">
+      <label style="color: white; margin-left: 15px;">User Type</label>
+      <select ng-model="selectedUser">
+        <option value="" disabled selected>Select User</option>
+        <option value="buyer">Buyer</option>
+        <option value="owner">Seller</option>
+      </select>
+    </div>
+  </div>
+  <md-dialog-content class="chat-window" id="chatbox">  
+    <div ng-repeat="item in messageData" class="message"
+      ng-class="{'user_message': item.user_type_sender == currentUser}">
+      <span class="user-name">{{item.user_type_sender | capitalize}} ({{item.product_siteNo}})</span><br>
+      <p>{{item.message}}</p>
+      <span class="time" ng-class="{'time-user': item.user_type_sender == currentUser}">{{item.created_at | date:'medium'}}</span>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions class="input-container">
+    <div class="footer">
+      <input type="text" class="send_background" placeholder="Type your message here" ng-model="message" ng-keypress="sendMessageOnEnter($event)"
+        ng-disabled="!selectedProductId || (currentUser == 'admin' && !selectedUser)" maxlength="100">
+      <button ng-click="sendMessage()"
+        ng-disabled="!selectedProductId || !message  || (currentUser == 'admin' && !selectedUser) "
+        ng-class="{'send-btn': !message || !selectedProductId || (currentUser == 'admin' && !selectedUser)}">Send
+        &#8811;</button>
+    </div>
+  </md-dialog-actions>
+</div>
+</md-dialog>

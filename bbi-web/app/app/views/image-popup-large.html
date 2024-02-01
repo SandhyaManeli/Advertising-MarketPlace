@@ -1,0 +1,350 @@
+<style>
+	.cont-im {
+		position: relative;
+		display: flex;
+		margin: 0 auto;
+	}
+	.cont-im p{
+		position: absolute;
+		margin-top: 25%;
+		margin-left: 25%;
+        background: black;
+ color: white;
+ /* margin-bottom: 5px; */
+ font-family: sans-serif;
+ opacity: 0;
+ visibility: hidden;
+ -webkit-transition: visibility 0s, opacity 0.5s linear; 
+ transition: visibility 0s, opacity 0.5s linear;
+	}
+
+	.cont-im:hover{
+ cursor: pointer;
+}
+
+.cont-im:hover p{
+ width: 200px;
+ padding: 8px 15px;
+ font-size: 20px;
+ visibility: visible;
+ opacity: 0.7; 
+}
+@media screen and (max-width: 575px) and (min-width: 320px)
+       {
+		#productImage{
+			top: 5rem;
+        }
+      }
+</style>
+<md-dialog flex="50" flex-lg="50" flex-md="60" flex-xs="100" flex-sm="70" class="pt-4 pb-4 pl-4 pr-4" id="productImage"
+	style="border-radius: 0; max-width: 80% !important; position: fixed;" ng-class="{'layout-fill':mdMedia('xs')  }">
+	<md-dialog-content>
+		<div class="pop_close_btn">
+			<button class="md-icon-button product_closebtn" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+				<i class="fa fa-times" aria-hidden="true"></i>
+			</button>
+		</div>
+		<!-- <div id="productImage" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+			  <div class="carousel-item active">
+				<img ng-src="{{img_src_0}}" alt="product image"  style="width:100%;height:500px;padding: 10px 10px;">
+			  </div>
+			</div>		  
+		</div> -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6" style="border-right: 1px solid #BC2535;">
+					<h2 class="pb-4">Product Details</h2>
+					<div class="form-group for_scroll row">	
+						<label class="col-md-6 control-label" for="name"><b>Title</b></label>
+						<div class="col-md-5">
+							<p class="">: <b>{{specDetails.title}} </b></p>
+						</div>	
+						<label class="col-md-6 control-label" for="name"><b>AMP Product</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.siteNo}} </p>
+						</div>				
+						<label class="col-md-6 control-label" for="name"><b>Type</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.type}}</p>
+						</div>
+						
+						
+						<label class="col-md-6 control-label" for="name"><b>Address 1</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.address}}</p>
+						</div>
+						
+						<!--<label class="col-md-6 control-label" for="name"><b>Land
+								Mark</b></label>-->
+						<label class="col-md-6 control-label" for="name"><b>Address 2</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.city}},&nbsp; {{specDetails.state}},
+								&nbsp;{{specDetails.country_name}} &nbsp;{{specDetails.zipcode}}</p>
+						</div>
+						
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Static' || specDetails.type == 'Digital' || specDetails.type == 'Digital/Static'"><b>Height</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Static' || specDetails.type == 'Digital' || specDetails.type == 'Digital/Static'">
+							<p class="">: {{specDetails.height}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Length</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.length}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Static' || specDetails.type == 'Digital' || specDetails.type == 'Digital/Static'"><b>Width</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Static' || specDetails.type == 'Digital' || specDetails.type == 'Digital/Static'">
+							<p class="">: {{specDetails.width}}</p>
+						</div>
+						<!-- <label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Cost Per Point</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.costperpoint}}</p>
+						</div> -->
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type != 'Media'"><b>Panel Size</b></label>
+						<div class="col-md-5" ng-if="specDetails.type != 'Media'">
+							<p class="">: {{specDetails.panelSize}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Minimum Days</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.minimumdays}}</p>
+						</div>					
+						<label class="col-md-6 control-label" for="name"><b>Audited</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.audited}}</p>
+						</div>
+						<!-- <label class="col-md-6 control-label" for="name"><b>Vendor</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.vendor}}</p>
+						</div> -->
+						<label class="col-md-6 control-label" for="name"><b>Seller Id</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.sellerId}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>UnitQty</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.unitQty}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Media HHI</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.mediahhi}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>4-week Price Net Cost</b></label>
+						<div class="col-md-5">
+							<p class="">: <span>$</span>{{specDetails.rateCard || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Install Cost</b></label>
+						<div class="col-md-5">
+							<p class="">: <span>$</span>{{specDetails.installCost || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b> # of 4-week periods</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.weekPeriod || '0' | number : 2}}</p>
+						</div>
+						<!-- <label class="col-md-6 control-label" for="name"><b>4-week Negotiated Net Cost</b></label>
+						<div class="col-md-5">
+							<p class="">:<span>$</span>{{specDetails.negotiatedCost || '0' | number : 2}}</p>
+						</div> -->
+						<label class="col-md-6 control-label" for="name"><b>Production Cost</b></label>
+						<div class="col-md-5">
+							<p class="">: <span>$</span>{{specDetails.productioncost || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Tax Percentage (%)</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.tax_percentage || '0'}}%</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>AMP Bills</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.billing}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>AMP Services</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.servicing}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Network</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.network}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>National/Local</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.nationloc}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Fixed/variable</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.fix}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Genre</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.genre}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Day Part</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.daypart}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Impression 18 - 49
+						</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.firstImpression || '0' | number : 0}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>CPM A 18 - 49</b></label>
+						<div class="col-md-5">
+							<p class="">: ${{specDetails.firstcpm || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Impression 18 - Plus</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.secondImpression || '0' | number : 0}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>CPM A 18 - Plus</b></label>
+						<div class="col-md-5">
+							<p class="">: ${{specDetails.cpm || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Impression 25 - 54</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.thirdImpression || '0' | number : 0}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>CPM A 25 - 54</b></label>
+						<div class="col-md-5">
+							<p class="">: ${{specDetails.thirdcpm || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Impression (HA25 - HA54)</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.forthImpression || '0' | number : 0}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>CPM H 25 - 54</b></label>
+						<div class="col-md-5">
+							<p class="">: ${{specDetails.forthcpm || '0' | number : 2}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Product
+							Direction</b></label>
+					    <div class="col-md-5">
+						    <p class="">: {{specDetails.imgdirection}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Cancellation Policy</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.cancellation_policy}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Payment Terms</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.cancellation_terms}}</p>
+						</div>
+						<!-- <label class="col-md-4 control-label" for="name"><b>Notes</b></label> -->
+						<label class="col-md-6 control-label" for="name"><b>Restrictions</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.notes}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Description</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.description}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type != 'Media'"><b>Facing</b></label>
+						<div class="col-md-5" ng-if="specDetails.type != 'Media'">
+							<p class="">: {{specDetails.direction}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Latitude</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.lat}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Longitude</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.lng}}</p>
+						</div>
+						<!-- <label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Reach</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.reach}}</p>
+						</div> -->
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Ad Type</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.placement}}</p>
+						</div>		
+						
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Digital' || specDetails.type == 'Media'"><b>Spot Length</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Digital' || specDetails.type == 'Media'">
+							<p class="">: {{specDetails.spotLength}}</p>	
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type== 'Digital/Static'"><b>Flip Length</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Digital/Static'">
+							<p class="">: {{specDetails.fliplength}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Digital/Static'"><b>Loop Length</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Digital/Static'">
+							<p class="">: {{specDetails.ageloopLength}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Digital'"><b>Loop Length</b></label>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Break/Loop Length</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Digital' || specDetails.type == 'Media'">
+							<p class="">: {{specDetails.ageloopLength}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Static Motion</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.staticMotion}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Sound</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.sound}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Medium</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.medium}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>Product</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.product_newMedia}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Media'"><b>File Type</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Media'">
+							<p class="">: {{specDetails.file_type}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Location Description</b></label>
+						<div class="col-md-5">
+							<p class="">: {{specDetails.locationDesc}}</p>
+						</div>
+						<!-- <label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Static'"><b>Light</b></label> -->
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type == 'Static'"><b>Illumination</b></label>
+						<div class="col-md-5" ng-if="specDetails.type == 'Static'">
+							<p class="">: {{specDetails.lighting}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name" ng-if="specDetails.type != 'Media'"><b>Comments</b></label>
+						<div class="col-md-5" ng-if="specDetails.type != 'Media'">
+							<p class="">: {{specDetails.Comments}}</p>
+						</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						<!-- <label class="col-md-6 control-label" for="name"><b>Sound</b></label>
+						<div class="col-md-5">
+							<p class="">:{{specDetails.sound}}</p>
+						</div> -->
+						<!-- <label class="col-md-6 control-label" for="name"><b>Loop Length</b></label>
+						<div class="col-md-5">
+							<p class="">:{{specDetails.looplength || '0'}}</p>
+						</div>
+						<label class="col-md-6 control-label" for="name"><b>Flip Length</b></label>
+						<div class="col-md-5">
+							<p class="">:{{specDetails.fliplength || '0'}}</p>
+						</div>
+						
+					
+						<label class="col-md-6 control-label" for="name"><b>Vendor</b></label>
+						<div class="col-md-5">
+							<p class="">:{{specDetails.vendor.firstName}}{{specDetails.vendor.lastName}}</p>
+						</div> -->
+					</div>
+				</div>
+				<div class="col-sm-6"  ng-controller="ImageCtrl" ng-click="showProductImage($event, specDetails)">
+					<!-- <div ng-controller="GmapCtrl"> -->
+					<div class="cont-im">
+						<img ng-src="{{ getImageUrl(specDetails.image) }}" alt="product image" style="width: 100%;
+					/* height: 92%; */
+					padding: 20px 0px;
+					margin-top: 33px;">
+					<p>Click The Image to Enlrge</p>
+					</div>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</md-dialog-content>
+</md-dialog>

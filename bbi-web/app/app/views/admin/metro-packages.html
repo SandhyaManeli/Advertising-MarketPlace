@@ -1,0 +1,122 @@
+<div layout="column" layout-fill="layout-fill">
+
+	<form role="form" style="margin: 1em"   name="metroPackage">
+		<input type="hidden" ng-model="package.id" />
+		<div class="form-group row">
+				<label for="name" class="col-sm-2 col-form-label">Name</label>
+				<div class="col-sm-5">
+					<input ng-model="package.name" type="text" name="name" placeholder="Name" class="form-control" maxlength="30" required="required" />
+					<div ng-messages="metroPackage.name.$error" ng-if="!metroPackage.name.$untouched" style="color: red">
+						<p ng-message="required"> Name is required</p>
+					  </div>
+				</div>
+			</div>
+		<div class="form-group row">
+			<label for="area" class="col-sm-2 col-form-label">Select Corridor</label>
+			<div class="col-sm-5">
+					<select name="corridor" class="form-control" id="corridor" ng-model="package.corridor_id" ng-options="corr.id as corr.name for corr in metroCorridorList" required="required" placeholder="Select Corridor" >
+						
+					</select>
+					
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="productType" class="col-sm-2 col-form-label">Format Type</label>
+			<div class="col-sm-5">
+				<select name="format" class="form-control" id="format" ng-model="package.format_id" ng-options="format.id as format.name for format in formatList" required="required" placeholder="Select Format">
+					
+				</select>
+				
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="max_trains" class="col-sm-2 col-form-label">Max. Trains</label>
+			<div class="col-sm-5">
+				<input type="number" class="form-control" ng-model="package.max_trains"  required="required" placeholder="Select Trains" >
+
+				<div ng-messages="metroPackage.max_trains.$error" ng-if="!metroPackage.max_trains.$untouched" style="color: red">
+					<p ng-message="required"> Max trains is required</p>
+				  </div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="price" class="col-sm-2 col-form-label">Price</label>
+			<div class="col-sm-5">
+
+				<input ng-model="package.price" type="number"  name="price" placeholder="Price" class="form-control"  min="0" required="required" />
+				<div ng-messages="metroPackage.price.$error" ng-if="!metroPackage.price.$untouched" style="color: red">
+					<p ng-message="required"> Price is required</p>
+				  </div>
+			</div>
+		</div>
+		<div class="form-group row">
+				<label for="price" class="col-sm-2 col-form-label">Description</label>
+				<div class="col-sm-5">
+					<textarea ng-model="package.description"  class="form-control" required="required">{{package.description}}</textarea>
+					<div ng-messages="metroPackage.description.$error" ng-if="!metroPackage.description.$untouched" style="color: red">
+						<p ng-message="required"> Description is required</p>
+					</div>
+				</div>
+		</div>
+		<div class="serverErrors" ng-show="stateErrors && !addPackageErrors.length == 0">
+			<ul>
+				<li ng-repeat="error in addPackageErrors">
+					{{error}}
+				</li>
+			</ul>
+		</div>
+		<div class="form-group" style="margin:10px 0">
+			<label class="col-md-2 control-label"></label>
+			<!-- <input class="btn btn-primary" ng-click="savePackage(package)" value="Save" type="button" ng-disabled="metroPackage.$invalid"> -->
+			<md-button class="md-raised all_button" ng-click="savePackage(package)" ng-disabled="metroPackage.$invalid">Save</md-button>
+			<span></span>
+			<!-- <input class="btn btn-default" value="Cancel" type="reset" ng-click="package = {};"> -->
+			<md-button class="md-raised Upload_font" ng-click="package = {};">Cancel</md-button>
+		</div>
+	</form>
+	<!-- tables grid html start-->
+	<div style="margin: 1em;">
+		<div class="table-responsive">
+			<table class="table table-hover call_center">
+				<thead>
+					<tr class="text_color">
+						<th>Name</th>
+						<th>Corridor</th>
+						<th>Format</th>
+						<th>Price</th>
+						<th>Max. Trains</th>
+						<th>Description</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="metroPackage in metroPackageList">
+						<td class="table_vertical">{{metroPackage.name}}</td>
+						<td class="table_vertical">{{metroPackage.corridor}}</td>
+						<td class="table_vertical">{{metroPackage.format}}</td>
+						<td class="table_vertical">{{metroPackage.price}}</td>
+						<td class="table_vertical">{{metroPackage.max_trains}}</td>
+						<td class="table_vertical">{{metroPackage.description}}</td>
+						<td class="table_vertical">
+							<span>
+								<a style="cursor:pointer;" ng-click="editPackage(metroPackage)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+							<span>
+								<a style="cursor:pointer;" ng-click="deletePackage(metroPackage.id)">
+									<md-icon>
+										<i class="material-icons">delete</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- tables grid html end-->
+</div>

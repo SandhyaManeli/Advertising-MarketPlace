@@ -1,0 +1,1090 @@
+<style>
+    /* .gray-blocked {
+      background: #ddd;
+    } */
+    .red-blocked {
+        color: #f00 !important;
+        font-weight: bold;
+    }
+</style>
+<md-dialog flex-xs="100" flex="55" flex-md="70" flex-sm="80">
+    <md-dialog-content>
+        <md-content class="add_productbgcol">
+            <div layout="row" layout-margin>
+                <h4>Edit Product Details</h4>
+                <div flex></div>
+                <md-button class="md-icon-button md-button" type="button" ng-click="closeMdDialog()">
+                    <i class="material-icons">close</i>
+                    <div class="md-ripple-container"></div>
+                </md-button>
+            </div>
+            <!-- <div layout="column" layout-align="center center">
+            </div> -->
+            <div class="col-md-12">
+                <form name="hordinglistEditform" novalidate="novalidate" style="position:relative;">
+                    <div class="col-md-12 mostly-customized-scrollbar">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Product Type <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                                    ng-model="adminProductEdit.type">
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">DMA <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <!-- <input type="text" class="form-control md-whiteframe-3dp" name="title" disabled
+                                ng-model="adminProductEdit.area_name"> -->
+                                <md-autocomplete md-min-length="3" md-selected-item="areaObj"
+                                    ng-blur="selectSearchedArea()" md-search-text="searchedArea"
+                                    md-items="item in searchableAreas(searchedArea)" md-item-text="item.city_name"
+                                    md-clear-button="true" style="min-width: 100% !important" name="Area"
+                                    md-menu-class="form-control md-whiteframe-3dp" required>
+                                    <md-item-template>
+                                        <span class="item-title">
+                                            <!-- <span> {{item.name}} </span> -->
+                                        </span>
+                                        <span class="item-metadata">
+                                            <span>
+                                                <strong>{{item.city_name}}</strong>
+                                            </span>
+                                            <span>
+                                                <strong>{{item.state_name}}</strong>
+                                            </span>
+                                            <span>
+                                                <!-- <strong>{{item.country_name}}</strong> -->
+                                            </span>
+                                        </span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No matches found.
+                                    </md-not-found>
+                                    <span style="color:red"
+                                        ng-show="hordinglistEditform.searchedArea.$dirty && hordinglistEditform.searchedArea.$invalid">
+                                        <span ng-show="hordinglistEditform.searchedArea.$error.required">Product Area is
+                                            required.</span>
+                                    </span>
+                                </md-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Upload Image<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group mb-2" style="width: 100%;">
+                                    <input type="file" class="form-control md-whiteframe-3dp p-1" ngf-select ng-if="!checked"
+                                        ng-model="files.image" name="imageFile" accept="image/*"
+                                        placeholder="Upload Product Image*" multiple>
+                                    <span class="input-group-addon md-whiteframe-3dp img_align"><i class="fa fa-picture-o"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <input type="checkbox" ng-model="checked"> <label> use default image</label>
+                                <div ng-messages="hordinglistEditform.imageFile.$error"
+                                    ng-if="hordinglistEditform.imageFile.$touched" style="color:red">
+                                    <div ng-message="required">File is required.</div>
+                                    <div ng-message="required" ng-if="files.image.length > 2">Select only 2 Images.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Product Title(Location)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="title"
+                                    ng-model="adminProductEdit.title" required>
+                                <span ng-messages="hordinglistEditform.title.$error" ng-if="hordinglistEditform.title.$touched"
+                                    style="color:red">
+                                    <span ng-message="required">Title required</span>
+                                </span>
+                            </div>
+                          
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Static' || adminProductEdit.type == 'Digital' || adminProductEdit.type == 'Digital/Static'">
+                                <label class="font-weight-bold for_required">Height<i class="fa fa-asterisk" aria-hidden="true"></i><span
+                                        ng-if="adminProductEdit.type != 'Static'"></span></label></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="height"
+                                    ng-model="adminProductEdit.height" required>
+                                <div ng-messages="hordinglistEditform.height.$error" ng-if="hordinglistEditform.height.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Height required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">Length<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="length" onkeypress="return isNumber(event)"
+                                    ng-model="adminProductEdit.length" required>
+                                <div ng-messages="hordinglistEditform.length.$error" ng-if="hordinglistEditform.length.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Length required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Static' || adminProductEdit.type == 'Digital' || adminProductEdit.type == 'Digital/Static'">
+                                <label class="font-weight-bold for_required" >Width<i class="fa fa-asterisk" aria-hidden="true"></i><span
+                                        ng-if="adminProductEdit.type != 'Static'"></span></label></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="width"
+                                    ng-model="adminProductEdit.width" required>
+                                <div ng-messages="hordinglistEditform.width.$error" ng-if="hordinglistEditform.width.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Width required</div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required" >Cost Per Point<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="CostPerPoint"
+                                    ng-model="adminProductEdit.costperpoint" only-numeric required>
+                                <div ng-messages="hordinglistEditform.costperpoint.$error" ng-if="hordinglistEditform.costperpoint.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Cost Per Point required</div>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Audited
+                                </label>
+                                <select ng-model="adminProductEdit.audited" name="audit"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.audit = product.audit || ''">
+                                    <option value="" disabled selected>Audited
+                                    </option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                                <!-- <div ng-messages="hordinglistEditform.audit.$error" ng-if="hordinglistEditform.audit.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Audited
+                                        required</div>
+                                </div> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Vendor</label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="vendor"
+                                    ng-model="VendorName" readonly>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Seller ID</label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="sellerID"
+                                    ng-model="adminProductEdit.sellerId" onkeypress="return alphaNumeric(event);"
+                                    >
+                                <!-- <div ng-messages="hordinglistEditform.sellerID.$error"
+                                    ng-if="hordinglistEditform.sellerID.$touched" style="color:red">
+                                    <div ng-message="required">Seller ID required</div>
+                                </div> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Median</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control md-whiteframe-3dp onlyNumComma" name="media"
+                                        ng-model="adminProductEdit.mediahhi" onkeypress="return isNumber(event)">
+                                </div>
+                                <!-- <div ng-messages="hordinglistEditform.media.$error" ng-if="hordinglistEditform.media.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Media HHI required</div>
+                                </div> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Unit Qty<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="unit"
+                                    ng-model="adminProductEdit.unitQty" onkeypress="return isNumber(event)" required>
+                                <div ng-messages="hordinglistEditform.unit.$error" ng-if="hordinglistEditform.unit.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Unit Qty required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                               <!--<label class="font-weight-bold">Stripe</label>-->
+                                <label class="font-weight-bold">AMP %</label>
+                                <input type="text"  class="form-control md-whiteframe-3dp" only-numeric id="numberbo" name="stripe_percent"
+                                    ng-model="adminProductEdit.stripe_percent">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold" for="username">Description (Maximum of 500 characters)</label>
+                                <textarea class="remove_line" id="w3mission" rows="5"
+                                    ng-model="adminProductEdit.description" cols="92" maxlength="527"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-2 col-xl-2 col-md-6 col-sm-12 col-xs-12">
+                                  <label class="font-weight-bold" for="unitquantity">Unit Quantity</label>
+                                <input type="text" class="form-control md-whiteframe-3dp" id="unitquantity"
+                                    name="unitquantity" value="1" readonly>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold adjust_space for_required">4-week Price Net Cost<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control md-whiteframe-3dp onlyNumComma"
+                                        name="ratecard" ng-model="adminProductEdit.rateCard" onkeypress="return isNumber(event)" required>
+                                </div>
+                                <div ng-messages="hordinglistEditform.ratecard.$error"
+                                    ng-if="hordinglistEditform.ratecard.$touched" style="color:red">
+                                    <div ng-message="required">4-week Price Net Cost</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-xl-4 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold adjust_space for_required">4-week Negotiated Net Cost<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control md-whiteframe-3dp onlyNumComma" name="negotiated"
+                                        ng-model="adminProductEdit.negotiatedCost" onkeypress="return isNumber(event)" required>
+                                </div>
+                                <div ng-messages="hordinglistEditform.negotiated.$error"
+                                    ng-if="hordinglistEditform.negotiated.$touched" style="color:red">
+                                    <div ng-message="required">4-week Negotiated Net Cost</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Tax %</label>
+                                    <input type="text"  only-numeric id="numberbox" class="form-control md-whiteframe-3dp" name="tax_percentage"
+                                        ng-model="adminProductEdit.tax_percentage" ng-keydown="percantagesHandling()" ng-change="percantageChangeHandling()">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <!-- <label class="font-weight-bold adjust_space">Minimum Days<i class="fa fa-asterisk" aria-hidden="true"></i></label> -->
+                                <label class="font-weight-bold adjust_space for_required">Minimum Days<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <!--<span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>-->
+                                    <input type="text" placeholder="Minimum Days" class="form-control md-whiteframe-3dp onlyNumComma"
+                                        name="MinimumDays" ng-model="adminProductEdit.minimumdays" onkeypress="return isNumber(event)" required>
+                                </div>
+                                <div ng-messages="hordinglistEditform.MinimumDays.$error"
+                                    ng-if="hordinglistEditform.MinimumDays.$touched" style="color:red">
+                                    <div ng-message="required">Minimum Days</div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <label class="font-weight-bold" for="first day purchase">First day
+                                    available</label>
+                                <md-datepicker style="margin-left: -10px;"
+                                    ng-model="adminProductEdit.firstdayofpurchase" md-placeholder="MM/DD/YYYY"
+                                    name="firstDay" md-min-date="ctrl.minDate" md-max-date="ctrl.maxDate">
+                                </md-datepicker>
+                                <div ng-messages="hordinglistEditform.firstDay.$error">
+                                    <div ng-message="valid" style="color:red">Use a valid date format</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="font-weight-bold" for="last day purchase">Last day available</label>
+                                <md-datepicker style="margin-left: -10px;" ng-model="adminProductEdit.lastdayofpurchase"
+                                    md-placeholder="MM/DD/YYYY" name="lastDay" md-min-date="ctrl.minDate"
+                                    md-max-date="ctrl.maxDate"></md-datepicker>
+                                <div ng-messages="hordinglistEditform.lastDay.$error">
+                                    <div ng-message="valid" style="color:red">Use a valid date format</div>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">First Day - Last Day Dates<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <input date-range-picker ng-model="adminProductEdit.dates"
+                                        class="form-control md-whiteframe-3dp date-picker" custom-options="customOptions" placeholder="Product date"
+                                        type="text" name="date" readonly options="rqstHrdngsOpts"
+                                        id="booking_dates_picker" ng-disabled="!areaObj"/>
+                                    <a class="input-group-addon md-whiteframe-3dp"
+                                        ng-click="getProductUnavailableDates(product,$event);"
+                                        style="padding: 4px 16px;">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Fixed vs Variable
+                                </label>
+                                <select ng-model="adminProductEdit.fix" name="fix"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.fix ='Variable'">
+                                   
+                                    <option value="Fixed">Fixed</option>
+                                    <option value="Variable" selected>Variable</option>
+                                </select>
+                                <!-- <div ng-messages="hordinglistEditform.fix.$error"
+                                    ng-if="hordinglistEditform.fix.$touched" style="color:red">
+                                    <div ng-message="required">Fixed/Variable
+                                        required</div>
+                                </div> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold"># of 4-week periods</label>
+                                <!-- <input type="text" class="form-control md-whiteframe-3dp" name="weekperiod"
+                                    ng-model="adminProductEdit.weekPeriod" only-numbers-and-decimal-point-input
+                                    required>
+                                <div ng-messages="hordinglistEditform.weekperiod.$error"
+                                    ng-if="hordinglistEditform.weekperiod.$touched" style="color:red">
+                                    <div ng-message="required"># of 4-week periods required</div>
+                                </div> -->
+                                <span  class="form-control md-whiteframe-3dp"  name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{noOffourweeks==0?adminProductEdit.weekPeriod:noOffourweeks | number:2 || '0'}}</span>
+                                <!-- <input type="text" class="form-control md-whiteframe-3dp" name="weekperiod" ng-if="adminProductEdit.weekPeriod"
+                                ng-model="adminProductEdit.weekPeriod" readonly> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Production Cost<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control md-whiteframe-3dp onlyNumComma" name="prod"
+                                        ng-model="adminProductEdit.productioncost" onkeypress="return isNumber(event)"  required>
+                                </div>
+                                <div ng-messages="hordinglistEditform.prod.$error" ng-if="hordinglistEditform.prod.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Production Cost required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required" for="username">Cancellation Policy<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <textarea class="remove_line" id="w3mission"
+                                    ng-model="adminProductEdit.cancellation_policy" rows="5" cols="42" maxlength="200" name="cancellation_policy" required>
+                                </textarea>
+                                <div ng-messages="hordinglistEditform.cancellation_policy.$error" ng-if="hordinglistEditform.cancellation_policy.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Cancellation Policy</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required" for="username">Payment Terms<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <textarea class="remove_line" id="w3mission"
+                                    ng-model="adminProductEdit.cancellation_terms" rows="5" cols="42" maxlength="200" name="cancellation_terms" required>
+                                </textarea>
+                                <div ng-messages="hordinglistEditform.cancellation_terms.$error" ng-if="hordinglistEditform.cancellation_terms.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Payment Terms</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Install Cost<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding: 7px 4px;">
+                                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control md-whiteframe-3dp onlyNumComma" name="cost"
+                                        ng-model="adminProductEdit.installCost" onkeypress="return isNumber(event)" required>
+                                </div>
+                                <div ng-messages="hordinglistEditform.cost.$error" ng-if="hordinglistEditform.cost.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Install Cost</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group row pt-3">
+                                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label class="font-weight-bold for_required">AMP Bills <i class="fa fa-asterisk" aria-hidden="true"></i>&nbsp;&nbsp;<input type="radio" ng-model="adminProductEdit.billing" ng-checked="adminProductEdit.billingYes  == 'yes'"  name="billing" value="yes"> Yes  <input type="radio" ng-model="adminProductEdit.billing" ng-checked="adminProductEdit.billingNo  == 'no'" name="billing" value="no">&nbsp;No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label class="font-weight-bold for_required">AMP Services<i class="fa fa-asterisk" aria-hidden="true"></i> &nbsp;&nbsp;<input type="radio" ng-model="adminProductEdit.servicing" ng-checked="adminProductEdit.servicingYes  == 'yes'" name="servicing" value="yes"> Yes  <input type="radio" ng-model="adminProductEdit.servicing" ng-checked="adminProductEdit.servicingNo  == 'no'" name="servicing" value="no">&nbsp;No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Location Description<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="location&Desc"
+                                    ng-model="adminProductEdit.locationDesc" required>
+                                <div ng-messages="hordinglistEditform.location&Desc.$error"
+                                    ng-if="hordinglistEditform.location&Desc.$touched" style="color:red">
+                                    <div ng-message="required">Location and Description required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Product Direction<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                               <select ng-model="adminProductEdit.imgdirection" name="direction"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.direction = product.direction || ''"
+                                    placeholder="Has direction?" required>
+                                    <option value="" disabled selected>Select</option>
+                                    <option>Left Hand Read</option>
+                                <option>Right Hand Read</option>
+                                <option>Not Applicable</option>
+                                </select>                                
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">Network<i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </label>
+                                <select ng-model="adminProductEdit.network" name="audit"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.network = product.network || ''" required>
+                                    <option value="" disabled selected>Network
+                                    </option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.network.$error" ng-if="hordinglistEditform.network.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Network
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">National/Local<i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </label>
+                                <select ng-model="adminProductEdit.nationloc" name="nationloc"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.nationloc = product.nationloc || ''" required>
+                                    <option value="" disabled selected>National/Local
+                                    </option>
+                                    <option>National</option>
+                                    <option>Local</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.nationloc.$error" ng-if="hordinglistEditform.nationloc.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">National/Local
+                                        required</div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">Reach<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="reach"
+                                    ng-model="adminProductEdit.reach" only-numeric required>
+                                <div ng-messages="hordinglistEditform.reach.$error" ng-if="hordinglistEditform.reach.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Reach is required.</div>
+                                </div>
+                            </div> -->
+                            
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">Ad Type<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="placement"
+                                    ng-model="adminProductEdit.placement" required>
+                                <div ng-messages="hordinglistEditform.placement.$error"
+                                    ng-if="hordinglistEditform.placement.$touched" style="color:red">
+                                    <div ng-message="required">Placement required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type === 'Media'">
+                                <label class="font-weight-bold for_required">Genre<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="placement"
+                                    ng-model="adminProductEdit.genre" required>
+                                <div ng-messages="hordinglistEditform.genre.$error"
+                                    ng-if="hordinglistEditform.genre.$touched" style="color:red">
+                                    <div ng-message="required">Genre required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type === 'Media'">
+                                <label class="font-weight-bold for_required">Day Part<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="placement"
+                                    ng-model="adminProductEdit.daypart" required>
+                                <div ng-messages="hordinglistEditform.daypart.$error"
+                                    ng-if="hordinglistEditform.daypart.$touched" style="color:red">
+                                    <div ng-message="required">Day Part required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">File type<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <select ng-model="adminProductEdit.file_type" name="filetype"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="adminProductEdit.fileType = adminProductEdit.fileType || ''"
+                                    placeholder="Has fileType?" required>
+                                    <option value="" disabled selected>Select
+                                    </option>
+                                    <option>MP3</option>
+                                    <option>MP4</option>
+                                    <option>Jpeg</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.filetype.$error"
+                                    ng-if="hordinglistEditform.filetype.$touched" style="color:red">
+                                    <div ng-message="required">File Type required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required" for="username">Restrictions<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <textarea class="remove_line" id="w3mission" rows="5" ng-model="adminProductEdit.notes" name="notes"
+                                    cols="42" maxlength="200" required
+                                    ></textarea>
+                                    <div ng-messages="hordinglistEditform.notes.$error"
+                                    ng-if="hordinglistEditform.notes.$touched" style="color:red">
+                                    <div ng-message="required">Restrictions required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group row">
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type != 'Media'">
+                                        <label class="font-weight-bold for_required">Facing<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                        <input ng-model="adminProductEdit.direction" class="form-control md-whiteframe-3dp"
+                                            type="text" name="Face" required />
+                                        <div ng-messages="hordinglistEditform.Face.$error" ng-if="hordinglistEditform.Face.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Direction is required.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type === 'Static'">
+                                        <!--<label class="font-weight-bold for_required">Lit <i class="fa fa-asterisk" aria-hidden="true"></i></label>-->
+                                        <label class="font-weight-bold for_required">Illumination <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                        <select ng-model="adminProductEdit.lighting" name="light"
+                                            class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                            data-md-container-class="selectdemoSelectHeader"
+                                            ng-init="product.lighting = product.lighting || ''" placeholder="Has lighting?"
+                                            required>
+                                            <!--<option value="" disabled selected>Light</option>-->
+                                            <option value="" disabled selected>Illumination</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                        <div ng-messages="hordinglistEditform.light.$error" ng-if="hordinglistEditform.light.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Light required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row pt-2">
+                                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12" ng-if="adminProductEdit.type !== 'Media'">
+                                        <label class="font-weight-bold">Comments</label>
+                                        <input type="text" class="form-control md-whiteframe-3dp" name="desc"
+                                            ng-model="adminProductEdit.Comments">
+                                        <!-- <div ng-messages="hordinglistEditform.desc.$error" ng-if="hordinglistEditform.desc.$touched"
+                                            style="color:red">
+                                            <div ng-message="required">Comments required</div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0"
+                        ng-if="adminProductEdit.type == 'Digital' || adminProductEdit.type == 'Media'">
+                            <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0px;">
+                                <label class="font-weight-bold for_required">Spot/Loop Length(:SL/:LL)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-group row"  ng-if="adminProductEdit.type == 'Digital' || adminProductEdit.type == 'Media'">
+                                <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                    <label class="font-weight-bold for_required">Spot Length :<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="spotLength"
+                                        ng-model="adminProductEdit.spotLength" placeholder="in seconds"
+                                        onkeypress="return onlyNumbersWithColon(event);" required>
+                                    <div ng-messages="hordinglistEditform.spotLength.$error"
+                                        ng-if="hordinglistEditform.spotLength.$touched" style="color:red">
+                                        <div ng-message="required">Spot Length required</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Digital' || adminProductEdit.type == 'Media'">
+                                    <label class="font-weight-bold for_required" ng-if="adminProductEdit.type == 'Digital'">Loop Length :<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                            <label class="font-weight-bold for_required" ng-if="adminProductEdit.type == 'Media'">Break / Loop Length :<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="ageloopLength"
+                                        ng-model="adminProductEdit.ageloopLength" placeholder="in seconds"
+                                        onkeypress="return onlyNumbersWithColon(event);" required>
+                                    <div ng-messages="hordinglistEditform.ageloopLength.$error"
+                                        ng-if="hordinglistEditform.ageloopLength.$touched" style="color:red">
+                                        <div ng-message="required">Loop Length required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row mb-0"
+                            ng-if="adminProductEdit.type === 'Digital/Static' && adminProductEdit.type != 'Static' && adminProductEdit.type != 'Digital' && adminProductEdit.type != 'New Age'">
+                            <div class="col-lg-4 col-xl-4 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0px;">
+                                <label class="font-weight-bold for_required">Flip/Loop Length(:FL/:LL)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                            </div>
+                        </div>
+                        <div class="form-group row"
+                            ng-if="adminProductEdit.type === 'Digital/Static' && adminProductEdit.type != 'Static' && adminProductEdit.type != 'Digital' && adminProductEdit.type != 'New Age'">
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Flip Length<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="flipLength"
+                                    ng-model="adminProductEdit.fliplength" placeholder="in seconds"
+                                    onkeypress="return onlyNumbersWithColon(event);" required>
+                                <div ng-messages="hordinglistEditform.flipLength.$error"
+                                    ng-if="hordinglistEditform.flipLength.$touched" style="color:red">
+                                    <div ng-message="required">Flip Length required</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Loop Length<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="ageloopLength"
+                                    ng-model="adminProductEdit.ageloopLength" placeholder="in seconds"
+                                    onkeypress="return onlyNumbersWithColon(event);" required>
+                                <div ng-messages="hordinglistEditform.ageloopLength.$error"
+                                    ng-if="hordinglistEditform.ageloopLength.$touched" style="color:red">
+                                    <div ng-message="required">Loop Length required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">
+                                    Static or Motion?<i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </label>
+                                <select ng-model="adminProductEdit.staticMotion" name="static&Motion"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.staticMotion = product.staticMotion || ''"
+                                    placeholder="Has staticMotion?" required>
+                                    <option value="" disabled selected>Select
+                                    </option>
+                                    <option>Static</option>
+                                    <option>Motion</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.static&Motion.$error"
+                                    ng-if="hordinglistEditform.static&Motion.$touched" style="color:red">
+                                    <div ng-message="required">Static or Motion?
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                <label class="font-weight-bold for_required">Sound<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <select ng-model="adminProductEdit.sound" name="sound"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.sound = product.sound || ''" placeholder="Has sound?" required>
+                                    <option value="" disabled selected>Select
+                                    </option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.sound.$error" ng-if="hordinglistEditform.sound.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Sound
+                                        required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-sm-4" style="padding-right: 0px;">
+                                <label class="font-weight-bold">Demographics</label>
+                            </div>
+                        </div>
+                        <div class="form-group row" data-ng-repeat="from in FromTo">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">From</label>
+                                <div class="input-group">
+                                    <input value="A18" class="form-control md-whiteframe-3dp" type="text" name="Fromage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">To</label>
+                                <div class="input-group">
+                                    <input value="A49" class="form-control md-whiteframe-3dp" type="text" name="Toage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Impressions(1 Week)</label>
+                                <div class="input-group">
+                                    <input ng-model="adminProductEdit.firstImpression"  onkeypress="return isNumber(event)"
+                                        class="form-control md-whiteframe-3dp" type="text" name="firstImpression"
+                                         />
+                                </div>
+                                <!-- <span ng-messages="hordinglistEditform.firstImpression.$error"
+                                    ng-if="hordinglistEditform.firstImpression.$touched" style="color:red">
+                                    <span ng-message="required">Impression required</span>
+                                </span> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label for="cpm" class="font-weight-bold">CPM</label>
+                                <div class="input-group">
+                                    <!-- <input value="cpm" ng-model="adminProductEdit.cpm1" class="form-control md-whiteframe-3dp" type="text"
+                                        name="cpm" /> -->
+                                        <span class="input-group-addon" style="padding: 7px 4px;">
+                                            <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                        </span>    
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays==0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{adminProductEdit.firstcpm | number:2 || "0"}}</span>
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays!=0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{(((adminProductEdit.rateCard/28)*totalnumDays)/((oneAdminProd))*1000) | number:2 || "0"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" data-ng-repeat="from in FromTo">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">From</label>
+                                <div class="input-group">
+                                    <input value="A18" class="form-control md-whiteframe-3dp" type="text" name="Fromage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">To</label>
+                                <div class="input-group">
+                                    <input value="Plus" class="form-control md-whiteframe-3dp" type="text" name="Toage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Impressions(1 Week) <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <div class="input-group">
+                                    <input ng-model="adminProductEdit.secondImpression"  onkeypress="return isNumber(event)"
+                                        class="form-control md-whiteframe-3dp" type="text" name="secondImpression"
+                                        required />
+                                </div>
+                                <span ng-messages="hordinglistEditform.secondImpression.$error"
+                                    ng-if="hordinglistEditform.secondImpression.$touched" style="color:red">
+                                    <span ng-message="required">Impression required</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label for="cpm" class="font-weight-bold">CPM</label>
+                                <div class="input-group">
+                                    <!-- <input value="cpm" ng-model="adminProductEdit.cpm" class="form-control md-whiteframe-3dp" type="text"
+                                        name="cpm" /> -->
+                                        <span class="input-group-addon" style="padding: 7px 4px;">
+                                            <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                        </span>  
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays==0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{adminProductEdit.cpm | number:2 || "0"}}</span>
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays!=0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{(((adminProductEdit.rateCard/28)*totalnumDays)/((oneAdminProd2))*1000) | number:2 || "0"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" data-ng-repeat="from in FromTo">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">From</label>
+                                <div class="input-group">
+                                    <input value="A25" class="form-control md-whiteframe-3dp" type="text" name="Fromage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">To</label>
+                                <div class="input-group">
+                                    <input value=" A54" class="form-control md-whiteframe-3dp" type="text" name="Toage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Impressions(1 Week)</label>
+                                <div class="input-group">
+                                    <input ng-model="adminProductEdit.thirdImpression"  onkeypress="return isNumber(event)"
+                                        class="form-control md-whiteframe-3dp" type="text" name="thirdImpression"
+                                         />
+                                </div>
+                                <!-- <span ng-messages="hordinglistEditform.thirdImpression.$error"
+                                    ng-if="hordinglistEditform.thirdImpression.$touched" style="color:red">
+                                    <span ng-message="required">Impression required</span>
+                                </span> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label for="cpm" class="font-weight-bold">CPM</label>
+                                <div class="input-group">
+                                    <!-- <input value="cpm" ng-model="adminProductEdit.cpm3" class="form-control md-whiteframe-3dp" type="text"
+                                        name="cpm" /> -->
+                                        <span class="input-group-addon" style="padding: 7px 4px;">
+                                            <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                        </span>  
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays==0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{adminProductEdit.thirdcpm | number:2 || "0"}}</span>
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays!=0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{(((adminProductEdit.rateCard/28)*totalnumDays)/((oneAdminProd3))*1000) | number:2 || "0"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">From</label>
+                                <div class="input-group">
+                                    <input value="HA25" class="form-control md-whiteframe-3dp" type="text"
+                                        name="Fromage" readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">To</label>
+                                <div class="input-group">
+                                    <input value="HA54" class="form-control md-whiteframe-3dp" type="text" name="Toage"
+                                        readonly />
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold">Impressions(1 Week)</label>
+                                <div class="input-group">
+                                    <input ng-model="adminProductEdit.forthImpression"  onkeypress="return isNumber(event)"
+                                        class="form-control md-whiteframe-3dp" type="text" name="forthImpression"
+                                         />
+                                </div>
+                                <!-- <span ng-show="adminProductEdit.forthImpression.$touched && adminProductEdit.forthImpression.$invalid" style="color:red">Install Cost required.</span> -->
+                                <!-- <span ng-messages="hordinglistEditform.forthImpression.$error"
+                                    ng-if="hordinglistEditform.forthImpression.$touched" style="color:red">
+                                    <span ng-message="required">Impression required</span>
+                                </span> -->
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label for="cpm" class="font-weight-bold">CPM</label>
+                                <div class="input-group">
+                                    <!-- <input value="cpm" ng-model="adminProductEdit.cpm4" class="form-control md-whiteframe-3dp" type="text"
+                                        name="cpm" /> -->
+                                        <span class="input-group-addon" style="padding: 7px 4px;">
+                                            <i class="fa fa-usd" aria-hidden="true" style="font-size: 13px;"></i>
+                                        </span>  
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays==0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{adminProductEdit.forthcpm | number:2 || "0"}}</span>
+                                        <span class="form-control md-whiteframe-3dp" ng-if="totalnumDays!=0" name="weekperiod" placeholder="Week Period" style="border: 1px solid #CED4DA; background-color: #E9ECEF; padding: 2px 5px 0px 5px;" >{{(((adminProductEdit.rateCard/28)*totalnumDays)/((oneAdminProd4))*1000) | number:2 || "0"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Street<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="addressone"
+                                    ng-model="adminProductEdit.address" required>
+                                <div ng-messages="hordinglistEditform.addressone.$error"
+                                    ng-if="hordinglistEditform.addressone.$touched" style="color:red">
+                                    <div ng-message="required">Address required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">City<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="city"
+                                    ng-model="adminProductEdit.city" required>
+                                <div ng-messages="hordinglistEditform.city.$error" ng-if="hordinglistEditform.city.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">City required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">State<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" name="state"
+                                    ng-model="adminProductEdit.state" required>
+                                <div ng-messages="hordinglistEditform.state.$error" ng-if="hordinglistEditform.state.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">State required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                <label class="font-weight-bold for_required">Zip<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="text" class="form-control md-whiteframe-3dp" minlength="5" maxlength="10" name="zipcode"
+                                    ng-model="adminProductEdit.zipcode" onkeypress="return alphaNumeri(event)"  required>
+                                <div ng-messages="hordinglistEditform.zipcode.$error"
+                                    ng-if="hordinglistEditform.zipcode.$touched" style="color:red">
+                                    <div ng-message="required">Zipcode required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                            
+                            
+                            
+                            --Transit Start-----------------
+                            <div class="col-sm-3" ng-show='trasitResult'>
+                                <label class="font-weight-bold">Number of Buses</label>
+                                <input ng-model="adminProductEdit.buses" class="form-control md-whiteframe-3dp"
+                                    type="text" name="buses" only-numeric required />
+                                <div ng-messages="hordinglistEditform.buses.$error" ng-if="hordinglistEditform.buses.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Number Buses is required.</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" ng-show='trasitResult'>
+                                <label class="font-weight-bold">Price for 7 days</label>
+                                <input ng-model="adminProductEdit.price" class="form-control md-whiteframe-3dp"
+                                    type="text" name="prices" only-numeric required />
+                                <div ng-messages="hordinglistEditform.prices.$error" ng-if="hordinglistEditform.prices.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Price is required.</div>
+                                </div>
+                            </div>
+                        </div> -->
+                       
+                        <div class="form-group row">
+                                <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12">
+                                    <label class="font-weight-bold for_required">Latitude<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="lat"
+                                        ng-model="adminProductEdit.lat" required ng-change="validateLat(adminProductEdit.lat)">
+                                    <div ng-messages="hordinglistEditform.lat.$error" ng-if="hordinglistEditform.lat.$touched"
+                                        style="color:red">
+                                        <div ng-message="required">Latitude is required.</div>
+                                    </div>
+                                    <div ng-If="!isValidLatLong.lat && adminProductEdit.lat" style="color:red">Invalid Latitude.</div>
+                                </div>
+                                <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" >
+                                    <label class="font-weight-bold for_required">Longitude<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <input type="text" class="form-control md-whiteframe-3dp" name="lng"
+                                        ng-model="adminProductEdit.lng"  required ng-change="validateLng(adminProductEdit.lng)">
+                                    <div ng-messages="hordinglistEditform.lng.$error" ng-if="hordinglistEditform.lng.$touched"
+                                        style="color:red">
+                                        <div ng-message="required">Longitude is required.</div>
+                                    </div>
+                                    <div ng-If="!isValidLatLong.lng && adminProductEdit.lng" style="color:red">Invalid Longitude.</div>
+                                </div>
+                           
+                                <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                    <label class="font-weight-bold for_required">Medium<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control md-whiteframe-3dp" name="medium"
+                                            ng-model="adminProductEdit.medium" required>
+                                    </div>
+                                    <div ng-messages="hordinglistEditform.medium.$error" ng-if="hordinglistEditform.medium.$touched"
+                                        style="color:red">
+                                        <div ng-message="required">Medium is Required</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-xl-3 col-md-6 col-sm-12 col-xs-12" ng-if="adminProductEdit.type == 'Media'">
+                                    <label class="font-weight-bold adjust_space for_required">Product<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control md-whiteframe-3dp" name="product"
+                                            ng-model="adminProductEdit.product_newMedia" required>
+                                    </div>
+                                    <div ng-messages="hordinglistEditform.product.$error"
+                                        ng-if="hordinglistEditform.product.$touched" style="color:red">
+                                        <div ng-message="required">Product Required</div>
+                                    </div>
+                                </div>
+                           
+                            <!-- <div class="col-sm-3" ng-if="adminProductEdit.type === 'Static'">
+                                <label class="font-weight-bold">Lit </label>
+                                <select ng-model="adminProductEdit.lighting" name="light"
+                                    class="form-control md-whiteframe-3dp" md-on-close="clearSearchTerm()"
+                                    data-md-container-class="selectdemoSelectHeader"
+                                    ng-init="product.lighting = product.lighting || ''" placeholder="Has lighting?"
+                                    required>
+                                    <option value="" disabled selected>Light</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+                                </select>
+                                <div ng-messages="hordinglistEditform.light.$error" ng-if="hordinglistEditform.light.$touched"
+                                    style="color:red">
+                                    <div ng-message="required">Light required</div>
+                                </div>
+                            </div> -->
+
+                           
+                         
+
+                        </div>
+                        
+                       
+                       
+                       
+                        <div class="form-group row mt-1 justify-content-end">
+                            <!-- <div class="col-sm-8">
+                                <b>Note:</b> You can change price / details any time you want.<br>
+                                * Select only booked dates remaining dates consider as available
+                            </div> -->
+                            <md-button type="submit" Class="md-raised md-primary all_button"
+                                ng-click="addEditedProduct(adminProductEdit)" ng-disabled="hordinglistEditform.$invalid || !isValidLatLong.lat || !isValidLatLong.lng">
+                                Submit</md-button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- <div class="form-group row">
+                    <div class="col-sm-8" style="opacity:0.5;">
+                        Note: You can change price / details any time you want.<br>
+                        * Select only booked dates remaining dates consider as available
+                    </div>
+                    <div class="col-sm-4">
+                        <md-button type="submit" Class="md-raised md-primary register_btn"
+                        ng-click="addProduct(adminProductEdit)">
+                            Submit</md-button>
+                    </div>
+                </div> -->
+            </div>
+
+
+
+
+
+
+
+            <div class="owner_blocked_date_popup box__shadow" ng-if="slotsClosed">
+                <div class="owner_blocked_header">
+                    <div layout="row">
+                        <div>
+                            <h3>select the blocked dates-52/2 week calender </h3>
+                            <p>Campaign start with frist day of week end with last day of week</p>
+                        </div>
+
+                        <div flex></div>
+                        <a class="" ng-click="slotedDatesPopupClosed()">
+                            <i class="material-icons" style="color:white !important">close</i>
+                        </a>
+                    </div>
+                </div>
+                <div class="owner_blocked_body">
+                    <div class="row" class="mt-2  mb-2">
+                        <div class="border col-2 mb-2 p-1 text-center cal_divcolor" ng-repeat="week in weeksArray"
+                            ng-click="selectUserWeeks(week,$index,$event)"
+                            ng-class="{selectedWeek : week.selected == true}">
+                            <div class="md-caption">Week of {{week.twoWeeks}}</div>
+                            <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots}}</h3>
+                        </div>
+                        <div class="col-md-8 mt-3">
+                            <md-button Class="md-raised md-primary all_button float-right"
+                                ng-click="blockedSlotesbtn(weeksArray)">Block Dates</md-button>
+                        </div>
+                    </div>
+                    <span class="clearfix"></span>
+                </div>
+            </div>
+        </md-content>
+    </md-dialog-content>
+</md-dialog>
+<script>
+    function onlyNumbersWithColon(e) {
+        var charCode;
+        if (e.keyCode > 0) {
+            charCode = e.which || e.keyCode;
+        } else if (typeof (e.charCode) != "undefined") {
+            charCode = e.which || e.keyCode;
+        }
+        if (charCode == 58)
+            return true
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+    function alphaNumeri(e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^[A-Za-z0-9-]+$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        return isValid;
+    }
+    function alphaNumeric(e) {
+        var keyCode = e.keyCode || e.which;
+        var regex = /^[A-Za-z0-9]+$/;
+        var isValid = regex.test(String.fromCharCode(keyCode));
+        return isValid;
+    }
+
+    $('#numberbo').keyup(function(){
+        if ($(this).val() > 100){
+    $(this).val('100');
+  }
+  else if($(this).val() < 0){
+    $(this).val('');
+  }
+  else if($(this).val().length > 3){
+    $(this).val('');
+  }
+  else if($(this).val() == '00'){
+    $(this).val('');
+  }
+});
+    $('input.onlyNumComma').keyup(function (event) {
+
+        // skip for arrow keys
+        if (event.which >= 37 && event.which <= 40) return;
+
+        // format number
+        $(this).val(function (index, value) {
+            return value
+                .replace(/\D/g, "")
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        });
+    });
+
+    function isNumber(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+ 
+         return true;
+      }
+</script>

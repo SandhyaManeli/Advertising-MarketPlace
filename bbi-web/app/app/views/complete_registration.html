@@ -1,0 +1,81 @@
+<div layout="column" layout-fill="layout-fill">
+  <div>
+    <div layout="row" layout-align="center center" layout-fill="layout-fill" class="setting-page">
+      <md-whiteframe layout="column" layout-align="center center" flex="45" flex-sm="60" flex-xs="100" flex-md="50" layout-padding="layout-padding"
+        class="login md-whiteframe-3" style="    margin: 5.5% 0;">
+        <md-content layout-fill="layout-fill" class="contbg">
+          <!-- <div layout="column" layout-align="center center" layout-margin="layout-margin" layout-padding="layout-padding">
+                <img src="assets/images/billboards.png" alt="logo"/>
+             </div> -->
+          <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block">
+            <h4>Complete Registration</h4>
+          </div>
+          <form name="forms.registerUserForm" novalidate="novalidate">
+            <md-input-container class="md-block">
+              <label>Name</label>
+              <input ng-model="userData.name" name="name" type="text" maxlength="50" required="required" />
+              <div ng-messages="forms.registerUserForm.name.$error">
+                <div class="alret alert-danger" ng-message="required">Name is required.</div>
+                <div ng-message="maxlength">Name shouldn't exceed 50 characters. </div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <input ng-model="userData.password" name="password" type="password" maxlength="60" required="required" />
+              <div ng-messages="forms.registerUserForm.password.$error">
+                <div class="alret alert-danger" ng-message="required">Password is required.</div>
+                <div ng-message="maxlength">Password shouldn't exceed 60 characters. </div>
+                <div ng-message="pattern">Enter a valid Password</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Confirm Password</label>
+              <input ng-model="userData.confirm_password" name="confirm_password" type="password" maxlength="60" required="required" />
+              <div ng-messages="forms.registerUserForm.confirm_password.$error">
+                <div class="alret alert-danger" ng-message="required">Password is required.</div>
+                <div ng-message="maxlength">Password shouldn't exceed 60 characters. </div>
+                <div ng-message="pattern">Enter a valid Password</div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Mobile number</label>
+              <input ng-model="userData.phone" name="phone" type="mobile" minlength="10" maxlength="10" required ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/"
+              />
+              <div ng-messages="forms.registerUserForm.phone.$error" role="alert" multiple>
+                <div ng-message="required" class="my-message">Mobile Number is required.</div>
+                <div ng-message="pattern">Enter a valid Mobile Number</div>
+                <div ng-message="minlength">Mobile Number must have 10 digites. </div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Address </label>
+              <input ng-model="userData.address" name="address" type="text" minlength="10" maxlength="50" />
+              <div ng-messages="forms.registerUserForm.address.$error">
+                <div class="alret alert-danger" ng-message="required">address is required.</div>
+                <div class="alret alert-warning" ng-message="minlength">address must have 10 characters.</div>
+                <div ng-message="maxlength">address shouldn't exceed 130 characters. </div>
+              </div>
+            </md-input-container>
+            <div layout="column" layout-align="center center" layout-fill="layout-fill" class="recaptcham" flex-xs="20">
+              <div class="g-recaptcha" data-sitekey="6LcePAATAAAAAGPRWgx90814DTjgt5sXnNbV5WaW"></div>
+            </div>
+            <div class="serverErrors" ng-if="completeRegistrationErrors">
+              <ul>
+                <li ng-repeat="error in completeRegistrationErrors">
+                  {{error}}
+                </li>
+              </ul>
+            </div>
+            <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+              <md-button type="submit" layout-fill="layout-fill" class="md-raised  md-primary regbn" ng-disabled="forms.registerUserForm.$invalid"
+                ng-click="completeUserRegistration()">Register</md-button>
+            </md-input-container>
+            <!-- <div layout="row" layout-xs="column">
+              <p>Verify the E-mail address to Sign In </p>
+            </div> -->
+          </form>
+        </md-content>
+      </md-whiteframe>
+    </div>
+  </div>
+</div>

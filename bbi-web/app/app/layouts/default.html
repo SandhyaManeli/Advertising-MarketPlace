@@ -1,0 +1,1182 @@
+<style>
+    button:focus {
+        /* outline: 1px dotted; */
+        outline: none !important;
+        border: none;
+    }
+    .main__header {
+        background-color: #6e6e6e80 !important;
+        box-shadow: 0px 4px 138px rgba(9, 8, 8, 0.1);
+    /* margin-top: -10px; */
+    }
+    .main__header_inner {
+        background-color: #6F7987 !important;
+        /* background-color: #44596D  !important; */
+        position: fixed;
+        width: 100%;
+        z-index: 9;
+        /* margin-top: -20px; */
+    }
+
+    .hamb_items{
+        list-style-type: none;
+        display: flex;
+        margin-top: -18px;
+    }
+    .hamb_items li{
+        display: inline;
+    }
+    .hamb_items li img{
+        width: 45%;
+    }
+    .buryer_navitems{
+        margin-left: 210px;
+    }
+    .aire_d_drop-mobile-home-buyer{
+        padding: 10px 45px 35px 60px;
+    }
+
+    .menu_btn{
+    /* padding-left: 6rem; */
+    /* padding-left: 32px; */
+    padding-top: 12px;
+    }
+    .btn-bgcolor a {
+        color: #e52435 !important;
+    }
+
+
+    @media screen and (max-width:768px) {
+    .sign_in{
+      display: none !important;
+    }
+  }
+  @media screen and (max-width:767px){
+    .hamb_items{
+        margin-top: 10px;
+    }
+    ul.air_d__utility {
+    float: unset;
+    }
+}
+@media screen and (max-width:541px){
+.buryer_navitems{
+        margin-left: 0px;
+    }
+    .main__header_inner{
+        height: 60px;
+    }
+}
+@media screen and (max-width: 359px){
+.signin-responsiveness{
+    padding: 6px 16px !important;
+}
+}
+</style>
+<!-- <div layout="column" style="position:relative;min-height:100%;" class="new_nav"> -->
+    <div layout="column" style="position:relative;" class="new_nav">
+    <!-- main nav section-->
+    <a id="myBtn" class="move-top text-center"></a>
+
+    <header class="main__header" ng-class="{main__header: isHomePage, main__header_inner: !isHomePage}" style="height: 73px;">
+        <div class="aire_d_bar_inner  col-1 menu_btn respMenu-btn">
+            <!-- <i class="fas fa-bars s_login"  style="color: white;cursor: pointer;" id="mobileBtn"></i> -->
+        <!-- <i class="fas fa-bars s_login"  style="color: white;cursor: pointer;" id="mobileBtn" ng-show="menuClose" ng-click="menuClose = false"></i> -->
+        <span><i class="fas fa-bars s_login bars-responsive"   style="color: #fff;cursor: pointer;" id="mobileBtn"></i></span>
+        <!-- <span ng-show="isAuthenticated"><i class="fas fa-bars s_login bars-responsive menubar-resp"  style="color: #fff; cursor: pointer;" id="mobileBtn"></i>
+        </span> -->
+        </div>
+        <div class="col-xs-10 bar_logo">
+        <nav class="container">
+            <div class="aire_d_bar">
+                
+                <div class="aire_d_bar_inner">
+                    <!-- <button class="menu_toggler mobile_btn d-block d-sm-block d-md-block d-lg-none d-xl-none"
+                    id="mobileBtn">
+                    <span><i class="fas fa-bars"></i></span>
+                </button> -->
+                    <a href="/" class="air_d_logo nav_log">
+                        <!-- <img src="assets/images/amp-white-1.png" alt="logo" width="350px" class="p-2"/>  -->
+                        <!-- <img src="assets/images/new-header-logo.png" alt="logo" style="width:200px;"> -->
+                        <span ng-show="!isAuthenticated">
+                            <img src="../assets/images/amp-new-logo.png" alt="logo" style="width:75px;" class="newLandingLogo">
+                        </span>
+                        <!-- <li class="s-depth1-wrap find_clr" ng-show="isAuthenticated">
+                            <a ng-click="showFindForMeDialog()" class="s-btn-toggler">FIND</a>
+                            </li> -->
+                        <span ng-show="isAuthenticated" class="afterLogin-logo">
+                            <img src="../assets/images/logo-tm.png" alt="logo" style="width:200px; margin-top: 10px;">
+                         </span>
+                        <!-- <img src="assets/images/White-amp-logo.png" alt="logo" style="width:200px;"> -->
+                        
+                        <!-- <img src="assets/images/logo-redred.png" alt="logo" width="350px" class="p-2"/> -->
+                        <!-- <img src="assets/images/Logo-red-new.png" alt="logo" width="350px" class="p-2"/> -->
+
+                        <!-- <img src="assets/images/Logo-Red.PNG" class="p-2" alt="logo" /> -->
+                        <!-- <img src="assets/images/Logo.png" alt="logo" /> -->
+                    </a>
+                </div>
+                <div class="aire_d_sub">
+                    <ul class="air_d__sub-nav air_main_menu d-none d-sm-none d-md-none d-lg-block d-xl-block" ng-style="{ 'margin-top' : (isAuthenticated) ? '25px' : '14px' }">
+
+                        <!-- below removing home in header for client requirement -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-href="/home" ng-if="!footerhide"
+                                class="s-btn-toggler">Home</a></li> -->
+
+                        <!-- below removing home in header for client requirement -->
+                        <!-- <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a ng-href="/home" class="s-btn-toggler">Home</a>
+                        </li> -->
+
+                       
+
+                        <!-- home page header about amp-1 start -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                            <a ng-href="/about" ng-if="!footerhide" class="s-btn-toggler">about AMP</a>
+                        </li> -->
+                        <!-- home page header about amp-1 end -->
+                        <!-- about amp in home header start -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                            <a ng-href="/about" ng-if="!footerhide" class="s-btn-toggler">about AMP</a>
+                        </li> -->
+                        <!-- about amp in home header end -->
+
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
+                                ng-if="!footerhide" class="s-btn-toggler" style="color: #FFFFFF !important;">Help</a>
+                        </li> -->
+
+                         <!-- home page header policy-2 start -->
+                        <!-- <li class="s-depth1-wrap policy_clr" ng-show="!isAuthenticated">
+                            <a ng-href="/policy" ng-if="!footerhide" class="s-btn-toggler">POLICY</a>
+                        </li> -->
+                        <!-- home page header policy-2 end -->
+
+                        <!-- home page header DMA-3 start -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" target="_blank">DMA</a>
+                        </li> -->
+                        <!-- home page header DMA-3 end -->
+
+                         <!-- home page header rfp-4 start -->
+                         <li class="s-depth1-wrap rfp_hover rfp_clr btn-bgcolor" ng-show="!isAuthenticated">
+                            <a ng-click="showRfpWithoutLoginDialog()" id="submitRfp" class="s-btn-toggler">SUBMIT AN RFP</a>
+                        </li>
+                        <!-- home page header rfp-4 end-->
+
+                        <!-- home page header facebook-5 start -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                            <a ng-href="https://www.facebook.com/advertisingmarketplaceofficial" ng-if="!footerhide" class="s-btn-toggler"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated">
+                            <a href="../assets/excelFile/broadcast.jpeg"  class="s-btn-toggler" target="_blank">Broadcast Calendar</a>
+                        </li>
+                        <dma1 -->
+                        <!-- <li class="s-depth1-wrap" ng-show="isAuthenticated || !isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" download>DMA</a>
+                        </li> -->
+                        <!-- home page header facebook-5 end -->
+
+                        <!-- home page header instagram-6 start -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated"><a ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" ng-if="!footerhide"
+                            class="s-btn-toggler"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </li> -->
+                        <!-- home page header instagram-6 end -->
+
+                        <!-- dma in buyer header section start -->
+                        <!-- <li class="s-depth1-wrap" n ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" target="_blank">DMA</a>
+                        </li> -->
+                        <!-- dma in buyer header section end -->
+
+                        <!-- broadcast in buyer login start -->
+                        <!-- <li class="s-depth1-wrap" n ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a href="../assets/excelFile/broadcast.jpeg"  class="s-btn-toggler" target="_blank">Broadcast Calendar</a>
+                        </li> -->
+                        <!-- broadcast in buyer login end -->
+                        <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && currStateName != 'index.suggest.product-detail'">
+                            <a ng-href="/location" class="s-btn-toggler">MAP</a>
+                        </li>
+
+                         <!-- buyer find start -->
+                         <li class="s-depth1-wrap find_clr" ng-show="isAuthenticated">
+                            <a ng-click="showFindForMeDialog()" class="s-btn-toggler">FIND</a>
+                        </li>
+                        <!-- buyer find end -->
+
+                        <!-- submit an rfp in buyer header start -->
+                        <li class="s-depth1-wrap rfp_hover" ng-show="isAuthenticated">
+                            <a ng-click="showRfpDialog($event)" class="s-btn-toggler">SUBMIT AN RFP</a>
+                        </li>
+                        <!-- submit an rfp in buyer header end -->
+
+                        <!-- <li class="s-depth1-wrap" ng-show="isAuthenticated || !isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" download>DMA</a>
+                        </li> -->
+
+
+                        <!-- buyer header facebook  insta icons start -->
+                        <!-- <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" class="s-btn-toggler">
+                                <img src="assets/images/facebook-new.png" class="face-bbok img-fluid" style="width: 50%;">
+                            </a>
+                        </li>
+
+                        <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" class="s-btn-toggler">
+                                <img src="assets/images/instagram-new.png" class="instagram img-fluid" style="width: 50%;">
+                            </a>
+                        </li> -->
+                        <!-- buyer header facebook  insta icons end -->
+
+
+                        <li class="s-depth1-wrap"
+                            ng-show="isAuthenticated && currStateName == 'index.suggest.product-detail'">
+                            <a ng-href="/location" class="s-btn-toggler">MAP</a>
+                        </li>
+
+                        <!-- home page header signin & get started start -->
+                        <li class="s-depth1-wrap head_signin" ng-show="!isAuthenticated">
+                            <!-- <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn sign_in" ng-show="isHomePage" style="color: #fff!important">SIGN IN</a>
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn sign_in"  ng-show="!isHomePage" style="color: #000!important">SIGN IN</a> -->
+                            <button class="s-btn-toggler login_btn newLogin_btn" type="button" ng-click="showSignInDialog($event)">Login</button>     
+                         </li>
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated" style="margin-left:10px;">
+                            <!-- <a ng-click="showRegisterDialog($event)" class="s-btn-toggler login_btn get_started">GET STARTED </a> -->
+                            <button class="s-btn-toggler login_btn get_started" type="button" ng-click="showRegisterDialog($event)">Get started</button>
+                        </li>
+                        <!-- home page header signin & get started end-->
+
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated" style=" margin-left:10px;">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
+                        </li>
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated" style=" margin-left:10px;">
+                            <a ng-click="showRegisterDialog($event)" class="s-btn-toggler login_btn">Register</a>
+                        </li> -->
+                        <!-- home page header login & Register- 7 end -->
+                    </ul>
+                    <ul class="air_d__sub-nav air_main_menu d-block d-sm-block d-md-block d-lg-none d-xl-none "
+                    style="margin-right:10px">
+                        <li class="s-depth1-wrap sign_margin" ng-show="!isAuthenticated" style=" margin-left:10px;">
+                            <!-- <a  ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn signin-responsiveness" style=" padding: 6px 33px;">LOGIN</a> -->
+                           <span class="s-btn-toggler" style="margin-top: 18px; color: #000;" ng-click="showSignInDialog($event)"><i class="fa fa-sign-in" aria-hidden="true" style="font-size: 22px;"></i></span> 
+                            <!-- <button class="s-btn-toggler login_btn sign_in" type="button" ng-click="showSignInDialog($event)">SIGN IN </button>   -->
+                        </li>
+                        <li class="s-depth1-wrap sign_margin signUp-icon" ng-show="!isAuthenticated" style=" margin-left:18px;">
+                            <!-- <a  ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn signin-responsiveness" style=" padding: 6px 33px;">LOGIN</a> -->
+                           <span class="s-btn-toggler" style="margin-top: 18px; color: #000;" ng-click="showRegisterDialog($event)"><i class="fa fa-user-plus" aria-hidden="true"></i></span> 
+                           
+                            <!-- <button class="s-btn-toggler login_btn sign_in" type="button" ng-click="showSignInDialog($event)">SIGN IN </button>   -->
+                        </li>
+                    </ul>
+                    <!-- <ul class="air_d__sub-nav air_main_menu d-block d-sm-block d-md-block d-lg-none d-xl-none"
+                        style="margin-right:10px">  
+                        <li class="s-depth1-wrap" ng-show="!isAuthenticated" style=" margin-left:10px;">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn sign_in" ng-show="isHomePage" style="color: #fff!important">SIGN IN</a>
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn sign_in"  ng-show="!isHomePage" style="color: #000!important">SIGN IN</a>
+                        </li>  
+                    </ul> -->
+                    <!-- <ul class="air_d__utility buryer_navitems" ng-if="isAuthenticated" style="display: flex;"> -->
+                        <ul class="air_d__utility buryer_navitems" ng-if="isAuthenticated" style="display: flex;">
+                        <button type="button" class="bell_icon" ng-click="gotoUserSavedCampaign()" ng-if="isUserBasic()"
+                        style="position:relative">
+                        <span class="s-ico-login shoping_card_size">
+                            <a>
+                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            </a>
+                            <span class="badge blue"
+                                style="position:absolute;top:0px;right:0px;background:#e52435;color:#fff;border-radius: 50%">{{shortListedProductsLength || 0}}</span></span>
+                         </button>
+                  
+                        <div class="dropdown s_login">
+                            <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown"
+                                style="position:relative">
+                                <span class="s-ico-login" style="color: #000"><i class="fa fa-bell"
+                                        aria-hidden="true"></i><span class="badge blue" id="notification-count"
+                                        style="position:absolute;top:0px;right:0px;background:#e52435;color:#fff;border-radius: 50%">{{unReadNotify.length || 0}}</span></span>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
+                                <div class="notification_header">
+                                    <h3 class="" style="font-size:12px"><b>You have <span
+                                                id="notification1-count">{{unReadNotify.length || 0}}</span> new
+                                            notification</b></h3>
+                                </div>
+                                <div style="padding:10px;" id="notification-id-0"
+                                    ng-repeat="notificationItem in unReadNotify.slice(0,3)">
+                                    
+                                        <span>{{notificationItem.desc}}</span>
+                                </div>
+                                <div class="notification_bottom">
+                                    <a href="/user-notifications"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role=='basic'">See all
+                                        notifications</a>
+                                    <a href="/owner/{{loggedInUser.clientSlug}}/owner-notifications"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role == 'owner'">See all
+                                        notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown s_login">
+                            
+                            <button type="button" style="line-height: inherit;" class="fst_letter dropdown-toggle buyer_fstletter" data-toggle="dropdown">
+                                {{loggedInUser.firstName.slice(0, 1) | capitalize}}
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px">
+                             
+                                <a class="dropdown-item" ng-href="/profile">{{loggedInUser.firstName | capitalize}}
+                                    {{loggedInUser.lastName}}</a>
+                                <a class="dropdown-item" ng-href="/report"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Dashboard</a>
+
+                                <!-- Buyer profile popup product list start -->
+                                <a class="dropdown-item" ng-href="/buyer-product-detail"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Browse</a>
+                                <!-- <a class="dropdown-item" ng-href="/contracts"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Contracts</a>
+                                <a class="dropdown-item" ng-href="/invoicing"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Invoicing</a> -->
+                                <!-- Buyer profile popup product list end -->
+                                <a class="dropdown-item" ng-href="/shortlisted-products" ng-if="isUserBasic()">
+                                    Cart Inventory
+                                    ({{shortListedProductsLength || "0"}})</a>
+                                <a class="dropdown-item" ng-href="/user-saved-campaigns">
+                                    Saved Campaign ({{ savedCampaignsCount || "0"}})</a>
+                                <a class="dropdown-item" ng-href="/campaigns"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Campaigns</a>
+                                <a class="dropdown-item" ng-href="/owner/{{clientSlug}}/campaigns"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Campaigns</a>
+                                    <a class="dropdown-item" ng-href="/contracts"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Contracts</a>
+                                <a class="dropdown-item" ng-href="/invoicing"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Invoicing</a>
+                                <a class="dropdown-item" ng-href="/user-payments"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Payments</a>
+
+                                <a class="dropdown-item" ng-href="/owner/{{clientSlug}}/payments"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Payments</a>
+                                <a class="dropdown-item" ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a>
+                                <!-- <a class="d-block d-sm-none dropdown-item" ng-href="/user-saved-campaigns">Saved
+                                    Campaign</a> -->
+                                <a class="dropdown-item" ng-href="/reset_password" style="margin-bottom:15px"> Change
+                                    Password</a>
+                                <a ng-click="logout()" class="logout_color" style="    margin: 0 0 0 18px;"> Logout</a>
+                            </div>
+                        </div>
+                       
+                   
+                    </ul>
+                    <div class=""></div>
+                </div>
+                <div class="aire_d_drop-mobile aire_d_drop-mobile-home-buyer" id="mobileMenu">
+                    <span class="text-white userHeaderName buyer_hb_res" ng-show="isAuthenticated">Welcome {{loggedInUser.firstName}}</span>
+                    <span class="text-white userHeaderName buyer_hb_res" ng-show="!isAuthenticated">Welcome!</span>
+                    <!-- <a href="#" class="close-icon" id="closeBtn"></a> -->
+                    <a class="close-icon" id="closeBtn" ng-click="menuClose = true"></a>
+                    <!-- <p ng-show="!isAuthenticated" class="text-white mt-0" style="padding-left: 4px;font-weight: 400;">You're not logged in. Would you like to <a ng-click="showSignInDialog($event)" style="color:#a6d800;text-decoration: underline;">SIGN IN?</a> Or <a ng-click="showRegisterDialog($event)" style="color:#a6d800;text-decoration: underline;">GET SRARTED</a></p> -->
+                    <p ng-show="!isAuthenticated" class="text-white mt-0" style="padding-left: 4px;font-weight: 400;">You're not logged in. <a ng-click="showSignInDialog($event)" style="color:#a6d800;text-decoration: underline;">SIGN IN?</a> Or <a ng-click="showRegisterDialog($event)" style="color:#a6d800;text-decoration: underline;">GET STARTED</a></p>
+                   
+                    <p class="rfp_hover rfp_clr" style="margin-bottom: 5rem; padding-left: 4px;" ng-show="!isAuthenticated">
+                        <a ng-click="showRfpWithoutLoginDialog($event)" style="color:#a6d800;text-decoration: underline;" class="s-btn-toggler">SUBMIT AN RFP</a>
+                    </p>
+
+                    <div class="row mb-5 mt-3 sideNavNotif" ng-show="isAuthenticated">
+                        <div class="col-4 text-white  cursor_pointer hb_buyer_icons" style="left: 5px;"><a class="text-white" ng-href="/shortlisted-products" onclick="closeMenu()">My Cart
+                            <i class="fa fa-shopping-cart" style="font-size: 13px;" aria-hidden="true"></i>
+                            <span class="badge blue"
+                                    style="position:absolute;top:-4px;background:#e52435;color:#fff;border-radius: 50%">{{shortListedProductsLength || 0}}</span></span>
+                        </a></div>
+                        <div class="col-4 text-white dropdown-toggle cursor_pointer hb_buyer_icons" style="right: 10px;" data-toggle="dropdown">Notifications <i class="fa fa-bell" style="font-size: 12px;"
+                            aria-hidden="true"></i><span class="badge blue mblBadge" id="notification-count"
+                            style="position:absolute;top:-5px;left:90px;background:#e52435;color:#fff;border-radius: 50%">{{unReadNotify.length || 0}}</span>
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
+                                <div class="notification_header">
+                                    <h3 class="" style="font-size:12px"><b>You have <span
+                                                id="notification1-count">{{unReadNotify.length || 0}}</span> new
+                                            notification</b></h3>
+                                </div>
+                                <div style="padding:10px;" id="notification-id-0"
+                                    ng-repeat="notificationItem in unReadNotify.slice(0,3)">
+                                    
+                                        <span>{{notificationItem.desc}}</span>
+                                </div>
+                                <div class="notification_bottom">
+                                    <a ng-click="ReddirectNotificationBuyer()"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role=='basic'">See all
+                                        notifications</a>
+                                    <a href="/owner/{{loggedInUser.clientSlug}}/owner-notifications"
+                                        ng-show="isAuthenticated &&loggedInUser.user_role == 'owner'">See all
+                                        notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4 text-white">                      
+                        <div class="dropdown-toggle cursor_pointer hb_buyer_icons" data-toggle="dropdown">My Account <button type="button" style="line-height: inherit;border-radius: 20px;
+                            width: 21px; height: 21px; padding: 2px;" class="fst_letter" >
+                            {{loggedInUser.firstName.slice(0, 1) | capitalize}}
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px;">
+                            <a class="dropdown-item" ng-click="ReddirectProfileBuyer()" ng-href="/profile">{{loggedInUser.firstName | capitalize}}
+                                {{loggedInUser.lastName}}</a>
+
+                            <a class="dropdown-item" ng-href="/report"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Dashboard</a>
+
+                            <a class="dropdown-item" ng-href="/buyer-product-detail"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Browse</a>
+
+                            <a class="dropdown-item" ng-click="ReddirectCartInventory()" ng-href="/shortlisted-products" ng-if="isUserBasic()">
+                                Cart Inventory
+                                ({{shortListedProductsLength || "0"}})</a>
+                            <a class="dropdown-item" ng-href="/user-saved-campaigns">
+                                    Saved Campaign ({{ savedCampaignsCount}})</a>
+                            <!-- <a class="dropdown-item" ng-click="ReddirectBuyerSavedCampaign()" ng-href="/user-saved-campaigns">
+                                Saved Campaign1111 ({{userSavedCampaigns.length}})</a> -->
+                            <a class="dropdown-item" ng-click="ReddirectBuyerCampaigns()" ng-href="/campaigns"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Campaigns</a>
+                            <a class="dropdown-item"  ng-href="/owner/{{clientSlug}}/campaigns"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Campaigns</a>
+                            <a class="dropdown-item" ng-href="/contracts"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Contracts</a>
+                            <a class="dropdown-item" ng-href="/invoicing"
+                                    ng-show="isAuthenticated && loggedInUser.user_role=='basic'">Invoicing</a>
+                           
+                            <a class="dropdown-item" ng-click="ReddirectBuyerPayments()" ng-href="/user-payments"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='basic'"> Payments</a>
+                            <a class="dropdown-item" ng-href="/owner/{{clientSlug}}/payments"
+                                ng-show="isAuthenticated && loggedInUser.user_role=='owner'"> Payments</a>
+                            <a class="dropdown-item" ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a>
+                            <!-- <a class="d-block d-sm-none dropdown-item" ng-href="/user-saved-campaigns">Saved
+                                Campaign</a> -->
+                            <a class="dropdown-item" ng-click="ReddirectBuyerResetPassword()" ng-href="/reset_password" style="margin-bottom:15px"> Change
+                                Password</a>
+                            <a ng-click="logout()" class="logout_color" style="    margin: 0 0 0 18px;"> Logout</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                <p class="s-depth1-wrap mt-3 hb_buyer_items" style="margin-left:0px; padding-left: 4px;"
+                    ng-show="isAuthenticated && currStateName != 'index.suggest.product-detail'">
+                    <a ng-href="/location" class="s-btn-toggler">Map</a>
+                </p>
+                </div>
+                <div class="col-4">
+                <p class="s-depth1-wrap find_clr mt-3 hb_buyer_items" style="margin-left:0px; padding-left: 4px;" ng-show="isAuthenticated">
+                    <a ng-click="showFindForMeDialog()" class="s-btn-toggler">Find</a>
+                </p>
+                </div>
+                <div class="col-4">
+                <p class="s-depth1-wrap rfp_hover mt-3 hb_buyer_items" style="margin-left:0px; padding-left: 4px; white-space: nowrap;" ng-show="isAuthenticated">
+                    <a ng-click="showRfpDialog($event)" class="s-btn-toggler">Submit an RFP</a>
+                </p>
+                </div>
+                        </div>
+                    <div class="col-xs-12">
+                        <!-- <p class="pt-2 quick_support">if you Need Quick Support</p> -->
+                        <p class="mobileList menu_heilight menu_heilight_click"><a href="/about" style="cursor:pointer" ng-click="menuClose = true" onclick="closeMenu()" ng-class="{menu_heilight_click:isActive('/about')}">About Advertising Marketplace</a></p>
+                        <hr class="mobileListLine">
+                        <p class="mobileList menu_heilight menu_heilight_click"><a href="./assets/excelFile/DMA - PDF.pdf" target="_blank" style="cursor:pointer">Download a DMA Map (PDF)</a></p>
+                        <hr class="mobileListLine">
+                        <p class="mobileList menu_heilight menu_heilight_click"><a ng-href="/policy" style="cursor:pointer" ng-click="menuClose = true" onclick="closeMenu()" ng-class="{menu_heilight_click:isActive('/policy')}">All Our Policies/Terms of Conditions & Restrictions (MUST READ)</a></p>
+                        <hr class="mobileListLine">
+                        <p data-toggle="collapse" class="mobileList cursor_pointer" href="#contactus" ng-click="contactusBool = !contactusBool" ng-style="contactusBool && {'color': '#a6d800'}">Contact Us
+                            <i  style="cursor: pointer;" ng-show="!contactusBool" class="fa fa-angle-right" ></i>
+                            <i  style="cursor: pointer;" ng-show="contactusBool" class="fa fa-angle-up"></i>
+                        </p>
+                        <hr class="mobileListLine" ng-style="contactusBool && {'border-top': '0.5px solid #90967c'}" style="border-top: 0.5px solid #b4b1b1;">
+                        <div class="contact-block-left mt-0 panel-collapse collapse" id="contactus">
+                            <div class="row pl-3">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <h6 class="contact m-0" style="font-size: 16px !important;">You Can Find Us Here</h6>
+                                    <ul class="p-0 list-group detaile_section">
+                                        <li class="list-group-item border-0 bottom_place" style="margin:0;margin-top: 10px">
+                                            <!-- <div class="icon_section">
+                                                <i class="fa fa-home" aria-hidden="true"></i>
+                                            </div> -->
+                                            <div class="text_section">
+                                                <h6 class="pb-2 m-0">ADVERTISING MARKETPLACE</h6>
+                                                <!-- <p class="m-0">Richard McClemmy</p> -->
+                                                <!-- <P>28832 Via Buena Vista, San Juan Capistrano CA 92675</P> -->
+                                            <!-- <P>629 Terminal Way Suite 1, Costa Mesa, CA 92627</P> -->
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item border-0 bottom_place pt-4 m-0">
+                                            <!-- <div class="icon_section">
+                                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                            </div> -->
+                                            <div class="text_section">
+                                                <h6 class="m-0">EMAIL</h6>
+                                                <p class="m-0"><a href="mailto:info@advertisingmarketplace.com" style="font-size: 10px;font-weight: unset;line-height: unset;color: white;padding: 0px;">info@advertisingmarketplace.com</a></p>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item border-0 bottom_place pt-4 m-0">
+                                            <!-- <div class="icon_section">
+                                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                            </div> -->
+                                            <div class="text_section pb-4">
+                                                <h6 class="m-0">CALL</h6>
+                                                <p class="mb-4">(714)293-3883</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <p data-toggle="collapse" class="mobileList cursor_pointer" ng-style="feedbackBool && {'color': '#a6d800'}" href="#feedback" ng-click="feedbackBool = !feedbackBool">Give us Feedback or Leave Us a Message 
+                            <i  style="cursor: pointer;" ng-show="!feedbackBool" class="fa fa-angle-right"></i>
+                            <i  style="cursor: pointer;" ng-show="feedbackBool" class="fa fa-angle-up"></i>
+                          </p>
+                        <hr class="mobileListLine mb-0" ng-style="feedbackBool && {'border-top': '0.5px solid #90967c'}" style="border-top: 0.5px solid #b4b1b1;">
+                        <div class="contact-block-left mt-0 panel-collapse collapse" id="feedback">
+                            <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
+                                <div class="row pt-3">
+                                    <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                        ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                        <input type="text" name="name" placeholder="Name" class="form-control"
+                                            ng-model="query.name" required>
+                                        <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine"
+                                            class="help-block form_inputnameleft" style="color: red;">Your name is required.
+                                        </p>
+                                    </div>
+                                    <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                        ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                        <input type="email" name="email" placeholder="Email" class="form-control"
+                                            ng-model="query.email" required>
+                                        <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine"
+                                            class="help-block form_inputnameright" style="color: red;">Email Id is required.
+                                        </p>
+                                    </div>
+                                    <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                        ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                        <select ng-model="query.subject" name="Subject" class="form-control">
+                                            <option value="" disabled selected>Subject*</option>
+                                            <option>Payment</option>
+                                            <option>Requested Inventory</option>
+                                            <option>Campaign</option>
+                                            <option>Other</option>
+                                        </select>
+                                        <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine"
+                                            class="help-block form_inputnameleft" style="color: red;">Subject is required.
+                                        </p>
+                                    </div>
+                                    <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                        ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                        <input type="text" name="contact" placeholder="Phone #" class="form-control"
+                                            ng-model="query.contactno" only-numeric required maxlength="10">
+                                        <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine"
+                                            class="help-block form_inputnameright" style="color: red;">Contact Number. is
+                                            required.</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Type Your Message"
+                                        ng-model="query.message"></textarea>
+                                </div>
+                                <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send
+                                    Message</md-button>
+                            </form>
+                        </div>
+                    </div>
+                    <div ng-style="!isAuthenticated && {'margin-top': '8rem'}" style="margin-top: 8rem;">
+                        <!-- <span class="text-white sideNav_copyright">
+                            <i class="fa fa-copyright" aria-hidden="true"></i> 2021 ADVERTISING MARKETPLACE. All rights reserved.
+                        </span>
+                        <span class="s-depth1-wrap socialIcons">
+                            <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" class="s-btn-toggler"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        </span>
+
+                        <span class="s-depth1-wrap float-right">
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" class="s-btn-toggler"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </span> -->
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                              <span class="text-white sideNav_copyright">
+                                  <i class="fa fa-copyright" aria-hidden="true"></i> 2023 ADVERTISING MARKETPLACE. All rights reserved.
+                              </span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                              <ul class="hamb_items">
+                                  <li>
+                                      <span class="s-depth1-wrap socialIcons_hamburger">
+                                          <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" class="s-btn-toggler">
+                                              <!-- <i class="fa fa-facebook-square" aria-hidden="true"></i> -->
+                                              <img src="assets/images/facebook-new.png" class="face-bbok img-fluid">
+                                          </a>
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span class="s-depth1-wrap">
+                                          <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" class="s-btn-toggler">
+                                              <!-- <i class="fa fa-instagram" aria-hidden="true"></i> -->
+                                              <img src="assets/images/instagram-new.png" class="instagram img-fluid">
+                                          </a>
+                                      </span>
+                                  </li>
+                                  <li>
+                                    <span class="s-depth1-wrap">
+                                        <a target="_blank" ng-href="https://www.linkedin.com/company/advertising-marketplace/" class="s-btn-toggler">
+                                           
+                                            <img src="../assets/images/Linkedin.png" class="instagram img-fluid">
+                                        </a>
+                                    </span>
+                                </li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <ul> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a ng-href="/home" ng-if="!footerhide" class="s-btn-toggler">Home</a>
+                        </li> -->
+
+                        <!--in responsive below removing home in header for client requirement -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()">
+                            <a  ng-href="/home" class="s-btn-toggler">Home</a>
+                        </li> -->
+                        <!-- responsiveness about amp in home header start -->
+                        <!-- <li  ng-show="!isAuthenticated">
+                            <a ng-href="/about" class="s-btn-toggler">about amp</a>
+                        </li> -->
+                        <!-- responsiveness about amp in home header end -->
+                        <!-- buyer responsive about amp1-->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()">
+                            <a ng-href="/about" class="s-btn-toggler">about amp</a>
+                        </li> -->
+                       
+                        <!-- <li><a ng-href="/suggest/product-detail" class="s-btn-toggler">help</a></li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()"><a ng-href="/faq" class="s-btn-toggler">faq</a></li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()"
+                            ng-show="isAuthenticated && loggedInUser.user_role=='basic' && currStateName != 'index.suggest.product-detail'">
+                            <a ng-href="/suggest/product-detail" class="s-btn-toggler border_right">suggestme</a></li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated"><a
+                                ng-click="showSignInDialog($event)">suggestme</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a ng-href="/suggest/product-detail" class="s-btn-toggler login_btn">help</a>
+                        </li> -->
+                         <!-- buyer responsive policy2-->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a ng-href="/policy" class="s-btn-toggler">Policy</a>
+                        </li> -->
+                        <!-- <li class="find_clr" ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a  ng-click="showFindForMeDialog()" class="s-btn-toggler">FIND</a>
+                        </li>
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" target="_blank">DMA</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a href="../assets/excelFile/broadcast.jpeg"  class="s-btn-toggler" target="_blank">Broadcast Calendar</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" class="rfp_hover" ng-show="!isAuthenticated">
+                            <a ng-click="showRfpWithoutLoginDialog($event)" class="s-btn-toggler">SUBMIT AN RFP</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()">
+                            <a ng-href="/location" class="s-btn-toggler">Map</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a ng-href="/location" class="s-btn-toggler">Map</a>
+                        </li>
+                        <li ng-click="closeMenuSidenavIfMobile()" class="rfp_hover" ng-show="isAuthenticated">
+                            <a ng-click="showRfpDialog($event)" class="s-btn-toggler">SUBMIT AN RFP</a>
+                        </li> -->
+                        <!-- dma mobile -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" download>DMA</a>
+                        </li> -->
+
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" class="s-btn-toggler">
+                                <img src="assets/images/facebook-new.png" class="face-bbok img-fluid">
+                            </a>
+                        </li>
+
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" class="s-btn-toggler">
+                                <img src="assets/images/instagram-new.png" class="instagram img-fluid">
+                            </a>
+                        </li>  -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a ng-href="https://www.facebook.com/advertisingmarketplaceofficial" ng-if="!footerhide"
+                        class="s-btn-toggler"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        </li>
+
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" ng-if="!footerhide"
+                            class="s-btn-toggler"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </li> -->
+
+                        <!-- RFP Button in mobile <li ng-click="closeMenuSidenavIfMobile()" ng-show="isAuthenticated">
+                            <a  ng-click="showRegisterDialog($event)" class="s-btn-toggler">RFP</a>
+                        </li> -->
+                        
+                        
+                        <!-- <li class="" ng-show="!isAuthenticated"><a ng-click="showSignInDialog($event)"
+                                class="metro_btn">Metro</a></li>
+                        <li class=""
+                            ng-show="isAuthenticated && currStateName != 'index.metro'&& loggedInUser.user_role!='bbi'">
+                            <a ng-href="/metro" class="s-btn-toggler">Metro</a></li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                                <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">help</a>
+                            </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a ng-click="showSignInDialog($event)" class="s-btn-toggler login_btn">login</a>
+                        </li> -->
+                        <!-- Home page policy start-->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a ng-href="/policy" class="s-btn-toggler">Policy</a>
+                        </li> -->
+                        <!-- Home page policy end-->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" target="_blank">DMA</a>
+                        </li> -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a href="../assets/excelFile/broadcast.jpeg"  class="s-btn-toggler" target="_blank">Broadcast Calendar</a>
+                        </li> -->
+                        <!-- dma 2 -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()">
+                            <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" download>DMA</a>
+                        </li> -->
+                        <!-- <li class="s-depth1-wrap" ng-show="!isAuthenticated" style="margin-left:10px;">
+                            <button class="s-btn-toggler login_btn get_started" type="button" ng-click="showRegisterDialog($event)">GET STARTED </button>
+                        </li> -->
+                        <!-- responsive in home page we are hiding face-bbok and instagram start -->
+                        <!-- <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" ng-if="!footerhide" class="s-btn-toggler">
+                         <img src="assets/images/facebook-new.png" class="face-bbok img-fluid"></a>
+                        </li>
+
+                        <li ng-click="closeMenuSidenavIfMobile()" ng-show="!isAuthenticated">
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" ng-if="!footerhide" class="s-btn-toggler">
+                            <img src="assets/images/instagram-new.png" class="instagram img-fluid">
+                        </a>
+                        </li> -->
+                        <!-- responsive in home page we are hiding face-bbok and instagram end -->
+                        <!-- duplicate <span class="s-depth1-wrap float-right">
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" class="s-btn-toggler">
+                                <img src="assets/images/instagram-new.png" class="instagram img-fluid">
+                            </a>
+                        </span> -->
+                    <!-- </ul> -->
+                    </div>
+                </div>
+
+
+            </div>
+        </nav>
+    </header>
+
+   
+    <!-- <script>
+        $("#mobileBtn").click(function () {
+         
+            $("#mobileMenu").toggle();
+            $("#closeBtn").show();
+        });
+        $("#closeBtn").click(function () {
+            $("#mobileBtn").show();
+            $("#mobileMenu").toggle();
+            $("#closeBtn").hide();
+        });
+        document.addEventListener('mouseup', function(e) {
+    var container = $("#mobileMenu");
+    if (!$(e.target).closest(container).length) {
+        container.hide();
+    }
+});
+    </script> -->
+    <script>
+        var isShowing = false;
+        $("#mobileBtn").on('click', (function () { //mobileBtn
+            isShowing = !isShowing;
+            if (isShowing) {
+                $("#mobileMenu").show();
+                $("#closeBtn").show();
+            } else {
+                $("#mobileMenu").hide();
+                $("#closeBtn").hide();
+            }
+        }));
+      
+        $("#closeBtn").click(function () {
+            $("#mobileMenu").hide();
+            $("#closeBtn").hide();
+            isShowing = false;
+        });
+      
+        function closeMenu(){
+            $("#mobileMenu").hide();
+            $("#closeBtn").hide();
+            isShowing = false;
+        }
+      
+        // document.addEventListener('mouseup', function(e) {
+        //   var container = $("#mobileMenu");
+        //   if (!$(e.target).closest(container).length) {
+        //     if (!isShowing)  
+        //         container.hide();
+        //     else
+        //         container.show();
+        //   }
+        // });
+      
+      </script>
+
+    <!--// main nav section-->
+    <!-- Content section-->
+    <ui-view></ui-view>
+    <!-- //Content section-->
+
+    <!-- Footer Section -->
+    <!-- <footer class="footer_home py-lg-4 py-md-3 py-sm-3 py-3 contbg" ng-if="!footerhide">
+        <div class="py-lg-4 py-md-3 py-sm-3 py-3 footer">
+            <div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">C</span>ontact
+                                Info</b></h3>
+                        <i class="fa fa-home gobalimg" aria-hidden="true"></i>
+                        <p class="font-weight-bold p3">BBI Advertising Pvt Ltd.</p>
+                        <p class="p4">People tech group building,Plot No.1, <br>
+                            <span class="span_left addrs_left">Whitefields,Hitech City Road, Kondapur,</span><br>
+                            <span class="span_left">Hyderabad,Telangana 500084</span>
+                        </p>
+                        
+                        <i class="fa fa-envelope-o email" aria-hidden="true"></i>
+                        <p class="font-weight-bold p3">MAIL US</p>
+                        <p class="p4">reach@billboardsindia.com</p>
+                        <i class="fa fa-mobile telephone" aria-hidden="true"></i>
+                        <p class="font-weight-bold p5">CALL</p>
+                        <p class="p5">+ 91 9550224488</p>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 leave_form">
+                        <h3 class="title mb-3 heading_3"><b class="first_word"><span class="first_letter">L</span>eave
+                                Message</b></h3>
+                        <h5 class="blog-title card-title font-weight-bold m-0">If you Need Quick Support</h5>
+                        <div class="contact-block-left">
+                            <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
+                                <div class="form-group form_inputnameleft"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="name" placeholder="Name" class="form-control"
+                                        ng-model="query.name" required>
+                                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Your name is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameright"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="email" name="email" placeholder="Email" class="form-control"
+                                        ng-model="query.email" required>
+                                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Email Id is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameleft"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <select ng-model="query.subject" name="Subject" class="form-control">
+                                        <option value="" disabled selected>Subject*</option>
+                                        <option>Payment</option>
+                                        <option>Requisted Inventory</option>
+                                        <option>Campaign</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Subject is required.
+                                    </p>
+                                </div>
+                                <div class="form-group form_inputnameright"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="contact" placeholder="Contact No" class="form-control"
+                                        ng-model="query.contactno" only-numeric required maxlength="10">
+                                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Contact No. is
+                                        required.</p>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Text Area"
+                                        ng-model="query.message"></textarea>
+                                </div>
+                                <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send
+                                    Message</md-button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container py-lg-3 py-md-3 py-sm-3 py-3">
+                <a ng-href="#home" class="move-top text-center"></a>
+                <div class="row py-2 d-flex align-items-center">
+                    <div class="col-md-8 col-lg-9 col-sm-12 col-12">
+                        <h6 class="mb-0"><span style="color:#BC2535;margin-right: 10px;"><b>Privacy &
+                                    Terms</b></span>BBI Advertising pvt Ltd @ Copyrights 2019. All rights reserved.</h6>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-12 text-lg-right text-md-right text-sm-center footersocial_icon">
+                        <a href="https://www.facebook.com/billboardsind/" target="_blank"><i
+                                class="fa fa-facebook white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/billboards_india/" target="_blank"><i
+                                class="fa fa-instagram white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://www.linkedin.com/company/billboards-india/?viewAsMember=true"
+                            target="_blank"><i class="fa fa-linkedin white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="https://twitter.com/billboardsindia" target="_blank"><i
+                                class="fa fa-twitter white-text mr-4" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play white-text mr-4" aria-hidden="true"></i></a>
+                    </div>
+    </footer> -->
+    <!-- //Footer Section -->
+    <div class="clearfix"  id="conatactInfo"></div>
+    <footer  class="footer_home" ng-show="!isAuthenticated">
+        <div class="container user_info">
+            <div class="row">
+                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+                    <h4>Contact Information</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <h3 class="contact pt-3">Find us here</h3>
+                    <ul class="pt-3 list-group detaile_section">
+                        <li class="list-group-item border-0 bottom_place">
+                            <!-- <div class="icon_section">
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                            </div> -->
+                            <div class="text_section">
+                                <h6 class="pb-2">ADVERTISING MARKETPLACE</h6>
+                                <!-- <p>Richard McClemmy</p> -->
+                                <!-- <P>28832 Via Buena Vista, San Juan Capistrano CA 92675</P> -->
+								<!-- <P>629 Terminal Way Suite 1, Costa Mesa, CA 92627</P> -->
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 bottom_place pt-4">
+                            <!-- <div class="icon_section">
+                                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                            </div> -->
+                            <div class="text_section">
+                                <h6 class="pb-2">EMAIL</h6>
+                                <p><a href="mailto:info@advertisingmarketplace.com">info@advertisingmarketplace.com</a></p>
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 bottom_place pt-4">
+                            <!-- <div class="icon_section">
+                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                            </div> -->
+                            <div class="text_section">
+                                <h6 class="pb-2">CALL</h6>
+                                <p>(714)293-3883</p>
+                            </div>
+                        </li>
+
+                        <li class="pt-4">
+                            <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" ng-if="!footerhide"
+                                class="s-btn-toggler facebook_space" style="width: 100%;">
+                                <!-- <i class="fa fa-facebook-square" aria-hidden="true"></i> -->
+                                <img src="assets/images/facebook-new.png" class="face-bbok img-fluid" alt="facebook">
+                            </a>
+                        
+                            <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" ng-if="!footerhide"
+                                class="s-btn-toggler facebook_space" style="width: 100%;">
+                                <!-- <i class="fa fa-instagram" aria-hidden="true"></i> -->
+                                <img src="assets/images/instagram-new.png" class="instagram img-fluid" alt="instagram">
+                            </a>
+                       
+                            <a target="_blank" ng-href="https://www.linkedin.com/company/advertising-marketplace/" ng-if="!footerhide"
+                                class="s-btn-toggler ng-scope" style="width: 81%;">
+                                <img src="assets/images/Linkedin.png" class="instagram img-fluid">
+                            </a>  
+                        </li>
+                    </ul>
+                    <!-- <ul class="depth1-wrap insta_fbook col-3" style="display: flex;bottom: 4px;">
+                    
+                    </ul> -->
+                </div>
+                <div class="col-md-6 col-xl-6 col-sm-12 col-lg-6 col-xs-12">
+                    <h3 class="leave_msg">Or, Leave us a Message</h3>
+                    <!-- <p class="pt-2 quick_support">if you Need Quick Support</p> -->
+                    <div class="contact-block-left">
+                        <form name="sendquery" ng-submit="sendQuery(query)" novalidate>
+                            <div class="row pt-3">
+                                <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="name" placeholder="Name*" class="form-control"
+                                        ng-model="query.name" required>
+                                    <p ng-show="sendquery.name.$invalid && !sendquery.name.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Your name is required.
+                                    </p>
+                                </div>
+                                <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="email" name="email" placeholder="Email*" class="form-control"
+                                        ng-model="query.email" required>
+                                    <p ng-show="sendquery.email.$invalid && !sendquery.email.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Email Id is required.
+                                    </p>
+                                </div>
+                                <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <select ng-model="query.subject" name="Subject" class="form-control">
+                                        <!-- <option value="" disabled selected>Subject*</option> -->
+                                        <option value="" disabled selected hidden>Subject*</option>
+                                        <option>Payment</option>
+                                        <option>Requested Inventory</option>
+                                        <option>Campaign</option>
+                                        <option>Other</option>
+                                    </select>
+                                    <p ng-show="sendquery.Subject.$invalid && !sendquery.Subject.$pristine"
+                                        class="help-block form_inputnameleft" style="color: red;">Subject is required.
+                                    </p>
+                                </div>
+                                <div class="form-group col-md-6  col-sm-12 col-lg-6 col-xs-12"
+                                    ng-class="{ 'has-error' : sendquery.name.$invalid && !sendquery.name.$pristine }">
+                                    <input type="text" name="contact" placeholder="Phone #" class="form-control"
+                                        ng-model="query.contactno" only-numeric required maxlength="10">
+                                    <p ng-show="sendquery.contact.$invalid && !sendquery.contact.$pristine"
+                                        class="help-block form_inputnameright" style="color: red;">Contact Number. is
+                                        required.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Type Your Message"
+                                    ng-model="query.message"></textarea>
+                            </div>
+                            <md-button class="all_button" type="submit" ng-disabled="sendquery.$invalid">Send
+                                Message</md-button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer_link pl-0">
+                <div class="row">
+                    <div class="col-lg-7 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12">
+                                <ul class="" style="padding-left: 0px;">
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/about" ng-if="!footerhide"
+                                            class="s-btn-toggler">About Advertising Marketplace</a>
+                                    </li>
+                                    <li class="depth1-wrap" ng-show="!isAuthenticated">
+                                        <a href="./assets/excelFile/DMA - PDF.pdf"  class="s-btn-toggler" target="_blank">Download a DMA Map (PDF)</a>
+                                    </li>
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/policy" ng-if="!footerhide"
+                                            class="s-btn-toggler">All Our Policies/Terms of Conditions and Restrictions (MUST READ)</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <div class="col-lg-4 col-xl-4 col-md-4">
+                                <ul style="padding-left: 0px;">
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" id="pageUp" ng-href="/listing_policies"
+                                            ng-if="!footerhide" class="s-btn-toggler">Listing Policies</a>
+                                    </li>
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/member_behavior" ng-if="!footerhide"
+                                            class="s-btn-toggler">Member Behavior Policies</a>
+                                    </li>
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/privacy_notice" ng-if="!footerhide"
+                                            class="s-btn-toggler">Privacy Notice</a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                            <!-- <div class="col-lg-5 col-xl-5 col-md-5">
+                                <ul style="padding-left: 0px;">
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/prohibited_restricted" ng-if="!footerhide"
+                                            class="s-btn-toggler">Prohibited and Restricted Items</a>
+                                    </li>
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/rules_buyers" ng-if="!footerhide"
+                                            class="s-btn-toggler">Rules for Buyers</a>
+                                    </li>
+                                    <li class="depth1-wrap">
+                                        <a ng-click="goTo('top')" ng-href="/user_agreement" ng-if="!footerhide"
+                                            class="s-btn-toggler">User Agreement</a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-xl-5 col-md-12 col-sm-12 col-xs-12" style="padding-left: 37px;margin-top: 60px;">
+                        <div class="row copyrts" style="padding-left: 0px;">
+                            <div class="depth1-wrap col-12">
+                                <div class="copyrights">
+                                    <h6>&copy;2023 ADVERTISING MARKETPLACE. All rights reserved.</h6>
+                                </div>
+                            </div>
+                            <!-- <div class="depth1-wrap insta_fbook col-3" style="display: flex;bottom: 4px;">
+                                <a target="_blank" ng-href="https://www.facebook.com/advertisingmarketplaceofficial" ng-if="!footerhide"
+                                    class="s-btn-toggler facebook_space" style="width: 100%;">
+                               
+                                    <img src="assets/images/facebook-new.png" class="face-bbok img-fluid" alt="facebook">
+                                </a>
+                    
+                                <a target="_blank" ng-href="https://www.instagram.com/advertisingmarketplaceofficial/" ng-if="!footerhide"
+                                    class="s-btn-toggler facebook_space" style="width: 100%;">
+                            
+                                    <img src="assets/images/instagram-new.png" class="instagram img-fluid" alt="instagram">
+                                </a>
+                    
+                                <a target="_blank" ng-href="https://www.linkedin.com/company/advertising-marketplace/" ng-if="!footerhide"
+                                    class="s-btn-toggler ng-scope" style="width: 81%;">
+                                    <img src="assets/images/Linkedin.png" class="instagram img-fluid">
+                                </a>
+                                </a>
+                            </div> -->
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+</div>
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
+<script>
+    // window.onscroll = function () {
+    //     scrollFunction()
+    // };
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+
+<script>
+    $(window).scroll(function () {
+        var height = $(window).scrollTop();
+        if (height > 20) {
+            $('#myBtn').fadeIn();
+        } else {
+            $('#myBtn').fadeOut();
+        }
+    });
+    $(document).ready(function () {
+        $("#myBtn").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({
+                scrollTop: 0
+            }, "slow");
+            return false;
+        });
+
+    });
+    function scrollFunction() {
+        let e = document.getElementById("conatactInfo");
+        e.scrollIntoView({
+          block: 'start',
+          behavior: 'smooth',
+          inline: 'start'
+        });
+    }
+
+</script>

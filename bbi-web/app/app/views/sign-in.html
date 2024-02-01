@@ -1,0 +1,185 @@
+<style>
+  .siginClose {
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    width: 20px;
+    padding-left: 2.2px;
+    background: #efefef;
+    float: right;
+}
+.siginClose::before {
+    -webkit-text-stroke: 2px #e8e8e8;
+}
+/* .close_align{
+  margin-right: -8px;
+} */
+.md-raised[disabled] {
+    cursor: not-allowed !important;
+    background-color: #e5e4e4 !important;
+}
+/* [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+} */
+.btn[disabled] {
+    cursor: not-allowed !important;
+}
+</style>
+<div id="id01" class="sign_bgcolor">
+  <md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60" style="border-radius: 2px;">
+    <md-dialog-content>
+      <div class="card card-signin" >
+        <div class="card-body pt-0">
+          <!--SIGN IN-->
+          
+          <!-- <button class="sign_in_clse" type="button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button> -->
+          <div class="d-flex justify-content-end">
+            <span  ng-click="closeMdDialog()" class="pr-0 pt-2 close_align">
+              <i class="fa fa-times siginClose"></i>
+            </span>
+          </div>	
+          <!-- <div class="popup_img_center">
+            <img src="assets/images/logo-png.jpg" class="login_img" alt="Smiley face">
+          </div> -->
+          <!-- <div class="text-center log__in">
+            <h4>Log in</h4>
+            <p>Log in with your email and password</p>
+          </div> -->
+
+          <!-- <div class="text-center forgot_pswd">
+            <h4>Forgot Password</h4>
+            <p>Enter the email associated with this account and we'll send a password reset link</p>
+          </div> -->
+          <!-- <hr class="my-4"> -->
+          <form class="form-signin mt-4" name="loginForm" novalidate ng-if="!forgotPasswordpage && !passwordEmailSentSuccess">
+            <!-- <div class="form-group row mr-0 ml-0">
+              <label class="col-12 col-sm-3 col-form-label md-body-2 user_font">Your Email</label>
+              <div class="col-12 col-sm-9" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                <input type="email" class="form-control form_border"  placeholder="Email"  name="email" ng-model="user.email" maxlength="50"
+                  required/>
+                  <p class="help-block" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
+              </div>
+            </div>
+            <div class="form-group row mr-0 ml-0">
+              <label for="Password" class="col-12 col-sm-3 col-form-label md-body-2 user_font">Password</label>
+              <div class="col-12 col-sm-9 show-password" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+                <input  ng-attr-type="{{ showPassword ? 'text' : 'password' }}" class="form-control form_border" placeholder="Password" name="password"  ng-model="user.password"  
+                maxlength="15" required/>
+                <i ng-show="user.password.length" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+                <p class="help-block" ng-if="loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters</p>
+              </div>
+            </div> -->
+            <div class="text-center log__in">
+              <h4 class="pb-2 header">Log In</h4>
+              <p>Log in with your email and password</p>
+            </div>
+            <div class="form-group row mr-0 ml-0 mb-0">
+              <label class="col-12 col-form-label md-body-2 user_font signin-label" ng-class="{'error_text': loginForm.email.$invalid && loginForm.email.$dirty}">Your Email</label>
+            </div>
+            <div class="form-group row mr-0 ml-0 mb-2">
+              <div class="col-12" ng-class="{'has-error': loginForm.email.$invalid && loginForm.email.$dirty, 'has-success': loginForm.email.$valid }">
+                <input type="email" class="form-control form_border_signin"  ng-class="{'error_border': loginForm.email.$invalid && loginForm.email.$dirty}" placeholder="Email"  name="email" ng-model="user.email" maxlength="50"
+                  required/>
+                  <p class="help-block errMsg mb-0" ng-if="loginForm.email.$invalid && loginForm.email.$dirty">Please Enter a valid email address</p>
+              </div>
+            </div>
+            <div class="form-group row mr-0 ml-0 mb-0">
+              <label for="Password" class="col-12 col-form-label md-body-2 user_font signin-label" ng-class="{'error_text': loginForm.password.$invalid && loginForm.password.$dirty}">Password</label>
+            </div>
+            <div class="form-group row mr-0 ml-0 mb-4">
+              <div class="col-12 show-password" ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+                <input  ng-attr-type="{{ showPassword ? 'text' : 'password' }}" ng-class="{'error_border': loginForm.password.$invalid && loginForm.password.$dirty}" class="form-control form_border_signin" placeholder="Password" name="password"  ng-model="user.password"  
+                maxlength="15" minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required ng-keyup="clearErrMsg($event)"/>
+                <i ng-show="hasInput" class="fa" ng-class="showPassword ? 'fa-eye-slash' : 'fa-eye'" ng-click="togglePassword()"></i>
+                <p class="help-block errMsg mb-0" ng-if="hasInput && loginForm.password.$invalid && loginForm.password.$dirty">Please Enter at least 8 characters (it should contain at least one character, one number and one special character)</p>
+              </div>
+            </div>
+            <div class="alert alert-danger error-panel" role="alert" ng-if="signInUserError != ''">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 10px;"></i> {{signInUserError}}
+            </div>
+            <!-- erroe message start -->
+            <!-- <div class="form-group row mr-0 ml-0">
+              <div class="col-12">
+                <input type="email" class="form-control form_border_signin" style="color:#BC2535 !important;" placeholder="Oops! wrong email or password"  name="pswd">
+              </div>
+            </div> -->
+            <!-- erroe message end -->
+            <div class="row mr-0 ml-0">
+              
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                <button class="btn new_sign_up all_button_signup form_border_signin" type="button" layout-fill="layout-fill" ng-click="showRegisterDialog()">Sign Up</button>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 pl-0 log_padd">
+                <button class="btn login_margin all_button log_height" type="submit" ng-click="signInUser(loginForm)"
+                ng-disabled="loginForm.email.$invalid || loginForm.password.$invalid" layout-fill="layout-fill" md-autofocus autofocus>Log In</button>
+              </div>
+            </div>
+            <div class="row mr-0 ml-0 mb-3">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="d-flex justify-content-center mt-4 forgot_align">                  
+                  <a class="md-primary udrlin alrhvacc" style="cursor:pointer; color: #007bff; font-size: 12px;" ng-click="showForgotPasswordDialog()">Forgot password ?</a><br>                  
+                  <!-- <a class="md-primary udrlin alrhvacc" style="cursor:pointer; text-decoration:none;color: #000;font-size: 11px;" ng-click="showRegisterDialog()">New User? Register Here</a> -->
+              </div>
+              </div>
+            </div>            
+          </form>
+          <!--//SIGN IN-->
+          <!--FORGOT PASSWORD-->
+          
+          <form class="form-signin mt-4" name="forgotPassword" novalidate="novalidate" ng-if="forgotPasswordpage && !passwordEmailSentSuccess">
+            <div class="text-center forgot_pswd">
+               <h4>Forgot Password</h4>
+               <p class="pt-2 email_text">Enter the email associated with this account and we'll send a password reset link</p>
+            </div>
+            <!-- <h4 class="text-center mb-3" style="margin-bottom:0px;">Reset Password</h4> -->
+            <div class="form-group row">
+                <label for="paymentType" class="col-12 col-form-label md-body-2 user_font" ng-class="{'error_text': forgotPassword.email.$invalid && forgotPassword.email.$dirty}">Your Email</label>
+            </div>
+            
+            <div class="form-group row">
+              <div class="col-12">
+                <input type="email" placeholder="Email" class="form-control form_border_signin" ng-class="{'error_border': forgotPassword.email.$invalid && forgotPassword.email.$dirty}" id="" name="email" ng-model="forgotPwd.email">
+                <p class="help-block errMsg mb-0" ng-if="forgotPassword.email.$invalid && forgotPassword.email.$dirty">Please Enter a valid email address</p>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-12">
+                <div class="alert alert-danger error-panel ml-0 mr-0 mt-3" role="alert" ng-show="errorMsg">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size: 10px;"></i>  <span>{{errorMsg}}</span>
+                </div>
+              </div>
+            </div>
+                <div class="row">
+                    <!-- <div class="offset-lg-3 offset-md-3 col-sm-6 col-md-6 col-lg-6"> -->
+                      <div class="col-sm-12 col-md-12 col-lg-12">
+                        <a><button class="btn reset_passowrd all_button log_height md-raised" style="background: #44596D !important;"
+                                type="submit" layout-fill="layout-fill" ng-click="requestResetPassword(forgotPwd)" ng-disabled="forgotPassword.email.$invalid || !forgotPwd.email">Reset Password</button></a>
+                    </div>
+                </div>
+          
+            <div class="row mr-0 ml-0">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="d-flex justify-content-center mt-4 forgot_align">                  
+                  <a class="md-primary udrlin alrhvacc" style="cursor:pointer; color: #007bff; font-size: 12px;" ng-click='returnToLogin()'>Back to Log In</a><br>                  
+              </div>
+              </div>
+            </div>
+        </form>
+          <!--//FORGOT PASSWORD-->
+          <div ng-if="passwordEmailSentSuccess" style="padding: 20px;">
+            <h2>Reset Instructions Sent</h2>
+            <p class="text-center pr-3 pt-3 pb-3">We delivered instructions to your email to help <br> you reset your password</p>
+            <div class="row">
+              <!-- <div class="offset-lg-3 offset-md-3 col-sm-6 col-md-6 col-lg-6"> -->
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                  <a><button class="btn reset_passowrd all_button log_height" style="background: #44596D !important;"
+                          type="submit" layout-fill="layout-fill" ng-click="returnToLogin()">Back to Log In</button></a>
+              </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </md-dialog-content>
+  </md-dialog>
+</div>

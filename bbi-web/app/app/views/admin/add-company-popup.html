@@ -1,0 +1,84 @@
+<md-dialog flex-xs="100" flex="35" flex-md="40" flex-sm="50">
+	<md-dialog-content>
+		<md-content class="md-padding contbg">
+			<div layout="row" layout-margin>
+				<h4>Enter Company Details</h4>
+				<div flex></div>
+				<md-button class="md-icon-button md-button" type="button" ng-click="closeMdDialog()">
+					<i class="material-icons">close</i>
+					<div class="md-ripple-container"></div>
+				</md-button>
+			</div>
+			<form name="addCompanyForm" novalidate="novalidate">
+				<input type="hidden" ng-model="company.id" />
+				<div layout="column" layout-xs="column" layout-padding flex="100" >
+					<div class="form-group">
+						<label>Company Name</label>
+						<input ng-model="company.name" class="form-control" type="text" name="name" minlength="5" maxlength="60" required="required" />
+						<div ng-messages="addCompanyForm.name.$error">
+							<div ng-message="required">Company Name is required.</div>
+							<div ng-message="minlength">Company Name must have 5 characters.</div>
+							<div ng-message="maxlength">Company Name shouldn't exceed 60 characters.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label> Company Type </label>
+						<input ng-model="company.company_type" class="form-control" type="text" name="company_type" minlength="2" maxlength="60" required="required" />
+						<div ng-messages="addCompanyForm.company_type.$error">
+							<div ng-message="required">Company Type is required.</div>
+							<div ng-message="minlength">Company Type must have 2 characters.</div>
+							<div ng-message="maxlength">Company Type shouldn't exceed 60 characters.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Contact Name</label>
+						<input ng-model="company.contact_name" class="form-control" type="text" name="contact_name" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9_-\s]+$/"/>
+						<div ng-messages="addCompanyForm.contact_name.$error">
+							<div ng-message="required">Contact Name is required.</div>
+							<div ng-message="minlength">Contact Name must have 3 characters.</div>
+							<div ng-message="maxlength">Contact Name shouldn't exceed 100 characters. </div>
+							<div ng-message="pattern">Contact Name should contain only Alpha Numeric and _ - . symbols.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<input ng-model="company.contact_email" class="form-control" name="email" type="email" minlength="3" maxlength="100" required="required" ng-pattern="/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+$/"/>
+						<div ng-messages="addCompanyForm.email.$error">
+							<div ng-message="required">Email is required.</div>
+							<div ng-message="maxlength">Email shouldn't exceed 30 characters. </div>
+							<div ng-message="pattern">Enter a valid EmailId.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Phone Number</label>
+						<input ng-model="company.contact_phone" class="form-control" type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
+						<div ng-messages="addCompanyForm.phone.$error">
+							<div ng-message="required">Phone Number is required.</div>
+							<div ng-message="minlength">Phone Number must have 10 characters.</div>
+							<div ng-message="maxlength">Phone Number shouldn't exceed 10 characters.</div>
+							<div ng-message="pattern">Phone Number should be only numbe.</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label> Address </label>
+						<input ng-model="company.address" class="form-control" type="text" name="address" required="required" />
+						<div ng-messages="addCompanyForm.address.$error">
+							<div ng-message="required">Campaign Name is required.</div>
+						</div>
+					</div>
+					<div class="serverErrors" ng-if ="comapnyErrors" style="padding-left:0px;">
+							<ul>
+								<li ng-repeat="error in comapnyErrors">
+									{{error}}
+								</li>
+							</ul>
+						</div>
+				</div>
+				<div layout="row" layout-align="center center">
+					<md-button Class="md-raised all_button" type="submit" ng-click="addCompany(company)" ng-disabled="addCompanyForm.$invalid">Submit</md-button>
+					<md-button Class="md-raised Upload_font" ng-click="closeMdDialog()">Cancel</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

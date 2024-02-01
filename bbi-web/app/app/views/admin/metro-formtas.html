@@ -1,0 +1,46 @@
+<div layout="column" layout-fill="layout-fill">
+	<div class="md-title" layout="row">
+		<div layout-align="center end" layout="column" flex="100">
+			<md-button class="md-raised md-warn all_button" ng-click="showFormatForm()">
+				Add New Metro Format
+			</md-button>
+		</div>
+	</div>
+	<div layout-margin layout="column">
+	</div>
+	<div style="margin-top: 1em;">
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="text_color">
+					<tr>
+						<th>Icon</th>
+						<th>Formats type</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="format in formatList">
+						<td class="table_vertical"><img ng-src="{{serverUrl + format.image}}" style="width:60px;height:60px;"/></td>
+						<td class="table_vertical">{{format.name}}</td>
+						<td class="table_vertical">
+							<span>
+								<a style="cursor:pointer;" ng-click="editFormat(format)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+							<span>
+								<a style="cursor:pointer;" ng-click="deleteFormat(format)">
+									<md-icon>
+										<i class="material-icons">delete</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

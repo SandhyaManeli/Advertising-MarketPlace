@@ -1,0 +1,445 @@
+<style>
+	.md-button {
+		min-width: 64px !important;
+	}
+	md-list-item {
+		padding: 0 0px !important;
+	}
+	.ul_class{
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+	.ul_class li{
+		display: inline-block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+	}
+</style>
+<!-- ============ add hoarding list side nav start ============ -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="add-metro-product-sidenav" style="width:400px !important">
+	<md-toolbar layout="row">
+		<div class="md-toolbar-tools bg_main_color" style="background:#414143 !important">
+			<h2>
+				<span>Add Packages</span>
+			</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleAddMetroProductSidenav()()">
+				<md-tooltip>Close Side Panel</md-tooltip>
+				<md-icon class="md-default-theme">
+					<i class="material-icons" style="color:#fff !important;">close</i>
+				</md-icon>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<md-content layout-padding="">
+		<form role="form" name="metroPackagesCampaigns">
+			<div class="form-group row">
+				<label for="productType" class="col-sm-4 col-form-label">Product Type</label>
+				<div class="col-sm-8">
+						<select name="package" class="form-control" id="package" ng-model="selectedFormat" ng-options="foramt as format.name for format in formatList" required>
+							<!-- <option value="" disabled selected>Select Format</option> -->
+						</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="area" class="col-sm-4 col-form-label">Select Corridor</label>
+				<div class="col-sm-8">
+					<select name="corridor" class="form-control" id="corridor" ng-model="selectedCorridor" ng-options="corr as corr.name for corr in metroCorridorList" ng-change="getMetroPackages(selectedCorridor.id)" required>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+					<label for="pack" class="col-sm-4 col-form-label">Packages</label>
+					<div class="col-sm-8">
+							<select name="corridor" class="form-control"  ng-model="selectedPackage" ng-options="pkg as pkg.name for pkg in metroPackages"  required>
+							</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="pack" class="col-sm-4 col-form-label">Months</label>
+					<div class="col-sm-8">
+						<!--	<select  class="form-control"  ng-model="selectedPackage.days"   required>
+									<option value = "" disabled>Days</option>
+									<option value = "7" ng-selected="true">7 Days</option>
+									<option value = "14">14 Days</option>
+									<option value = "28">28 Days</option>
+									<option value = "60">60 Days</option>
+									<option value = "90">90 Days</option>
+							</select>-->
+							<select  class="form-control"  ng-model="selectedPackage.months" ng-options="opt.label for opt in monthoptions"   required>
+								
+							</select>
+							<!--<input type="number" ng-model="selectedPackage.months" value= "1" min ="1" max="12" required class="form-control">-->
+					</div>
+				</div>
+			
+			<div class="form-group row">
+				<label for="hoardingLight" class="col-sm-4 col-form-label">No. Of Trains</label>
+				<div class="col-sm-8">
+					<input class="form-control" type='number' ng-model="selectedPackage.selected_trains" max="{{selectedPackage.max_trains}}" min="1" />
+				</div>
+			</div>
+		<!--	<div class="form-group row" >
+				<label for="" class="col-sm-4 col-form-label">No. Of Slots</label>
+				<div class="col-sm-8">
+						{{selectedPackage.max_slots * selectedPackage.days}}
+				</div>
+			</div> --> 
+			<div class="form-group row">
+				<label for="" class="col-sm-4 col-form-label">Select Date</label>
+				<div flex-gt-xs="">
+					<md-datepicker ng-model="selectedPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="productId" class="col-sm-4 col-form-label">Price</label>
+				<div class="col-sm-8">
+					
+					<div style="padding-top:6px;">{{ selectedPackage.price_new = (selectedPackage.price * selectedPackage.months.value * selectedPackage.selected_trains) || "N/A"}}</div>
+				</div>
+			</div>
+			<div class="form-group" style="margin:10px 0">
+				<label class="col-md-3 control-label"></label>
+				<!-- <input class="btn btn-primary" value="Save" type="button"  ng-click="addPackageInMetroCampaign(admin_selected_slots,admin_price)"> -->
+				<md-button class="md-raised all_button" ng-click="addPackageInMetroCampaign(admin_selected_slots,admin_price)">Save</md-button>
+				<span></span>
+				<!-- <input class="btn btn-default" value="Cancel" type="button" ng-click="toggleAddMetroProductSidenav()"> -->
+				<md-button class="md-raised Upload_font" ng-click="toggleAddMetroProductSidenav()">Cancel</md-button>
+			</div>
+		</form>
+	</md-content>
+</md-sidenav>
+<!-- ============ add hoarding list side nav end ============ -->
+<div ng-cloak flex-xs="100" flex-sm="100" flex-md="100">
+	<div layout="column" layout-sm="column" layout-xs="column">
+		<div class="bg-part">
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay">
+				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp client_info">
+					<!-- <div layout="column" layout-align="center center" layout-margin>
+						<div>
+							<img src="assets/images/client_details.png" width="70%">
+						</div>
+						<h3 class="text_color">Client Details</h2>
+					</div> -->
+					<table class="table table-striped table-bordered camp_tablewidth">
+						<tbody>
+							<tr>
+								<td><b>Campaign Name</b></td>
+								<td>{{metroCampaignDetails.name | capitalize}}</td>
+							</tr>
+							<tr>
+								<td><b>Client Name</b></td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.company_name || "N/A" | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_name || "N/A" | capitalize}}</td>
+							</tr>
+							<tr>
+								<td><b>Contact</b></td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.phone || "N/A"}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_phone || "N/A"}}</td>
+							</tr>
+							<tr>
+								<td><b>Email</b></td>
+								<td ng-if="metroCampaignDetails.type == 0">{{metroCampaignDetails.user_details.email || "N/A" | capitalize}}</td>
+								<td ng-if="metroCampaignDetails.type == 1">{{metroCampaignDetails.org_contact_email || "N/A" | capitalize}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp Campaign_summary">
+					<!-- <div layout="column" layout-align="center center" layout-margin>
+						<div>
+							<img src="assets/images/capaign_details.png" width="70%">
+						</div>
+						<h3 class="text_color">Campaign Summary</h2>
+					</div> -->
+					<table class="table table-striped table-bordered camp_tablewidth">
+						<tbody>
+							<tr>
+								<td class="camp_tableadmin"><b>Date</b></td>
+								<td>{{metroCampaignDetails.created_at | dateify | date:'dd-MM-yyyy' || "N/A"}}</td>
+							</tr>
+							<tr>
+								<td><b>Total Price</b></td>
+								<td>
+									<span ng-if="metroCampaignDetails.act_budget">Rs. </span>{{TOTAL || "0"}}
+								</td>
+							</tr>
+							<tr>
+								<td><b>Pending Price</b></td>
+								<td>
+									<span ng-if="!metroCampaignDetails">{{"0"}}</span>
+									<span ng-if="metroCampaignDetails && metroCampaignDetails.act_budget">Rs. {{metroCampaignDetails.pending_payment}}</span>
+									<span ng-if="metroCampaignDetails && !metroCampaignDetails.act_budget">{{"0"}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td><b>Status</b></td>
+								<td>{{metroCampaignDetails.status | stringifyCampaignStatus }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div layout="row" layout-xs="column" layout-sm="column" layout-gt-sm="row" layout-margin="layout-margin" class="client-summay" ng-if="metroCampaignDetails.pending_payment < metroCampaignDetails.act_budget">
+					<!-- ng-if="metroCampaignDetails.pending_payment < metroCampaignDetails.act_budget" -->
+				<div layout="column" layuot-xs="column" layout-sm="column" layout-gt-sm="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+					<div layout="column" layout-align="center center">
+						<h3>Payment Details</h2>
+					</div>
+					{{campaignMetroPayments.totalamount}}
+					<div layout="row">
+						<div flex="50" layout="column" layout-align="center center">Total amount:</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.campaign_details.totalamount || "0"}}</div>
+					</div>
+					<div layout="row">
+						<div flex="50" layout="column" layout-align="center center">Paid Amount:</div>
+						<div flex="50" layout="column" layout-align="center center">Rs. {{campaignMetroPayments.total_paid || 0 }}</div>
+					</div>
+					<div layout="row" ng-if="campaignMetroPayments.total_paid < TOTAL">
+						<div flex="100" layout="column" layout-align="center center">
+							<md-button Class="md-raised md-primary all_button" type="submit" ng-click="showConfirmMetroPaymentPopup()">
+								Update Payment
+							</md-button>
+						</div>
+					</div>
+				</div>
+				<div layout="column" flex="50" flex-xs="100" flex-sm="100" flex-gt-sm="50" layuot-xs="column" layout-sm="column" layout-gt-sm="column"
+				 layout-margin="layout-margin" class="contbg md-whiteframe-3dp">
+					<div layout="column" layout-align="center center">
+						<h3>Recently Updated Payments</h2>
+					</div>
+					<div layout="column" layout-margin style="height:150px; overflow:auto;">
+						<div layout="row">
+							<div flex="20" layout="column" layout-align="center center">Date</div>
+							<div flex="20" layout="column" layout-align="center center">Amount</div>
+							<div flex="20" layout="column" layout-align="center center">Txn Type</div>
+							<div flex="20" layout="column" layout-align="center center">Ref. No.</div>
+							<div flex="20" layout="column" layout-align="center center">Accepted by</div>
+						</div>
+						<div layout="row" ng-if="!campaignMetroPayments">
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">Rs. 0</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+							<div flex="20" layout="column" layout-align="center center">N/A</div>
+						</div>
+						<div layout="row" ng-repeat="payment in campaignMetroPayments.all_payments">
+							<div flex="20" layout="column" layout-align="center center">{{payment.updated_at | dateify | date: "dd/MM/yyyy"}}</div>
+							<div flex="20" layout="column" layout-align="center center">{{"Rs." + payment.amount }}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.type }}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.reference_no || "N/A"}}</div>
+							<div flex="20" layout="column" layout-align="center center">{{payment.received_by || "N/A" }}</div>
+						</div>
+					</div>
+					
+				</div>
+			</div> 
+		</div>
+		<!-- <div layout="row" layout-margin>
+			<div flex="100" layout="row" layout-xs="column" layout-sm="row" layout-gt-sm="row" layout-align="end center">
+				<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
+					Add New Product
+				</md-button>
+				<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
+					Update Payment 
+				</md-button>
+				<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+					Launch Campaign
+				</md-button>
+				<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 1141" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
+					Close Campaign
+				</md-button>
+			</div>
+		</div> -->
+		<div class="row" style="margin-left:0px; margin-right:0px;">
+			<div class="row col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12" style="padding-right: 0px;margin-left: 0px;" >
+				<div class="offset-xl-6 col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+					<md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampaignDetails.id)" download style="float:right">					
+							Download Quotation
+					</md-button>
+				</div>
+				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1">
+					<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
+						Add Packages
+					</md-button>
+				</div>
+				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2">
+
+					<md-button ng-disabled=" campaignMetroPayments.total_paid <= TOTAL || (metroCampaignDetails.type !=1 && metroCampaignDetails.status == 1101 ) || (metroCampaignDetails.type ==1 && metroCampaignDetails.status == 1101 )" class="md-raised md-warn all_gary" ng-click="showConfirmMetroPaymentPopup()">
+						Update Payment 
+					</md-button>
+				</div>
+				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3">
+					<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+						Launch Campaign
+					</md-button>
+				</div>
+				<div class="col-xl-1 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4">
+					<md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 1141" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
+						Close Campaign
+					</md-button>
+				</div>
+			</div>
+			<!-- <div class="row col-xl-12 col-lg-12 col-md-12 col-sm-6 col-12">
+					<div class="offset-xl-6">
+					<ul class="ul_class">
+							<li ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0"><md-button class="dropbtn Upload_font" ng-click="downloadOwnerQuote(metroCampaignDetails.id)" download>					
+									Download Quotation
+							</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status > 1101" ng-click="toggleAddMetroProductSidenav()">
+									Add Packages
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+									Launch Campaign
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || (metroCampaignDetails.status != 1131)" ng-click="launchMetroCampaign(metroCampaignDetails.id, $event)">
+									Launch Campaign
+								</md-button></li>
+							<li><md-button class="md-raised md-warn all_gary" ng-disabled="!metroCampaignDetails || metroCampaignDetails.status != 1141" ng-click="closeMetroCampaign(metroCampaignDetails.id)">
+									Close Campaign
+								</md-button></li>
+						  </ul>
+					</div>
+			</div> -->
+		</div>
+		<div layout="row">
+			<div flex="30">
+				<h3 class="m-2 text_color" style="margin: 30px 0 0 0;font-size: 20px;">Products({{metroCampaignDetails.packages.length || 0}})</h3>
+			</div>
+		</div>
+		
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="text_color">
+					<tr>
+						<th>Product Type</th>
+						<th>Corridor</th>
+						<th>No.of Trains</th>
+						<!--<th>No.of Slots</th>-->
+						<th>Durations</th>
+						<th>Start Date</th>
+						<th>Price</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="pkg in metroCampaignDetails.packages">
+						<td class="table_vertical">{{pkg.package_name}}</td>
+						<td class="table_vertical">{{pkg.corridor_name}}</td>
+						<td class="table_vertical">{{pkg.selected_trains}}</td>
+						<!--<td>{{pkg.selected_slots}}</td>-->
+						<td class="table_vertical">{{((pkg.months == 0.5) ? '15 Days' : pkg.months+'Months')  }}</td>
+						<td class="table_vertical">{{pkg.start_date | date: "dd-MM-yyyy"}}</td>
+						<td class="table_vertical">{{pkg.price}}</td>
+							 <!--<md-input-container class="md-block margin-input">
+								  <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
+							    <input ng-model="pkg.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" style="width: 30%"
+									 />
+									 <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice"><i class="material-icons">edit</i></md-button>
+							     <md-button class="md-primary" ng-click="updatePackagePrice(pkg.price,pkg)" ng-show="enabledPrice"><i class="material-icons">check</i></md-button>
+							</md-input-container>-->
+							
+						
+						<td class="table_vertical">
+							<md-button class="md-icon-button" ng-disabled="(metroCampaignDetails.status != '1101' && metroCampaignDetails.status != '1121')" ng-click="updatePackagePrice(pkg.price,pkg)">
+								<md-icon>
+									<i class="material-icons">mode_edit</i>
+								</md-icon>
+							</md-button>
+							<md-button class="md-icon-button" ng-if="metroCampDetails.status == 1101" ng-click="deleteProductFromCampaign(metroCampaignDetails.id, pkg.package_id)">
+								<md-icon>
+									<i class="material-icons">delete </i>
+								</md-icon>
+							</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- <div class="row border_quest mr-0 ml-0 ">
+			<div class="col-md-12">
+					ng-if="metroCampDetails.status >= 1121"
+				ng-if="metroCampDetails.type != 0"
+				<div class="mt-3 pull-right" style="font-size: 13px;">
+					<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
+					</p>
+					<p class="text_color" style="text-indent: 161px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+					<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+							TOTAL | number : 2}}</span>
+					</p>
+				</div>
+			</div>
+		</div> -->
+		<!-- ------------------------------------------------------------------------------- -->
+		<div class="row border_quest mr-0 ml-0">
+				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status < 1121" style="padding-right: 0px;">
+						<div class="small-wrapper mt0">
+								<div class="smallContainer">
+								  <div class="payment-summary">
+									<ul id="double">
+									  <li class="col1">Total :</li>
+									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
+									  <li class="col1 text_color"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+										ng-change="uncheck(checked)" />18% GST :</li>
+									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									</ul>
+									<ul id="total">
+									  <li class="col1">Grand Total :</li>
+									  <li class="col2">{{TOTAL | number : 2}}</li>
+									</ul>
+								  </div>
+								</div>
+							  </div>
+					<!-- <div class="mt-3 pull-right sub_total">
+						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
+						</p>
+						<p class="text_color" style="text-indent: 161px;"><input type="checkbox" ng-model="checked" ng-init="checked = true"
+							ng-change="uncheck(checked)" />18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+								TOTAL | number : 2}}</span>
+						</p>
+					</div> -->
+				</div>
+				<div class="col-md-12" ng-if="metroCampaignDetails.status < 1121">
+						<md-button class="md-grid-item-content pull-right all_button book_campowner" ng-disabled="metroCampaignDetails.status != 1101"
+						 ng-click="checkoutMetroCampaign($event, metroCampaignDetails.id)">					
+							Checkout
+						</md-button>
+				</div>
+				<div class="col-12 col-sm-6 col-md-12" ng-if="metroCampaignDetails.status >= 1121 " style="padding-right: 0px;">
+						<div class="small-wrapper mt0">
+								<div class="smallContainer">
+								  <div class="payment-summary">
+									<ul id="double">
+									  <li class="col1">Total :</li>
+									  <li class="col2">{{metroCampaignDetails.act_budget}}</li>
+									  <li class="col1 text_color">18% GST :</li>
+									  <li class="col2 text_color">{{ GST |number : 2 ||"N/A" }}</li>
+									</ul>
+									<ul id="total">
+									  <li class="col1">Grand Total :</li>
+									  <li class="col2">{{TOTAL | number : 2}}</li>
+									</ul>
+								  </div>
+								</div>
+							  </div>
+					<!-- <div class="mt-3 pull-right sub_total">
+						<p class="font-weight-light" style="text-indent: 193px;"><b>Total : <span class="float-right">{{metroCampaignDetails.act_budget}}</b></span>
+						</p>
+						<p class="text_color" style="text-indent: 161px;">18% GST : <span class="float-right">{{ GST |number : 2 ||"N/A" }}</span></p>
+						<p class="" style="text-indent: 143px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{
+								TOTAL | number : 2}}</span>
+						</p>				
+					</div> -->
+				</div>
+			</div>
+		<!-- ------------------------------------------------------------------------------------- -->
+	</div>
+</div>

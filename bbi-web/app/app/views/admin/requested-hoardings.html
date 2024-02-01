@@ -1,0 +1,54 @@
+<div layout="column" layout-fill="layout-fill">
+    <div layout="column">
+        <div style="margin-top: 1em;">
+            <div class="table-responsive">
+                <table class="table table-hover call_center">
+                    <thead>
+                        <tr class="text_color">
+                            <th>Site No</th>
+                            <th>Site type</th>
+                            <th>Ad Space Owner</th>
+                            <th>Area</th>
+                            <th>Panel Size</th>
+                            <th>Lighting</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <tr ng-repeat="product in requestedProductList">
+                            <td class="table_vertical">{{product.siteNo}}</td>
+                            <td class="table_vertical">{{product.format_name}}</td>
+                            <td class="table_vertical">{{product.client_name}}</td>
+                            <td class="table_vertical">{{product.area_name}}</td>
+                            <td class="table_vertical">{{product.panelSize}}</td>
+                            <td class="table_vertical">{{product.lighting| boolToYesNo}}</td>
+                            <td class="table_vertical">
+                                <img ng-src="{{serverUrl + product.image}}" class="img-thumbnail" style="width:60px; height:40px;" ng-click="viewProductImage(product.image)"/>
+                            </td>
+                            <td class="table_vertical">
+                                <span>
+                                    <a style="cursor:pointer;" ng-click="editProduct(product)">
+                                        <md-icon>
+                                            <i class="material-icons">mode_edit</i>
+                                        </md-icon>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container" style="margin-top:20px;" ng-if="pagination.pageCount > 1">
+                <ul class="pagination">
+                    <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+                        <a ng-click="pagination.pageNo = i; getRequestedHoardings();" 
+                           ng-class="{'selected-pagelink' : pagination.pageNo == i}" 
+                           style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+                            {{i}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+<g>
+	<image style="overflow:visible;" width="64" height="64" xlink:href="535FA021.jpg"  transform="matrix(1 0 0 1 0 -0.11)">
+	</image>
+	<g>
+		<defs>
+			<path id="SVGID_1_" d="M32,58.9c14.9,0,27-12.1,27-27c0-14.9-12.1-27-27-27C17.1,4.9,5,17,5,31.9C5,46.8,17.1,58.9,32,58.9
+				 M32,63.9c-17.7,0-32-14.3-32-32c0-17.7,14.3-32,32-32s32,14.3,32,32C64,49.6,49.7,63.9,32,63.9L32,63.9L32,63.9z"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_2_);">
+			<image style="overflow:visible;" width="64" height="64" xlink:href="535FA023.jpg"  transform="matrix(1 0 0 1 0 -0.11)">
+			</image>
+		</g>
+	</g>
+	<g>
+		<defs>
+			<path id="SVGID_3_" d="M32,31.2c-4.3,0-7.7-3.4-7.7-7.7s3.5-7.7,7.7-7.7s7.7,3.4,7.7,7.7S36.3,31.2,32,31.2L32,31.2z M18,48.9
+				C18,41.2,24.3,35,32,35s14,6.2,14,13.9H18L18,48.9z"/>
+		</defs>
+		<clipPath id="SVGID_4_">
+			<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_4_);">
+			<image style="overflow:visible;" width="64" height="64" xlink:href="535FA026.jpg"  transform="matrix(1 0 0 1 0 -0.11)">
+			</image>
+		</g>
+	</g>
+	<g>
+		<defs>
+			<polygon id="SVGID_5_" points="8.6,53 3,58.5 4.1,62.9 13,55.2 9.7,51.9 8.6,53 			"/>
+		</defs>
+		<clipPath id="SVGID_6_">
+			<use xlink:href="#SVGID_5_"  style="overflow:visible;"/>
+		</clipPath>
+		<g style="clip-path:url(#SVGID_6_);">
+			<image style="overflow:visible;" width="64" height="64" xlink:href="535FA027.jpg"  transform="matrix(1 0 0 1 0 -0.11)">
+			</image>
+		</g>
+	</g>
+</g>
+</svg>

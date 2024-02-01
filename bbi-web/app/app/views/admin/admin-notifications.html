@@ -1,0 +1,163 @@
+<style>
+        .unReadNotifications {
+            background-color: #f2f3f2;
+        }
+</style>
+<meta http-equiv="content-type" content="application/pdf ">
+<div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+<div layout="column" layout-padding>
+    <p class="text_color md-title">Notifications</p>
+    <div class="col-sm-3">
+        <md-button ng-disabled="bulkSelect || (selectedids && !selectedids.length)" class="md-raised all_button" ng-click="bulkUplodData()">
+           Mark Notification As Read
+        </md-button>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th><input type="checkbox" ng-model="$root.selectAllChk" ng-click="selectAll($event, selectAllChk)"> Select Unread</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th class="table_vertical text-right">Date Entered
+                        <span class="d-inline" ng-class="'created_at' == upArrowColour && sortType == 'Asccrfqacca'?'highlight': 'nonhighlight'" ng-click='sortAsccrfqacca("created_at","string")'><i class="fas fa-arrow-up"></i>
+                        </span>
+                        <span class="d-inline" ng-class="'created_at' == downArrowColour && sortType == 'Dsccrfqacca'?'highlight': 'nonhighlight'" ng-click='sortDsccrfqacca("created_at","string")'><i class="fas fa-arrow-down"></i>
+                        </span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="notifictaion in getAdminNotifictaionss" ng-class ="{unReadNotifications : notifictaion.status == 0}">
+                    <td class="table_vertical"><input type="checkbox" ng-model="notifictaion.valueChecked" ng-click="selectSingle(notifictaion.id,notifictaion.status)"></td>
+                    <td class="table_vertical">{{notifictaion.message | capitalize}}</td>
+                    <td class="table_vertical">
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'metro-campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/metro-campaign/{{notifictaion.campaign_id}}">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'delete_product_from_campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id,notifictaion.product_id)"
+                        href="/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}/16">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'offer_request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/offers">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'delete_campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}/15">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}/10">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product-request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'product_request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.product_id,notifictaion.id)"
+                        href="/admin/product-camp-details/{{notifictaion.product_id}}">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'user-query'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/admin-feeds">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'SubSeller_registartion'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/user-management">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                        <a style="cursor:pointer;" ng-if="notifictaion.type == 'Owner_registartion' || notifictaion.type == 'User_registartion'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/user-management?a=u">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'rfp_request'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/RFP-Requset-Without-Login">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'campaign_product_offer'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/campaign-proposal-summary/{{notifictaion.campaign_id}}/30">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'bulk_upload'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+						<a style="cursor:pointer;" ng-if="notifictaion.type == 'product_transfer'" 
+                        ng-click = "updateNotifyStatus(notifictaion.type,notifictaion.campaign_id,notifictaion.id)"
+                        href="/admin/hoarding-list">
+                            <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                                <i class="material-icons">remove_red_eye</i>
+                            </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical text-right text_color">{{notifictaion.created_at| dateFormat}}</td>
+                </tr> 
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<style>
+	.highlight {
+		color: black;
+	}
+  .nonhighlight{
+	color: #808080c2;
+  }
+  
+  </style>

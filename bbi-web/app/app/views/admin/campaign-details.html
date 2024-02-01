@@ -1,0 +1,209 @@
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+    <!-- <div layout="column" layout-sm="column" layout-xs="column">
+            <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="ClientRequest">
+                <md-toolbar layout="row" style="    background: #48869c;">
+                    <div class="md-toolbar-tools">
+                        <h2>
+                            <span>Client Request</span>
+                        </h2>
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeInputPanel()">
+                            <md-icon>
+                                <i class="material-icons">clear</i>
+                            </md-icon>
+                        </md-button>
+                    </div>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <div class="md-whiteframe-z2 md-body-1">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard dummy
+                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
+                        book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
+                        unchanged.
+                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+                        recently
+                        with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                </md-content>
+            </md-sidenav>
+    
+        </div> -->
+    <!-- share campaign sidenav -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+        <div layout="row">
+            <div class="md-toolbar-tools">
+                <div flex></div>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                    <md-tooltip>Close Side Panel</md-tooltip>
+                    <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-content layout-align="center center" layout-margin layout-padding>
+            <h3 class="md-headline">Share Campaign</h3>
+            <form name="shareCampaignForm">
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                        <div ng-messages="shareCampaignForm.name.$error">
+                            <div ng-message="required">Name is required.</div>
+                            <div ng-message="pattern">Enter a valid Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                        <div ng-messages="shareCampaignForm.email.$error">
+                            <div ng-message="required">Email is required.</div>
+                            <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                    </md-input-container>
+                    <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign)">Share
+                        Campaign</md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-sidenav>
+    <!-- share campaign sidenav ends -->
+    <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+        <div class="row" style="margin-left:0px; margin-right:0px;">
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+                style="margin-top:14px;">
+                <p class="">Camapaign ID</p>
+                <p class="md-caption mob_span"><b>BB-001</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng"
+                style="margin-top:14px;">
+                <p class="">Camapaign Name</p>
+                <p class="md-caption mob_span"><b>BB-238</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+                style="margin-top:14px;">
+                <p class="">Number of Products</p>
+                <p class="md-caption mob_span mob_5"><b>5</b></p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+                style="margin-top:14px;">
+                <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+                    <p class="md-caption"><span><i class="material-icons i_icon">
+                                reply_all
+                            </i></span></p>
+                    <p class="mob_spanicon share_icon">Share Camapaign</p>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+                style="margin-top:14px;">
+                <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+                    <p class="md-caption"><span><i class="material-icons i_icondown">
+                                file_copy
+                            </i></span></p>
+                    <p class="mob_spanicon share_icon">Download Quotetation</p>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs"
+                style="margin-top:1em;">
+                <!-- <md-button class="md-raised Upload_font">
+                        <md-icon>
+                            <i class="material-icons material_iconscloud">
+                                cloud_upload
+                            </i>
+                        </md-icon>
+                        Upload Art Work
+                    </md-button> -->
+                <md-button class="md-raised add_blue" ng-href="/admin/add-campagin-product">Add Another Product
+                </md-button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Product Details</th>
+                    <th></th>
+                    <!-- <th class="">Size</th> -->
+                    <th class="hide-xs">Starting Date</th>
+                    <th class="hide-xs">Ending Date</th>
+                    <th class="hide-xs">Price Given</th>
+                    <th class="hide-xs">Price Received</th>
+                    <th class="hide-xs">Inventory Owner</th>
+
+                    <th class="hide-xs">Inventory Status</th>
+                    <!-- <th class="hide-xs">
+                            <md-button class="md-raised add_blue" ng-href="/admin/add-campagin-product">Add Another Product
+                            </md-button>
+                        </th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="image_tdwidth">
+                        <img ng-src="{{config.serverUrl + product.image}}" alt="Smiley face" class="requ_size">
+                    </td>
+                    <td>
+                        <p class="td_font"><b>BB238 - Kothaguda (40Ft X 40Ft)</b><br><b style="color: #44596D;">Address:</b> From Kothaguda X Roads
+                            towards Hitech city
+                            <br><b style="color: #44596D;">Views :</b> 1, 54000 Per week,
+                            Per week<br>Live Traffic:<button class="btn" style="background:#FF0A25; color:#fff; margin-left:10px;"><i
+                                    class="fa fa-eye"></i>1,25,589</button></p>
+                    </td>
+                    <!-- <td class="table_vertical">60*60</td> -->
+                    <td class="table_vertical hide-xs">
+                        <p>15-08-2018</p>
+                        <!-- <p></p> -->
+                    </td>
+                    <td class="table_vertical hide-xs">
+                        <p>15-08-2018</p>
+                        <!-- <p>15-10-2018</p> -->
+                    </td>
+                    <!-- <td class="table_vertical hide-xs">600000</td>
+                    <td class="table_vertical hide-xs">700000</td> -->
+                    <td class="table_vertical hide-xs">
+                            <div class="input-group">
+                                  <input ng-model="suggestedProduct.price" type="text" only-numeric="" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = ownerProduct.default_price" style="width: 70px;padding: 4px 5px;" class="ng-pristine ng-untouched ng-valid ng-not-empty ng-valid-required ng-valid-pattern" disabled="disabled" aria-invalid="false">
+                                  <span ng-click="enabledPrice = true;" ng-show="!enabledPrice" role="button" tabindex="0" aria-hidden="false" class=""><i class="material-icons">edit</i></span>
+                            </div>
+                          </td>
+                          <td class="table_vertical hide-xs">
+                              1,48,000
+                          </td>
+                    <td class="table_vertical hide-xs">
+                        <p class=" md-caption">Uni Ads</p>
+                        <!-- <a href="#"><i class="material-icons">delete_foreve</i></a> -->
+                    </td>
+                    <td class="text-center table_vertical hide-xs addcampaign_details">
+                        <p class="text_color md-caption">This Inventory<br>
+                            Campaign Completed</p>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- table grid end -->
+    <div class="md-whiteframe-3dp campaign_payment hide-xs" layout="row" layout-margin>
+        <div layout="column" class="payment_inner">
+            <div layout="row">
+                <div class="md-body-1">Total :</div>
+                <div class="md-body-1">{{"N/A"}}</div>
+            </div>
+            <div layout="row">
+                <div class="md-body-1">18% GST :</div>
+                <div class="md-body-1"> {{"N/A"}}</div>
+            </div>
+            <div layout="row">
+                <div class="md-body-1">Sub Total :</div>
+                <div class="md-body-1">{{"N/A"}}</div>
+            </div>
+            <div layout="row">
+                <div class="md-title">Grand Total :</div>
+                <div class="md-title">{{"N/A"}}</div>
+            </div>
+            <md-button class="md-raised md-primary">SHOP</md-button>
+        </div>
+    </div>
+</div>

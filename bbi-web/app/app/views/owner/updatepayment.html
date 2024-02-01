@@ -1,0 +1,544 @@
+<style>
+  .padding-20{
+		padding-left: 20px;
+	}
+</style>
+<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+  <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+</md-button>
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+    </div>
+  </div>
+</div>
+<div class="campaign_details mt-4">
+  <div class="">
+      <div class="row ml-0 mr-0">
+          <div class="col-12 col-sm-12 col-md-6">
+              <div class="contbg md-whiteframe-3dp p-2">
+                  <table class="table table-striped table-bordered mb-0 table_user">
+                      <tbody>
+                          <tr>
+                              <td><b>Campaign ID</b></td>
+                              <td>{{campaignPaymentDetails.cid}}</td>
+                              <!-- <td></td> -->
+                          </tr>
+                          <tr>
+                              <td><b>Campaign Name</b></td>
+                           
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.name | capitalize}}</td>
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">Advertiser Campaign</td>                          
+                          </tr>
+                          <tr>
+                              <td><b>Client Name</b></td>
+                            
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.org_name | capitalize}}</td>
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">Advertiser Campaign</td>
+                          </tr>
+                          <tr>
+                              <td><b>Contact Number</b></td>
+                           
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.org_contact_phone}}</td>
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">+ 91 9550224488</td>
+                          </tr>
+                          <tr>
+                              <td><b>Email</b></td>                           
+                              <td ng-hide="campaignPaymentDetails.type == 0">{{campaignPaymentDetails.org_contact_email | capitalize}}
+                              </td>
+                              <td ng-hide="campaignPaymentDetails.type == 2 || campaignPaymentDetails.type == 1">
+                                  reach@billboardsindia.com</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+          <div class="col-12 col-sm-12 col-md-6">
+              <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                  <table class="table table-striped table-bordered mb-0 table_user">
+                      <tbody>
+                          <tr>
+                              <td class="camp_tableowner"><b>Number of Products</b></td>
+                              <td>{{campaignPaymentDetails.product_count}}</td>
+                          </tr>
+                          <tr>
+                              <td><b>Date</b></td>
+                              <td>{{campaignPaymentDetails.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
+                          </tr>
+                          <tr>
+                              <td><b>Total Price</b></td>
+                              <td>
+                                  ${{ campaignPaymentDetails.act_budget |number : 2 || 0 }}
+                              </td>
+                          </tr>
+                          <tr>
+                              <td><b>Pending Price</b></td>
+                              <td>${{campaignPaymentDetails.totalamount - campaignPaymentDetails.total_paid | number:2 || '0'}}</td>                                                               
+                          </tr>
+                          <tr>
+                              <td><b>Status</b></td>
+                              <td>{{campaignPaymentDetails.status | stringifyCampaignStatus}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div layout="row" flex-offset-gt-md="70" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+            layout-margin="layout-margin" class="book_campowner float-left ml-2">
+            <div class="button_leftright">
+              <div class="dropdown">
+                <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-xs">
+                  Share Campaign
+              </md-button>
+              <md-button onclick="shareOwnerCampaign()" class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" style="min-width: 38px;">
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+          </md-button>
+              <!-- <div class="modal fade" id="sharePopupdate" tabindex="-1" role="dialog" aria-labelledby="sharePopupdateTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header modal_bottom">
+                          <h5 class="modal-title" id="sharePopupdateTitle">Share Campaign</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                          </div>
+                          <div class="modal-body">
+                          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                              <form name="shareCampaignForm">
+                                  <div layout="column" style="padding:10px;">
+                                      <div class="form-group">
+                                          <input ng-model="shareCampaign.receiver_name" class="form-control"
+                                              name="receiver_name" placeholder="Name" required="required" />
+                                          <div ng-messages="shareCampaignForm.name.$error">
+                                              <div ng-message="required">Name is required.</div>
+                                              <div ng-message="pattern">Enter a valid Name.</div>
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                          <input ng-model="shareCampaign.email" name="email" class="form-control"
+                                              placeholder="Email" type="email" required="required"
+                                              ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                          <div ng-messages="shareCampaignForm.email.$error">
+                                              <div ng-message="required">Email is required.</div>
+                                              <div ng-message="pattern">Enter a valid Email Id.</div>
+                                          </div>
+                                      </div>
+                                      <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                                          <md-button class="md-raised md-warn Upload_font" layout-fill
+                                              ng-click="shareCampaignToEmail($event, shareCampaign, campaignPaymentDetails.id)">
+                                              Share
+                                              Campaign</md-button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>              -->
+                <div id="shareownercampDrop" class="dropdown-content_share contbg animated fadeInDown camp_preparing" style="padding:10px;">
+                <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                  <div layout="colmun">
+                  <span flex></span>
+                  <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="shareOwnerCampaign()">
+                    <md-icon class="md-default-theme">
+                    <i class="material-icons">close</i>
+                    </md-icon>
+                  </md-button>
+                  </div>
+                  <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+                  <form name="shareCampaignForm">
+                    <div layout="column" style="padding:10px;">
+                      <div class="form-group">
+                        <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name" required="required" />
+                        <div ng-messages="shareCampaignForm.receiver_name.$error">
+                          <div ng-message="required">Name is required.</div>
+                          <div ng-message="pattern">Enter a valid Name.</div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                        <div ng-messages="shareCampaignForm.email.$error">
+                          <div ng-message="required">Email is required.</div>
+                          <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                      </div>
+                      <div class="offset-md-7 col-md-5 align_center_btns">
+                          <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,campaignPaymentDetails.id)">Share
+                              Campaign</md-button>
+                      </div>
+                      
+                    </div>
+                  </form>
+                </form>
+                </div>
+              </div>
+            </div>
+            <div class="button_leftright" style="cursor: pointer;">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download>
+                        Download Invoice
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download  style="min-width: 38px;margin-left: 0px;">
+                      <i class="fas fa-file-invoice-dollar" style="font-size: 17px;"></i>
+                    </md-button>
+                </div>
+            </div>
+            <div class="button_leftlast purchase_responsive">
+              <div class="dropdown" style="float: right;">
+                <md-button class="md-raised md-primary all_button update_mrg hide-xs" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
+                  Purchase
+              </md-button>
+              <md-button class="md-raised md-primary all_button hide-gt-lg hide-lg hide-md hide-sm" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0" style="margin-left: 0px;">
+                Purchase
+            </md-button>
+              <div id="addpaymentdrop" class="dropdown-content_add_payment contbg animated fadeInDown add_paymentowner">
+                <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                  <div layout="colmun">
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+                      <md-icon class="md-default-theme">
+                        <i class="material-icons">close</i>
+                      </md-icon>
+                    </md-button>
+                  </div>
+                  <h3 class="md-title" style="margin-top:-28px;">Grand Total : ${{campaignPaymentDetails.totalamount |number : 2}}</h3><br>
+                  <h4 class="md-title" style="margin-top:-20px;">Balance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${{campaignPaymentDetails.totalamount - campaignPaymentDetails.total_paid || '0' |number : 2}}</h4><br>
+                  <li>
+                    <div class="">
+                      <div class="col-md-12">
+                          <div class="form-group row">
+                            <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
+                            <div class="col-sm-8">
+                              <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
+                                <option selected>Select Payment Mode</option>
+                                <option ng-repeat="paymentType in paymentTypes">{{paymentType.name}}</option>
+                              </select>
+                              <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                                Mode Is required!!
+                              </span>                        
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control md-whiteframe-3dp" name="amount" required="required" only-numeric id="amount" ng-model="campaignPayment.amount">
+                              <div ng-messages="forms.ownerCampaignForm.amount.$error" style="color:red" ng-if="forms.ownerCampaignForm.amount.$touched">
+                                  <div ng-message="required">Amount is required.</div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" only-numeric required="required" ng-model="campaignPayment.reference_no">
+                              <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
+                                  <div ng-message="required">Reference Number is required.</div>
+                                </div>
+                            </div>
+                          </div>                                       
+                          <div class="form-group row">
+                            <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By :</label>
+                            <div class="col-sm-8">
+                              <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input  name="recived" required="required" ng-model="campaignPayment.received_by">
+                              <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
+                                  <div ng-message="required">Received By is required.</div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                            <div class="col-sm-8">
+                              <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"
+                                ng-model="campaignPayment.comment"></textarea>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                            <div class="col-sm-8">
+                              <span class="input-group-btn">
+                                <span class="">
+                                  <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                                    accept="image/*" ngf-max-size="1MB">
+                                </span>
+                              </span>
+                              <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                                style="color:red">
+                                <div ng-message="required">Image is required.</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <div flex></div>
+                            <div class="col-sm-4">
+                            </div>
+                            <div class="col-sm-4">
+                              <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="updateOwnerCampaignPayment(campaignPaymentDetails.id)">Submit</md-button>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                  </li>
+                </form>
+              </div>
+            </div>
+            </div>
+            <div class="button_leftright" style="cursor: pointer;" ng-if="campaignPaymentDetails.payment_details.length > 0">
+                <div class="md-grid-item-content hoarding-btn">
+                    <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download>
+                        Download Receipts
+                    </md-button>
+                    <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" ng-click="downloadOwnerReciepts(campaignPaymentDetails.id)" download  style="margin-left: 0px;">
+                        Receipts
+                    </md-button>
+                </div>
+            </div>
+      
+    </div>
+
+<!-- <div class="ml-2 mr-2 mt-2 mb-2 contbg mobile_campdetails">
+  <div class="row" style="margin-left:0px; margin-right:0px;">
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-left: 46%;margin-top:1em;">
+        <div class="dropdown">
+          <md-button onclick="shareownerCampaign()" class="dropbtn Upload_font hide-xs" style="margin-left: 30em;">
+            Share Campaign
+        </md-button>
+          <div id="ownerupdatepaymentDrop" class="dropdown-content contbg animated fadeInDown contant_drop share_detailsmob" style="padding:10px;">
+          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+            <div layout="colmun">
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="shareownerCampaign()">
+              <md-icon class="md-default-theme">
+              <i class="material-icons">close</i>
+              </md-icon>
+            </md-button>
+            </div>
+            <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+            <form name="shareCampaignForm">
+              <div layout="column" style="padding:10px;">
+                <div class="form-group">
+                  <input ng-model="shareCampaign.receiver_name" class="form-control" name="receiver_name" placeholder="Name" required="required" />
+                  <div ng-messages="shareCampaignForm.receiver_name.$error">
+                    <div ng-message="required">Name is required.</div>
+                    <div ng-message="pattern">Enter a valid Name.</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input ng-model="shareCampaign.email" name="email" class="form-control" placeholder="Email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                  <div ng-messages="shareCampaignForm.email.$error">
+                    <div ng-message="required">Email is required.</div>
+                    <div ng-message="pattern">Enter a valid Email Id.</div>
+                  </div>
+                </div>
+                <div class="offset-md-7 col-md-5" style="padding-right: 0px;">
+                    <md-button class="md-raised md-warn Upload_font" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,campaignPaymentDetails.id)">Share
+                        Campaign</md-button>
+                </div>
+                
+              </div>
+            </form>
+          </form>
+          </div>
+        </div>
+        </div>    
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+    style="cursor: pointer; margin-top:1em;">	
+   <md-button class="dropbtn Upload_font hide-xs" ng-click="downloadOwnerQuote(campaignPaymentDetails.id)" download style="margin-left: 20em;">
+    Download Quotation
+</md-button>
+   </div>
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+      style="margin-top:1em;">
+      <div class="dropdown" style="float: right;">
+          <md-button class="md-raised md-primary all_button update_mrg" onclick="addPayment()" class="dropbtn" ng-disabled="campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid == 0">
+          Add Payment
+        </md-button>
+        <div id="addpaymentdrop" class="dropdown-content contbg animated fadeInDown add_paymentowner">
+          <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+            <div layout="colmun">
+              <span flex></span>
+              <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addPayment()">
+                <md-icon class="md-default-theme">
+                  <i class="material-icons">close</i>
+                </md-icon>
+              </md-button>
+            </div>
+            <h3 class="md-title" style="margin-top:-28px;">Grand Total : ${{campaignPaymentDetails.totalamount |number : 2}}</h3><br>
+            <h4 class="md-title" style="margin-top:-20px;">Balence &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${{campaignPaymentDetails.totalamount - campaignPaymentDetails.total_paid || '0' |number : 2}}</h4><br>
+            <li>
+              <div class="">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                      <label for="amount" class="col-sm-4 col-form-label md-body-2">Mode :</label>
+                      <div class="col-sm-8">
+                        <select id="paymentType" ng-model="campaignPayment.type" name="mode" class="form-control md-whiteframe-3dp" required="required">
+                          <option ng-repeat="paymentType in paymentTypes" ng-value="{{paymentType.name}}">{{paymentType.name}}</option>
+                        </select>
+                        <span ng-show="forms.ownerCampaignForm.mode.$error.required" style="color:red" ng-if="forms.ownerCampaignForm.mode.$touched">
+                          Mode Is required!!
+                        </span>                        
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Amount</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" name="amount" required="required" only-numeric id="amount" ng-model="campaignPayment.amount">
+                        <div ng-messages="forms.ownerCampaignForm.amount.$error" style="color:red" ng-if="forms.ownerCampaignForm.amount.$touched">
+                            <div ng-message="required">Amount is required.</div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Reference No:</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" name="reference" only-numeric required="required" ng-model="campaignPayment.reference_no">
+                        <div ng-messages="forms.ownerCampaignForm.reference.$error" style="color:red" ng-if="forms.ownerCampaignForm.reference.$touched">
+                            <div ng-message="required">Reference No is required.</div>
+                          </div>
+                      </div>
+                    </div>                                       
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Received By :</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control md-whiteframe-3dp" id="amount" only-letters-input  name="recived" required="required" ng-model="campaignPayment.received_by">
+                        <div ng-messages="forms.ownerCampaignForm.recived.$error" style="color:red" ng-if="forms.ownerCampaignForm.recived.$touched">
+                            <div ng-message="required">Received By is required.</div>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Comments</label>
+                      <div class="col-sm-8">
+                        <textarea class="form-control md-whiteframe-3dp" rows="5" id="comment" name="text" placeholder="Type Your Massage"
+                          ng-model="campaignPayment.comment"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="paymentType" class="col-sm-4 col-form-label md-body-2">Upload Image</label>
+                      <div class="col-sm-8">
+                        <span class="input-group-btn">
+                          <span class="">
+                            <input type="file" ngf-select ng-model="files.image" name="files.image" class="form-control md-whiteframe-3dp"
+                              accept="image/*" ngf-max-size="1MB">
+                          </span>
+                        </span>
+                        <div ng-messages="addProductForm.imageFile.$error" ng-if="addProductForm.imageFile.$touched"
+                          style="color:red">
+                          <div ng-message="required">Image is required.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div flex></div>
+                      <div class="col-sm-4">
+                      </div>
+                      <div class="col-sm-4">
+                        <md-button class="md-raised md-primary all_button pull-right text-white" ng-click="updateOwnerCampaignPayment(campaignPaymentDetails.id)">Submit</md-button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </li>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead class="text_color">
+      <tr>
+          <th class="table_firstthpadding">Date</th>
+          <th>Mode of Payment</th>
+          <th>Reference Number</th>
+          <th>Received By</th>
+          <th class="text-right padding-20">Received Price</th>
+          <th>Comment</th> 
+        <th class="text-center">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="payment in campaignPaymentDetails.payment_details">
+          <td class="table_vertical table_firstthpadding">{{payment.updated_at | dateFormat}}</td>
+          <td class="table_vertical">{{payment.type || "N/A" | capitalize}}</td>
+          <td class="table_vertical">{{payment.reference_no || "N/A"}}</td>
+          <td class="table_vertical">{{payment.received_by || "N/A"}}</td>
+          <!-- <td class="table_vertical text-right padding-20">${{payment.amount | number:2 || '0'}}</td> -->
+          <td class="table_vertical text-right padding-20">${{campaignPaymentDetails.newofferStripepercentamtSumSeller | number:2 || '0'}}</td>
+          <td class="table_vertical">{{payment.comment | capitalize}}</td>   
+          <td class="image_tdwidth text-center">
+              <a ng-click="paymentrefImage(payment.image)">
+            <p ng-if="payment.type === 'Cash'"><b>Cash</b></p>
+              <img ng-src="{{config.serverUrl + payment.image}}" alt="Smiley face" ng-if="payment.type === 'Cheque' || payment.type === 'Online' || payment.type === 'Transfer'"
+              class="requ_size img-thumbnail" style="width: 95px !important;height: 80px !important;">
+            </a>
+            </td>      
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="row border_quest">
+    <!-- <div class="col-md-4">
+    </div>
+    <div class="col-md-8">
+            <div class="mt-3 pull-right sub_total" style="font-size: 13px;">
+              <p class="font-weight-light" style="text-indent: 53px;"><b>Total : <spam class="float-right">{{campaignPaymentDetails.act_budget}}</b></spam></p>
+              <p class="text_color" style="text-indent: 17px;">18% GST : <span class="float-right">{{ campaignPaymentDetails.gst_price |number : 2 ||"N/A" }}</span></p>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Grand Total : <span class="float-right">{{campaignPaymentDetails.totalamount}}</span>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Paid : <span class="float-right">{{campaignPaymentDetails.total_paid}}</span>
+              <p class="" style="text-indent: 25px;font-size: 15px;font-weight: 500;">Balance : <spam class="float-right">{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid}}</spam>
+              </p>
+            </div>
+    </div> -->
+</div>
+
+
+
+<!-- <div class="small-wrapper mt0">
+  <div class="smallContainer">
+    <div class="payment-summary">
+      <ul id="double">
+        <li class="col1">Total :</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.act_budget || '0' |number : 2}}</li>        
+        <li class="col1">Paid :</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.total_paid || '0' |number : 2}}</li>
+      </ul>
+      <div class=""></div>
+      <ul id="total">
+        <li class="col1">Balance :</li>
+        <li class="col2"><span>$</span>{{campaignPaymentDetails.totalamount-campaignPaymentDetails.total_paid || '0' |number : 2}}</li>
+      </ul>
+      <div class=""></div>
+    </div>
+  </div>
+</div> -->
+<!-- model popup payment image -->
+
+<!-- model popup payment image -->
+<script>
+   function shareOwnerCampaign () {
+        document.getElementById("shareownercampDrop").classList.toggle("show");
+    }   
+    function shareUpdatePopCampaign () {
+        document.getElementById("sharePopupdate").classList.toggle("show");
+    }
+  function addPayment() {
+    document.getElementById("addpaymentdrop").classList.toggle("show");
+  }
+</script>
+
+<script>
+  var loadFile = function (event) {
+    var image = document.getElementById('output');
+    image.src = URL.createObjectURL(event.target.files[0]);
+  };
+</script>

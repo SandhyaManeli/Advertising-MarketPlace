@@ -1,0 +1,498 @@
+<!-- ====================== Add out sourcing agent html start =================-->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 scrollbar__style" md-component-id="ownerAddAgency" id="">
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools bg_main_color">
+        <h2>
+            <span>Add Agency</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="">
+            <md-tooltip>Close Side Panel</md-tooltip>
+            <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+        </md-button>
+        </div>
+    </md-toolbar> 
+    <md-content layout-padding="">
+        <form  role="form">
+            
+            <div class="form-group">
+                <label class="control-label"> Company Name</label>
+                <br>
+                <input class="form-control"  type="text">
+            </div>
+            <div class="form-group">
+                <label for=""class=" control-label">Type Of Company</label>
+                
+                <select id="" class="form-control">
+                    <option selected>Select Company</option>
+                    <option>Print</option>
+                    <option>Mount</option>
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Agent Name</label>
+                <br>
+                <input class="form-control" type="text">
+            </div> 
+            <div class="form-group">
+                <label class="control-label">Email:</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Phone Number</label>
+                <br>
+                <input class="form-control"  type="text">
+            </div>
+            <div class="form-group">
+                <label class="control-label"> City</label>
+                <br>
+                <input class="form-control" type="text">
+            </div> 
+            <div class="form-group">
+                <label class="control-label"> Address</label>
+                <br>
+                 <textarea style="width:100%"></textarea> 
+            </div>
+            <div class="form-group" style="margin:10px 0">
+                <label class="col-md-3 control-label"></label>
+                <input class="btn btn-primary" value="Save" type="button">
+                <span></span>
+                <input class="btn btn-default" value="Cancel" type="reset">
+            </div>
+            
+        </form>
+    </md-content> 
+</md-sidenav>
+<!-- ====================== Add out sourcing agent html end =================-->
+
+<div layout="column" layout-padding="layout-padding" layout-margin="layout-margin" layout-fill="layout-fill">
+
+    <div layout="row">
+        <h2 class="md-title text_color">OutSourcing Agent</h2>
+        <div flex></div>
+        <div>
+            <md-button aria-label="Addacategory" ng-click="addOutsourcingAgent()" class="md-raised md-warn">
+                    add OutSourcing Agent
+            </md-button>
+        </div>
+    </div>
+    
+    <div ng-show="showBillboardsData">
+        <div>
+            <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md >
+                <md-list-item>
+                    <div flex="5">S.No</div>
+                    <div flex="15">companyName</div>
+                    <div flex="15">type of company</div>
+                    <div flex="15">Agent Name</div>
+                    <div flex="20">Email</div>
+                    <div flex="10">Phone No</div>
+                    <div flex="15">Address</div>
+                    <div flex="10">Actions</div>
+                </md-list-item>
+            </div>
+            <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in teamlist"
+                class="contbg md-whiteframe-3dp">
+
+                <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                    <div flex="5"  flex-xs="100" flex-sm="100"                                                                                                                                                                                                                   layout-xs="row" layout-sm="row" class="campaign-name">
+
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c1.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.sno}}</div>
+                        </div>
+                        
+                    </div>
+
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10"  layout="column" hide-md hide-lg>
+                            <div style="display:inline !important;">
+                                <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="80">
+                            <div class="md-body-1">{{item.comapanyname}}</div>
+                        </div>
+                        <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                            <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.typeofcompany}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100"layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.agentname}}</div>
+                        </div>
+                    </div>
+        
+                    <div flex="20" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row"  class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c5.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.email}}</div>
+                        </div>
+                    </div>
+                    <div flex="10" flex-xs="100"  class="detail" flex-sm="100"  layout-xs="row" layout-sm="row" >
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c7.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.phone}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row" class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c6.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.address}}</div>
+                        </div>
+                    </div>
+
+                    <div flex="10" hide-xs hide-sm>
+                        <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                    </div>
+                </div>
+
+            </div>
+                <div layout="column" layout-align="center end" class="loadmore">
+                <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+            </div> 
+        </div>
+    </div>
+    <!-- <div ng-show="showUnipoleData">
+        <div>
+            <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md >
+                <md-list-item>
+                    <div flex="5">S.No</div>
+                    <div flex="15">companyName</div>
+                    <div flex="15">type of company</div>
+                    <div flex="15">Agent Name</div>
+                    <div flex="20">Email</div>
+                    <div flex="10">Phone No</div>
+                    <div flex="15">Address</div>
+                    <div flex="10">Actions</div>
+                </md-list-item>
+            </div>
+            <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in teamlist"
+                class="contbg md-whiteframe-3dp">
+
+                <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                    <div flex="5"  flex-xs="100" flex-sm="100" hide-xs hide-sm layout-xs="row" layout-sm="row" class="campaign-name">
+
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c1.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.sno}}</div>
+                        </div>
+                        
+                    </div>
+
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10"  layout="column" hide-md hide-lg>
+                            <div style="display:inline !important;">
+                                <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="80">
+                            <div class="md-body-1">{{item.comapanyname}}</div>
+                        </div>
+                        <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                            <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.typeofcompany}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100"layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.agentname}}</div>
+                        </div>
+                    </div>
+        
+                    <div flex="20" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row"  class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c5.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.email}}</div>
+                        </div>
+                    </div>
+                    <div flex="10" flex-xs="100"  class="detail" flex-sm="100"  layout-xs="row" layout-sm="row" >
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c7.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.phone}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row" class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c6.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.address}}</div>
+                        </div>
+                    </div>
+
+                    <div flex="10" hide-xs hide-sm>
+                        <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                    </div>
+                </div>
+
+            </div>
+                <div layout="column" layout-align="center end" class="loadmore">
+                <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+            </div> 
+        </div>
+    </div>
+    <div ng-show="showdigitalData">
+        <div>
+            <div layout="row" layout-padding="layout-padding" hide-xs hide-sm show-lg show-md >
+                <md-list-item>
+                    <div flex="5">S.No</div>
+                    <div flex="15">companyName</div>
+                    <div flex="15">type of company</div>
+                    <div flex="15">Agent Name</div>
+                    <div flex="20">Email</div>
+                    <div flex="10">Phone No</div>
+                    <div flex="15">Address</div>
+                    <div flex="10">Actions</div>
+                </md-list-item>
+            </div>
+            <div layout="column" layout-margin layout-lg="column" layout-md="column" layout-xs="column" layout-sm="column" ng-repeat="item in teamlist"
+                class="contbg md-whiteframe-3dp">
+
+                <div layout="row" layout-lg="row" layout-md="row" layout-xs="column" layout-sm="column" layout-padding="layout-padding">
+
+                    <div flex="5"  flex-xs="100" flex-sm="100" hide-xs hide-sm layout-xs="row" layout-sm="row" class="campaign-name">
+
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c1.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.sno}}</div>
+                        </div>
+                        
+                    </div>
+
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10"  layout="column" hide-md hide-lg>
+                            <div style="display:inline !important;">
+                                <md-icon md-svg-icon="assets/images/c2.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="80">
+                            <div class="md-body-1">{{item.comapanyname}}</div>
+                        </div>
+                        <div hide-gt-sm show-xs show-sm flex-xs="5" flex-sm="5">
+                            <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100" layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c3.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.typeofcompany}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" layout-align-xs="start center" layout-xs="row" flex-xs="100" flex-sm="100"layout-align-sm="start center" layout-gt-xs="row">
+                        <div flex-xs="10" flex-sm="10" layout="column" hide-md hide-lg>
+                            <div>
+                                <md-icon md-svg-icon="assets/images/c4.svg"></md-icon>
+                            </div>
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.agentname}}</div>
+                        </div>
+                    </div>
+        
+                    <div flex="20" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row"  class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c5.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.email}}</div>
+                        </div>
+                    </div>
+                    <div flex="10" flex-xs="100"  class="detail" flex-sm="100"  layout-xs="row" layout-sm="row" >
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c7.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.phone}}</div>
+                        </div>
+                    </div>
+                    <div flex="15" flex-xs="100" flex-sm="100"  layout-xs="row" layout-sm="row" class="detail">
+                        <div hide-gt-sm show-xs show-sm flex-xs="10" flex-sm="10">
+                            <img src="assets/images/c6.png" alt="c1">
+                        </div>
+                        <div flex-xs="80" flex-sm="85">
+                            <div class="md-body-1">{{item.address}}</div>
+                        </div>
+                    </div>
+
+                    <div flex="10" hide-xs hide-sm>
+                        <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                                    <md-icon><i class="material-icons">more_vert</i></md-icon>
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Edit</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-href="#">Share</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button>Delete</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                    </div>
+                </div>
+
+            </div>
+                <div layout="column" layout-align="center end" class="loadmore">
+                <md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+            </div> 
+        </div>
+    </div> -->
+</div>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-1">Chanikya</div>
+    <div class="col-12 col-sm-12 col-md-2">Neon</div>
+    <div class="col-12 col-sm-12 col-md-2">srikanth</div>
+    <div class="col-12 col-sm-12 col-md-2">chanikya@Billboards.com</div>
+    <div class="col-12 col-sm-12 col-md-2">8899667755</div>
+    <div class="col-12 col-sm-12 col-md-2">Amreepet</div>
+    <div class="col-12 col-sm-12 col-md-1">
+            <md-menu>
+                    <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button">
+                        <md-icon><i class="material-icons">more_vert</i></md-icon>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item>
+                            <md-button ng-href="#">Edit</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-href="#">Share</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button>Delete</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+    </div>
+</div>
+

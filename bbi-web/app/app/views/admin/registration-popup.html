@@ -1,0 +1,159 @@
+<md-dialog flex-xs="100" flex="35" flex-md="60" flex-sm="60" style="border-radius:0">
+	<md-dialog-content>
+		<md-content class="">
+			<!-- <div layout="column" layout-align="center center">
+				<img ng-src="assets/images/campaign_popup_icon.png">
+			</div> -->
+			<div layout="row" layout-margin>
+				<h4>Registration</h4>
+				<div flex></div>
+				<md-button class="md-icon-button md-button" type="button">
+					<i class="material-icons">close</i>
+					<div class="md-ripple-container"></div>
+				</md-button>
+			</div>
+			<div layout="row" layout-align="center center" layout-margin>
+				<md-checkbox class="green" name="standarad" ng-click="showUser()" ng-checked="userChecked">
+					Users
+				</md-checkbox>
+				<md-checkbox class="green" ng-click="showAgency()" ng-checked="!userChecked">
+					Adverstising agency
+				</md-checkbox>
+			</div>
+			<div ng-show="userChecked">
+				<form name="userData" novalidate="novalidate">
+					<div layout="column" layout-xs="column" layout-padding flex="100" >
+						<md-input-container class="md-block margin-input">
+							<label>First Name</label>
+							<input ng-model="user.first_name" type="text" name="first_name" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+							/>
+							<div ng-messages="userData.first_name.$error">
+								<div ng-message="required">First Name is required.</div>
+								<div ng-message="minlength">First Name must have 3 characters.</div>
+								<div ng-message="maxlength">First Name shouldn't exceed 30 characters. </div>
+								<div ng-message="pattern">First Name should contain only Alpha Numeric and _ - . symbols.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Last Name</label>
+							<input ng-model="user.last_name" type="text" name="last_name" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"
+							/>
+							<div ng-messages="userData.last_name.$error">
+								<div ng-message="required">Last Name is required.</div>
+								<div ng-message="minlength">Last Name must have 3 characters.</div>
+								<div ng-message="maxlength">Last Name shouldn't exceed 30 characters. </div>
+								<div ng-message="pattern">Last Name should contain only Alpha Numeric and _ - . symbols.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Email</label>
+							<input ng-model="user.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							/>
+							<div ng-messages="userData.email.$error">
+								<div ng-message="required">Email is required.</div>
+								<div ng-message="pattern">Enter a valid EmailId.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Phone No</label>
+							<input ng-model="user.phone" only-numeric type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"
+							/>
+							<div ng-messages="userData.phone.$error">
+								<div ng-message="required">Phone No is required.</div>
+								<div ng-message="minlength">Phone No must have 10 characters.</div>
+								<div ng-message="maxlength">Phone No shouldn't exceed 10 characters.</div>
+								<div ng-message="pattern">Phone No should be only numbe.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Company Name</label>
+							<input ng-model="user.company_name" type="text" name="company_name" minlength="5" maxlength="60" required="required" />
+							<div ng-messages="userData.company_name.$error">
+								<div ng-message="required">Company Name is required.</div>
+								<div ng-message="minlength">Company Name must have 10 characters.</div>
+								<div ng-message="maxlength">Company Name shouldn't exceed 30 characters.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label> Type Company </label>
+							<input ng-model="user.company_type" type="text" name="company_type" minlength="5" maxlength="60" required="required" />
+							<div ng-messages="userData.company_type.$error">
+								<div ng-message="required">Company Name is required.</div>
+								<div ng-message="minlength">Company Name must have 10 characters.</div>
+								<div ng-message="maxlength">Company Name shouldn't exceed 30 characters.</div>
+							</div>	
+						</md-input-container>
+						<div class="registeredEmailErrors" ng-if ="registerUserErrors">
+								<ul>
+									<li ng-repeat="error in registerUserErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
+						<div layout="row" layout-align="center center">
+							<md-button type="submit" Class="md-raised md-primary" ng-click="addUser()" ng-disabled="userData.$invalid">SUBMIT</md-button>
+							<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div ng-show="!userChecked">
+				<form name="agencyData" novalidate="novalidate">
+					<div layout="column" layout-xs="column" layout-padding flex="100">
+						<md-input-container class="md-block margin-input">
+							<label>Company Name</label>
+							<input ng-model="agency.agency_name" type="text" name="agency_name" minlength="3" maxlength="60" required="required" ng-pattern="/^[A-Za-z0-9._-\s]+$/"
+							/>
+							<div ng-messages="agencyData.agency_name.$error">
+								<div ng-message="required">Agency Name is required.</div>
+								<div ng-message="minlength">Agency Name must have 3 characters.</div>
+								<div ng-message="maxlength">Agency Name shouldn't exceed 30 characters. </div>
+								<div ng-message="pattern">Agency Name should contain only Alpha Numeric and _ - . symbols.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Email</label>
+							<input ng-model="agency.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"
+							/>
+							<div ng-messages="agencyData.email.$error">
+								<div ng-message="required">Email is required.</div>
+								<div ng-message="pattern">Enter a valid EmailId.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label>Phone No</label>
+							<input ng-model="agency.phone" only-numeric type="text" name="phone" minlength="10" maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"
+							/>
+							<div ng-messages="agencyData.phone.$error">
+								<div ng-message="required">Phone No is required.</div>
+								<div ng-message="minlength">Phone No must have 10 characters.</div>
+								<div ng-message="maxlength">Phone No shouldn't exceed 10 characters.</div>
+								<div ng-message="pattern">Phone No should be only numbe.</div>
+							</div>
+						</md-input-container>
+						<md-input-container class="md-block margin-input">
+							<label> Type Company </label>
+							<input ng-model="agency.company_type" type="text" name="company_type" minlength="5" maxlength="60" required="required" />
+							<div ng-messages="agencyData.company_type.$error">
+								<div ng-message="required">Company Name is required.</div>
+								<div ng-message="minlength">Company Name must have 10 characters.</div>
+								<div ng-message="maxlength">Company Name shouldn't exceed 30 characters.</div>
+							</div>
+						</md-input-container>
+						<div class="registeredEmailErrors" ng-if ="addAgencyErrors">
+								<ul>
+									<li ng-repeat="error in addAgencyErrors">
+										{{error}}
+									</li>
+								</ul>
+							</div>
+						<div layout="row" layout-align="center center">
+							<md-button type="submit" Class="md-raised md-primary" ng-click="addAgency()" ng-disabled="agencyData.$invalid">SUBMIT</md-button>
+							<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

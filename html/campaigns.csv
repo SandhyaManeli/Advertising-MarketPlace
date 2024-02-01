@@ -1,0 +1,117 @@
+"S No.","Campaign ID",Name,Status
+1,BB-514809,Test-RFP-SavedCamapign,"RFP Campaign"
+2,AMP_ABI0003_000115,65Savecamp,"Campaign Preparing"
+3,AMP_ABI000189_000114,savecam65,"Campaign Preparing"
+4,AMP_ABI0003_000113,"fixed pr",Requested
+5,AMP_ABI0003_000112,fixed,Requested
+6,AMP_ABI0003_000111,variable,Requested
+7,AMP_ABI0003_000110,"testing paid",Requested
+8,AMP_ABI000189_000109,Test-RFP-UniqueID,"Campaign Preparing"
+9,AMP_ABI00055_000108,Test-Buyer3-RFP,"Campaign Preparing"
+10,AMP_ABI0003_000107,Test-Pavan-FP,"Campaign Preparing"
+11,AMP_ABI00052_000106,"Testing people","Campaign Preparing"
+12,AMP_ABI0003_000105,CID7/19test,"Campaign Preparing"
+13,AMP_ABI0003_000104,Test-RFP-Uid-19th-Jul-21,"Campaign Preparing"
+14,AMP_ABI000189_000103,CampaignID7/19Test,"Campaign Preparing"
+15,AMP_ABI0003_000102,Test-InsertionOrder-AdminMail,Scheduled
+16,AMP_ABI00052_000101,Testing-I/O-001,"Campaign Preparing"
+17,AMP_ABI00052_000100,Test-Admin-I/O-Mail,Scheduled
+18,AMP_ABI00055_000099,Test-Spec,Scheduled
+19,AMP_ABI00055_000098,Test-I/O-18-Jul-21,Scheduled
+20,AMP_ABI0003_000097,Test-I/O,"Campaign Preparing"
+21,AMP_ABI0001_000096,Test-UID-Admin,"Campaign Preparing"
+22,AMP_ABI00055_000095,Test-UID-Rfp-18-Jul-21,"Campaign Preparing"
+23,AMP_ABI00055_000094,Test-UID-18-Jul-21,"Campaign Preparing"
+24,BB-769760,RFP-DEMO-005,"Campaign Preparing"
+25,BB-583678,"Test RFP Request 001","RFP Campaign"
+26,BB-658726,AMP-DEMO-001,Deleted
+27,BB-654274,"Testing popup 3",Requested
+28,BB-423374,"Testing popup 1",Requested
+29,BB-96946,"Testing popup",Requested
+30,BB-224312,"New Campaign-1",Scheduled
+31,BB-228026,testCA5/7,Requested
+32,BB-245152,uidtest7/2,Requested
+33,BB-276808,TestCA,"Campaign Preparing"
+34,BB-784550,test7/1,"Campaign Preparing"
+35,BB-641751,"Testing 89","Campaign Preparing"
+36,BB-239351,UID-test-30-6,Scheduled
+37,BB-325324,QA23/6,"Campaign Preparing"
+38,BB-953261,"Testing 87",Requested
+39,BB-38380,"Testing 23",Requested
+40,BB-203876,"GPR Waring","RFP Campaign"
+41,BB-135619,Camp1,"Campaign Preparing"
+42,BB-72621,Capaign1,"Campaign Preparing"
+43,BB-565943,PAYMENT11/6,Requested
+44,BB-513100,Pay11/6,Requested
+45,BB-334879,Test11-June,Requested
+46,BB-537470,stripe-issue-002,"Campaign Preparing"
+47,BB-601687,stripe-issue,Requested
+48,BB-461973,Campaign_03/06/2021-10:08PM,"Campaign Preparing"
+49,BB-388247,Test28,"Campaign Preparing"
+50,BB-107605,"Testing 27","Campaign Preparing"
+51,BB-813654,SecondTest,"Campaign Preparing"
+52,BB-383400,"Testing 65",Deleted
+53,BB-600241,"Testing 33",Requested
+54,BB-741103,Testing10,Requested
+55,BB-407277,Campaign_11:10PM,Deleted
+56,BB-709703,Campaign_10:44PM,Deleted
+57,BB-248716,Campaign_2,"RFP Campaign"
+58,BB-318746,Campaign_1,"RFP Campaign"
+59,BB-243415,Test-PDF-002,"RFP Campaign"
+60,BB-296630,Test-PDF-001,"RFP Campaign"
+61,BB-723214,"Testing 3",Requested
+62,BB-224698,Campaign_11:09PM,Requested
+63,BB-139720,Testrefund,Scheduled
+64,BB-704733,"17th May-4","Campaign Preparing"
+65,BB-193231,"17th May3","Campaign Preparing"
+66,BB-417015,Test155/5,Stopped
+67,BB-734886,"Testing 77",Requested
+68,BB-181782,ProdTest,"Campaign Preparing"
+69,BB-990475,"Marcy Test 2 5.12 Edited","Campaign Preparing"
+70,BB-869164,"Marcy Test 5.12","Campaign Preparing"
+71,BB-411902,Kansas,"Campaign Preparing"
+72,BB-759368,"Testing 66",Deleted
+73,BB-36387,Testing867,Requested
+74,BB-694782,"Testing 22 Updating",Requested
+75,BB-207240,Campaign_12/5-11:38PM,Requested
+76,BB-563651,"Testing 999","Campaign Preparing"
+77,BB-295661,"Testing 88",Deleted
+78,BB-128205,Test1,"Campaign Preparing"
+79,BB-900122,"Testing 98",Requested
+80,BB-629253,test-campaign-demo-001,Requested
+81,BB-772684,Capaign_10:48pm,"Campaign Preparing"
+82,BB-871343,Testing86,Stopped
+83,BB-227464,Test-Ma-Camapign-Count,"Campaign Preparing"
+84,BB-575772,"cancel campaign",Deleted
+85,BB-958461,Campaign_12/05-9:17PM,"Campaign Preparing"
+86,BB-81521,test-demo-12MAY-001,"Campaign Preparing"
+87,BB-488196,Test-Stripe-12-May-21,Deleted
+88,BB-409021,"Teat Module","Campaign Preparing"
+89,BB-615485,sravani,"RFP Campaign"
+90,BB-16241,Gpr1,"Campaign Preparing"
+91,BB-422057,GprRajita,"Campaign Preparing"
+92,BB-169067,GPR,"RFP Campaign"
+93,BB-695487,Testing1,Deleted
+94,BB-489621,"Testing 99",Requested
+95,BB-592575,Testing88,Requested
+96,BB-150130,Ptg,"RFP Campaign"
+97,BB-419510,Rajita,"RFP Campaign"
+98,BB-438856,test,Requested
+99,BB-597364,Rajitagpr,"Campaign Preparing"
+100,BB-600311,Rajita,"RFP Campaign"
+101,BB-501997,Rajita,"RFP Campaign"
+102,BB-226268,"Testing 11",Requested
+103,BB-443655,Testing10,Deleted
+104,BB-906437,Test2,"Campaign Preparing"
+105,BB-588715,"Testing 27","Campaign Preparing"
+106,BB-593515,Campaign_05/10/2021-6:41PM,"Campaign Preparing"
+107,BB-726215,OrderRT,Scheduled
+108,BB-757615,"order2 ed","Campaign Preparing"
+109,BB-960236,FirstOrder,Requested
+110,BB-262225,"pSS Reddy","Campaign Preparing"
+111,BB-902266,test_1234012,Requested
+112,BB-825455,Test-Camp-Buyer3,Requested
+113,BB-21911,Test-Camp-Buyer2,"Campaign Preparing"
+114,BB-369642,Test-Camp1,"Campaign Preparing"
+115,BB-685589,Testing-27-Apr,Stopped
+116,BB-425854,test_001,"Campaign Preparing"

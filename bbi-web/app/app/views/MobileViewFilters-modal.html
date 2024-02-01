@@ -1,0 +1,707 @@
+<style>
+    .mobileFIlterModal {
+        margin-top: 15%;
+        min-width: 100%;
+        min-height: 93%;
+    }
+
+    .filter_bgColor {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+    }
+
+    #form {
+        position: relative;
+    }
+
+    .finish {
+        text-align: center
+    }
+
+    #form fieldset:not(:first-of-type) {
+        display: none
+    }
+
+    #form .previous-step,
+    .next-step {
+
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 10px 5px;
+        /* margin: 10px 5px 10px 0px; */
+
+    }
+
+    #form .previous-step:hover,
+    #form .previous-step:focus {
+        background-color: #000000
+    }
+
+    #progressbar {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    #progressbar li {
+        float: left;
+        width: 25%;
+        text-align: center;
+        position: relative;
+    }
+
+    #progressbar li:before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 20px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px
+    }
+
+    #progressbar li:after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+        background-color: #2F6FED;
+    }
+
+    .progress {
+        height: 7px
+    }
+
+    .progress-bar {
+        background-color: #2F6FED;
+        border-radius: 5px;
+    }
+
+    @media screen and (max-width: 575px) {
+        .md-button.md-icon-button {
+            margin: 0px;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        .engage-card {
+            padding: 10px 10px !important;
+        }
+    }
+
+    .card-content {
+        margin-top: auto;
+    }
+
+    .engage-card {
+        padding: 10px 13px;
+        text-align: center;
+        margin-right: 1rem;
+    }
+
+    .engage-card img {
+        padding: 12px;
+        background-color: #EBF3FF;
+    }
+
+    .bottom-fixedContain {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+    }
+
+    .arrow-forwardIcon i {
+        margin: 7px;
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .accordion-button::after {
+        content: "\f107";
+        color: black;
+        right: 2rem;
+        position: absolute;
+        font-family: "FontAwesome"
+    }
+
+    .accordion-button[aria-expanded="true"]::after {
+        content: "\f106";
+    }
+
+    .card {
+        margin-bottom: 12px;
+        background: #F1F3F9;
+        border: 0;
+    }
+
+    .accordion>.card>.card-header {
+        border-radius: 0;
+        cursor: pointer;
+    }
+
+    .card-bodyBg-white {
+        background: #ffffff;
+    }
+
+    .save-icon i {
+        margin-left: 2rem;
+        background: #08875D;
+        padding: 1rem;
+        border-radius: 50px;
+        color: #fff;
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 375px) {
+        .accordionHeader {
+            font-size: 16px;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        .md-datepicker-triangle-button.md-button.md-icon-button {
+            left: 62px !important;
+        }
+    }
+
+    .selected-type {
+        background-color: #dae0e2;
+    }
+
+    .save-icon button {
+        margin-left: 1rem;
+        background: #2F6FED !important;
+    }
+
+    .pill-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .pill-button {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+
+    .active-pill {
+        background-color: dodgerblue;
+        color: white;
+    }
+
+    /* Mobile responsiveness */
+    @media screen and (max-width: 767px) {
+        .pill-container {
+            align-items: center;
+        }
+
+        .pill-button {
+            width: 100%;
+        }
+    }
+
+    .md-padding {
+        padding: 15px;
+    }
+
+    .next-step,
+    .previous-step {
+        cursor: pointer;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .p-3 {
+        padding: 15px;
+    }
+
+    @media only screen and (max-width: 768px) {
+
+        .md-padding {
+            padding: 10px;
+        }
+
+        .next-step,
+        .previous-step {
+            font-size: 14px;
+        }
+
+        .p-3 {
+            padding: 10px;
+        }
+
+        .btn {
+            font-size: 14px;
+        }
+    }
+</style>
+<div id="myDropdown" class="filter_bgColor">
+    <md-dialog class="mobileFIlterModal md-padding" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+        <md-dialog-content>
+            <div class="d-flex justify-content-between filetrsPopContent">
+                <h4>
+                    <button type="button" class="btn" onclick="goBack()">
+                        <i class="material-icons">arrow_back</i>
+                    </button>Filters
+                </h4>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon class="md-default-theme close_rg"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+            <div class="pill-container">
+                <div ng-repeat="pill in pillData" class="pill-button" ng-click="loadDataForPill(pill.id)"
+                    ng-class="{ 'active-pill': pill.id === selectedPillId }">
+                    {{ pill.search_criteria_name }}
+                </div>
+            </div>
+            <md-content class="md-padding mb-5" style="background-color: #FFFFFF;">
+                <div class="">
+                    <form id="form" ng-submit="saveFilterSet()" novalidate="novalidate">
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <ul id="progressbar">
+                            <li class="active" id="step1">
+                                <strong>Step 1</strong>
+                            </li>
+                            <li><strong>Step 2</strong></li>
+                            <li><strong>Step 3</strong></li>
+                            <li><strong>Step 4</strong></li>
+                        </ul>
+                        <br>
+                        <fieldset>
+                            <!-- Add ng-click to the buttons representing advertising types -->
+                            <!-- <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+                                <div class="row" style="margin-left: 0px; margin-right: 0px">
+                                    <div class="col-sm-4 col-4"
+                                        style="padding-right: 0px; padding-left: 0px; text-align: center"
+                                        ng-repeat="format in formatGroup track by $index" class="formatgridpart">
+                                        <md-button class="md-grid-item-content mt-1 mb-1"
+                                            ng-click="selectAdvertisingType(format.id)"
+                                            ng-class="{'selected-type' : selectedAdvertisingType === format.id}"
+                                            style="margin: 0px; padding: 0px;">
+                                            <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                                            <div class="md-caption">{{format.name}}</div>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+                                <div class="row" style="margin-left:0px;margin-right:0px">
+                                    <div class="col-sm-4 col-4"
+                                        style="padding-right:0px;padding-left:0px; text-align: center"
+                                        ng-repeat="format in formatGroup track by $index" class="formatgridpart">
+                                        <div ng-cloak>
+                                            <md-button class="md-grid-item-content mt-1 mb-1"
+                                                ng-click="toggleAdvertisingType(format.id)"
+                                                ng-class="{'selected-type' : isAdvertisingTypeSelected(format.id)}"
+                                                ng-if="format" style="margin:0px;padding :0px;">
+                                                <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                                                <div class="md-caption">{{format.name}}</div>
+                                            </md-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p type="button" name="next-step" class="next-step bottom-fixedContain"
+                                ng-click="goToStep(2)">{{ currentStep < 2 ? 'All Done? Let\' s go to Step 2'
+                                    : 'Next Step' }} <span class="arrow-forwardIcon"><i
+                                        class="material-icons">arrow_forward</i></span>
+                            </p>
+                        </fieldset>
+                        <fieldset>
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseTwo">
+                                            Impressions
+                                        </h4>
+                                    </div>
+
+                                    <div id="collapseTwo" class="collapse show card-bodyBg-white"
+                                        aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="impressionsInput">Number of Impressions :</label>
+                                                <input type="number" class="form-control" id="impressionsInput"
+                                                    ng-model="product_impressions" required
+                                                    placeholder="Please Enter Impressions">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseThree">
+                                            Size
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="collapse card-bodyBg-white"
+                                        aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group row m-0">
+                                                        <label for="heightInput" class="my-auto">Height : </label>
+                                                        <div>
+                                                            <input type="number" class="form-control" id="heightInput"
+                                                                ng-model="size.height" required placeholder="Height">
+                                                        </div>
+                                                        <div>
+                                                            <select name="productType" ng-model="productType"
+                                                                class="Pixels_feets md-whiteframe-3dp"
+                                                                ng-init="productType ='pixels'">
+                                                                <option value="pixels" class="select_border" selected>
+                                                                    pixels
+                                                                </option>
+                                                                <option value="feet" class="select_border">feet</option>
+                                                                <option value="Line Inches" class="select_border">Line
+                                                                    Inches
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group row m-0 mt-2">
+                                                        <label for="widthInput" class="my-auto">Width : </label>
+                                                        <div>
+                                                            <input type="number" class="form-control" id="widthInput"
+                                                                ng-model="size.width" required placeholder="Width">
+                                                        </div>
+                                                        <div>
+                                                            <select name="productType" ng-model="productType"
+                                                                class="Pixels_feets md-whiteframe-3dp"
+                                                                ng-init="productType ='pixels'">
+                                                                <option value="pixels" class="select_border" selected>
+                                                                    pixels</option>
+                                                                <option value="feet" class="select_border">feet</option>
+                                                                <option value="Line Inches" class="select_border">Line
+                                                                    Inches</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseFour">
+                                            CPMs
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="collapse card-bodyBg-white"
+                                        aria-labelledby="headingFour" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="cpmInput">CPM Range :</label>
+                                                <input type="text" placeholder="Please Enter CPM Range"
+                                                    class="form-control" id="cpmInput" ng-model="product_cpm" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingFive">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseFive">
+                                            Filter by Description or other Text
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFive" class="collapse card-bodyBg-white"
+                                        aria-labelledby="headingFive" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="textSearchInput">Enter Text to Search :</label>
+                                                <input type="text" placeholder="Type here to search"
+                                                    class="form-control" id="textSearchInput" ng-model="product_search">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingSix">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseSix">
+                                            Filter by DMA
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSix" class="collapse card-bodyBg-white"
+                                        aria-labelledby="headingSix" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="dma">DMA :</label>
+                                                <md-autocomplete md-min-length="3" md-selected-item="areaObj"
+                                                    ng-blur="selectSearchedArea()" md-search-text="searchedArea"
+                                                    md-items="item in searchableAreas(searchedArea)"
+                                                    md-item-text="item.city_name" md-clear-button="true" name="Area"
+                                                    md-menu-class="form-control md-whiteframe-3dp" required>
+                                                    <md-item-template>
+                                                        <span class="item-title"></span>
+                                                        <span class="item-metadata">
+                                                            <span><strong>{{item.city_name}}</strong></span>
+                                                            <span><strong>{{item.state_name}}</strong></span>
+                                                        </span>
+                                                    </md-item-template>
+                                                    <md-not-found>No matches found. </md-not-found>
+                                                </md-autocomplete>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header" id="headingSeven">
+                                        <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                            data-target="#collapseSeven">
+                                            Filter by Lat, long & Radius
+                                        </h4>
+                                    </div>
+                                    <div id="collapseSeven" class="collapse card-bodyBg-white"
+                                        aria-labelledby="headingSeven" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="latitudeInput">Latitude:</label>
+                                                <input type="text" placeholder="Enter Latitude" class="form-control"
+                                                    id="latitudeInput" ng-model="product_lat">
+                                            </div>
+                                            <!-- Input field for Longitude -->
+                                            <div class="form-group">
+                                                <label for="longitudeInput">Longitude:</label>
+                                                <input type="text" placeholder="Enter Longitude" class="form-control"
+                                                    id="longitudeInput" ng-model="product_long">
+                                            </div>
+                                            <!-- Input field for Radius -->
+                                            <div class="form-group">
+                                                <label for="radiusInput">Radius:</label>
+                                                <input type="text" placeholder="Enter Radius" class="form-control"
+                                                    id="radiusInput" ng-model="product_radius">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between filetrsPopContent">
+                                    <button type="button" class="btn previous-step" name="previous-step" >
+                                        <i class="material-icons">arrow_back</i>
+                                    </button>
+                                    <button type="button" class="btn  next-step" name="next-step" >
+                                        <span >All Done? Let's go to Step 3 </span>
+                                        <i class="material-icons" style="margin-left: 0px;">arrow_forward</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                        <fieldset>
+                            <div class="card">
+                                <div class="card-header" id="headingEight">
+                                    <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                        data-target="#collapseEight">
+                                        Availability Date Range
+                                    </h4>
+                                </div>
+                                <div id="collapseEight" class="collapse show card-bodyBg-white"
+                                    aria-labelledby="headingEight" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row ml-0 mr-0 form-group">
+                                            <div class="col-6 text-center mt-2 map_cal">
+                                                <label for="latitudeInput">Start Date :</label>
+                                                <md-datepicker class="form-control " ng-model="product_startDate"
+                                                    md-placeholder="Start Date"></md-datepicker>
+                                            </div>
+                                            <div class="col-6 text-center mt-2 map_cal ">
+                                                <label for="latitudeInput">End Date :</label>
+                                                <md-datepicker class="form-control " ng-model="product_endDate"
+                                                    md-placeholder="End Date" md-min-date="booked_from"></md-datepicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between filetrsPopContent">
+                                <button type="button" class="btn previous-step" name="previous-step" >
+                                    <i class="material-icons">arrow_back</i>
+                                </button>
+                                <button type="button" class="btn  next-step" name="next-step" >
+                                    <span >All Done? Let's go to Step 4 </span>
+                                    <i class="material-icons" style="margin-left: 0px;">arrow_forward</i>
+                                </button>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="card">
+                                <div class="card-header" id="headingNine">
+                                    <h4 class="mb-0 accordion-button accordionHeader" data-toggle="collapse"
+                                        data-target="#collapseNine">
+                                        You’re nearly done. Name this filter!
+                                    </h4>
+                                </div>
+                                <div id="collapseNine" class="collapse show card-bodyBg-white"
+                                    aria-labelledby="headingNine" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <label class="mb-4" for="" style="font-size: 14px; font-weight: 600;">
+                                            Like your options? We’ll want to save this filter set to use now or in the
+                                            future:
+                                        </label>
+                                        <div class="d-flex">
+                                            <input type="text" class="input-textSave-bgColor"
+                                                ng-model="search_criteria_name" required style="width: 80%;">
+                                            <div class="save-icon">
+                                                <button type="submit"
+                                                    class="md-raised all_button  md-button "
+                                                    type="submit" ng-if="!getDataResponse.length">
+                                                    Save
+                                                </button>
+                                                <button type="submit"
+                                                    class="md-raised all_button md-button "
+                                                    type="submit" ng-if="getDataResponse.length">
+                                                    Update
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p>(ex. Name of Project or other descriptive name)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p type="button" name="next-step" class="next-step bottom-fixedContain"
+                                ng-click="allDone()">All Done ! </p>
+                        </fieldset>
+                    </form>
+                </div>
+            </md-content>
+        </md-dialog-content>
+    </md-dialog>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        var currentGfgStep, nextGfgStep, previousGfgStep;
+        var opacity;
+        var current = 1;
+        var steps = $("fieldset").length;
+
+        setProgressBar(current);
+
+        $(".next-step").click(function () {
+            if (current < steps) {
+                currentGfgStep = $(this).closest("fieldset");
+                nextGfgStep = currentGfgStep.next();
+
+                currentGfgStep.hide();
+                nextGfgStep.show();
+
+                setProgressBar(++current);
+            }
+        });
+
+        $(".previous-step").click(function () {
+            if (current > 1) {
+                currentGfgStep = $(this).closest("fieldset");
+                previousGfgStep = currentGfgStep.prev();
+
+                currentGfgStep.hide();
+                previousGfgStep.show();
+
+                setProgressBar(--current);
+            }
+        });
+
+        // $(".next-step").click(function () {
+        //     currentGfgStep = $(this).parent();
+        //     nextGfgStep = $(this).parent().next();
+
+        //     $("#progressbar li").eq($("fieldset")
+        //         .index(nextGfgStep)).addClass("active");
+
+        //     nextGfgStep.show();
+        //     currentGfgStep.animate({ opacity: 0 }, {
+        //         step: function (now) {
+        //             opacity = 1 - now;
+
+        //             currentGfgStep.css({
+        //                 'display': 'none',
+        //                 'position': 'relative'
+        //             });
+        //             nextGfgStep.css({ 'opacity': opacity });
+        //         },
+        //         duration: 500
+        //     });
+        //     setProgressBar(++current);
+        // });
+
+        // $(".previous-step").click(function () {
+
+        //     currentGfgStep = $(this).parent();
+        //     previousGfgStep = $(this).parent().prev();
+
+        //     $("#progressbar li").eq($("fieldset")
+        //         .index(currentGfgStep)).removeClass("active");
+
+        //     previousGfgStep.show();
+
+        //     currentGfgStep.animate({ opacity: 0 }, {
+        //         step: function (now) {
+        //             opacity = 1 - now;
+
+        //             currentGfgStep.css({
+        //                 'display': 'none',
+        //                 'position': 'relative'
+        //             });
+        //             previousGfgStep.css({ 'opacity': opacity });
+        //         },
+        //         duration: 500
+        //     });
+        //     setProgressBar(--current);
+        // });
+
+        function setProgressBar(currentStep) {
+            var percent = parseFloat(100 / steps) * current;
+            percent = percent.toFixed();
+            $(".progress-bar").css("width", percent + "%")
+        }
+
+        $(".submit").click(function () {
+            return false;
+        })
+    });
+</script>

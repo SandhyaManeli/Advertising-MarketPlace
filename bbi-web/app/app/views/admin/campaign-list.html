@@ -1,0 +1,800 @@
+<!-- share campaign sidenav -->
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+  <div layout="row">
+      <div class="md-toolbar-tools">
+          <div flex></div>
+          <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+              <md-tooltip>Close Side Panel</md-tooltip>
+              <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+          </md-button>
+      </div>
+  </div>
+  <md-content layout-align="center center" layout-margin layout-padding>
+      <h3 class="md-headline">Share Campaign</h3>
+      <form name="shareCampaignForm">
+          <div layout="column">
+              <md-input-container class="md-block">
+                  <label>Name</label>
+                  <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                  <div ng-messages="shareCampaignForm.name.$error">
+                      <div ng-message="required">Name is required.</div>
+                      <div ng-message="pattern">Enter a valid Name.</div>
+                  </div>
+              </md-input-container>
+              <md-input-container class="md-block">
+                  <label>Email</label>
+                  <input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                  <div ng-messages="shareCampaignForm.email.$error">
+                      <div ng-message="required">Email is required.</div>
+                      <div ng-message="pattern">Enter a valid Email Id.</div>
+                  </div>
+              </md-input-container>
+              <md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentAdminShareCampaign)">Share Campaign</md-button>
+          </div>
+      </form>
+  </md-content>
+</md-sidenav>
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+
+  <!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md  newLogo">
+    <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+  </md-button> -->
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+  <div layout="colmun" layout-align="end center" class="campaign_search res_search_wid admin_camp_2 admin_camp_22">
+   
+  <!-- <div layout="colmun" layout-align="end center" class="campaign_search hide-xs"> -->
+      <input type="text" ng-model="search" placeholder="Search by Campaign Name..." class="camp_seachowner camp_admin res_search_campaign mt-3 mr-2" />
+  </div>
+  
+  <md-tabs md-dynamic-height class="padding_cmp">
+         <!-- <md-tab label="Requested Proposals"> -->
+          <md-tab label="Requested Insertion Order" ng-click="tabHandle('insertion_order')">
+          <div style="margin-top: 1em;">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr class="text_color">
+                    <th class="cam_admin_requested">Campaign ID
+                      <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("cid","string")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("cid","string")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="cam_admin_requested">Campaign Name
+                      <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("name","string")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("name","string")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="cam_admin_requested">Name
+                      <span class="d-inline" ng-class="'first_name' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("first_name","string")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'first_name' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("first_name","string")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="cam_admin_requested">Start Date
+                      <span class="d-inline" ng-class="'start_date' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("start_date","string")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'start_date' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("start_date","string")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="text-center cam_admin_requested">Number of Products 
+                      <span class="d-inline" ng-class="'product_count' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("product_count","number")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'product_count' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("product_count","number")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="text-right cam_admin_requested">Paid
+                      <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="text-right cam_admin_requested">Price
+                      <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("total_price","number")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("total_price","number")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                    <th class="text-center cam_admin_requested">View Details</th>
+                    <th class="text-center cam_admin_requested">Date Entered
+                      <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asci'?'highlight': 'nonhighlight'" ng-click='sortAsci("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                      </span>
+                      <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsci'?'highlight': 'nonhighlight'" ng-click='sortDsci("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="">
+                  <tr ng-repeat="campaign in priorityCampaignsArray | filter: search | limitTo:limit" style="color: red;">
+                    <td class="table_vertical">{{campaign.cid}}</td>
+                    <td class="table_vertical">{{campaign.name | capitalize}}</td>
+                    <td class="table_vertical">{{campaign.first_name | capitalize}}</td>
+                    <td class="table_vertical">{{campaign.start_date | dateify | date:'dd-MM-yyyy' }}</td>
+                    <td class="table_vertical text-center">{{campaign.product_count|| "N/A"}}</td>
+                    <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_paid || '0' |number : 2  }}</td>
+                    <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_price || '0' |number : 2 }}</td>
+                    <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right target">
+                          <div class="dropdown dropleft">
+                            <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                              <!-- <i class="fa fa-ellipsis-v"></i> -->
+                              <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}/10" style="font-size:11px;">
+                              <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                              </a>
+                              <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(campaign.id)" style="font-size:11px;">
+                              <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                              </a>
+                            </div>
+                          </div>
+                        </md-menu>
+                      </td>
+                    <td class="text-center table_vertical">
+                      <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+                <tbody>
+                  <tr ng-repeat="campaign in plannedCampaigns | filter: search | limitTo:limit">
+                    <td class="table_vertical">{{campaign.cid}}</td>
+                    <td class="table_vertical">{{campaign.name | capitalize}}</td>
+                    <td class="table_vertical">{{campaign.first_name | capitalize}}</td>
+                    <td class="table_vertical">{{campaign.start_date | dateify | date:'dd-MM-yyyy' }}</td>
+                    <td class="table_vertical text-center">{{campaign.product_count|| "N/A"}}</td>
+                    <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_paid || '0' |number : 2  }}</td>
+                    <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_price || '0' |number : 2 }}</td>
+                    <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right
+                         target">
+                          <!-- <div class="dropdown dropleft float-right"> -->
+                            <div class="dropdown dropleft">
+                            <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                              <!-- <i class="fa fa-ellipsis-v"></i> -->
+                              <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}/11" style="font-size:11px;">
+                              <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                              </a>
+                              <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(campaign.id)" style="font-size:11px;">
+                              <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                              </a>
+                            </div>
+                          </div>
+                        </md-menu>
+                      </td>
+                    <td class="text-center table_vertical">
+                      <span class="text_color md-caption">{{campaign.updated_at | dateFormat}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+        </md-tab>
+        <md-tab label="Scheduled" ng-click="tabHandle('scheduled')">
+            <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text_color">
+                                <th class="cam_admin_scheduled">Campaign ID
+                                  <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("cid","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("cid","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_scheduled">Campaign Name
+                                  <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_scheduled">Name
+                                  <span class="d-inline" ng-class="'first_name' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("first_name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'first_name' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("first_name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_scheduled">Start Date
+                                  <span class="d-inline" ng-class="'start_date' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("start_date","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'start_date' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("start_date","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_scheduled">Number of Products 
+                                  <span class="d-inline" ng-class="'product_count' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("product_count","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'product_count' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("product_count","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_scheduled">Paid
+                                  <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_scheduled">Price
+                                  <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_scheduled">View Details</th>
+                                <th class="text-center cam_admin_scheduled">Date Entered
+                                  <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Ascis'?'highlight': 'nonhighlight'" ng-click='sortAscis("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dscis'?'highlight': 'nonhighlight'" ng-click='sortDscis("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr ng-repeat="campaign in scheduledCampaigns | filter: search" ng-if="campaign.status != 100 && campaign.status != 600">
+                                <td class="table_vertical">{{campaign.cid}}</td>
+                                <td class="table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.first_name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.start_date | date}}</td>
+                                <td class="text-center table_vertical">{{campaign.product_count || "N/A"}}</td>
+                                <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_price || '0' |number : 2 }}</td>
+                                <!-- <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right target">
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                            </md-button>
+                            <md-menu-content width="2">
+                                <md-menu-item>                                    
+                                    <md-button class="pop_view" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">share</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>                             
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{campaign.id}}">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        </td> -->
+                        <td class="text-center table_vertical">
+                            <md-menu md-position-mode="target-right target">
+                              <div class="dropdown dropleft">
+                                <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                  <!-- <i class="fa fa-ellipsis-v"></i> -->
+                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}/12" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(campaign.id)" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-payment-details/{{campaign.id}}" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                  </a>
+                                </div>
+                              </div>
+                            </md-menu>
+                          </td>
+                        <td class="text-center table_vertical">
+                            <span class="text_color md-caption">{{campaign.updated_at| dateFormat}}</span>
+                        </td>
+                        </tr>
+                        </tbody> 
+                    </table>
+                </div>
+            </div>
+
+        </md-tab>
+        <md-tab label="Running" ng-click="tabHandle('running')">
+            <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text_color">
+                                <th class="cam_admin_running">Campaign ID
+                                  <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("cid","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("cid","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_running">Campaign Name
+                                  <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_running">Name
+                                  <span class="d-inline" ng-class="'first_name' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("first_name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'first_name' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("first_name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_running">Start Date
+                                  <span class="d-inline" ng-class="'start_date' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("start_date","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'start_date' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("start_date","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_running">Number of Products 
+                                  <span class="d-inline" ng-class="'product_count' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("product_count","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'product_count' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("product_count","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_running">Paid
+                                  <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_running">Price
+                                  <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_running">View Details</th>
+                                <th class="text-center cam_admin_running">Date Entered
+                                  <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisr("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisr("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                            <tr ng-repeat="campaign in runningCampaigns| limitTo:limit | filter: search" ng-if="campaign.status != 100 && campaign.status != 600 && campaign.status != 1200">
+                                <td class="table_vertical">{{campaign.cid}}</td>
+                                <td class="table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.first_name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.start_date| date }}</td>
+                                <td class="text-center table_vertical">{{campaign.product_count || "N/A"}}</td>
+                                <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="text-right text-nowrap padding-20 table_vertical">${{campaign.total_price || '0' |number : 2 }}</td>
+                                <!-- <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right target">
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                            </md-button>
+                            <md-menu-content width="2">
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                        </div>
+                                    </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">share</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                      <md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{campaign.id}}">
+                                        <div layout="row">
+                                          <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                          <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                        </div>
+                                      </md-button>
+                                    </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        </td> -->
+                        <td class="text-center table_vertical">
+                            <md-menu md-position-mode="target-right target">
+                              <div class="dropdown dropleft">
+                                <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                  <!-- <i class="fa fa-ellipsis-v"></i> -->
+                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}/13" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(campaign.id)" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-payment-details/{{campaign.id}}" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                  </a>
+                                </div>
+                              </div>
+                            </md-menu>
+                          </td>
+                        <td class="text-center table_vertical">
+                            <span class="text_color md-caption">{{campaign.updated_at| dateFormat}}</span>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </md-tab> 
+        <md-tab label="Closed" ng-click="tabHandle('closed')">
+            <div style="margin-top: 1em;">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="text_color">
+                                <th class="cam_admin_closed">Campaign ID
+                                  <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("cid","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("cid","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_closed">Campaign Name
+                                  <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_closed">Name
+                                  <span class="d-inline" ng-class="'first_name' == upArrowColour && sortType == 'Ascisr'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("first_name","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'first_name' == downArrowColour && sortType == 'Dscisr'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("first_name","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="cam_admin_closed">Start Date
+                                  <span class="d-inline" ng-class="'start_date' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("start_date","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'start_date' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("start_date","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_closed">Number of Products 
+                                  <span class="d-inline" ng-class="'product_count' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("product_count","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'product_count' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("product_count","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_closed">Paid
+                                  <span class="d-inline" ng-class="'total_paid' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("total_paid","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_paid' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("total_paid","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-right cam_admin_closed">Price
+                                  <span class="d-inline" ng-class="'total_price' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("total_price","number")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'total_price' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("total_price","number")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                                <th class="text-center cam_admin_closed">View Details</th>
+                                <th class="text-center cam_admin_closed">Date Entered
+                                  <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Ascisrc'?'highlight': 'nonhighlight'" ng-click='sortAscisrc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                                  </span>
+                                  <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dscisrc'?'highlight': 'nonhighlight'" ng-click='sortDscisrc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                                  </span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="" >
+                            <tr ng-repeat="campaign in closedCampaigns| limitTo:limit | filter: search" ng-if="campaign.status != 100 && campaign.status != 600">
+                                <td class="table_vertical">{{campaign.cid}}</td>
+                                <td class="text-left table_vertical">{{campaign.name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.first_name | capitalize}}</td>
+                                <td class="table_vertical">{{campaign.start_date| date }}</td>
+                                <td class="text-center table_vertical">{{campaign.product_count || "N/A"}}</td>
+                                <td class="text-right text-nowrap table_vertical">${{campaign.total_paid || '0' |number : 2 }}</td>
+                                <td class="text-right text-nowrap table_vertical">${{campaign.total_price || '0' |number : 2 }}</td>
+                                <!-- <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right target">
+                            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+                            </md-button>
+                            <md-menu-content width="2">
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}">                          <div layout="row">
+                                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">View Details</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-click="toggleShareCampaignSidenav(campaign.id)">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">share</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{campaign.id}}">
+                                        <div layout="row">
+                                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                                            <p style="margin:0 4px;font-size:11px;">Payment Details</p>
+                                        </div>
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                        </td> -->
+                        <td class="text-center table_vertical">
+                            <md-menu md-position-mode="target-right target">
+                              <div class="dropdown dropleft">
+                                <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                  <!-- <i class="fa fa-ellipsis-v"></i> -->
+                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{campaign.id}}/14" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-click="toggleShareCampaignSidenav(campaign.id)" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">share</i>Share Campaign
+                                  </a>
+                                  <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-payment-details/{{campaign.id}}" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>Payment Details
+                                  </a>
+                                </div>
+                              </div>
+                            </md-menu>
+                          </td>
+                        <td class="text-center table_vertical">
+                            <span class="text_color md-caption">{{campaign.updated_at| dateFormat }}</span>
+                        </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </md-tab>
+        <md-tab label="Delete Campaigns">
+          <div style="margin-top: 1em;">
+              <div class="table-responsive">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr class="text_color">
+                              <th class="cam_admin_delete">Campaign ID
+                                <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("cid","string")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("cid","string")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>
+                              <th class="cam_admin_delete">Campaign Name
+                                <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("name","string")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("name","string")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>
+                              <th class="text-right text-nowrap cam_admin_delete">Price
+                                <span class="d-inline" ng-class="'price' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("price","number")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'price' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("price","number")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>
+                              <th class="cam_admin_delete">Comments</th>
+                              <th class="cam_admin_delete">User Name
+                                <span class="d-inline" ng-class="'firstName' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("firstName","string")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'firstName' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("firstName","string")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>
+                              <th class="cam_admin_delete">User Email
+                                <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("email","string")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("email","string")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>
+                              <th class="text-center cam_admin_delete">Action</th>
+                              <th class="text-center cam_admin_delete">Date
+                                <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Ascisrcd'?'highlight': 'nonhighlight'" ng-click='sortAscisrcd("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                                </span>
+                                <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dscisrcd'?'highlight': 'nonhighlight'" ng-click='sortDscisrcd("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                                </span>
+                              </th>                      
+                          </tr>
+                      </thead>
+                      <tbody class="">
+                          <tr ng-repeat="request in RequestData | limitTo:limit">
+                              <td class="table_vertical">{{request.cid}}</td>
+                              <td class="table_vertical">{{request.name}}</td>
+                              <td class="text-right text-nowrap padding-20 table_vertical">${{request.price |number : 2}}</td>
+                              <td class="table_vertical">{{request.user_query}}</td>
+                              <td class="table_vertical">{{request.loggedinUser.firstName | capitalize}}</td>
+                              <td class="table_vertical">{{request.loggedinUser.email | capitalize}}</td>                          
+                      <td class="text-center table_vertical">
+                          <md-menu md-position-mode="target-right target">
+                            <div class="dropdown dropleft">
+                              <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                                <!-- <i class="fa fa-ellipsis-v"></i> -->
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item pop_view dropactive" ng-href="/admin/campaign-proposal-summary/{{request.campaign_id}}/15" style="font-size:11px;">
+                                  <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                  </a>
+                              </div>
+                            </div>
+                          </md-menu>
+                        </td>
+                      <td class="text-center table_vertical">
+                          <span class="text_color md-caption">{{request.updated_at | dateFormat}}</span>
+                      </td>
+                      </tr>
+                      </tbody> 
+                  </table>
+              </div>
+          </div>
+
+      </md-tab>
+      <md-tab label="Delete Product Campaigns">
+        <div style="margin-top: 1em;">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="text_color">
+                            <th class="cam_admin_delete">Campaign ID
+                              <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("cid","string")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("cid","string")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>
+                            <th class="cam_admin_delete">Campaign Name
+                              <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("name","string")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("name","string")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>
+                            <th class="text-right cam_admin_delete">Price
+                              <span class="d-inline" ng-class="'price' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("price","number")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'price' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("price","number")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>
+                            <th class="cam_admin_delete">Comments</th>
+                            <th class="cam_admin_delete">User Name
+                              <span class="d-inline" ng-class="'firstName' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("firstName","string")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'firstName' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("firstName","string")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>
+                            <th class="cam_admin_delete">User Email
+                              <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("email","string")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("email","string")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>
+                            <th class="text-center cam_admin_delete">Action</th>
+                            <th class="text-center cam_admin_delete">Date
+                              <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Ascisrcdp'?'highlight': 'nonhighlight'" ng-click='sortAscisrcdp("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                              </span>
+                              <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dscisrcdp'?'highlight': 'nonhighlight'" ng-click='sortDscisrcdp("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                              </span>
+                            </th>                      
+                        </tr>
+                    </thead>
+                    <tbody class="">
+                        <tr ng-repeat="product in ProductData | limitTo:limit">
+                            <td class="table_vertical">{{product.cid}}</td>
+                            <td class="table_vertical">{{product.name}}</td>
+                            <td class="table_vertical padding-20 text-right text-nowrap"><span>$</span>{{product.price| number : 2}}</td>
+                            <td class="table_vertical">{{product.comments}}</td>
+                            <td class="table_vertical">{{product.loggedinUser.firstName | capitalize}}</td>
+                            <td class="table_vertical">{{product.loggedinUser.email | capitalize}}</td>                          
+                    <td class="text-center table_vertical">
+                        <md-menu md-position-mode="target-right target">
+                          <div class="dropdown dropleft">
+                            <button type="button" class="pop_view dropdown-toggle drp_btn" data-toggle="dropdown">
+                              <!-- <i class="fa fa-ellipsis-v"></i> -->
+                              <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item pop_view dropactive" ng-click="localStorageProductId(product.productbookingid)" ng-href="/admin/campaign-proposal-summary/{{product.campaign_id}}/16"  style="font-size:11px;">
+                                <i class="material-icons" style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View Details
+                                </a>
+                            </div>
+                          </div>
+                        </md-menu>
+                      </td>
+                    <td class="text-center table_vertical">
+                        <span class="text_color md-caption">{{product.updated_at | dateFormat}}</span>
+                    </td>
+                    </tr>
+                    </tbody> 
+                </table>
+            </div>
+        </div>
+
+    </md-tab>
+        <!-- share campaign sidenav -->
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+            <div layout="row">
+                <div class="md-toolbar-tools">
+                    <div flex></div>
+                    <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                        <md-tooltip>Close Side Panel</md-tooltip>
+                        <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                    </md-button>
+
+                    <md-menu-content width="2">
+                      <md-menu-item>
+                        <md-button ng-href="/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                          <div layout="row">
+                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                            <p style="margin:auto 10px auto 10px">View Details</p>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item>
+                        <md-button ng-click="toggleShareCampaignSidenav(campaign.id)">
+                          <div layout="row">
+                            <md-icon><i class="material-icons">share</i></md-icon>
+                            <p style="margin:auto 10px auto 10px">Share Campaign</p>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item>
+                        <md-button ng-href="/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                          <div layout="row">
+                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                            <p style="margin:auto 10px auto 10px">Pay Now</p>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item>
+                        <md-button ng-href="/owner/{{clientSlug}}/campaign-details/{{campaign.id}}/{{campaign.type}}">
+                          <div layout="row">
+                            <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                            <p style="margin:auto 10px auto 10px">Payment Details</p>
+                          </div>
+                        </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+                </td>
+                <td class="table_vertical hide-xs">
+                  <span class="text_color md-caption">{{campaign.updated_at | datetimeify}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+    </md-tab>   
+  </md-tabs>  
+</div>
+<style>
+     .highlight {
+        color: black;
+    }
+.nonhighlight{
+    color: #808080c2;
+}
+.padding-20{
+    padding-right:20px !important;
+  }
+</style>

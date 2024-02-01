@@ -1,0 +1,186 @@
+
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+
+   <!-- share campaign sidenav -->
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+		<div layout="row">
+			<div class="md-toolbar-tools">
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+					<md-tooltip>Close Side Panel</md-tooltip>
+					<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+				</md-button>
+			</div>
+		</div>
+		<md-content layout-align="center center" layout-margin layout-padding>
+			<h3 class="md-headline">Share Campaign</h3>
+			<form name="shareCampaignForm">
+				<div layout="column">
+					<md-input-container class="md-block">
+						<label>Name</label>
+						<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+						<div ng-messages="shareCampaignForm.name.$error">
+							<div ng-message="required">Name is required.</div>
+							<div ng-message="pattern">Enter a valid Name.</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block">
+						<label>Email</label>
+						<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+						<div ng-messages="shareCampaignForm.email.$error">
+							<div ng-message="required">Email is required.</div>
+							<div ng-message="pattern">Enter a valid Email Id.</div>
+						</div>
+					</md-input-container>
+					<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentAdminShareCampaign)">Share Campaign</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-sidenav>
+	<!-- share campaign sidenav ends -->
+    <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+		<div class="row" style="margin-left:0px; margin-right:0px;">
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng" style="margin-top:14px;">
+				<p class="">Campaign ID</p>
+				<p class="md-caption mob_span"><b>{{adminpayments.cid}}</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-3 payment_mng" style="margin-top:14px;">
+				<p class="">Campaign Name</p>
+				<p class="md-caption mob_span"><b>BB-238</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng" style="margin-top:14px;">
+				<p class="">Number of Products</p>
+				<p class="md-caption mob_span mob_5"><b>5</b></p>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng" style="margin-top:14px;">
+				<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="toggleShareCampaignSidenav()">
+					<p class="md-caption"><span><i class="material-icons i_icon">
+								reply_all
+							</i></span></p>
+					<p class="mob_spanicon share_icon">Share Camapaign</p>
+				</div>
+			</div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
+					<div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 0}" ng-click="selectedFormatIndex = 0">
+					  <p class="md-caption"><span><i class="material-icons i_icondown">
+							file_copy
+						  </i></span></p>
+					  <p class="mob_spanicon share_icon">Download Quotetation</p>
+					</div>
+				  </div>
+			<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng" style="margin-top:14px;">
+				  <p class="md-caption"><span><i class="material-icons i_icon">
+					  account_balance_wallet
+					</i></span></p>
+					<p class="mob_spanicon share_icon">Payment Details</p>
+			  </div>
+			<!-- <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 payment_nng hide-xs" style="margin-top:1em;">
+				<md-button class="md-raised Upload_font">
+					<md-icon>
+						<i class="material-icons material_iconscloud">
+							cloud_upload
+						</i>
+					</md-icon>
+					Upload Art Work
+				</md-button>
+			</div> -->
+		</div>
+	</div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="text_color">
+                <tr>
+                    <th>Date</th>
+                    <th>Mode of Payment</th>
+                    <th>Paid</th>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table_vertical">14-08-2018</td>
+                    <td class="table_vertical">By Cash</td>
+                    <td class="table_vertical">17,00,000</td>
+                    <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                </tr>
+                <tr>
+                    <td class="table_vertical">14-08-2018</td>
+                    <td class="table_vertical">By Cash</td>
+                    <td class="table_vertical">17,00,000</td>
+                    <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                </tr>
+                <tr>
+                    <td class="table_vertical">14-08-2018</td>
+                    <td class="table_vertical">By Cash</td>
+                    <td class="table_vertical">17,00,000</td>
+                    <td class="table_vertical">9:00 Am, 21-09-2018</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- table grid end -->
+
+    <div class="d-flex bg-light mb-5" style="min-height:100px">
+        <div class="p-2 col-md-6">
+            <div class="chat_box">
+                <form action="/action_page.php">
+                    <div class="form-group">
+                        <label for="text" class="text_color">Any questions, Please submit below</label>
+                        <textarea type="text" class="form-control" id="text" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn submit_payment float-right">Submit</button>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="p-2  col-md-6 align-self-end">
+            <div class="d-flex justify-content-end pt-4">
+                <md-button class="md-raised all_button">Request Proposal</md-button>
+            </div>
+        </div> -->
+        <div class="p-2 col-md-6" >
+            <div class="d-flex justify-content-end pt-4 align-self-end">
+                <div layout="column" class="payment_inner">
+                    <div class="">
+                        <p class="md-body-1 pull-right">Total : <span class="payment_online">12,58,100</span></p>
+                    </div>
+                    <!-- <div layout="row">
+                        <div class="md-body-1">18% GST :</div>
+                        <div class="md-body-1"></div>
+                    </div> -->
+                    <!-- <div layout="row">
+                        <div class="md-body-1">Paid :</div>
+                        <div class="md-body-1">11,10,850</div>
+                    </div>
+                    <div layout="row">
+                        <div class="md-title">Balance :</div>
+                        <div class="md-title">1,47,150</div>
+                    </div> -->
+                    <div class="">
+                        <p class="md-body-1 pull-right">Paid : <span class="payment_online">11,10,850</span></p>
+                    </div>
+                    <div class="">
+                        <p class="md-title pull-right">Balance : <span class="payment_balance">1,47,150</span></p>
+                    </div>
+                    <div>
+                        <input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span>
+                        <md-button class="md-raised all_button" ng-click="confirmCampaignBooking($event, campaignDetails.id)">Pay Online</md-button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="p-2  col-md-6 align-self-end" ng-if="campaignDetails.status == 600">
+            <div class="d-flex justify-content-end pt-4 align-self-end">
+                <div layout="column" class="payment_inner">
+                    <div layout="row">
+                        <div class="md-body-1">We have received your request and working on blocking the products you
+                            have selected.</div>
+                    </div>
+                    <div layout="row">
+                        <div class="md-body-1">You'll soon hear from us.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

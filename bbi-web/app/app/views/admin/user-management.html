@@ -1,0 +1,290 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+  <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+    <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+  </md-button>
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+  <md-tabs md-selected="selectedIndex" md-dynamic-height class="padding_cmp">
+    <md-tab label="Companies">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div flex="20">
+          <!-- <input class="hide-xs form-control md-whiteframe-z1" type="text" placeholder="Search by company name..." ng-model="searchByCompanyName"
+            style="width:317px;border-radius:0px;height:33px;float:right"> -->
+            <input class="form-control md-whiteframe-z1 user_search" type="text" placeholder="Search by company name..." ng-model="searchByCompanyName"
+            style="width:317px;border-radius:0px;height:33px;float:right">
+        </div>
+      </div>
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color">
+                <th class="adjust_space">Company Name
+                  <span class="d-inline" ng-class="'company_name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"  ng-click='sortAsc("company_name","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'company_name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("company_name","string")'><i class="fas fa-arrow-down"></i>
+                  </span> 
+                </th>
+                <th class="adjust_space">Company Type
+                  <span class="d-inline" ng-class="'company_type_name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("company_type_name","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'company_type_name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("company_type_name","string")'><i class="fas fa-arrow-down"></i>
+                  </span> 
+                </th>
+                <th class="adjust_space">Super Admin Details</th>
+                <th class="text-center adjust_space">Activated</th>
+                <th class="text-center adjust_space">Email
+                  <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("email","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("email","string")'><i class="fas fa-arrow-down"></i>
+                  </span> 
+                </th>
+                <th class="text-center adjust_space">Phone 
+                </th>
+                <th class="text-center adjust_space">Address
+                </th>
+                <th class="adjust_space">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr ng-repeat="client in allClients | filter : searchByCompanyName">
+                <td class="table_vertical">{{client.company_name}}</td>
+                <td class="table_vertical">{{client.company_type_name | capitalize}}</td>
+                <td class="table_vertical">
+                  <a style="cursor:pointer; color:#00f;" ng-click="showUserDetailsPopup(client.client_id, client.company_super_admin)"
+                    ng-if="client.company_super_admin">
+                    View User
+                  </a>
+                  <a style="cursor:pointer; color:#00f;" ng-click="showAssignSuperAdminPopup(client.id)" ng-if="!client.company_super_admin">
+                    Assign Super Admin
+                  </a>
+                </td>
+                <td class="text-center table_vertical">{{client.activated | boolToYesNo}}</td>
+                <!-- <td class="text-center table_vertical">{{client.contact_email | capitalize}}</td> -->
+                <td class="text-center table_vertical">{{client.contact_email!='' &&  client.contact_email || client.email| capitalize}}</td>
+                <td class="text-center table_vertical">{{client.phone}}</td>
+                <td class="text-center table_vertical adjust_space">{{client.address}}</td>
+                <td class="table_vertical icon_res">
+                  <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">done</i></md-icon>
+                    </a></span>
+                  <!-- <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">share</i></md-icon>
+                    </a></span> -->
+                  <span><a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">delete</i></md-icon>
+                    </a></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="Users">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div flex="20">
+          <input class="mr-2 form-control md-whiteframe-z1 search_email_res admin_user_search" type="text" placeholder="Search by Email..." ng-model="searchByEmail"
+            style="width:317px;border-radius:0px;height:33px;float:right">
+        </div>
+        <!-- <div class="hide-xs" layout="row"> -->
+          <div layout="row">
+          <div flex></div>
+          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+            <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
+            <md-button class="md-raised all_button add_button" ng-click="showAddUserPopup()">Add New User</md-button>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color">
+                <th class="adjust_space">Name
+                  <span class="d-inline" ng-class="'first_name' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("first_name","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'first_name' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("first_name","string")'><i class="fas fa-arrow-down"></i>
+                  </span>
+                </th>
+                <th class="adjust_space">Email
+                  <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'"  ng-click='sortAscc("email","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("email","string")'><i class="fas fa-arrow-down"></i>
+                  </span>
+                </th>
+                <th class="adjust_space">Phone
+                </th>
+                <th class="adjust_space">User Type
+                  <span class="d-inline" ng-class="'company_type' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("company_type","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline"  ng-class="'company_type' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("company_type","string")'><i class="fas fa-arrow-down"></i>
+                  </span>
+                </th>
+                <th class="adjust_space">Company
+                  <span class="d-inline" ng-class="'company_name' == upArrowColour && sortType == 'Ascc'?'highlight': 'nonhighlight'" ng-click='sortAscc("company_name","string")'><i class="fas fa-arrow-up"></i>
+                  </span>
+                  <span class="d-inline" ng-class="'company_name' == downArrowColour && sortType == 'Dscc'?'highlight': 'nonhighlight'" ng-click='sortDscc("company_name","string")'><i class="fas fa-arrow-down"></i>
+                  </span>
+                </th>
+                <th class="adjust_space">Activated</th>
+                <th class="adjust_space">Action</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr ng-repeat="user in allUsers | filter : searchByEmail">
+                <td class="table_vertical">{{user.first_name | capitalize}} {{user.last_name}}</td>
+                <td class="table_vertical">{{user.email | capitalize}}</td>
+                <td class="table_vertical">{{user.phone || "N/A"}}</td>
+                <td class="table_vertical">{{user.company_type}}</td>
+                <td class="table_vertical">{{user.company_name | capitalize}}</td>
+                <td class="table_vertical">
+                  <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                    {{user.activated | boolToYesNo}}
+                  </a>
+                </td>
+                <td class="table_vertical adjust_space">
+                  <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                    View details
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="System Roles">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <!-- <div class="hide-xs" layout="row"> -->
+          <div class="" layout="row">
+          <div flex></div>
+          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+            <!-- <a ng-click="showAddUserPopup()">Add New User</a> -->
+            <md-button class="md-raised all_button" ng-click="showAddRolePopup()">Add Role</md-button>
+          </div>
+        </div>
+      </div>
+      <!-- <div style="float:right; margin-right:10px;">
+        <a ng-click="showAddRolePopup()" style="cursor:pointer; color:blue;">Add Role</a>
+      </div> -->
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color">
+                <th></th>
+                <th class="">Name</th>
+                <th>Description</th>
+                <th class="">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr ng-repeat="role in allRoles">
+                <td class="table_vertical">
+                  <input type="checkbox" ng-click="toggleRoleSelection(role.id)" ng-checked="selectedRole == role.id" />
+                </td>
+                <td class="table_vertical adjust_space">{{role.display_name | capitalize}}</td>
+                <td class="table_vertical">{{role.description | capitalize}}</td>
+                <td class="table_vertical icon_res">
+                  <span>
+                    <!-- view role -->
+                    <a ng-href="/admin/role-details/{{role.id}}" ng-click="">
+                      <md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+                    </a>
+                  </span>
+                  <span>
+                    <!-- assign this role to user -->
+                    <a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">assignment_ind</i></md-icon>
+                    </a>
+                  </span>
+                  <span>
+                    <!-- delete this role -->
+                    <a ng-href="#" ng-click="">
+                      <md-icon><i class="material-icons">delete</i></md-icon>
+                    </a>
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6" ng-if="selectedRole != 0">
+            <!-- permissions table, fills up when a role is selected -->
+            <div style="float:left;">
+              <h3 style="padding-left:30px;">Role Permissions</h3>
+            </div>
+            <div style="float:right; margin-right:10px;">
+              <a ng-click="updatePermissionsForRole()" style="cursor:pointer; color:blue;">Update Permissions</a>
+            </div>
+            <div class="table-responsive" style="height:400px; overflow:auto;">
+              <table class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <!-- <th>Actions</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="permission in allPermissions">
+                    <td>
+                      <input type="checkbox" ng-checked="selectedPermissions.indexOf(permission.id) > -1" ng-click="togglePermissionSelection(permission.id)" />
+                    </td>
+                    <td>{{permission.name}}</td>
+                    <td>{{permission.description}}</td>
+                    <!-- <td>
+                      <span>
+                        assign this permission to role --
+                        <a ng-href="#" ng-click=""><md-icon><i class="material-icons">subdirectory_arrow_left</i></md-icon></a>
+                      </span>
+                    </td> -->
+                  </tr>      
+                </tbody>
+              </table>
+            </div>
+            <!-- permissions table ends -->
+          </div>
+        </div>
+        
+      </div>
+    </md-tab>
+  </md-tabs>
+</div>
+
+<script type="text/ng-template" id="add-bbi-user-popup.html">
+    <md-content class="md-padding">
+      <form name="addBBIUserForm" novalidate="novalidate">
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="newBBIUser.email" name="newBBIUserEmail" type="email" maxlength="100" required="required"/>
+          <div ng-messages="anewBBIUserForm.newBBIUserEmail.$error">
+            <div class="alret alert-danger" ng-message="required">Email is required.</div>
+            <div ng-message="maxlength">email shouldn't exceed 100 characters. </div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn all_button" ng-disabled="assignSuperAdminForm.$invalid" ng-click="sendInviteToBBIUser()">Send invite</md-button>
+        </md-input-container>
+      </form>
+    </md-content>
+  </script>
+  <style>
+    .highlight {
+        color: black;
+    }
+.nonhighlight{
+    color: #808080c2;
+}
+
+</style>

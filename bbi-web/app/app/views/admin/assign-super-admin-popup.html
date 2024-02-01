@@ -1,0 +1,16 @@
+<md-content class="md-padding">
+  <form name="assignSuperAdminForm" novalidate="novalidate">
+    <md-input-container class="md-block">
+      <label>Email</label>
+      <input ng-model="superAdminToAssign.email" name="superAdminEmail" type="email" maxlength="50" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+      <div ng-messages="assignSuperAdminForm.superAdminEmail.$error">
+        <div class="alret alert-danger" ng-message="required">Email is required.</div>
+        <div ng-message="maxlength">email shouldn't exceed 50 characters. </div>
+        <div ng-message="pattern">Enter a valid email Id</div>
+      </div>
+    </md-input-container>
+    <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+      <md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn register_btn" ng-disabled="assignSuperAdminForm.$invalid" ng-click="setSuperAdminForClient()">Set Super Admin</md-button>
+    </md-input-container>
+  </form>
+</md-content>

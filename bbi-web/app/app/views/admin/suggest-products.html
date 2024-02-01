@@ -1,0 +1,281 @@
+<style>
+  .red {
+    color: #f00;
+  }
+</style>
+
+<div layout="column">
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="quoteChangeRequestDetailsSidenav">
+    <md-toolbar layout="row" style="    background: #48869c;">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Client Request</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleQuoteChangeRequestDetailsSidenav()">
+          <md-icon>
+            <i class="material-icons">clear</i>
+          </md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding>
+      <div class="md-whiteframe-z2 md-body-1" layout-margin ng-repeat="changeQuoteItem in changeRequestHistory">
+        <div>
+          {{changeQuoteItem.remark}}
+          <hr />
+          <div layout-align="end center" style="font-size:11px;">{{changeQuoteItem.updated_at | dateify | date: "dd-MMM-yyyy"}}</div>
+        </div>
+      </div>
+    </md-content>
+  </md-sidenav>
+  <div class="md-title" style="background: #447bde;color: #fff;">Product</div>
+  <div layout="row">
+    <div flex="flex"></div>
+    <div flex="60">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <form ng-submit="searchHoardingData()">
+            <input ng-model="searchAll" placeholder="Search Billboards with ID, Areas, Directions or Locations">
+            <md-icon ng-if="searchAll!=''">
+              <i class="material-icons" ng-click="clearSearch()">clear</i>
+            </md-icon>
+            <md-icon ng-if="searchAll==''">
+              <i class="material-icons">search</i>
+            </md-icon>
+          </form>
+        </md-input-container>
+      </div>
+    </div>
+    <!-- <div flex="20">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+        </md-input-container>
+      </div>
+    </div>
+    <div flex="20">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+        </md-input-container>
+      </div>
+    </div>
+    <div flex="20">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+        </md-input-container>
+      </div>
+    </div>
+    <div flex="20">
+      <div layout="row" layout-padding class="search-field">
+        <md-input-container flex class="search-input">
+          <label>&nbsp;</label>
+          <input ng-model="search.who" placeholder="Search Billboards" class="search-bg">
+        </md-input-container>
+      </div>
+    </div>-->
+  </div>
+  <!-- <div class="row " >
+    <div class=" col-md-5 col-sm-offset-7 col-sm-5 col-xs-10">
+      <form action="/action_page.php">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+          </div>
+        </form>
+    </div>
+	</div> -->
+  <div layout="row">
+    <md-grid-list layout-fill="layout-fill" flex="flex" md-cols-xs="1" md-cols-gt-xs="1" md-cols-md="3" md-cols-gt-md="3" md-row-height="600px"
+      md-gutter-gt-md="16px" md-gutter-xs="16px" md-gutter-sm="16px" md-gutter-gt-sm="8px" md-gutter="4px" ng-style="{'background': '#fff'}">
+      <md-grid-tile ng-repeat="product in productList" ng-style="{'background': '#fff'}">
+        <div layout="column" class="md-whiteframe-2dp">
+          <div layout="column" class="admin-img">
+            <img ng-src="{{serverUrl + product.image}}" style="width:100%;height:200px;">
+            <div layout="row" class="adminimg-content" flex>
+              <div class="md-body-2" style="margin:8px 0 0 15px" flex=50 layout="column">{{product.siteNo}}({{product.format_name}})</div>
+              <!-- <md-button class="md-icon-bitton"></md-button> -->
+              <!-- <div class="preview-glyphs" ng-clicl="showcalender()" layout-align=" center end" layout="column">
+                <md-icon ><i class="material-icons">perm_contact_calendar</i></md-icon>
+              </div> -->
+              <div layout="column" flex="50" layout-align=" center end">
+                <md-button class="md-icon-button md-accent" aria-label="Calender">
+                  <md-icon md-svg-icon="assets/images/calendar_white_18px.svg"></md-icon>
+                </md-button>
+              </div>
+            </div>
+          </div>
+          <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="details">
+              <md-content class="">
+                <div class="content-innerone">
+                  <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+                    <div layout="column" flex="33" layout-align="center center">
+                      <div>
+                        <img src="assets/images/bb.png">
+                      </div>
+                      <div>{{product.hoardingCost}}</div>
+                    </div>
+                    <div layout="column" flex="33" layout-align="center center">
+                      <div>
+                        <img src="assets/images/lit.png">
+                      </div>
+                      <div>
+                        Lit:
+                        <span ng-if="product.lighting">Yes</span>
+                        <span ng-if="!product.lighting">No</span>
+                      </div>
+                    </div>
+                    <div layout="column" flex="33" layout-align="center center">
+                      <div>
+                        <img src="assets/images/size.png">
+                      </div>
+                      <div>size:{{product.panelSize}}</div>
+                    </div>
+                  </div>
+                  <md-divider></md-divider>
+                  <div layout="row" layout-padding="layout-padding">
+                    <!-- <div flex="10"><span><md-icon md-svg-icon="assets/images/loaction.svg"></md-icon></span></div> -->
+
+                    <span>
+                      <md-icon md-svg-icon="assets/images/loaction.svg"></md-icon>
+                    </span>
+                    <div class="ellipsis">
+                      <span>{{product.address}}
+                        <br>
+                        <span class="md-caption" style="color:red">{{product.direction}}</span>
+                      </span>
+                    </div>
+
+
+                  </div>
+                  <md-divider></md-divider>
+                  <div layout="row" layout-padding="layout-padding">
+                    <div flex="10">
+                      <span>
+                        <md-icon md-svg-icon="assets/images/impression.svg"></md-icon>
+                      </span>
+                    </div>
+                    <div flex="80">
+                      <span class="md-caption">{{product.impressions}}</div>
+                  </div>
+                  <md-divider></md-divider>
+                  <div layout="column" layout-padding="layout-padding">
+                    <!-- <div layout="row" flex>
+                      <div flex="50">
+                        <md-button class="md-raised md-primary">Add</md-button>
+                      </div>
+                      <div flex="50">
+                        <md-button >Shortlist</md-button>
+                      </div>
+                  </div> -->
+                    <div layout="row" flex ng-if="product.alreadyAdded">
+                      <div flex="60">
+                        <div class="md-caption">Product Already Added</div>
+                        <!-- <div class="md-caption">From 12-sep-2017To 30-sep-2017</div> -->
+                      </div>
+                      <div flex="40">
+                        <md-button class="md-raised md-warn" ng-click="removeProductFromCampaignSuggestion(product.id)">Remove</md-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Add" ng-disabled="product.alreadyAdded">
+              <md-content class="md-padding">
+                <div class="content-innertwo">
+                  <div layout="row" layout-xs="row" flex-xs="100" layout-gt-xs="row" flex-gt-xs="100" layout-margin>
+                    <!-- <md-button class="md-icon-button" aria-label="backarrow" >
+                        <md-icon><i class="material-icons">arrow_back</i></md-icon>
+                      </md-button> -->
+                    <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = product.id"
+                    />
+                    <!-- <div class="form-group">
+                      <div class='input-group' style="width:130px">
+                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.start_date" is-open="opened.start" ng-click="opened.start = !opened.start"
+                          max-date='model.end_date' ng-readonly='true' placeholder="start date" />
+                        <span class="input-group-addon" for='start' ng-click="opened.start = !opened.start; $event.stopPropagation()">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class='input-group' style="width:130px">
+                        <input type='text' class="form-control" datepicker-popup ng-model="suggestedProduct.end_date" is-open="opened.end" ng-click="opened.end = !opened.end"
+                          min-date='suggestedProduct.start_date' ng-readonly='true' placeholder="end date" />
+                        <span class="input-group-addon" ng-click="opened.end = !opened.end;  $event.stopPropagation()">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                      </div>
+                    </div> -->
+                    <div layout-gt-xs="row">
+                      <div flex-gt-xs="">
+                        <label>Start date</label>
+                        <md-datepicker ng-model="suggestedProduct.start_date" ng-init="suggestedProduct.start_date = campaignStartDate" onkeydown="return false"
+                          md-placeholder="Enter date" md-min-date="fromMinDate" md-max-date="fromMaxDate"></md-datepicker>
+                      </div>
+                      <div flex-gt-xs="">
+                        <label>End Date</label>
+                        <md-datepicker ng-model="suggestedProduct.end_date" ng-init="suggestedProduct.end_date = campaignEndDate" onkeydown="return false"
+                          md-placeholder="Enter date" md-min-date="suggestedProduct.start_date" md-max-date="toMaxDate"></md-datepicker>
+                      </div>
+                    </div>
+                  </div>
+                  <div layout="column" layout-xs="column" flex-xs="100" layout-gt-xs="column" flex-gt-xs="100" layout-margin>
+                    <div layout="row">
+                      <md-input-container class="md-block margin-input">
+                        <md-icon md-svg-icon="assets/images/rupee.svg"></md-icon>
+                        <input ng-model="suggestedProduct.price" type="text" name="price" required="required" ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice"
+                          ng-init="suggestedProduct.price = product.default_price" />
+                      </md-input-container>
+                      <md-button class="md-primary" ng-click="enabledPrice = true;" ng-show="!enabledPrice">Change Price</md-button>
+                    </div>
+                    <div>Note:This Price Will not affected actual price</div>
+                  </div>
+                  <div layout="row" layout-align="center center">
+                    <md-button class="md-raised md-primary" ng-click="suggestProductForCampaign(suggestedProduct)">Add</md-button>
+                  </div>
+                </div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </div>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <div class="container" ng-if="pagination.pageCount > 1" style="margin-top:20px;">
+    <ul class="pagination">
+      <li class="pageResults" ng-repeat="i in pagination.pageArray track by $index" style="margin:auto;">
+        <a ng-click="pagination.pageNo = i; loadProductList();" ng-class="{'selected-pagelink' : pagination.pageNo == i}" style="padding:10px; font-size:18px; font-weight:bold;color:#447bde;cursor:pointer;">
+          {{i}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div style="position:fixed;bottom:60px;right:60px;width:200px;height:190px;background:#fff;border-radius:5px;padding-left:10px;box-shadow:0px 0px 4px #888;">
+  <p>From
+    <b>{{ campaignStartDate | dateify | date:"dd-MM-yyyy" }}</b>
+  </p>
+  <p>To
+    <b>{{ campaignEndDate | dateify | date:"dd-MM-yyyy" }}</b>
+  </p>
+  <p>Expected Budget
+    <b>{{ campaignEstBudget || "N/A" }}</b>
+  </p>
+  <p>Actual Budget
+    <b ng-class="{red: campaignActBudget > campaignEstBudget}">{{ campaignActBudget || "N/A" }}</b>
+  </p>
+  <md-button class="md-fab md-mini md-primary" aria-label="Use Android" ng-click="getChangeRequestHistory(campaignId)" style="margin:0px">
+    <md-icon>!</md-icon>
+  </md-button>
+</div>

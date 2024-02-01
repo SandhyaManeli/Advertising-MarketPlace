@@ -1,0 +1,55 @@
+<md-dialog flex-xs="100" flex="50" flex-md="60" flex-sm="60">
+  <md-dialog-content>
+    <md-content class="md-padding">
+      <div layout="row" layout-align="center center" layout-margin>
+        <div>Enter Payment Details</div>
+      </div>
+      <form name="updateCampaignPaymentForm" novalidate="novalidate">
+        <div layout="column" layout-xs="column" layout-padding flex="60" flex-offset-gt-sm="20">
+          <md-input-container class="md-block margin-input">
+            <label>Payment Amount</label>
+            <input ng-model="campaignPayment.amount" type="text" name="amount" minlength="3" maxlength="20" required="required" />
+            <div ng-messages="updateCampaignPaymentForm.name.$error">
+              <div ng-message="required">Payment Amount is required.</div>
+              <div ng-message="minlength">Payment Amount must have 3 characters.</div>
+              <div ng-message="maxlength">Payment Amount shouldn't exceed 20 characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block margin-input">
+            <label>Payment Type</label>
+            <md-select name="campaign_payment_type" id="campaign_payment_type" ng-model="campaignPayment.type" required>
+              <md-option ng-repeat="cpt in paymentTypes" value="{{cpt.name}}">{{cpt.name}}</md-option>
+            </md-select >
+            <div ng-messages="updateCampaignPaymentForm.type.$error">
+              <div ng-message="required">Client Type is required.</div>
+              <div ng-message="minlength">Client Type must have 2 characters.</div>
+              <div ng-message="maxlength">Client Type shouldn't exceed 30 characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block margin-input">
+            <label>Cheque/Reference/Transaction No.</label>
+            <input ng-model="campaignPayment.reference_no" type="text" name="reference_no" minlength="3" maxlength="60" ng-required="campaignPayment.type != 'Cash'"/>
+            <div ng-messages="updateCampaignPaymentForm.reference_no.$error">
+              <div ng-message="required">Cheque/Reference/Transaction is required.</div>
+              <div ng-message="minlength">Cheque/Reference/Transaction must have 3 characters.</div>
+              <div ng-message="maxlength">Cheque/Reference/Transaction shouldn't exceed 30 characters. </div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block margin-input">
+            <label>Received By</label>
+            <input ng-model="campaignPayment.received_by" type="text" name="received_by" minlength="3" maxlength="60" required/>
+            <div ng-messages="updateCampaignPaymentForm.received_by.$error">
+              <div ng-message="required">Received By is required.</div>
+              <div ng-message="minlength">Received By must have 3 characters.</div>
+              <div ng-message="maxlength">Received By shouldn't exceed 60 characters. </div>
+            </div>
+          </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+          <md-button Class="md-raised all_button" type="submit" ng-click="updateCampaignPayment()">Submit</md-button>
+          <md-button Class="md-raised Upload_font" ng-click="closeMdDialog()">Cancel</md-button>
+        </div>
+      </form>
+    </md-content>
+  </md-dialog-content>
+</md-dialog>

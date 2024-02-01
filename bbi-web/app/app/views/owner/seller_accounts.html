@@ -1,0 +1,293 @@
+<!-- <div layout="column" layout-fill="layout-fill" class="campagin_page">
+  <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+    <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+  </md-button>
+  <md-tabs md-dynamic-height class="padding_cmp">
+    <md-tab label="Sub Sellers">
+      <div class="md-title" layout="row">
+        <div flex></div>
+        <div flex="20">
+          <input class="hide-xs mr-2 form-control md-whiteframe-z1" type="text" placeholder="Search by Email..." ng-model="searchByEmail"
+            style="width:317px;border-radius:0px;height:33px;float:right">
+        </div>
+        <div class="hide-xs" layout="row">
+          <div flex></div>
+          <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+            <a ng-click="showAddUserPopup()">Add New User</a>
+            <md-button class="md-raised all_button add_button" ng-click="showAddUserPopup()">Add New User</md-button> 
+			<div class="d-flex justify-content-between"> 
+
+				<div class="addseller_btn">
+			<button type="button" class="btn" data-toggle="modal" data-target="#addSeller">Add Seller</button> 
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+	  
+      <div style="margin-top: 1em;">
+        <div class="table-responsive">
+          <table class="table table-hover call_center">
+            <thead>
+              <tr class="text_color">
+                <th class="">Name</th>
+                <th class="">Email</th>
+                <th class="">Phone</th>
+                <th class="">User Type</th>
+                <th class="">Company</th>
+                <th class="">Activated</th>
+                <th class=""></th>
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr ng-repeat="user in allUsers | filter : searchByEmail">
+                <td class="table_vertical">{{user.first_name | capitalize}} {{user.last_name}}</td>
+                <td class="table_vertical">{{user.email | capitalize}}</td>
+                <td class="table_vertical">{{user.phone || "N/A"}}</td>
+                <td class="table_vertical">{{user.company_type}}</td>
+                <td class="table_vertical">{{user.company_name | capitalize}}</td>
+                <td class="table_vertical">
+                  <a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                    {{user.activated | boolToYesNo}}
+                  </a>
+                </td>
+                <td class="table_vertical">
+                  <a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                    View details
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </md-tab>
+  </md-tabs> 
+</div>
+
+		<div class="container">
+			<div class="d-flex justify-content-between"> 
+
+				<div class="addseller_btn">
+	
+					<div class="modal" id="addSeller">
+						<div class="mt-4 modal-dialog">
+							<div class="seller_popup modal-content">
+								<div class="container">
+
+
+									<div class="modal-header d-flex align-items-center">
+										<h4>Add Seller</h4>
+										<button type="button" class="btn" data-dismiss="modal">X</button>
+									</div>
+									<div class="modal-body">
+										<form name="sendquery">
+											<div class="form-group">
+												<label for="name">Name</label>
+												<input type="text" class="form-control" name="name"
+													ng-model="seller.name">
+											</div>
+											<div class="form-group">
+												<label for="type">Client Type</label>
+												<input type="text" class="form-control" name="type"
+													ng-model="seller.type">
+											</div>
+											<div class="form-group">
+												<label for="contactname">Contact Name</label>
+												<input type="text" class="form-control" name="contactname"
+													ng-model="seller.contactName">
+											</div>
+											<div class="form-group">
+												<label for="email">Email</label>
+												<input type="email" class="form-control" id="email" name="email"
+													ng-model="seller.email">
+											</div>
+											<div class="form-group">
+												<label for="phone">Phone No</label>
+												<input type="number" class="form-control" name="number"
+													ng-model="seller.phone">
+											</div>
+											<div class="form-group">
+												<label for="address">Address</label>
+												<input type="text" class="form-control" name="number" ng-model="seller.address">
+											</div>
+											<span>Note: Password will be sent to sellers email address</span>
+											<div class="modal-footer">
+												<button type="button" class="btn"
+													ng-click="sendSellerDetails(seller)">Create Seller
+													Account</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		
+		<div class="seller_list">
+	<form>
+		<div class="container">
+			<div class="d-flex justify-content-between">
+
+				<div class="seller">
+					<h4>Seller Accounts</h4>
+					<p>{{subSellerDetails.length}} Sellers</p>
+				</div>
+
+				<div class="addseller_btn">
+					<button type="button" class="btn add_seller" data-toggle="modal" data-target="#addSeller">Add Seller</button>
+
+					<!-- The Modal -->
+					<div class="modal" id="addSeller">
+						<div class="mt-4 modal-dialog">
+							<div class="seller_popup modal-content">
+								<div class="container">
+
+									<!-- Modal Header -->
+									<div class="modal-header d-flex align-items-center">
+										<h4>Add Seller</h4>
+										<button type="button" class="btn" data-dismiss="modal">X</button>
+										<!-- <button type="button" class="close btn" data-dismiss="modal">Cancel</button> -->
+									</div>
+
+									<!-- Modal body -->
+									<div class="modal-body">
+										<form name="sendquery">
+											<div class="form-group">
+												<label for="name">Name</label>
+												<input type="text" class="form-control" name="name"
+													ng-model="seller.name">
+											</div>
+											<div class="form-group">
+												<label for="contactname">Last Name</label>
+												<input type="text" class="form-control" name="contactname"
+													ng-model="seller.contactName" >
+											</div>
+
+											<!-- <div class="form-group">
+												<label for="designation">Designation</label>
+												<input type="text" class="form-control" name="designation"
+													ng-model="seller.designation"> 
+											</div> -->
+											<div class="form-group"> 
+												<label for="type">Client Type</label>
+												<input type="text" class="form-control" name="type"
+													ng-model="seller.type">
+											</div>
+											<div class="form-group">
+												<label>Contact Name</label>
+												<input type="text" class="form-control" name=""
+                                        ng-model="SellerName" readonly>
+											</div>
+											<div class="form-group">
+												<label for="email">Email</label>
+												<input type="email" class="form-control" id="email" name="email"
+													ng-model="seller.email">
+											</div>
+											<div class="form-group">
+												<label for="phone">Phone No</label>
+												<input type="number" class="form-control" name="number"
+													ng-model="seller.phone">
+											</div>
+											<div class="form-group">
+												<label for="address">Address</label>
+												<input type="text" class="form-control" name="number" ng-model="seller.address">
+											</div>
+											<span>Note: Password will be sent to sellers email address</span>
+											<div class="modal-footer">
+												<button type="button" class="btn"
+													ng-click="sendSellerDetails(seller)">Create Seller
+													Account</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group icon_search">
+				<input type="text" class="form-control" id="seller by name" placeholder="Search seller by name"
+					name="seller by name" ng-model="search.first_name">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</div>
+ 
+			<div class="d-flex flex-column">
+				<div class="d-flex justify-content-between mb-4" ng-repeat="user in allUsers | filter : search">
+					<div class="iconrounded_section">
+						<span>{{user.first_name.slice(0, 1) | capitalize}}</span>  
+						<div class="edith_details">
+							<h6>{{user.first_name}}</h6>
+							<p>{{user.email}}</p> 
+							<p> {{user.phone}}</p>
+							<p>{{user.company_type}}</p>
+						</div>
+					</div>
+					<div class="icons_display d-flex flex-column">
+						<div class="p-2">
+								<a ng-click="toggleUserActivation(user.id)" style="cursor:pointer;color:#0000EE">
+                    {{user.activated | boolToYesNo}} 
+                  </a>
+						</div>
+						<div class="p-2">
+							<a ng-click="viewUserRoles(user.id)" style="cursor:pointer;color:#0000EE">
+                    View details
+                  </a>
+						</div>
+					</div>
+					<div class="">
+						<a data-toggle="modal" data-target="#exampleModalCenter"
+                            ng-click="conformDeleteSubSeller(user.id)"><i
+                                class="material-icons">delete_forever</i></a>
+
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header modal_bottom">
+                                        <h5 class="modal-title">Are you Sure! you want to
+                                            cancel this Account</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer modal_top">
+                                        <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal"
+                                            ng-click="deleteSubSellerAccount(user.id)">Yes</button>
+                                        <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<div layout="column" layout-align="center end" class="loadmore" ng-if="subSellerDetails.length >= 3">
+					<md-button class="md-primary loadmorebtn" ng-click='loadMore()'>Load More</md-button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script type="text/ng-template" id="add-bbi-user-popup.html">
+    <md-content class="md-padding">
+      <form name="addBBIUserForm" novalidate="novalidate"> 
+        <md-input-container class="md-block">
+          <label>Email</label>
+          <input ng-model="newBBIUser.email" name="newBBIUserEmail" type="email" maxlength="100" required="required"/>
+          <div ng-messages="anewBBIUserForm.newBBIUserEmail.$error">
+            <div class="alret alert-danger" ng-message="required">Email is required.</div>
+            <div ng-message="maxlength">email shouldn't exceed 100 characters. </div>
+          </div>
+        </md-input-container>
+        <md-input-container layout-align="center center" layout-fill="layout-fill" class="sinbtn">
+          <md-button type="submit" layout-fill="layout-fill" class="md-raised md-primary regbn all_button" ng-disabled="assignSuperAdminForm.$invalid" ng-click="sendInviteToBBIUser()">Send invite</md-button>
+        </md-input-container>
+      </form>
+    </md-content>
+  </script>

@@ -1,0 +1,36 @@
+<md-dialog flex-xs="100" flex="30" flex-md="40" flex-sm="60" >
+	<md-dialog-content>
+		<md-content class="md-padding contbg">
+			<div layout="column" layout-align="center end">
+          
+          <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button" ng-click="closeMdDialog()">
+            <i class="material-icons">close</i>
+          </button>
+			</div>
+			<form name="editProposedProductForm" novalidate="novalidate" layout-padding>			
+        <div>
+          <label>Start date</label>
+          <md-datepicker ng-model="product.from_date" ng-init="product.from_date = OwnerProposalStartDate" onkeydown="return false"
+            md-placeholder="Enter date" md-min-date="OwnerProposalFromMinDate" md-max-date="OwnerProposalFromMaxDate"></md-datepicker>        
+          
+        </div>
+        <div>
+            <label>End Date</label>
+            <md-datepicker ng-model="product.to_date" ng-init="product.to_date = OwnerProposalEndDate" onkeydown="return false"
+              md-placeholder="Enter date" md-min-date="product.from_date" md-max-date="OwnerProposalToMaxDate"></md-datepicker>
+        </div>
+        <md-input-container class="md-block margin-input">
+          <label>Price:</label>
+          <input ng-model="product.price" type="text" name="price" only-numeric required="required" />
+          <div ng-messages="editProposedProductForm.price.$error">
+            <div ng-message="required">Format Name is required.</div>
+          </div>
+        </md-input-container>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary" ng-click="updateProposedProduct(product)">SAVE</md-button>
+					<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

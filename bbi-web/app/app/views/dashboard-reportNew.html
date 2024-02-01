@@ -1,0 +1,904 @@
+<style>
+    .button-groups {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .button-groups li {
+        padding: 0.3rem 0.8rem;
+        margin-right: 1rem;
+    }
+
+    .button-groups h4 {
+        max-width: 365px;
+        font-size: 16px;
+    }
+
+    /* .filter-section {
+        margin-bottom: 15px;
+    } */
+
+    .filter-section h1 {
+        font-weight: 500;
+        font-size: 50px;
+        margin-bottom: 2rem;
+    }
+
+    .greatFilter-heading {
+        max-width: 360px;
+        font-weight: 500;
+    }
+
+    .greatfilter-Section {
+        display: flex;
+        list-style: none;
+        padding: 0px;
+        justify-content: space-between;
+    }
+
+    /* .greatfilter-Section li {
+        margin-right: 1rem;
+    } */
+
+    .right-arrow i {
+        font-size: 30px;
+        font-weight: bold;
+    }
+
+    .card-group-btns {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card-group-btns li {
+        padding: 0.3rem;
+    }
+
+    .FilterLtr {
+        background: #6750A4;
+        border-radius: 50px;
+    }
+
+    .FilterLtr span {
+        color: #fff;
+        font-size: 16px;
+        padding: 0.7rem;
+    }
+
+    .custom-card {
+        border: 2px solid #e3e3e3;
+        /* box-shadow: 2px 2px 6px 1px #e3e3e3; */
+        padding: 1.5rem;
+        border-radius: 4px;
+    }
+
+    .card-group {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background: #F7F2FA;
+        font-size: 14px;
+        padding: 1rem;
+    }
+
+    .card-group div {
+        margin-right: 15px;
+    }
+
+    .filter-letter {
+        background: #6750A4;
+        padding: 0.5rem 1rem;
+        border-radius: 15px
+    }
+
+    .methods-title {
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .custom-title {
+        font-weight: 600;
+    }
+
+    .custumcard-paragraph {
+        max-width: 200px;
+        font-size: 14px;
+        min-height: 85px;
+    }
+
+    .rechout-title h3 {
+        padding: 1rem;
+    }
+
+
+    /* .filter-square {
+        background-color: #F7F2FA;
+        border: 1px solid #CAC4D0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        border-radius: 15px;
+    } */
+
+    /* .filter-square li {
+        margin: 8px 5px 0px 8px
+    } */
+
+    /* .Letter-F-li {
+        margin: auto;
+        padding: 6px;
+    } */
+
+    .Letter-F-li {
+        margin-right: 15px;
+        align-self: center;
+        background: #6750A4;
+        padding: 2px 10px;
+        font-size: 18px;
+        color: #fff;
+        border-radius: 25px;
+    }
+
+    .Letter-F-li i {
+        color: white;
+        margin: 0px;
+        margin-top: 8px;
+        font-size: 22px;
+    }
+
+    .FilterTitle-li h6 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .FilterTitle-li p {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .noFilterDiv {
+        margin-bottom: 3rem;
+    }
+
+    .filteragenda {
+        padding: 0;
+        list-style: none;
+    }
+
+    .filterButton {
+        cursor: pointer;
+        padding: 0;
+        list-style: none;
+    }
+
+    .filterButton li {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #F7F2FA;
+        padding: 5px 10px;
+        box-shadow: 1px 2px 5px 0px #6d6868e3 !important;
+    }
+
+
+    .filteragenda li {
+        border: 1px solid #CAC4D0;
+        border-radius: 10px;
+        background-color: #F7F2FA;
+        padding: 0 0 0 1rem;
+        margin-bottom: 20px;
+        box-shadow: 1px 2px 5px 0px #6d6868e3 !important;
+    }
+
+    .filterSetCard li {
+        list-style: none;
+        border-radius: 10px;
+        background-color: #ECEFF1;
+        padding: 8px 25px;
+        /* margin-bottom: 1.2rem; */
+        box-shadow: 1px 2px 5px 0px #6d6868e3 !important;
+    }
+
+    .agenda-photo {
+        /* margin: auto 0 auto auto; */
+        margin: auto 0 0 auto;
+        height: 65px;
+        border-radius: 0px 10px 10px 0px;
+    }
+
+    .font-700 {
+        font-weight: 700;
+        margin: 6px 0;
+    }
+
+    .agenda-paragraph {
+        font-size: 16px;
+        margin: 5px 0;
+    }
+
+    .repsonsive-left {
+        padding: 1rem;
+    }
+
+    .select-cardIcons {
+        margin-bottom: 1.7rem;
+    }
+
+    .select-cardIcons i {
+        background-color: #F0F5FF;
+        border-radius: 25px;
+        padding: 1rem;
+        font-size: 22px;
+        color: #2F6FED;
+    }
+
+    .select-cardIcons img {
+        background-color: #F0F5FF;
+        border-radius: 25px;
+        padding: 1rem;
+        font-size: 22px;
+        color: #2F6FED;
+    }
+
+
+    /* 
+    @media (min-width: 1400px) {
+
+        .container,
+        .container-lg,
+        .container-md,
+        .container-sm,
+        .container-xl,
+        .container-xxl {
+            max-width: 1320px;
+        }
+    } */
+
+    @media (max-width: 992px) {
+        .button-groups li {
+            padding: 0.3rem 0.8rem;
+            margin-right: 1rem;
+        }
+
+        .repsonsive-left {
+            padding: 0;
+        }
+
+        .filter-section h1 {
+            font-weight: 600;
+            font-size: 38px;
+        }
+
+    }
+
+    @media (max-width: 767px) {
+
+        .repsonsive-left {
+            padding: 0;
+        }
+
+        .deskView-filter {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+
+        .filter-section h1 {
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+    }
+
+    @media only screen and (min-width: 768px) {
+        .filter-section h1 {
+            font-weight: 500;
+            font-size: 44px;
+        }
+
+        .mobileFIlterDiv {
+            display: none;
+        }
+
+    }
+
+    @media only screen and (max-width: 480px) {
+
+        .filter-section h1 {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .filterMobileheading {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        .FilterTitle-li p {
+            font-size: 12px;
+            font-weight: 500;
+        }
+    }
+
+    @media screen and (max-width:349px) {
+        .filter-section h1 {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .filterMobileheading {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .agenda-paragraph {
+            font-size: 12px;
+        }
+    }
+
+    @media screen and (min-width:402px) and (max-width: 480px) {
+        .filter-section h1 {
+            font-weight: 600;
+            font-size: 28px;
+        }
+    }
+
+    .mobileView a {
+        color: #1D1B20;
+    }
+
+    .circle {
+        width: 40px;
+        height: 40px;
+        background-color: #82B1FF;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .circle .material-icons {
+        margin-left: 0px;
+    }
+
+    .tick-mark {
+        color: #fff;
+    }
+
+    .mobileView {
+        flex-grow: 1;
+        /* Allow the content to grow and take available space */
+    }
+
+    md-autocomplete input:not(.md-input) {
+        border: #1D1B20;
+    }
+
+
+    .md-virtual-repeat-container.md-autocomplete-suggestions-container {
+        position: absolute;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, .25);
+        z-index: 1050;
+        height: 100%;
+    }
+
+    #userbrowseProd,
+    #searchModal {
+        border: 1px solid #000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        min-width: 450px;
+        position: fixed;
+        top: 40%;
+        left: 30%;
+        transform: translate(-50%, -50%);
+        max-width: 90vw;
+        width: 300px;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 0 auto;
+    }
+
+    #userbrowseMobileProd,
+    #searchMobileModal {
+        display: none;
+        border: 1px solid #000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+        min-width: 300px;
+        max-width: 90vw;
+        width: 90%;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        margin: 0 auto;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #0069d9 !important;
+        border-color: #0062cc;
+    }
+
+    /* Media Query for screens with a maximum width of 768px (typical mobile devices) */
+    @media only screen and (max-width: 768px) {
+
+        #userbrowseMobileProd,
+        #searchMobileModal {
+            width: 90%;
+            min-width: auto;
+            left: 5%;
+            top: 30%;
+            transform: translate(0, -50%);
+        }
+    }
+</style>
+<div style="padding-top: 6.5rem;">
+    <div class="container-fluid">
+        <div class="repsonsive-left">
+            <div class="filter-section">
+                <h1>Welcome Back {{loggedInUser.firstName | capitalize}}
+                    {{loggedInUser.lastName}} ! <br>
+                    Find what you're looking for, fast:</h1>
+            </div>
+            <div class="row mobileFIlterDiv">
+                <div class="container">
+                    <div class="">
+                        <div class="row m-0">
+                            <div class="col-md-12">
+
+                                <!-- <div class="noFilterDiv"></div> -->
+                                <div class="mb-5" ng-if="getDataResponse.length == 0">
+                                    <h4 class="filterMobileheading">
+                                        No Filters in place ? First, fill this out:
+                                    </h4>
+                                    <ul class="filteragenda" ng-click="showFilterMobileDialog($event)">
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex">
+                                                    <span class="Letter-F-li my-auto"> <i
+                                                            class="material-icons">filter_alt</i></span>
+                                                    <div>
+                                                        <h5 class="font-700">Filters</h5>
+                                                        <p class="agenda-paragraph"> Fill out a Preference Set</p>
+                                                    </div>
+                                                </div>
+                                                <!-- <img src="../assets/images/Triangle-media-icon.png"
+                                                    class="agenda-photo"> -->
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="mb-3" ng-if="getDataResponse.length > 0">
+                                    <ul class="filteragenda filterSetCard" ng-click="redirectToLocation()"
+                                        style="cursor: pointer;">
+                                        <li style="padding: 8px 10px !important;">
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex">
+                                                    <div class="circle mx-auto">
+                                                        <i class="material-icons tick-mark">check</i>
+                                                    </div>
+                                                    <div ng-if="getDataResponse" style="margin-left: 1.5rem;">
+                                                        <h5 class="font-700">Now Using This Filter Set</h5>
+                                                        <p class="agenda-paragraph">Project:
+                                                            {{getDataResponse[0].search_criteria_name}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div style="text-align: end;">
+                                        <a href="#" ng-click="showFilterMobileDialog($event)" style="color:#1D1B20; text-decoration: underline; 
+                                            font-family: Roboto; font-size: 12px;">Pick a Different Filter Set</a>
+                                    </div>
+                                </div>
+
+                                <div ng-if="getDataResponse.length > 0">
+                                    <h5 style="color: #1D2433; font-weight: 600;">Great Filter! Now:</h5>
+                                </div>
+                                <div class="mb-5">
+                                    <ul class="filteragenda">
+                                        <li ng-click="browseMobileProducts();">
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex mobileView">
+                                                    <span class="Letter-F-li my-auto">
+                                                        <i class="material-icons">sort</i>
+                                                    </span>
+                                                    <div>
+                                                        <h5 class="font-700">Browse</h5>
+                                                        <p class="agenda-paragraph">DMAs, Dates, Locations</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <div id="userbrowseMobileProd"
+                                            class="contbg animated fadeInDown share_usercamp offer_res">
+                                            <form name="browseSearchForm" ng-submit="browseForm()">
+                                                <div layout="colmun">
+                                                    <span flex></span>
+                                                    <md-button class="md-icon-button" aria-label="Close Side Panel">
+                                                        <md-icon class="md-default-theme"
+                                                            ng-click="browseMobileProducts()">
+                                                            <i class="material-icons">close</i>
+                                                        </md-icon>
+                                                    </md-button>
+                                                </div>
+                                                <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span
+                                                        class="md-title">Let's Browse product</span></h3>
+                                                <br>
+                                                <div layout="column" style="padding:10px;">
+                                                    <label class="font-weight-bold for_required">DMA</label>
+                                                    <md-autocomplete md-min-length="3" md-selected-item="areaObject"
+                                                        placeholder="Type your DMA" ng-blur="selectSearchedCity()"
+                                                        md-search-text="searchedArea"
+                                                        md-items="item in searchableAreas(searchedArea)"
+                                                        md-item-text="item.city_name" md-clear-button="true" name="Area"
+                                                        md-menu-class=" md-whiteframe-3dp" required>
+                                                        <md-item-template>
+                                                            <span class="item-title"></span>
+                                                            <span class="item-metadata">
+                                                                <span><strong>{{item.city_name}}</strong></span>
+                                                                <span><strong>{{item.state_name}}</strong></span>
+                                                            </span>
+                                                        </md-item-template>
+                                                        <md-not-found>No matches found. </md-not-found>
+                                                    </md-autocomplete>
+                                                </div>
+                                                <div layout="column" style="padding:10px;">
+                                                    <label class="font-weight-bold for_required">First Day - Last Day
+                                                        Dates</label>
+                                                    <div class="row form-group">
+                                                        <div class="col-md-6 text-center mt-2 datepicker-container">
+                                                            <md-datepicker class="form-control"
+                                                                style="height: calc(2.2em + 0.65rem + 2px); padding: 0.075rem 0.05rem;"
+                                                                ng-model="browseProd_startDate"
+                                                                md-placeholder="Start Date"></md-datepicker>
+                                                        </div>
+                                                        <div class="col-md-6 text-center mt-2 datepicker-container">
+                                                            <md-datepicker class="form-control"
+                                                                style="height: calc(2.2em + 0.65rem + 2px); padding: 0.075rem 0.05rem;"
+                                                                ng-model="browseProd_endDate" md-placeholder="End Date"
+                                                                md-min-date="booked_from"></md-datepicker>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row justify-content-end m-auto">
+                                                    <md-button type="submit"
+                                                        Class="md-raised md-primary all_button ">Submit
+                                                    </md-button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <li ng-click="searchMobileProducts();">
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex mobileView">
+                                                    <span class="Letter-F-li my-auto">
+                                                        <i class="material-icons">search</i>
+                                                    </span>
+                                                    <a>
+                                                        <h5 class="font-700"> Search </h5>
+                                                        <p class="agenda-paragraph">w/ Filters</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <div id="searchMobileModal" 
+                                            class="contbg animated fadeInDown share_usercamp offer_res">
+                                            <form name="browseSearchForm" ng-submit="SearchForm()">
+                                                <div layout="colmun">
+                                                    <span flex></span>
+                                                    <md-button class="md-icon-button" aria-label="Close Side Panel">
+                                                        <md-icon class="md-default-theme"
+                                                            ng-click="searchMobileProducts()">
+                                                            <i class="material-icons">close</i>
+                                                        </md-icon>
+                                                    </md-button>
+                                                </div>
+                                                <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span
+                                                        class="md-title">Let's Search Product</span></h3>
+                                                <br>
+                                                <div class="mt-1 mb-2 search_tab md-whiteframe-2dp">
+                                                    <input type="text" placeholder="Search" class="buyer_search"
+                                                        ng-model="additionalSearchTerm"
+                                                        ng-keyup="searchTermChanged(additionalSearchTerm)">
+                                                </div>
+                                                <div class="row justify-content-end m-auto">
+                                                    <md-button type="submit" Class="md-raised md-primary all_button"
+                                                        ng-click="submitSearch()"> Search </md-button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex mobileView">
+                                                    <span class="Letter-F-li my-auto">
+                                                        <i class="material-icons">map</i>
+                                                    </span>
+                                                    <a ng-href="/location">
+                                                        <h5 class="font-700"> Maps </h5>
+                                                        <p class="agenda-paragraph">Things You have Tagged</p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div ng-if="getDataResponse.length > 0">
+                                    <h5 style="color: #1D2433; font-weight: 600;">Or You Can:</h5>
+                                </div>
+                                <div>
+                                    <ul class="filteragenda">
+                                        <li ng-click="showRfpDialog($event)">
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex">
+                                                    <span class="Letter-F-li my-auto">
+                                                        <i class="material-icons">request_quote</i>
+                                                    </span>
+                                                    <div>
+                                                        <h5 class="font-700"> Fill out an RFP Form</h5>
+                                                        <p class="agenda-paragraph">Someone will reach out</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex">
+                                                    <span class="Letter-F-li my-auto">
+                                                        <i class="material-icons">favorite</i>
+                                                    </span>
+                                                    <div>
+                                                        <h5 class="font-700"> Favorites </h5>
+                                                        <p class="agenda-paragraph">Things You have Tagged</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-xl-7 col-md-12  p-0">
+                <div class="deskView-filter">
+                    <div class="message-header mb-4">
+                        <div class="d-flex" style="justify-content: space-between; max-width: 750px;"
+                            ng-if="getDataResponse.length == 0">
+                            <div class="my-auto d-inline-flex">
+                                <h5 class="">First, to make things as speedy as possible, help us <br> understand what
+                                    you are looking for:</h5>
+                            </div>
+                            <div class="my-auto">
+                                <img src="../assets/images/New-right-Arrow.png" class="">
+                            </div>
+                            <div>
+                                <ul class="filterButton" ng-click="showFiltersDialog($event)">
+                                    <li>
+                                        <div class="d-flex">
+                                            <div class="my-auto d-inline-flex">
+                                                <p class="Letter-F-li my-auto">F</p>
+                                                <div style="padding-right: 12px;">
+                                                    <h5 class="font-700">Filters</h5>
+                                                    <p class="agenda-paragraph"> Fill out a Preference Set</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div ng-if="isShownProductGetApi">
+                            <div class="d-flex" style="justify-content: space-between; max-width: 750px;"
+                                ng-if="getDataResponse.length > 0">
+                                <div class="my-auto d-inline-flex">
+                                    <h5 class="">Great! You’ve selected the following filter set. <br>
+                                        Great Filter! Now:</h5>
+                                </div>
+                                <div class="my-auto">
+                                    <img src="../assets/images/New-right-Arrow.png" class="">
+                                </div>
+                                <div>
+                                    <ul class="filterSetCard" ng-click="redirectToLocation()" style="cursor: pointer;">
+                                        <li>
+                                            <div class="d-flex">
+                                                <div class="my-auto d-inline-flex">
+                                                    <div class="circle mx-auto">
+                                                        <i class="material-icons tick-mark">check</i>
+                                                    </div>
+                                                    <div ng-if="getDataResponse" style="margin-left: 1.5rem;">
+                                                        <h5 class="font-700">Now Using This Filter Set</h5>
+                                                        <p class="agenda-paragraph">Project:
+                                                            {{getDataResponse[0].search_criteria_name}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div style="text-align: end;">
+                                        <a href="#" ng-click="showFiltersDialog()" style="color:#1D1B20; text-decoration: underline; 
+                                            font-family: Roboto; font-size: 12px;">Pick a Different Filter Set</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 style="font-weight: 600;">Then, select from the following methods:</h3>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="custom-card">
+                                    <div class="select-cardIcons"><i class="material-icons">sort</i></div>
+                                    <h4 class="custom-title">Browse</h4>
+                                    <p class="custumcard-paragraph">Browse through DMAs, dates of availability,
+                                        locations. We have multiple
+                                        methods of drilling down. Filters recommended.</p>
+                                    <md-button class=" btn btn-primary  btn-lg w-100  m-0" onclick="BrowseProducts()"
+                                        class="dropbtn">Browse </md-button>
+                                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        Browse
+                                    </button> -->
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="custom-card">
+                                    <div class="select-cardIcons"><i class="material-icons">search</i></div>
+                                    <h4 class="custom-title">Search</h4>
+                                    <p class="custumcard-paragraph">Search on just about anything. And me mean
+                                        that!
+                                        We recommend setting filters first!
+                                    </p>
+                                    <button type="button" class="btn btn-primary btn-lg w-100  m-0"
+                                        onclick="searchModal()">Search
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-primary btn-lg col-12">Search</button> -->
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="custom-card">
+                                    <div class="select-cardIcons">
+                                        <i class="material-icons">layers</i>
+                                        <!-- <img src="../assets/images/maps-icon.png" alt="" width="25%"> -->
+                                    </div>
+                                    <h4 class="custom-title">Maps</h4>
+                                    <p class="custumcard-paragraph">Go straight to the Mapping Tool. Find what
+                                        you need geographically.
+                                        Again, we recommend using filters first!
+                                    </p>
+                                    <a type="button" class="btn btn-primary btn-lg col-12" ng-href="/location">Maps</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  browse  products modal Popup -->
+                        <div id="userbrowseProd"
+                            class="dropdown-content_share dropdown-content_offer contbg animated fadeInDown share_usercamp offer_res">
+                            <form name="browseSearchForm" ng-submit="browseForm()">
+                                <div layout="colmun">
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" aria-label="Close Side Panel">
+                                        <md-icon class="md-default-theme" ng-click="closeAndResetBrowseForm()">
+                                            <i class="material-icons">close</i>
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                                <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span
+                                        class="md-title">Let's Browse product</span></h3>
+                                <br>
+                                <div layout="column" style="padding:10px;">
+                                    <label class="font-weight-bold for_required">DMA</label>
+                                    <md-autocomplete md-min-length="3" md-selected-item="areaObject"
+                                        placeholder="Type your DMA" ng-blur="selectSearchedCity()"
+                                        md-search-text="searchedArea" md-items="item in searchableAreas(searchedArea)"
+                                        md-item-text="item.city_name" md-clear-button="true" name="Area"
+                                        md-menu-class=" md-whiteframe-3dp" required>
+                                        <md-item-template>
+                                            <span class="item-title"></span>
+                                            <span class="item-metadata">
+                                                <span><strong>{{item.city_name}}</strong></span>
+                                                <span><strong>{{item.state_name}}</strong></span>
+                                            </span>
+                                        </md-item-template>
+                                        <md-not-found>No matches found. </md-not-found>
+                                    </md-autocomplete>
+                                </div>
+                                <div layout="column" style="padding:10px;">
+                                    <label class="font-weight-bold for_required">First Day - Last Day Dates</label>
+                                    <div class="row form-group">
+                                        <div class="col-md-6 text-center mt-2 datepicker-container">
+                                            <md-datepicker class="form-control"
+                                                style="height: calc(2.2em + 0.65rem + 2px); padding: 0.075rem 0.05rem;"
+                                                ng-model="browseProd_startDate"
+                                                md-placeholder="Start Date"></md-datepicker>
+                                        </div>
+                                        <div class="col-md-6 text-center mt-2 datepicker-container">
+                                            <md-datepicker class="form-control"
+                                                style="height: calc(2.2em + 0.65rem + 2px); padding: 0.075rem 0.05rem;"
+                                                ng-model="browseProd_endDate" md-placeholder="End Date"
+                                                md-min-date="booked_from"></md-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end m-auto">
+                                    <md-button type="submit" Class="md-raised md-primary all_button ">Submit
+                                    </md-button>
+                                </div>
+                            </form>
+                        </div>
+                        <!--  browse  products modal Popup ends -->
+                        <div id="searchModal"
+                            class="dropdown-content_share dropdown-content_offer contbg animated fadeInDown share_usercamp offer_res">
+                            <form name="browseSearchForm" ng-submit="SearchForm()">
+                                <div layout="colmun">
+                                    <span flex></span>
+                                    <md-button class="md-icon-button" aria-label="Close Side Panel">
+                                        <md-icon class="md-default-theme" ng-click="closeAndResetSearchModal()">
+                                            <i class="material-icons">close</i>
+                                        </md-icon>
+                                    </md-button>
+                                </div>
+                                <h3 class="md-body-2" style="margin-top:-31px !important;">Great, <span
+                                        class="md-title">Let's Search Product</span></h3>
+                                <br>
+                                <div class="mt-1 mb-2 search_tab md-whiteframe-2dp">
+                                    <input type="text" placeholder="Search" class="buyer_search"
+                                        ng-model="additionalSearchTerm"
+                                        ng-keyup="searchTermChanged(additionalSearchTerm)">
+                                </div>
+                                <div class="row justify-content-end m-auto">
+                                    <md-button type="submit" Class="md-raised md-primary all_button"
+                                        ng-click="submitSearch()"> Search </md-button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-8">
+                                <div class="rechout-title">
+                                    <h3>Or, reach out to our team, with a handy form. <br>
+                                        We’ll get back to you shortly!</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="custom-card">
+                                    <div class="select-cardIcons"><i class="material-icons"
+                                            style="color: #3F51B5;">request_quote</i></div>
+                                    <h4 class="custom-title">RFP</h4>
+                                    <p class="custumcard-paragraph">Browse through DMAs, dates of availability,
+                                        locations. multiple methods of drilling down.
+                                    </p>
+                                    <button type="button" ng-click="showRfpDialog($event)"
+                                        class="btn btn-primary btn-lg col-12">Create an
+                                        RFP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function BrowseProducts() {
+        document.getElementById("userbrowseProd").classList.toggle("show");
+    }
+
+    function searchModal() {
+        document.getElementById("searchModal").classList.toggle("show");
+    }
+
+</script>

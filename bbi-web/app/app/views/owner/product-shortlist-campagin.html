@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+    </div>
+  </div>
+<div layout="column">
+    
+    <div layout="row" class="" layout-padding>
+
+        <div class="md-caption text_color"><b>This Product Shortlisted In - {{shortlistedproduct.product_detail.shorlist_count}} Campaigns</b> </div>
+        <div flex></div>
+        <!-- <div>
+            <md-button class="md-raised md-primary">ADD NEW PRODUCT</md-button>
+        </div> -->
+    </div>
+    <section class="product_">
+        <div class="row mr-0 ml-0 product_ineer">
+            <div class="col-md-4">
+                <div class="produt_img">
+                    <!-- <img src="assets/images/owner/hoardings2.png" alt="produt_img" class="img-thumbnail" /> -->
+                    <img src="{{config.serverUrl + shortlistedproduct.product_detail.image}}" alt="produt_img" class="img-thumbnail" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="product_detailes">
+                    <!-- <p class="mb-0 md-body-2">{{shortlistedproduct.product_detail.siteNo}} - {{shortlistedproduct.product_detail.area_name}} ({{shortlistedproduct.product_detail.panelSize}})</p>
+                    <p class="mb-0"><b style="color: #44596D;">Address</b>: {{shortlistedproduct.product_detail.address}}</p>
+                    <p class="mb-0"><b style="color: #44596D;">Facing</b>: {{shortlistedproduct.product_detail.direction}}</p>
+                    <p class="mb-0"><b style="color: #44596D;">Type</b>: {{shortlistedproduct.product_detail.format_name}}</p> -->
+                    <p class=""><b>{{shortlistedproduct.product_detail.siteNo}}</b>&nbsp;<b>{{shortlistedproduct.product_detail.title || "N/A"}}</b>
+                        <br><b style="color: #44596D;">Address</b>:
+                        {{shortlistedproduct.product_detail.address | capitalize}} {{shortlistedproduct.product_detail.city | capitalize}}
+                        <br><b style="color: #44596D;">DMA</b>: {{shortlistedproduct.product_detail.city_name | capitalize}}
+                        <br><b style="color: #44596D;">Venue</b>: {{shortlistedproduct.product_detail.venue | capitalize}}
+                        <br><b style="color: #44596D;">Type</b>: {{shortlistedproduct.product_detail.type || "N/A"}}
+                        <br><b style="color: #44596D;">Facing</b>: {{shortlistedproduct.product_detail.direction|| "N/A" | capitalize}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 2em;">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr class="text_color">               
+                            <th>Campaign ID</th>
+                            <th>Campaign Name</th>
+                            <th>Start Date</th>
+                            <th class="text-center">End Date</th>
+                            <!-- <th class="text-center">Total Price</th> -->
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                            <th class="text-center">Date Entered</th>
+                        </tr>
+                    </thead>
+                    <tbody class="">
+            
+                        <tr ng-repeat="product in shortlistedproduct.campaign_list">
+                            <td>{{product.cid}}</td>
+                            <td>{{product.name | capitalize}}</td>
+                            <td>{{((product.from_date.$date.$numberLong)) | date: "MM-dd-yyyy"}}</td>
+                            <td class="text-center table_vertical">{{((product.to_date.$date.$numberLong)) | date: "MM-dd-yyyy"}}</td>
+                            <!-- <td class="text-center table_vertical">{{product.est_budget}}</td> -->
+                            <th class="text-center table_vertical">{{product.status | stringifyCampaignStatus}}</th>
+                            <td class="text-center table_vertical">
+                                    <a href="/owner/{{clientSlug}}/campaign-details/{{product.id}}/{{product.type}}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                   
+                            </td>
+                            <td class="text-center table_vertical">
+                                <span class="text_color md-caption">{{product.created_at | dateFormat}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</div>

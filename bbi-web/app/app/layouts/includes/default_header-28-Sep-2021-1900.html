@@ -1,0 +1,125 @@
+<div class="md-toolbar-tools">
+      <md-button ng-click="closeSidenav()" ng-if="hidelocations" aria-label="menu" class="md-icon-button">
+        <md-icon md-svg-icon="assets/images/menu_24px.svg"></md-icon>
+      </md-button>
+      <md-button aria-label="locations" href="#/" md-no-ink class="logo" style="margin-left:2.5%">
+        <!-- <img class="png-icon" src="assets/images/owner/logo.png" width="130px" alt="images"> -->
+      </md-button>
+
+      <span flex class=""></span>
+      <md-menu-bar class="main-menu">
+        <md-button aria-label="about bbi" ng-click="whatwedo()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn what-we">About
+         BBA</md-button>
+        <md-button aria-label="products" ng-click="formate()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Our
+          Products</md-button>
+        <md-button aria-label="Support" ng-click="whyOutdoor()" ng-if="!footerhide" hide-xs hide-sm class="toolbar-btn">Support
+        </md-button>
+        <!-- browse-->
+        <md-button hide-xs aria-label="location" ng-href="#/location" ng-show="isAuthenticated && currStateName != 'index.location'">
+          Browse Inventory
+        </md-button>
+        <!-- <md-button hide-xs aria-label="location" ng-if="isAuthenticated && isUserBasic() && currStateName != 'index.metro'"
+          ng-href="#/metro">
+          Metro
+        </md-button> -->
+        <!--sugg -->
+        <md-button hide-xs aria-label="location" ng-if="footerhide && isAuthenticated && isUserBasic()" ng-href="#/suggest/product-detail">
+          Request Me
+        </md-button>
+        <!--search button -->
+
+        <!-- profile button end-->
+        <div class="profile_details_left" style="float:right">
+          <!--notifications of menu start -->
+          <ul class="nofitications-dropdown">
+            <li class="dropdown head-dpdn" ng-if="isAuthenticated"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">4</span></a>
+              <ul class="dropdown-menu dropdown-bell arrrow_box animated fadeInDown">
+                <li>
+                  <div class="notification_header">
+                    <h3 class=""><b>Notification :</b></h3>
+                  </div>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="notification_desc md-whiteframe-2dp pl-3">
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                      <p class="text_color">Created On 02-12-2018 - 12:00 am</p>
+                    </div>
+                  </a>
+                </li>
+                <li class="odd">
+                  <a href="#">
+                    <div class="notification_desc md-whiteframe-2dp pl-3">
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                      <p class="text_color"><span>Created On 02-12-2018 - 12:00 am</span></p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="notification_desc md-whiteframe-2dp pl-3">
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                      <p class="text_color"><span>Created On 02-12-2018 - 12:00 am</span></p>
+                    </div>
+                  </a>
+                </li>
+
+                <li>
+                  <div class="notification_bottom"> <a ng-href="#/user-notifications">See all notifications</a> </div>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown head-dpdn hide-xs" ng-if="isAuthenticated">
+              <a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">Saved
+                Campaign ({{activeUserCampaigns.length}})</a> 
+              <ul class="dropdown-menu animated fadeInDown dropdown-saved">
+                <li>
+                  <div class="notification_header ">
+                    <h3 class="text_color">You have {{activeUserCampaigns.length}} Campaigns</h3>
+                  </div>
+                </li>
+                <li ng-repeat="activeUserCampaign in activeUserCampaigns.slice(0,3)"><a ng-href="#/campaign-details/{{activeUserCampaign.id}}">
+                    <div class="notification_desc pl-3">
+                      <p>{{activeUserCampaign.name}}</p>
+                      <!-- <p><span>1 hour ago</span></p> -->
+                    </div>
+                    <div class="clearfix"></div>
+                  </a>
+                </li>
+                <li>
+                  <div class="notification_bottom"> <a ng-href="#/user-saved-campaigns">See all campaigns</a> </div>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown head-dpdn" ng-if="isAuthenticated">
+              <a href="#" class="dropdown-toggle saved_campaign" data-toggle="dropdown" aria-expanded="false">A
+                <!-- <img src="assets/images/man.png"/> -->
+                <!-- <i class="fa fa-ellipsis-v lnr"></i> -->
+
+              </a>
+              <ul class="dropdown-menu drp-mnu animated fadeIn delay-.5s dropdown-logout">
+                <li> <a ng-href="#/profile">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a> </li>
+                <li ng-if="isUserBasic()"> <a ng-href="#/campaigns"> Campaigns</a> </li>
+                <li ng-if="isUserBasic()"> <a ng-href="#/shortlisted-products"> Shortlisted Inventory
+                    ({{shortListedProductsLength}})</a> </li>
+                <!-- <li ng-if="isUserBasic()"> <a ng-href="#/user-requested-campaigns"> Requested Campaigns -->
+                 </a> </li>
+                <li ng-if="isUserBasic()"> <a ng-href="#/user-payments"> Payments</a> </li>
+                <li> <a ng-href="#/reset_password"> Change Password</a> </li>
+                <li> <a ng-if="!isUserBasic()" ng-click="switchView()"> Switch view</a> </li>
+                <li> <a ng-href="#"> Team</a> </li>
+                <li> <a ng-click="logout()" class="logout_color"> Logout</a> </li>
+              </ul>
+
+            </li>
+          </ul>
+          <div class="clearfix"> </div>
+        </div>
+        <md-button aria-label="location" class="md-raised all_button book_now" ng-click="showSignInDialog($event)"
+          ng-show="!isAuthenticated">
+          Book Now
+        </md-button>
+
+      </md-menu-bar>
+</div>

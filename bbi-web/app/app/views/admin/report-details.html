@@ -1,0 +1,416 @@
+<style>
+    .csv-pdf-align td {
+        float: right;
+        border: none !important;
+        padding-bottom: 15px;
+    }
+
+    .csv-pdf-align table {
+        border: none !important;
+    }
+
+    .table-responsive tr td .clear_filter[disabled] {
+        color: #ffff;
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    .fixedHeader table {
+        /* display: block; */
+        empty-cells: show;
+    }
+
+    .fixedHeader thead {
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+
+    .fixedHeader table tbody {
+        overflow: auto;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 245px);
+    }
+
+    .fixedHeader tr {
+        width: 100%;
+        display: flex;
+    }
+
+    .fixedHeader td,
+    .fixedHeader th {
+        flex-basis: 100%;
+        flex-grow: 2;
+        display: block;
+        padding: 1rem;
+        text-align: left;
+    }
+
+    .table thead th {
+        white-space: nowrap;
+    }
+
+    /* .fixedHeader td {
+        white-space: nowrap;
+    } */
+    @media only screen and (max-width: 1100px) {
+        .type_search {
+            width: auto;
+        }
+    }
+    button:disabled,
+    button[disabled]{
+        border: 1px solid #999999;
+        background-color: #cccccc;
+        color: #666666;
+        cursor: not-allowed;
+    }
+    .user-th-column-0, .user-td-column-0 {
+        max-width: 40px !important;
+    }
+    .user-th-column-1, .user-td-column-1 {
+        max-width: 140px !important;
+    }
+    .user-th-column-2, .user-td-column-2{
+        max-width: 135px !important;
+    }
+    .user-th-column-3, .user-td-column-3 {
+        max-width: 315px !important;
+    }
+    .user-th-column-4, .user-td-column-4{
+        max-width: 120px !important;
+    }
+    .user-th-column-5, .user-td-column-5{
+        max-width: 200px !important;
+    }
+    .user-th-column-6, .user-td-column-6{
+        max-width: 100px !important;
+    }
+    .user-th-column-7, .user-td-column-7 {
+        max-width: 90px !important;
+        white-space: nowrap;
+    }
+
+    .product-th-column-0, .product-td-column-0 {
+        max-width: 30px !important;
+    }
+    .product-th-column-1, .product-td-column-1 {
+        max-width: 165px !important;
+    }
+    .product-th-column-2, .product-td-column-2 {
+        max-width: 80px !important;
+    }
+    .product-th-column-3, .product-td-column-3 {
+        max-width: 160px !important;
+    }
+    .product-th-column-4, .product-td-column-4 {
+        max-width: 118px !important;
+    }
+    .product-th-column-5, .product-td-column-5 {
+        max-width: 118px !important;
+    }
+    .product-th-column-6, .product-td-column-6 {
+        max-width: 130px !important;
+    }
+    .product-th-column-7, .product-td-column-7 {
+        max-width: 135px !important;
+    }
+    .product-th-column-8, .product-td-column-8 {
+        max-width: 100px !important;
+    }
+    .product-th-column-9, .product-td-column-9 {
+        max-width: 100px !important;
+    }
+
+    @media screen and (max-width: 1024px){
+        .th-column-6, .td-column-6{
+        max-width: 65px !important;
+    }
+    .res_table .table {
+        width: 135%;
+        max-width: 300%;
+        margin-bottom: 0px;
+    }
+    .table-respn{
+        min-width: 165px;
+    }
+
+    }
+    @media screen and (max-width: 768px){
+    .res_table .table {
+        width: 145%;
+        max-width: 300%;
+        margin-bottom: 0px;
+    }
+
+        }
+    @media screen and (max-width: 575px){
+    .res_table .table {
+        width: 195%;
+    }
+        }
+    @media screen and (max-width: 480px){
+    .res_table .table {
+        width: 230%;
+        max-width: 300%;
+        margin-bottom: 0px;
+    }
+        }
+    @media screen and (max-width: 425px){
+    .res_table .table {
+        width: 265%;
+    }
+        }
+    @media screen and (max-width: 375px){
+    .res_table .table {
+        width: 298%;
+    }
+        }
+    @media screen and (max-width: 320px){
+    .res_table .table {
+        width: 370%;
+        max-width: 400%;
+    }
+        }
+    
+    @media screen and (min-width: 2555px) and (max-width: 2560px)  { 
+    .user-th-column-0, .user-td-column-0 {
+        max-width: 10% !important;
+    }
+    .user-th-column-1, .user-td-column-1 {
+        max-width: 15% !important;
+    }
+    .user-th-column-2, .user-td-column-2 {
+        max-width: 15% !important;
+    }
+    .user-th-column-3, .user-td-column-3 {
+        max-width: 25% !important;
+    }
+    .user-th-column-4, .user-td-column-4, .user-th-column-5, .user-td-column-5 {
+        max-width: 13% !important;
+    }
+
+    .product-th-column-0, .product-td-column-0 {
+        max-width: 10% !important;
+    }
+    .product-th-column-1, .product-td-column-1, .product-th-column-2, .product-td-column-2, .product-th-column-3, .product-td-column-3 {
+        max-width: 15% !important;
+    }
+    .product-th-column-4, .product-td-column-4, .product-th-column-5, .product-td-column-5 {
+        max-width: 10% !important;
+    }
+    .product-th-column-6, .product-td-column-6, .product-th-column-7, .product-td-column-7 {
+        max-width: 8% !important;
+    }
+    }
+    @media screen and (min-width: 1915px) and (max-width: 1920px)  {  
+    .user-th-column-0, .user-td-column-0 {
+        max-width: 100px !important;
+    }
+    .user-th-column-1, .user-td-column-1 {
+        max-width: 250px !important;
+    }
+    .user-th-column-2, .user-td-column-2 {
+        max-width: 230px !important;
+    }
+    .user-th-column-3, .user-td-column-3 {
+        max-width: 600px !important;
+    }
+
+   
+    .product-th-column-0, .product-td-column-0 {
+        max-width: 100px !important;
+    }
+    .product-th-column-1, .product-td-column-1 {
+        max-width: 385px !important;
+    } 
+    .product-th-column-2, .product-td-column-2 {
+        max-width: 200px !important;
+    }
+    .product-th-column-3, .product-td-column-3 {
+        max-width: 250px !important;
+    }
+    .product-th-column-7, .product-td-column-7 {
+        max-width: 190px !important;
+    }
+    }
+
+    @media screen and (min-width: 1439px) and (max-width: 1440px)  {    
+    .user-th-column-3, .user-td-column-3 {
+        max-width: 410px !important;
+    }
+    .product-th-column-1, .product-td-column-1 {
+        max-width: 270px !important;
+    }
+    }
+
+    @media screen and (min-width: 1025px) and (max-width: 1440px)  {    
+
+     .table-respn{
+        min-width: 130px;
+    }
+    }
+
+
+
+        /* .th-column-0, .td-column-0 {
+        max-width: 40px !important;
+    }
+    .th-column-1, .td-column-1 {
+        max-width: 140px !important;
+    }
+    .th-column-2, .td-column-2{
+        max-width: 135px !important;
+    }
+    .th-column-3, .td-column-3 {
+        max-width: 315px !important;
+    }
+    .th-column-4, .td-column-4{
+        max-width: 120px !important;
+    }
+    .th-column-5, .td-column-5{
+        max-width: 200px !important;
+    }
+    .th-column-6, .td-column-6{
+        max-width: 100px !important;
+    }
+    .th-column-7, .td-column-7 {
+        max-width: 90px !important;
+        white-space: nowrap;
+    }
+    @media screen and (max-width: 1024px){
+        .th-column-6, .td-column-6{
+        max-width: 65px !important;
+    }
+    }
+    @media screen and (max-width: 768px){
+    .res_table .table {
+        width: 125%;
+        max-width: 300%;
+        margin-bottom: 0px;
+    }
+        }
+    @media screen and (max-width: 575px){
+    .res_table .table {
+        width: 180%;
+    }
+        }
+    @media screen and (max-width: 480px){
+    .res_table .table {
+        width: 195%;
+        max-width: 300%;
+        margin-bottom: 0px;
+    }
+        }
+    @media screen and (max-width: 425px){
+    .res_table .table {
+        width: 250%;
+    }
+        }
+    @media screen and (max-width: 374px){
+    .res_table .table {
+        width: 297%;
+    }
+        } */
+</style> 
+ <div class="pt-4 pb-4 pl-2 pr-2">
+    <div class="container pt-3">
+        <div class="row">
+          <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+          </div>
+        </div>
+      </div>
+     <div class="csv-pdf-align">
+         <div class="table-responsive">
+            <table class="table table_user mb-0" style="border: 1px solid #d7d3d3;border-bottom: 0;">
+                <tbody>
+                    <tr>
+                    <td>
+                        <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="downloadPdf()" ng-disabled="dataErrorMsg" download><i class="fa fa-download" aria-hidden="true" style="padding-right: 5px;"></i> Download PDF</button>
+                    </td>
+                    <td>
+                         <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="downloadCSV()" ng-disabled="dataErrorMsg" download><i class="fa fa-download" aria-hidden="true" style="padding-right: 5px;"></i> Download CSV</button>
+                    </td>
+                    </tr>
+            </tbody>
+        </table>
+        </div>
+     </div>
+    <div class="table-responsive">
+        <table class="table table_user mb-0" style="border: 1px solid #d7d3d3;border-bottom: 0;">
+            <tbody>
+                <tr>
+                    <td style="width: 600px;"><h3>{{getPageTitle()}}</h3></td>
+                        <td class="" style="width: 170px;">
+                        <md-datepicker class="form-control adjust_calender" name="startDate" ng-focus="datepicker()" ng-model="startDate" ng-change="onChangeStartEndDate()"
+                            onkeydown="return false" md-placeholder="From" layout-fill
+                            style="border: none;padding: 0px;"></md-datepicker>
+                    </td>
+                        <td class="" style="width: 170px;">
+                        <md-datepicker class="form-control adjust_calender" name="endDate" ng-focus="datepicker()" ng-model="endDate"
+                            onkeydown="return false" md-placeholder="To" md-min-date="product.start_date" ng-change="onChangeStartEndDate()"
+                            layout-fill style="border: none;padding: 0px;"></md-datepicker>
+                    </td>
+                    <td class="" style="width:550px;">
+                        <input type="search" class="form-control md-whiteframe-3dp type_search" ng-change="searchText(searchtxt)" ng-model="searchtxt" ng-model-options="{ debounce: 1200 }" placeholder="Type here to search.." ng-disabled="isSearching">
+                    </td>
+                    <td style="width: 330px;">
+                        <button class="s-btn-toggler login_btn sign_in clear_filter" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-disabled="!hasFilter" ng-click="clearFilters()" Clear><i class="fa fa-close" aria-hidden="true" style="padding-right: 5px;"></i> Clear Filters </button>
+                    </td>
+                    <!-- <td style="width: 340px;">
+                            <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="downloadPdf()" download><i class="fa fa-download" aria-hidden="true" style="padding-right: 5px;"></i> Download PDF</button>
+                    </td>
+                    <td style="width: 340px;">
+                        <button class="s-btn-toggler login_btn sign_in" style="border: unset;border-radius: 20px;margin-top: 2px;padding: 8px !important; margin-left: 25px;" type="button" ng-click="downloadCSV()" download><i class="fa fa-download" aria-hidden="true" style="padding-right: 5px;"></i> Download CSV</button>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive fixedHeader res_table" style="margin-bottom:50px !important">
+        <table class="table" style="border: 1px solid #e4e4e4;">
+            <thead class="text_color">
+                <tr>
+                    <th class="{{selectedType}}-th-column-0">SNo.</th>
+                    <th ng-repeat="item in tableHeader" class="{{selectedType}}-th-column-{{$index+1}} table-respn">{{ item.heading }}
+                        <div class="d-inline" ng-if="item.heading != 'Lat' && item.heading != 'Zipcode' && item.heading != 'Approved' && item.heading != 'Phone' && item.heading != 'Long' && item.heading != 'Status'" ng-class="item.field == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc(item.field, item.type)'><i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="d-inline" ng-if="item.heading != 'Lat' && item.heading != 'Zipcode' && item.heading != 'Approved' && item.heading != 'Phone' && item.heading != 'Long' && item.heading != 'Status'" ng-class="item.field == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc(item.field, item.type)'><i class="fas fa-arrow-down"></i>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody ng-if="!dataErrorMsg && tableRows.length" class="contbg">
+                <tr ng-repeat="row in tableRows | limitTo: limit" in-view="loadMore($last, $inview)">
+                    <td class="{{selectedType}}-td-column-0">{{$index + 1}}</td>
+                    <!-- <td ng-repeat="item in tableHeader">
+                        {{ item.field == 'rateCard'?('$&nbsp;'+(row[item.field] | number:2)):item.field=='status'?getCampaignStatusString(row[item.field]):item.field=='created_at'?(row[item.field]['date'] | dateify | date:'dd-MM-yyyy'):row[item.field] }}
+                    </td> -->
+                    <td class="{{selectedType}}-td-column-{{$index+1}} table-respn" ng-repeat="item in tableHeader">
+                        {{ item.field == 'rateCard'?('$'+(row[item.field] | number:2)):item.field=='status'?getCampaignStatusString(row[item.field]):item.field=='created_at'?(row[item.field] | dateify | date:'dd-MM-yyyy'):item.field=='verified'?(row[item.field]?"Yes":"No"):row[item.field] }}
+                    </td>
+                </tr>
+            </tbody>
+            <tbody ng-if="dataErrorMsg || (!tableRows.length && isApiCalled)">
+                <tr>
+                    <td>
+                        <p style="color:red;">{{dataErrorMsg || "There is no any matching records"}}</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <style>
+        .highlight {
+            color: black;
+        }
+    .nonhighlight{
+        color: #808080c2;
+    }
+
+    </style>
+</div>

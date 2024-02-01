@@ -1,0 +1,49 @@
+
+
+<md-dialog flex-xs="90" flex="50" flex-md="65" flex-sm="85" ng-controller="bbMngrCtrl">
+	<md-dialog-content>
+		<div layout="row" layout-xs="column" layout-margin>
+			<div flex="40" flex-xs="100" layout="column" layout-xs="row" layout-align="center center">
+				<img src="assets/images/product/Request.jpg" alt="images" class="rquest-width">
+			</div>
+			<div flex="60" flex-xs="100" layout="column">
+				<div layout="column" flex layout-align="center end">
+					<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+						<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+					</md-button>
+				</div>
+
+				<h4 class="md-headline never-miss" layout="column" layout-xs="column" >Never Miss a Chance To </h4>
+				<h4 class="md-headline expose-brand theme-text" layout="column" layout-xs="column">Expose Your Brand</h4>
+				<div layout="row" layout-margin style="padding:0px;margin-top:15px">
+					<div class="md-headline rquest-text" style="font-weight: 500;margin:0px;padding:0px">Request a call back</div>
+				</div>
+				<div layout="row" layout-margin  style="padding:0px;margin: 0px 0 0 8px;">
+					
+					<form name="contactnumber" method="post" ng-submit="userSignin()" novalidate="novalidate" layout="row" layout-xs="column" flex="80"
+					 flex-lg="100" flex-md="80" flex-sm="100" flex-xs="100" style="margin:0px;padding:0px">
+						<div layout-fill="layout-fill" layout-fill="$mdMedia('gt-sm')" class="bbsct">
+
+							<md-input-container class="md-block">
+								<label>Drop us your number</label>
+								<input type="hidden" ng-value="callbackRequest.type" ng-init="callbackRequest.type = 2;"/>
+								
+								<input ng-model="callbackRequest.phoneNo" only-numeric name="phoneNumber" type="mobile" minlength="10" maxlength="11" required 
+								/>
+								<div ng-messages="contactnumber.phoneNumber.$error">
+									<div ng-message="required">Phone Number is required.</div>
+									<div ng-message="minlength">Phone Number must have 10 digits.</div>
+									
+								</div>
+							</md-input-container>
+						</div>
+						<div class="bbscont">
+							<md-button aria-label="submitRCB" class="md-raised all_button newbbsub" ng-disabled="forms.callbackRequest.$invalid" ng-click="requestCallBack()">Submit</md-button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</md-dialog-content>
+	
+</md-dialog>

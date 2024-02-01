@@ -1,0 +1,54 @@
+<style>
+  .pswd_reset, .pswd_reset:hover {
+    color: #fff !important;
+  }
+</style>
+<div id="id01" class="sign_bgcolor">
+  <md-dialog class="mx-auto form_width" flex-xs="100" flex="35" flex-md="40" flex-sm="60" style="border-radius: 2px;">
+    <md-dialog-content>
+      <md-content layout-fill="layout-fill" class="contbg">
+        <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block reset_pswd pt-4">
+          <h4 class="pb-2 header" ng-if="!typeReset">Password Changed</h4>
+          <h4 class="pb-2 header" ng-if="typeReset">Reset Instructions Sent</h4>
+          <p class="infoContent mb-0 text-center" ng-if="!typeReset">We have updated your password. You may now use it to login in to your account</p>
+          <p class="infoContent mb-0 text-center" ng-if="typeReset">We delivered instructions to your email to help you reset your password.</p>
+        </div>
+      </md-content>
+      <md-input-container layout-align="center center" layout-fill="layout-fill" class="registerBtn pb-4" style="padding: 15px; background-color: #fff;">
+        <md-button layout-fill="layout-fill" style="padding: 2px; border-radius: 7px !important; background: #44596D;" class="md-raised  md-primary regbn register_btn">
+          <p class="pswd_reset"><a style="color: #fff !important;" href="#" ng-click="showLogin()">Back to Log In</a></p></md-button>
+      </md-input-container>
+      </md-dialog-content>
+   </md-dialog>
+</div>
+<!-- login pages-->
+<!-- <div layout="column" layout-fill="layout-fill" style="background:rgba(253, 205, 205, 0.85);height: 90vh;"> -->
+  <!-- <div>
+  <md-dialog>
+  <div>
+    <div layout="row" layout-align="center center" layout-fill="layout-fill" class="setting-page">
+			<md-whiteframe layout="column" layout-align="center center" flex-xs="100" flex="35" flex-md="40" flex-sm="60"
+			 class="login md-whiteframe-3dp form_width" style="margin: 5.5% 0; z-index: 9;">
+				  <md-content layout-fill="layout-fill" class="contbg">
+            <div layout="column" layout-align="center center" layout-margin="layout-margin" class="md-block reset_pswd pt-4">
+              <h4 class="pb-2 header" ng-if="!typeReset">Password Changed</h4>
+              <h4 class="pb-2 header" ng-if="typeReset">Reset Instructions Sent</h4>
+              <p class="infoContent mb-0 text-center" ng-if="!typeReset">We have updated your password. You may now use it to login in to your account</p>
+              <p class="infoContent mb-0 text-center" ng-if="typeReset">We delivered instructions to your email to help you reset your password.</p>
+            </div>
+          </md-content>
+          <md-input-container layout-align="center center" layout-fill="layout-fill" class="registerBtn pb-4" style="padding: 15px; background-color: #fff;">
+            <md-button layout-fill="layout-fill" style="padding: 2px; border-radius: 7px !important; background: #44596D;" class="md-raised  md-primary regbn register_btn">
+              <p class="pswd_reset"><a style="color: #fff !important;" href="#" ng-click="showLogin()">Back to Log In</a></p></md-button>
+          </md-input-container>
+      </md-whiteframe>
+    </div>
+</div>
+</md-dialog>
+</div> -->
+
+<!-- <md-dialog style="height:10em;padding: 1em;">
+  <h3 ng-if="typeReset">congratulations!! you have successfully reset your password.</h3>
+  <h3 ng-if="!typeReset">congratulations!! you have successfully changed your password.</h3>
+  <p>You can Login here. &nbsp <a href="#" ng-click="showLogin()">Login</a></p>
+</md-dialog> -->

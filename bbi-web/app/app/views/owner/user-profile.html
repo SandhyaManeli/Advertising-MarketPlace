@@ -1,0 +1,100 @@
+<!--userprofie page -->
+<div layout="column" layout-sm="column" layout-xs="column" class="bbsco contbg">
+	<div layout="column" layout-align="center center" class="pricing-head">
+	</div>
+	<div class=" profile-details">
+		<div layout="column" class="news-inner md-whiteframe-3dp contbg" layout-align="center center" layout-margin
+			flex-offset-gt-sm="15" flex="70" flex-xs="100" flex-sm="100" style="margin-top: -70px">
+			<div ng-if="userProfile.user.profile_pic">
+				<img ng-src="{{serverUrl + userProfile.user.profile_pic}}" alt="team"
+					style="width:150px;margin: -78px 0 0 0;">
+			</div>
+			<div ng-if="!userProfile.user.profile_pic">
+				<img src="assets/images/product/user_avatar.png" alt="team" style="width:150px;margin: -78px 0 0 0;">
+			</div>
+			<h3 style="color:#fff">{{userProfile.user.name}}</h3>
+			<h4 style="color:#fff">{{userProfile.user.email}}</h3>
+				<div class="md-body-2" ng-if="userProfile.user.phone">
+					<span></span>
+					<md-icon>
+						<i class="material-icons">call</i>
+					</md-icon>
+					<span>Phone:</span>(+91) {{userProfile.user.phone}}
+				</div>
+				<!-- <div class="md-body-2"><span></span>
+				<md-icon><i class="material-icons">location_on</i></md-icon>
+				<span>Addres:</span>
+				<span>K67/68, Sonal Heavy Indl Est,
+					<br> Kanchapadaramchandra Lane Extn, Banjara Hills</span>
+			</div> -->
+				<!-- horizontal start here  -->
+
+				<md-divider></md-divider>
+
+				<h1>Campaigns Info</h1>
+				<md-content layout-padding class="profile-icons">
+					<md-list flex layout="row" layout-align="center center">
+						<md-list-item>
+							<div>
+								<div class="md-grid-item-content" style="text-align:center" layout="column"
+									layout-margin>
+									<span>
+										<md-icon>
+											<i class="material-icons">autorenew</i>
+										</md-icon>
+									</span>
+									<div class="md-body-1"> Running</div>
+									<h4>{{userProfile.running_campaigns_count}}</h4>
+								</div>
+							</div>
+						</md-list-item>
+						<md-list-item>
+							<div>
+								<div class="md-grid-item-content" style="text-align:center" layout="column"
+									layout-margin>
+									<span>
+										<md-icon>
+											<i class="material-icons">lock_outline</i>
+										</md-icon>
+									</span>
+									<div class="md-body-1">Closed </div>
+									<h4>{{userProfile.closed_campaigns_count}}</h4>
+								</div>
+							</div>
+						</md-list-item>
+						<md-list-item>
+							<div>
+								<div class="md-grid-item-content" style="text-align:center" layout="column"
+									layout-margin>
+									<span>
+										<md-icon>
+											<i class="material-icons">search</i>
+										</md-icon>
+									</span>
+									<div class="md-body-1"> Number of boards </div>
+									<h4>{{userProfile.product_count}}</h4>
+								</div>
+							</div>
+						</md-list-item>
+						<md-list-item>
+							<div>
+								<div class="md-grid-item-content" style="text-align:center" layout="column"
+									layout-margin>
+									<span>
+										<md-icon>
+											<i class="material-icons">card_travel</i>
+										</md-icon>
+									</span>
+									<div class="md-body-1"> Invested </div>
+									<h4>N/A</h4>
+
+								</div>
+							</div>
+						</md-list-item>
+					</md-list>
+				</md-content>
+				<!--content Div End-->
+		</div>
+		<!---column div end -->
+	</div>
+</div>

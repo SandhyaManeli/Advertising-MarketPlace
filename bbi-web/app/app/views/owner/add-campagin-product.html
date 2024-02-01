@@ -1,0 +1,539 @@
+<style>
+
+.gray-blocked {
+      background: #ddd;
+    }
+    .red-blocked {
+      color: #f00 !important;
+      font-weight: bold;
+    }
+#ownerSlots{
+  width:500px;
+}
+.productAdded {
+  background-color: rgb(202, 224, 231)
+}
+.md-datepicker-input{
+  font-size: 12px;
+  min-width: 100px;
+}
+.form-control{
+  background: none;
+}
+.md-button.md-icon-button{
+  margin-right: 0px;
+  margin-left: 0px;
+}
+md-icon{
+  width: 20px;
+  min-width: 20px;
+}
+.md-icon-button+.md-datepicker-input-container{
+      margin-left: 0px;
+}
+.form-group{
+  margin-bottom: 0px;
+}
+</style>
+<div layout="column" class="owner_hoarding_list" style="position:relative;">
+  <!-- <div layout="row" layout-margin class="md-whiteframe-3dp">
+      
+    <p class="mb-0 mt-4">Campaign Name : <span class="text_color">{{selectedOwnerCampaign.name | capitalize}}</span></p>
+    <p class="mb-0 mt-4">Product Added : <span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
+        "0"}}</span></p>
+    <p class="mb-0 mt-4">Estimated Budget : {{selectedOwnerCampaign.est_budget || "N/A"}}</p>
+    <p class="mb-0 mt-4 text_color"> Total Budget : {{selectedOwnerCampaign.total_budget || "N/A"}}</p>
+    <p class="mb-0 mt-4"><span class="text_color">Created On</span> : {{selectedOwnerCampaign.created_at || "N/A"}}</p>
+    <span flex></span>    
+    <md-button class="md-raised md-primary all_button" ng-href="/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+  </div> -->
+  <!-- <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg mobile_campdetails">
+			<div class="row" style="margin-left:0px; margin-right:0px;">
+				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+				 style="margin-top:14px;">
+					<p class="cmp_bottom">Campaign Name</p>
+					<p class="md-caption mob_span"><b><span class="text_color">{{selectedOwnerCampaign.name | capitalize}}</span></b></p>
+				</div>
+				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
+				 style="margin-top:14px;">
+					<p class="cmp_bottom">Product Added</p>
+					<p class="md-caption mob_span"><b><span class="text_color md-title">{{selectedOwnerCampaign.no_of_products ||
+              "0"}}</span></b></p>
+				</div>
+				<div class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-5 payment_nng"
+				 style="margin-top:14px;">
+					<p class="cmp_bottom">Created On</p>
+					<p class="md-caption mob_span mob_5"><b>{{selectedOwnerCampaign.created_at || "N/A"}}</b></p>
+				</div>
+				<div class="offset-xl-4 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-6 payment_nng"
+				 style="margin-top:1.2em;text-align: end" >
+         <md-button class="md-raised md-primary all_button" ng-href="/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+				</div>
+			</div>
+    </div> -->
+    <div class="campaign_details mt-4">
+      <div class="">
+          <div class="row ml-0 mr-0">
+              <div class="col-12 col-sm-12 col-md-6">
+                  <div class="contbg md-whiteframe-3dp p-2">
+                      <table class="table table-striped table-bordered mb-0 table_user">
+                          <tbody>
+                              <tr>
+                                  <td><b>Campaign ID</b></td>
+                                  <td>{{selectedOwnerCampaign.cid}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Campaign Name</b></td>
+                                  <td>{{selectedOwnerCampaign.name | capitalize}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Client Name</b></td>
+                                  <td>{{selectedOwnerCampaign.org_name | capitalize}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">BillBoards India</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Contact Number</b></td>
+                                  <td>{{selectedOwnerCampaign.org_contact_phone}}</td>
+                                  <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">+ 91 9550224488</td> -->
+                              </tr>
+                              <tr>
+                                  <td><b>Email</b></td>
+                                  <td>{{selectedOwnerCampaign.org_contact_email | capitalize}}
+                                    <!-- ng-hide="selectedOwnerCampaign.type == 0" -->
+                                  </td>
+                                  <!-- <td ng-hide="selectedOwnerCampaign.type == 2 || selectedOwnerCampaign.type == 1">
+                                      reach@billboardsindia.com</td> -->
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6">
+                  <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                      <table class="table table-striped table-bordered mb-0 table_user">
+                          <tbody>
+                              <tr>
+                                  <td class="camp_tableowner"><b>No of Products</b></td>
+                                  <td>{{selectedOwnerCampaign.products.length || 0}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Date</b></td>
+                                  <td>{{selectedOwnerCampaign.created_at | dateify | date: "dd-MMM-yyyy"}}</td>
+                              </tr>
+                              <tr>
+                                  <td><b>Total Price</b></td>
+                                  <td>
+                                      ${{ selectedOwnerCampaign.act_budget || 0 | number : 2}}
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td><b>Pending Price</b></td>
+                                  <td>
+                                      <!-- ng-if="selectedOwnerCampaign.type != 0" -->
+                                      ${{campaignDetails.act_budget - result.total_paid || 0 | number:2}}
+                                  </td>
+                                  <!-- <td ng-if="selectedOwnerCampaign.type == 0">
+                                      <span ng-if="selectedOwnerCampaign.pending_payment"></span>
+                                      ${{PendingPay | number:2 || '0'}}
+                                  </td>                                     -->
+                              </tr>
+                              <tr>
+                                  <td><b>Status</b></td>
+                                  <td>{{selectedOwnerCampaign.status | stringifyCampaignStatus}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>     
+  </div>
+
+  <!-- filters-->
+  <div class="table-responsive">
+    <table class="table table_user">
+      <tbody>
+        <tr>
+          <!-- <td  class="hide-xs"> -->
+          <td  class="">
+            <!-- <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+            md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+            md-min-length="4" placeholder="Search..." md-clear-button="true" style="margin-left: 7px;">
+            <md-item-template>
+              <span class="item-title">
+                <span> {{item.siteNo}} </span>
+              </span>
+              <span class="item-metadata">
+                <span>
+                  <strong>{{item.address}}</strong>
+                </span>
+              </span>
+            </md-item-template>
+          </md-autocomplete></td> -->
+          <input type="text" placeholder="Search for DMA" class="inventory_search" ng-model="search.city_name">
+          <td class="adjust_space">
+            <label class="pt-2">Filter by :</label>
+         </td>
+          <td>
+            <!-- <label for="pwd" class="add_filterby hide-xs">Filter By:</label> -->
+            <div class="form-group all_formfilter">
+            <select id="productType" ng-options="productType.name for productType in ProductTypes"
+                        ng-model="product.type" class="form-control md-whiteframe-3dp all_filtermobile filter_width"
+                        ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
+                        name="productType">  
+                        <option value="" selected>All</option>                   
+                    </select>
+            </div>
+          </td>
+          <!-- <td class="hide-xs" style="width: 170px;"> -->
+            <td class="" style="width: 170px;">
+              <md-datepicker class="" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;padding: 0px;"></md-datepicker>
+          </td>
+
+          <!-- <td class="hide-xs" style="width: 170px;"> -->
+            <td class="" style="width: 170px;">
+            <md-datepicker  class="" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date" layout-fill style="border: none;padding: 0px;"></md-datepicker>
+          </td>
+          <!-- <td class="hide-xs" style="width: 170px;"> -->
+            <td class="" style="width: 170px;">
+            <!-- <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+              <option  value="1" selected>Budget High to Low</option>
+              <option value="0">Budget Low to High </option>
+            </select> -->
+            <select class="form-control budget_wid" ng-model="product.budgetprice" id="sel1"
+                ng-change="getBudget(product.budgetprice)">
+                <option selected  value="">Budget High to Low</option>
+                <option value="0">Budget Low to High </option>
+            </select>
+          </td>
+          <td class="apply_mob">
+            <!-- <md-button class="md-raised md-primary register_btn" style="background-color:#f2f3f2;margin: 0px;color: #000;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button> -->
+            <md-button class="md-raised md-primary register_btn" style="background-color:#44596D;margin: 0px;color: #fff;"  onClick="onClickHandler(this)" ng-click="applymethod(product)">Apply Filters</md-button>
+            <!-- <md-button class="md-raised all_button hide-xs" ng-click="clearOwnerProductFilter(product)" onClick="onClickHandler(this)" >Clear Filters</md-button> -->
+            <md-button class="md-raised all_button" ng-click="clearOwnerProductFilter(product)" onClick="onClickHandler(this)" >Clear Filters</md-button>
+          </td>
+          <td class="text-right"><md-button class="md-raised md-primary all_button" ng-href="/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}"  style="margin: 0px;margin-right:8px;" ng-disabled="selectedOwnerCampaign.products.length == 0">view campaign</md-button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+  <!-- <form class="form-inline camp_filters ml-3" action="">
+    <md-autocomplete class="md-whiteframe-3dp add_mobile" ng-disabled="isDisabled" md-selected-item="selectedItem" md-search-text="searchText"
+      md-selected-item-change="viewSelectedProduct(item)" md-items="item in productSearch(searchText)" md-item-text="item.siteNo"
+      md-min-length="4" placeholder="Search..." md-clear-button="true">
+      <md-item-template>
+        <span class="item-title">
+          <span> {{item.siteNo}} </span>
+        </span>
+        <span class="item-metadata">
+          <span>
+            <strong>{{item.address}}</strong>
+          </span>
+        </span>
+      </md-item-template>
+    </md-autocomplete>
+    <label for="pwd" class="add_filterby hide-xs">Filter By:</label>
+    <div class="form-group hide-xs">
+    <select id="productType" ng-options="productType.name for productType in ProductTypes"
+                ng-model="product.type" class="form-control md-whiteframe-3dp add_filtermobile"
+                ng-change="getProductByFormat(product.type)" data-md-container-class="selectdemoSelectHeader"
+                name="productType">
+                <option value="" disabled selected>Site Type</option>
+            </select>
+    </div>
+
+    <div class="form-group form_cal hide-xs">
+      <md-datepicker class="form-control" name="startDate" ng-model="product.start_date" onkeydown="return false" md-placeholder="Available From"  layout-fill style="border: none;"></md-datepicker>
+    </div>
+    <div class="form-group form_cal hide-xs">
+      <md-datepicker  class="form-control" name="endDate" ng-model="product.end_date" onkeydown="return false" md-placeholder="Available To" md-min-date="product.start_date" layout-fill style="border: none;"></md-datepicker>
+    </div>
+    <div class="form-group form_cal hide-xs">
+      <select class="form-control" ng-model="product.budgetprice" id="sel1" ng-change="getBudget(product.budgetprice)">
+        <option selected value="1">Budget High to Low</option>
+        <option value="0">Budget Low to High </option>
+      </select>
+    </div>
+    <md-button class="md-raised md-primary register_btn hide-xs" style="background-color:#44596D" ng-click="applymethod(product)">Apply Filters</md-button>
+    <md-button class="md-raised md-primary all_button" ng-href="/owner/{{clientSlug}}/campaign-details/{{selectedOwnerCampaign.id}}/{{selectedOwnerCampaign.type}}">view campaign</md-button>
+  </form> -->
+  <!-- product list -->
+  <div class="table-responsive">
+    <md-button class="md-raised md-primary all_button" ng-if="!ownerProduct.alreadyAdded" onClick="onClickHandler(this)" ng-click="addToCampaign(productList)" style="float: right; margin-right: 15px;">Add All to Campaign</md-button>
+    <table class="table">
+      <thead class="text_color">
+        <tr>
+          <th class="table_firstthpadding">Product Details</th>
+          <!-- <th class="hide-xs"></th> -->
+          <th class=""></th>
+          <!-- <th class="text-center">Size</th> -->
+          <th class="">Lit</th>
+          <th class="">Listed in</th>
+          <th class="">Price</th>
+          <th class="text-center">Calender</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="ownerProduct in productList | filter:search" ng-class="{productAdded : ownerProduct.focusProduct == true}">
+          <!-- <td class="image_tdwidth hide-xs table_firstthpadding"> -->
+            <td class="image_tdwidth table_firstthpadding">
+            <input type="hidden" name="suggestedProduct.id" ng-model="suggestedProduct.id" ng-init="suggestedProduct.id = ownerProduct.id" />
+            <img ng-src="{{serverUrl + ownerProduct.image[0]}}" alt="Smiley face" class="requ_size img-thumbnail">
+          </td>
+          <td class="table_address">
+              
+              <b>Title</b>: <b>{{ownerProduct.title}}</b> <br>
+              {{ownerProduct.siteNo}}
+              <br><b>Address</b>: {{ownerProduct.address | capitalize}}
+              <br><b>City</b>: {{ownerProduct.city_name | capitalize}}
+              <br><b>Type</b>: {{ownerProduct.type | capitalize}}
+              <br><b>Size</b>: {{ownerProduct.panelSize}}
+              <br><b>Product Direction</b>: {{ownerProduct.imgdirection}}              
+          </td>
+          <!-- <td class="table_vertical text-center">{{ownerProduct.panelSize}}</td> -->
+          <td class="table_vertical">
+            <span class="md-caption">{{ownerProduct.lighting | boolToYesNo}}</span>
+          </td>
+          <td class="table_vertical">
+            <!-- <a ng-href="/owner/{{clientSlug}}/product-shortlist-campagin">14 Campaigns</a> -->
+            <a ng-href="/owner/{{clientSlug}}/product-shortlist-campagin/{{ownerProduct.id}}">{{ownerProduct.camapigns_count || '0'}} Campaigns</a>
+          </td>
+          <td class="table_vertical table_price">
+            <!-- <div class="input-group">
+              <input ng-model="suggestedProduct.price" type="text" only-numeric name="price" required="required"
+                ng-pattern="/[0-9]+/" ng-disabled="!enabledPrice" ng-init="suggestedProduct.price = ownerProduct.default_price"
+                style="width: 70px;padding: 4px 5px;" />
+              <input type="text" class="" placeholder="Somete" style="width: 70px;padding: 4px 5px;" />
+              <span ng-click="enabledPrice = true;" ng-show="!enabledPrice"><i class="material-icons">edit</i></span>
+            </div> -->
+            <!-- <div class="input-group">
+            
+              {{(!myfield)?ownerProduct.default_price:''}}
+              <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" ng-if="myfield" style="width: 70px;padding: 4px 5px;" />
+              <span ng-click="myfield=true;" ng-show="!myfield"> <i class="material-icons">edit</i></span>
+              <span ng-click="myfield=false;changeProductPrice(ownerProduct)"  ng-show="myfield"> <i class="material-icons">check</i></span>
+            
+            </div> -->
+              <p>${{ownerProduct.rateCard}}
+              <!-- <input type="text" class="" ng-model="ownerProduct.default_price" placeholder="Price" only-numeric  style="width: 70px;padding: 8px 5px 2px 5px;"/> -->
+              <!-- <span ng-click="myfield = true;"   ng-show="!myfield"> <i class="material-icons">edit</i></span> ng-if="myfield" ${{(!myfield)?ownerProduct.default_price:''}}
+              <button ng-click="myfield = false;changeProductPrice(ownerProduct)" ng-disabled="(ownerProduct.default_price > 0 && ownerProduct.default_price.length !== 0 ) ? false : true"  ng-show="myfield" style="border: none;background: #44596D;color: #fff !important;padding: 6px 7px 4px 7px;margin-left: -3px;"> <i class="material-icons" style="color: #fff;">check</i></button> -->
+            </p>
+          </td>
+          <td class="table_vertical text-center">
+            <input date-range-picker ng-model="ownerProduct.booking_dates" class="form-control md-whiteframe-3dp date-picker"
+              placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+              style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+            <a ng-click="getProductUnavailableDates(ownerProduct, $event,$index);">
+              <i class="fa fa-calendar"></i>
+            </a>
+          </td>
+          <td class=" table_vertical text-right">
+            <md-button class="md-raised md-primary all_button" ng-if="!ownerProduct.alreadyAdded" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+              campaign</md-button>
+              <md-button class="md-raised Upload_font" ng-if="ownerProduct.alreadyAdded" >Added</md-button>
+          </td>    
+          <!-- <td class="table_vertical"> -->
+            <!-- <input ng-model="ownerProduct.booking_dates"  class="form-control md-whiteframe-3dp "
+              placeholder="Product date" type="text" name="date" readonly options="suggestProductOpts" id="booking_dates_picker"
+              style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+            <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+              <i class="fa fa-calendar" aria-hidden="true" ng-if="ownerProduct.booking_dates == 0"></i>
+            </a> -->
+            <!-- <a ng-click="getProductUnavailableDates(ownerProduct.id, $event);">
+              <i class="fa fa-calendar material-Cal" aria-hidden="true" ng-if="ownerProduct.booking_dates != 0"></i>
+            </a> -->
+            <!-- calender slots starts-->
+            
+
+
+              <!-- <div class="dropdown">
+                  <md-button onclick="OwnerSlotsBooking()" ng-model="ownerProduct.booking_dates"  class="dropbtn" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price)">
+                      <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </md-button>
+                  <div id="ownerSlots" class="dropdown-content box_shadow contbg "
+                      style="padding:10px;">
+                      <div class="">
+                        <div class="row">
+                          <div class="col-md-9"><h5 class="font-weight-bold ml-3 mt-3">Select Campaign Duration :</h5></div>
+                          <div class="col-md-3 text-right">
+                            <md-button class="md-icon-button" onclick="OwnerSlotsBooking()" >
+                                <i class="fa fa-close" aria-hidden="true"></i>
+                            </md-button>
+                          </div>
+                            
+                        </div>
+                          
+
+                          <p class="text-muted ml-3 mb-1">This Bulletin minimum booking is 4 weeks.</p>
+                          <p class="text-muted ml-3 mb-1">There after you can select your bookings in multiples of two weeks.</p>
+                          <p class="text-muted ml-3">Price includes all taxes and productions charges</p>
+                          <div layout="row" class="mt-2 ml-3 mb-2 mostly-customized-scrollbar">
+                            <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+                            ng-click="selectHordingWeeks(weeks)"
+                            ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+                              <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
+                              <h3 class="md-body-2 setect_padbottom">{{weeks.price}}</h3>
+                            </a>
+                          </div>
+          
+                          <h5 class="font-weight-bold ml-3 mt-3">Select Campaign Start Date :</h5>
+                          <p class="text-muted ml-3">The posters will be placed between Monday and Friday of your first selected week. A specific day cannot
+                            be guaranteed. However, the poster will run for the amount of paid weeks, starting from the date that it is placed.</p>
+                          <div layout="row" id="scrollFind" class="mt-2 mb-2" style="width:100%;overflow:auto;" >
+                            <button class="border ml-3 mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+                              ng-disabled="week.isBlocked && week.isBlocked == true">
+                              <div class="md-caption selected_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                              <h3 class="md-body-2 selected_padbottom"> of {{week.startDay | dateslots }}</h3>
+                            </button>
+                          </div>   
+          
+                          <div class="row mt-4 pb-3" style="margin-right:0px;">
+                            <div class="col-md-6">
+                                <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <md-button layout-fill class="md-raised md-primary all_button" style="margin-left: 2px;" ng-disabled="false"
+                                ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </div> -->
+            <!-- calender slots Ends-->
+          <!-- </td> -->
+          <!-- <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Bulletin' ">
+              <a data-toggle="modal" data-target="#exampleModalcalendar" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                      <div class="modal fade" id="exampleModalcalendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                  <div class="modal-content text-left">
+                                      <div class="modal-header modal_bottom">
+                                      <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav(ownerProduct.type)">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button> 
+                                      </div>
+                                      <div class="modal-body">
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;This Bulletin minimum booking is 4 weeks.</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;There after you can select your bookings in multiples of two weeks.</p>
+                                          <p class=""><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Price includes all taxes and productions charges</p>
+                                          <div layout="row" class="mt-2  mb-2 mostly-customized-scrollbar">
+                                            <a class="border mb-2 p-1 text-center cal_divcolor" ng-repeat = "weeks in yearlyWeeks"
+                                            ng-click="selectHordingWeeks(weeks)"
+                                            ng-class="{selectedWeekColor : weeks.selectedWeek == true}">
+                                              <div class="md-caption setect_padding">{{weeks.weeklyPackage}}&nbsp;Week</div>
+                                              <h3 class="md-body-2 setect_padbottom">${{weeks.price}}</h3>
+                                            </a>
+                                          </div>
+                          
+                                          <h5 class="font-weight-bold  mt-3">Select Campaign Start Date :</h5>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;The posters will be placed between Monday and Friday of your first selected week.
+                                            </p>
+                                            <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;A specific day cannot be guaranteed.</p>
+                                            <p class="mb-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;However, the poster will run for the amount of paid weeks.</p>
+                                          <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" >
+                                            <a class="border  mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksArray track by $index" 
+                                              ng-click="selectUserWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}"
+                                              ng-disabled="week.isBlocked && week.isBlocked == true">
+                                              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp;Weeks</div>
+                                              <h3 class="md-body-2 setect_padbottom">{{week.startDay | dateslots }}</h3>
+                                            </a>
+                                          </div> 
+                                      </div>
+                                      <div class="modal-body modal_top">
+                                          <div class="row" style="margin-right:0px;">
+                                              <div class="col-md-8">
+                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{ownerTotalPrice || 0}}</h5>
+                                              </div>
+                                              <div class="col-md-4">
+                                                  <md-button class="md-raised md-primary popup_yes all_button" ng-disabled="false"
+                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksArray)">Add to campaign</md-button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+          </td> -->
+          <!-- <td class="table_vertical text-center" ng-if="ownerProduct.type == 'Transit' || ownerProduct.type == 'Digital Bulletin'">
+              <a data-toggle="modal" data-target="#digitalTransitCalender" ng-model="ownerProduct.booking_dates" ng-click = "getProductUnavailableDates(ownerProduct.id, $event,ownerProduct.default_price,ownerProduct.type,ownerProduct.slots)"><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                      <div class="modal fade" id="digitalTransitCalender" tabindex="-1" role="dialog" aria-labelledby="exampleModalcalendarTitle" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+                                  <div class="modal-content text-left">
+                                      <div class="modal-header modal_bottom">
+                                      <h5 class="modal-title" id="exampleModalcalendarTitle">Select Campaign Duration :</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"  ng-click="toggleProductDetailSidenav(ownerProduct.type)">
+                                          <span aria-hidden="true">&times;</span>
+                                      </button> 
+                                      </div>
+                                      <div class="modal-body">
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;This digital bulletin minimum booking is 1 weeks.</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Total No of busses is 30 busses.</p>
+                                          <p class="mb-0"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Your 10 second ad will be shown 1 time per 70 seconds.</p>
+                                          <p class="mb-3"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size: 12px;"></i>&nbsp;Total slots available in this digital bulletin is 7 slots.</p>
+                                
+                                          
+                                            <h5 class="font-weight-bold mt-3 mb-3">Select Duration, Start Date & No of slots -:
+                                                <select class="browser-default" ng-model = "digitalNumOfSlots.value" id="slot" ng-change = "blockSlotChange()" ng-options="slots for slots in digitalSlots" style="width: 140px; background: #e9e9e9; border:none;">
+                                                  </select>
+                                            </h5>
+                                          
+                                          <div layout="row" id="scrollFind" class="mt-2 mb-2 mostly-customized-scrollbar" style="width:100%;overflow:auto;" >
+                                            <a class="border mb-2 p-1 text-center selected_divcolor" ng-repeat = "week in weeksDigitalArray track by $index" 
+                                             ng-disabled = "week.isBlocked && week.isBlocked == true" ng-click="selectUserDigitalWeeks(week,$index,$event)" ng-class="{addWeekColor: week.selected && week.selected == true , addBlockedColor : week.isBlocked && week.isBlocked == true}">
+                                              <div class="md-caption setect_padding">{{week.twoWeeks}}&nbsp; Weeks</div>
+                                              <h3 class="md-body-2 setect_paddingweek"> of {{week.startDay | dateslots }}</h3>
+                                              <h3 class="md-body-2 setect_padbottom">${{week.price || 0}}</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(109, 16, 21);font-size: 11px;" ng-if="digitalNumOfSlots.value && week.availableSlots > 0">{{week.availableSlots}} Available</h3>
+                                              <h3 class="md-body-2 selected_padbottom" style="color:rgb(29, 119, 64);font-size: 11px;" ng-if="digitalNumOfSlots.value && (!week.availableSlots || week.availableSlots == 0) && !week.isBlocked && week.isBlocked != true" >{{digitalSlots.length}} Available</h3>
+                                
+                                            </a>
+                                          </div>
+                                      </div>
+                                      <div class="modal-body modal_top">
+                                        
+                                          <div class="row" style="margin-right:0px;">
+                                              <div class="col-md-8">
+                                                  <h5 class="font-weight-bold ml-3 mt-3">Total : ${{totalDigitalSlotAmount || 0}}</h5>
+                                              </div>
+                                              <div class="col-md-4" style="text-align: right;padding-right: 0px;">
+                                                  <md-button class="md-raised md-primary popup_yes all_button" ng-disabled="false"
+                                                  ng-click="suggestProductForOwnerCampaign(ownerProduct,weeksDigitalArray)">Add to campaign</md-button>
+                                              </div>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+          </td> -->
+         
+          <!-- <td class=" table_vertical text-right">
+            <md-button class="md-raised md-primary all_button" ng-class = "{addBlockedColor : ownerProductBlocked.length !== 1}" ng-disabled="ownerProductBlocked.length !== 1" ng-click="suggestProductForOwnerCampaign(ownerProduct)">Add to
+              campaign</md-button>
+               <md-button class="md-raised Upload_font" ng-if="$scope.ownerProductBlocked" >Added</md-button> -->
+          <!-- </td>           -->
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+ 
+
+</div>
+<script>
+function onClickHandler(elem) {
+  elem.style.background = '#bc2535';
+  elem.style.color = 'white';
+}
+</script>

@@ -1,0 +1,111 @@
+<div>
+    <div class="md-whiteframe-2dp contbg md-caption" layout="row" layout-margin>
+        <!-- <p class="mt-4">Total Products<span class="text_color">: {{productList.length}}</span></p> -->
+        <div flex></div>
+        <!-- Add New Product -->
+        <!-- <div class="dropdown hide-xs"> -->
+            <div class="container pt-3">
+                <div class="row">
+                  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                    <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+                  </div>
+                </div>
+              </div>
+            <div class="dropdown">
+            <md-button class="md-raised md-primary all_button" ng-click="addnewImage()" class="dropbtn">Add New Image
+            </md-button>
+            <div id="bulkUpload" class="dropdown-content_bulk contbg animated fadeInDown uploading_files">
+              
+              <div layout="colmun">
+                  <span flex></span>
+                  <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="addnewImage()">
+                      <md-icon class="md-default-theme">
+                          <i class="material-icons">close</i>
+                      </md-icon>
+                  </md-button>
+              </div>
+              <h3><span>Great,</span> Let's add new image</h3>
+                <form name="hordinglistform" novalidate="novalidate" style="position:relative;">
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+        <label class="font-weight-bold for_required">Product Type<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+        <select id="productType"
+            ng-options="bulkUploadProductType.name for bulkUploadProductType in BulkProductTypes"
+            ng-model="type" name="type" ng-change="bulkProductType(type.name)"
+            class="form-control md-whiteframe-3dp" required>
+            <option>
+                <!-- ng-repeat="productType in ProductTypes" -->
+                {{bulkUploadProductType.name}}</option>
+        </select>
+        <span style="color:red"
+            ng-show="hordinglistform.type.$dirty && hordinglistform.type.$invalid">
+            <span ng-show="hordinglistform.type.$error.required">Product Type is
+                required.</span>
+        </span>
+    </div>
+    <div ng-if="uploadImgContent" class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 pt-4">
+        <label class="font-weight-bold for_required">Upload Image<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+        <div class="input-group" style="width: 100%;">
+            <input type="file" class="form-control md-whiteframe-3dp p-1" ngf-select
+                ng-model="bulk.image" name="imageFile" accept="image/*"
+                placeholder="Upload Product Image*" multiple required>
+            <span class="input-group-addon md-whiteframe-3dp img_align"><i class="fa fa-picture-o"
+                    aria-hidden="true"></i></span>
+        </div>
+    </div>
+
+<div class="form-group row mt-3 justify-content-end">
+    <md-button type="submit" Class="md-raised md-primary all_button"
+        ng-click="requestAddImage()" ng-disabled="type=='Select product type' || !bulk.image">
+        Submit</md-button>
+</div>
+</div>
+</div>
+<!-- <div ng-if="displayErrorMsg">
+    <p class="text-danger pt-2">{{errorMsg}}</p>
+</div> -->
+
+              </form>
+          </div>
+        </div>
+        
+    </div>
+    <div class="table-responsive">
+
+      <table class="table">
+          <thead class="text_color">
+              <tr>
+                  <th class="text-left adjust_space">S.No 
+                  </th>
+                  <th class="text-left adjust_space">Image
+                  </th>
+                  <th class="text-left adjust_space">Product Name
+                </th>
+                  <th class="text-left text-nowrap padding-20">Product Type
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- <tr ng-repeat="list in ImageList track by $index">
+                      <td class="image_tdwidth">
+                        {{$index + 1}}
+                  </td>
+                  <td class="table_address product_detail_res">
+                    <img src="{{config.serverUrl + list.image}}" alt="Smiley face"
+                    class="requ_size img-thumbnail bulk_res_img">
+                  </td>
+                  <td class="table_vertical text-left">{{list.image_name}}</td>
+                  <td class="table_vertical text-left">
+                    {{list.product_type}}</td>
+  
+              </tr> -->
+          </tbody>
+      </table>
+      <div ng-if="ImageList.length==0"><h5 class="text-center"><b>No Images available</b></h5></div>
+  </div>
+</div>
+<script>
+  function addnewImage() {
+      document.getElementById("bulkUpload").classList.toggle("show");
+  }

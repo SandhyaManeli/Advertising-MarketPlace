@@ -1,0 +1,50 @@
+<md-dialog flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<!-- <div layout="column" layout-align="center center">
+				<img ng-src="assets/images/campaign_popup_icon.png">
+			</div> -->
+			<div layout="row" layout-margin >
+				<h4>Enter Role Details</h4>
+				<div flex></div>
+				<md-button class="md-icon-button md-button" type="button">
+					<i class="material-icons" ng-click="closeMdDialog()">close</i>
+					<div class="md-ripple-container"></div>
+				</md-button>
+			</div>
+			<form name="forms.addRoleForm" novalidate="novalidate">
+				<div layout="column" layout-xs="column" layout-padding flex="100">
+					<md-input-container class="md-block margin-input">
+						<label>Role Name</label>
+						<input ng-model="role.display_name" type="text" name="name" minlength="3" maxlength="30" required="required" />
+						<div ng-messages="forms.addRoleForm.name.$error">
+							<div ng-message="required">Role Name is required.</div>
+							<div ng-message="minlength">Role Name must have 3 characters.</div>
+							<div ng-message="maxlength">Role Name shouldn't exceed 30 characters.</div>
+						</div>
+					</md-input-container>
+					<md-input-container class="md-block margin-input">
+						<label>Role Description</label>
+						<input ng-model="role.description" type="text" name="name" minlength="8" maxlength="150" required="required" />
+						<div ng-messages="forms.addRoleForm.roleType.$error">
+							<div ng-message="required">Role Description is required.</div>
+							<div ng-message="minlength">Role Description must have 8 characters.</div>
+							<div ng-message="maxlength">Role Description shouldn't exceed 150 characters.</div>
+						</div>
+					</md-input-container>
+					<div class="registeredEmailErrors" ng-if="addRoleErrors">
+						<ul>
+							<li ng-repeat="error in addRoleErrors">
+								{{error}}
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div layout="row" layout-align="center center">
+					<md-button type="submit" Class="md-raised md-primary register_btn" ng-click="addRole()" ng-disabled="forms.addRoleForm.$invalid">Submit</md-button>
+					<md-button Class="md-raised register_btn" ng-click="closeMdDialog()">Cancel</md-button>
+				</div>
+			</form>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

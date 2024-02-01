@@ -1,0 +1,63 @@
+<md-dialog flex-xs="100" flex="40" flex-md="60" flex-sm="60">
+  <md-dialog-content>
+    <md-content class="md-padding">
+      <!-- <div layout="row" layout-align="center center" layout-margin>
+        <div>Enter Payment Details</div>
+      </div> -->
+      <div layout="row" layout-margin>
+        <h4 class="text_color">Enter Payment Details</h4>
+        <div flex></div>
+        <md-button class="md-icon-button md-button" type="button" >
+          <i class="material-icons" ng-click="close()">close</i>
+          <div class="md-ripple-container"></div>
+        </md-button>
+      </div>
+      <form name="updateCampaignPaymentForm" novalidate="novalidate">
+        <div layout="column" layout-xs="column" layout-padding flex="90" flex-offset-gt-sm="5">
+          <div class="form-group">
+            <!-- <label>Payment Amount</label> -->
+            <input ng-model="campaignPayment.amount" type="text" name="amount" minlength="3" maxlength="20" required="required" placeholder="Payment Amount" class="form-control" />
+            <div ng-messages="updateCampaignPaymentForm.amount.$error" style="color: red" ng-if="!updateCampaignPaymentForm.amount.$untouched" style="color: red">
+              <div ng-message="required" >Payment Amount is required.</div>
+              <div ng-message="minlength">Payment Amount must have 3 characters.</div>
+              <div ng-message="maxlength">Payment Amount shouldn't exceed 20 characters.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- <label>Payment Type</label> -->
+            <select name="campaign_payment_type" id="campaign_payment_type" ng-model="campaignPayment.type"  placeholder="Payment Type" class="form-control" required>
+              <option ng-repeat="cpt in paymentTypes" value="{{cpt.name}}">{{cpt.name}}</option>
+            </select >
+            <div ng-messages="updateCampaignPaymentForm.campaign_payment_type.$error" style="color: red" ng-if="!updateCampaignPaymentForm.campaign_payment_type.$untouched">
+              <div ng-message="required">Client Type is required.</div>
+              <div ng-message="minlength">Client Type must have 2 characters.</div>
+              <div ng-message="maxlength">Client Type shouldn't exceed 30 characters.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- <label>Cheque/Reference/Transaction No.</label> -->
+            <input ng-model="campaignPayment.reference_no" type="text" name="reference_no" minlength="3" maxlength="60" ng-required="campaignPayment.type != 'Cash'" placeholder="Cheque/Reference/Transaction No." class="form-control" required/>
+            <div ng-messages="updateCampaignPaymentForm.reference_no.$error" style="color: red" ng-if="!updateCampaignPaymentForm.reference_no.$untouched">
+              <div ng-message="required">Cheque/Reference/Transaction no. is required.</div>
+              <div ng-message="minlength">Cheque/Reference/Transaction no. must have 3 characters.</div>
+              <div ng-message="maxlength">Cheque/Reference/Transaction no. shouldn't exceed 60 characters. </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <!-- <label>Received By</label> -->
+            <input ng-model="campaignPayment.received_by" type="text" name="received_by" minlength="3" maxlength="60" required placeholder="Received By" class="form-control"/>
+            <div ng-messages="updateCampaignPaymentForm.received_by.$error" style="color: red" ng-if="!updateCampaignPaymentForm.received_by.$untouched">
+              <div ng-message="required">Received By is required.</div>
+              <div ng-message="minlength">Received By must have 3 characters.</div>
+              <div ng-message="maxlength">Received By shouldn't exceed 60 characters. </div>
+            </div>
+          </div>
+        </div>
+        <div layout="row" layout-align="center center">
+          <md-button Class="md-raised md-primary" type="submit" ng-click="updateCampaignPayment()" ng-disabled="updateCampaignPaymentForm.$invalid">SUBMIT</md-button>
+          <md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+        </div>
+      </form>
+    </md-content>
+  </md-dialog-content>
+</md-dialog>

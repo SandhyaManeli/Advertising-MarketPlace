@@ -1,0 +1,58 @@
+<!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+  <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+</md-button> -->
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+      <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+    </div>
+  </div>
+</div>
+<div class="owner_feeds">
+  <div class="table-responsive">
+    
+    <table class="table table-hover" ng-if="requestList.length > 0">
+      <thead class="text_color">
+        <tr>
+          <!-- <th>CID</th> -->
+          <th>Campaign ID</th>
+          <th class="">Campaign Name</th>
+          <th>Status</th>
+          <!-- <th class="text-center">Action</th> -->
+          <th class="">Action</th>
+          <th>Date Entered</th>
+          <th>Start Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="request in requestList" ng-style="{'color': request.colorcode}">
+          <td class="table_vertical">{{request.cid}}</td>
+          <td class="table_vertical">{{request.name | capitalize}}</td>
+          <td class="table_vertical">
+            <!-- <span ng-show="request.status == 100" >Preparing</span> -->
+            <!-- <span ng-show="request.status == 200" >A user has asked for a quote for your products.</span> -->
+            <!-- <span ng-show="request.status == 300" >Quote Requested</span>                
+                <span ng-show="request.status == 400" >Quote Given</span>
+                <span ng-show="request.status == 500" >Change Requested</span>
+                <span ng-show="request.status == 600" >Booking Requested</span>
+                <span ng-show="request.status == 700" >Booked</span> -->
+            <span>{{request.status | stringifyCampaignStatus}}</span>
+          </td>
+          <!-- <td class="table_vertical text-center"> -->
+            <td class="table_vertical feeds_eye_responsive">
+            <a style="cursor:pointer;" ng-click="showCampaignDetails($event, request)">
+              <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                <i class="material-icons">remove_red_eye</i>
+              </md-icon>
+            </a>
+          </td>
+          <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+          <td class="table_vertical">{{request.start_date | dateFormat}}</td>
+        </tr> 
+      </tbody>
+    </table>
+    <div ng-if="noCampaigns">
+      <h3 class="m-2">There are no Campaigns</h3>
+    </div>
+  </div>
+</div>

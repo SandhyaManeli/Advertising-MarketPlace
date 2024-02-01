@@ -1,0 +1,94 @@
+<!-- <div layout="column" layout-fill="layout-fill">
+
+    <div class="md-title" style="background: #447bde;color: #fff;padding:5px" layout="row">
+        <div class="md-title">
+            Add City
+        </div>
+    </div>
+
+    <form name="cityform" novalidate>
+        <div layout="column" layout-margin layout-padding flex="50">
+            <div layout="column" layout-margin layout-padding flex="50">
+                <md-input-container>
+                    <label>Select Country </label>
+                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="city.country_id" ng-change="getStateList(city.country_id)"
+                        required>
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                    </md-select required>
+
+                </md-input-container>
+                <md-input-container>
+                    <label>Select State </label>
+                    <md-select name="repeatSelect" class="select-value" id="repeatSelect" ng-model="city.state_id" required>
+                        <md-select-header class="demo-select-header">
+                            <input ng-model="searchTerm" type="search" placeholder="Search for a State.." class="demo-header-searchbox md-text">
+                        </md-select-header>
+                        <md-option ng-repeat="state in stateListForCountry | filter:searchTerm" value="{{state.id}}">{{state.name}}</md-option>
+                    </md-select required>
+
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Add City</label>
+                    <input ng-model="city.name" type="text" name="city_name" required="required" />
+                    <div ng-messages="cityform.city_name.$error && cityform.city_name.$dirty">
+                        <div ng-message="required">City Name is required</div>
+                    </div>
+                </md-input-container>
+            </div>
+            <div class="serverErrors" ng-if="cityErrors && !cityErrors.length == 0">
+                <ul>
+                    <li ng-repeat="error in cityErrors">
+                        {{error}}
+                    </li>
+                </ul>
+            </div>
+            <div layout="row">
+                <md-button Class="md-raised md-primary" type="submit" ng-disabled="cityform.$invalid" ng-click="saveCity()">SUBMIT</md-button>
+                <md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<div style="margin-top: 1em;">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered ">
+            <thead>
+                <tr>
+                    <th>Sr. No.</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="city in cityList track by $index">
+                    <td>{{$index + 1}}</td>
+                    <td>{{city.country_name}}</td>
+                    <td>{{city.state_name}}</td>
+                    <td>{{city.name}}</td>
+                    <td>
+                        <span>
+                            <a style="cursor:pointer;" ng-click="editCity(city)">
+                                <md-icon>
+                                    <i class="material-icons">mode_edit</i>
+                                </md-icon>
+                            </a>
+                        </span>
+                        <span>
+                            <a style="cursor:pointer;" ng-click="deleteCity(city)">
+                                <md-icon>
+                                    <i class="material-icons">delete</i>
+                                </md-icon>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->

@@ -1,0 +1,31 @@
+ <!-- <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+        <img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+    </md-button> -->
+    <div class="">
+        <div layout="column">
+            <!-- status of hoarding list html start-->
+            
+            <div class="table-responsive"> 
+                <table class="table table-hover call_center">
+                        <thead class="text_color">
+                          <tr>
+                            <th>Date</th>
+                            <th>Phone Number</th>
+                            <th>Comments</th>
+                            <th class="">By</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="callinfo in callCenterData | limitTo:limit">
+                            <td class="table_vertical ">{{callinfo.created_at | dateify | date:'dd-MM-yyyy'}}</td>
+                            <td class="table_vertical ">{{callinfo.phoneNo}}</td>
+                            <td class="table_vertical ">{{callinfo.call_feedback || "N/A" | capitalize}}</td>
+                            <td class="table_vertical ">Madhuri</td>
+                            <td class="table_vertical">{{callinfo.updated_at | dateFormat }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+              </div>
+        </div>
+        </div>

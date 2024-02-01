@@ -1,0 +1,227 @@
+<div class="row" class="name-suggest mr-0 ml-0">
+    <!-- <div flex="25" flex-sm="100" flex-xs="100" layout="colmun">
+        <h3 class="md-subhead">Advertising objective</h3>
+    </div> -->
+    <div class="col-12 col-md-8">
+        <div class="motive">
+            <p class="md-body-2" style="margin-bottom:15px">What is the motive of the ad campaign?</p>
+           
+            <md-checkbox ng-model="suggestionRequest.adv_objective.new_product" aria-label="Checkbox 1">
+            To showcase a new product
+            </md-checkbox>
+    
+            <md-checkbox ng-model="suggestionRequest.adv_objective.market_existing_product" aria-label="Checkbox 1">
+            To market an existing product
+            </md-checkbox>
+
+            <md-checkbox ng-model="suggestionRequest.adv_objective.offer" aria-label="Checkbox 1">
+            Any new offers or season specific offers 
+            </md-checkbox>
+       
+        </div>
+        <div class="medias">
+            <p class="md-body-2" style="margin-bottom:15px">
+            What is your preferred medium?
+            </p>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.unipoles" aria-label="Checkbox 1">
+                <!--Unipole-->
+                Static Billboard
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.billboards" aria-label="Checkbox 1">
+<!--                Billboards-->
+		Transit
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.bus_shelter" aria-label="Checkbox 1">
+                <!--Bus shelter-->
+	Live Event	
+                </md-checkbox>
+            </div>
+            </div>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.metro_pillers" aria-label="Checkbox 1">
+                <!--Metro pillars-->
+		Digital Billboard
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.center_mediums" aria-label="Checkbox 1">
+                <!--Center mediums-->
+		Digital Display
+                </md-checkbox>
+            </div>
+            <div flex="35">
+                <md-checkbox ng-model="suggestionRequest.medium.digital_screens_metro" aria-label="Checkbox 1">
+                <!--Digital screening in metro stations-->
+		Retail
+                </md-checkbox>
+            </div>
+            </div>
+            <!--<div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.smart_bins" aria-label="Checkbox 1">
+         	Smart bins
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.retail" aria-label="Checkbox 1">
+                Retail
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.airport" aria-label="Checkbox 1">
+                Airport
+                </md-checkbox>
+            </div>
+            </div>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.medium.transit" aria-label="Checkbox 1">
+                Transit
+                </md-checkbox>
+            </div>
+            </div>-->
+        </div>
+        <div class="people">
+            <p class="md-body-2" style="margin-bottom:15px">
+                What is the ideal customer/target market for this ad campaign
+            </p>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.it_people" aria-label="Checkbox 1">
+                IT people
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.students" aria-label="Checkbox 1">
+                Students
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.children" aria-label="Checkbox 1">
+                Children
+                </md-checkbox>
+            </div>
+            </div>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.logistics_transport" aria-label="Checkbox 1">
+                Logistics and transport 
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.manufacturers" aria-label="Checkbox 1">
+                Manufacturers
+                </md-checkbox>
+            </div>
+            <div flex="35">
+                <md-checkbox ng-model="suggestionRequest.target_audience.dealers" aria-label="Checkbox 1">
+                Dealers
+                </md-checkbox>
+            </div>
+            </div>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.cinema" aria-label="Checkbox 1">
+                Cinema
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.real_state" aria-label="Checkbox 1">
+                Real estate
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.target_audience.event_organizers" aria-label="Checkbox 1">
+                Event organizer
+                </md-checkbox>
+            </div>
+            </div>
+
+        </div>
+        <div class="Gender">
+            <p class="md-body-2" style="margin-bottom:15px">
+                Please specify the gender to the whom the ad is intended?
+            </p>
+           
+            <md-checkbox ng-model="suggestionRequest.gender_group.male" aria-label="Checkbox 1">
+                Male
+            </md-checkbox>
+            
+    
+            <md-checkbox ng-model="suggestionRequest.gender_group.female" aria-label="Checkbox 1">
+                Female
+            </md-checkbox>
+           
+            <md-checkbox ng-model="suggestionRequest.gender_group.other" aria-label="Checkbox 1">
+                Others
+            </md-checkbox>
+            
+        </div>
+        <div class="Age">
+            <p class="md-body-2" style="margin-bottom:15px">
+                What would be the age group of the people who are interested in this product
+            </p>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.age_group.fourteen_eighteen" aria-label="Checkbox 1">
+                14-18
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.age_group.eighteen_twentyfive" aria-label="Checkbox 1">
+                18-25
+                </md-checkbox>
+            </div>
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.age_group.twentyfive_thirtytwo" aria-label="Checkbox 1">
+                25-32
+                </md-checkbox>
+            </div>
+            </div>
+            <div layout="row">
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.age_group.thirtytwo_fourtyfive" aria-label="Checkbox 1">
+                32-45
+                </md-checkbox>
+            </div>
+	   <div flex="30">
+		<md-checkbox ng-model="suggestionRequest.age_group.fourtyfive_fiftyfive" aria-label="Checkbox 1">
+		45-55
+           </div>
+	   <div flex="30">
+	       <md-checkbox ng-model="suggestionRequest.age_group.fiftyfive_sixtyfive" aria-label="Checkbox 1">
+		55-65
+	   </div>
+	   </div>
+
+	   <div layout="row">	
+            <div flex="30">
+                <md-checkbox ng-model="suggestionRequest.age_group.sixtyfive_above" aria-label="Checkbox 1">
+                65 and above
+                </md-checkbox>
+            </div>                              
+            </div>
+        </div>
+        <div class="form-group row mt-5">
+            <div class="col-6">
+                <a ui-sref="index.suggest.marketing-objectives" class="suggest__btn suggest_btn_back  float-left"  >
+                    Back 
+                </a>
+            </div>
+            <div class="col-6">
+                <a class="suggest__btn suggest_btn_next float-right" ng-click="goToOtherInfo($event)">
+                Next  
+                </a>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

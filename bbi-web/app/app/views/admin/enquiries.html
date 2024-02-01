@@ -1,0 +1,52 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page"> 
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+    <md-tabs md-dynamic-height class="padding_cmp">
+       <md-tab label="Enquiries">
+   <div class="">
+       <div layout="column">
+           <div class="table-responsive">
+               <table class="table">
+                   <thead class="text_color">
+                       <tr>
+                           <th style="width:10%;" class="adjust_space">S. No.</th>
+                           <th class="adjust_space">User Name</th>
+                           <th style="width:10%;" class="adjust_space">User Email</th>
+                           <th class="adjust_space">Product Name</th>
+                           <th class="adjust_space">Product ID</th>
+                           <th class="adjust_space">Date</th>
+                           <th class="adjust_space">User Message</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr ng-repeat="enquiry in enquiries ">
+                         <td>{{$index+1}}</td>
+                         <td class="table_vertical adjust_space">{{enquiry.loggedinUser.firstName}} {{enquiry.loggedinUser.lastName}}</td>
+                         <td class="table_vertical adjust_space">{{enquiry.loggedinUser.email}}</td>
+                         <td class="table_vertical adjust_space"><a href="admin/product-camp-details/{{enquiry.product_id}}">{{enquiry.title}}</a></td> 
+                         <td class="table_vertical adjust_space"><a href="admin/product-camp-details/{{enquiry.product_id}}">{{enquiry.siteNo}}</a></td> 
+                         <td class="table_vertical adjust_space">{{enquiry.created_at | dateFormat}}</td> 
+                         <td class="table_vertical adjust_space">{{enquiry.user_message}}</td>
+                       </tr>
+                     </tbody>
+               </table>
+           </div>
+       </div>
+   </div>
+   </div>
+       </md-tab>
+     </md-tabs>
+     <style>
+      .highlight {
+          color: black;
+      }
+  .nonhighlight{
+      color: #808080c2;
+  }
+  
+  </style>

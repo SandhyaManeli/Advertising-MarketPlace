@@ -1,0 +1,17 @@
+<!-- //////////// show image start \\\\\\\\\\\\\\\\\\\\ -->
+<md-dialog flex="50"  flex-lg="50" flex-md="60" flex-xs="100" flex-sm="70" style="border-radius: 0;" ng-class="{'layout-fill':mdMedia('xs')  }">
+
+    <md-dialog-content>
+        <div class="pop_close_btn">
+            <button class="md-icon-button product_closebtn" aria-label="Close Side Panel" ng-click="closeMdDialog()">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div id="productImage" >    
+            <img ng-src="{{img_src}}" alt="product image" style="width:100%;height:100%;padding: 10px 10px;">   
+        </div>
+    </md-dialog-content>
+</md-dialog>
+   
+<!-- //////////// share shortlist end \\\\\\\\\\\\\\\\\\\\ -->
+    

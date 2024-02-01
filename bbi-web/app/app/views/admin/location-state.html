@@ -1,0 +1,66 @@
+<!-- <div layout="column" layout-fill="layout-fill">
+
+<form name="stateform" novalidate style="margin-top:20px">
+    <div layout="column">
+        <div layout="row" layout-margin layout-padding >
+            <md-input-container flex="50">
+                <label>Select Country</label>
+                <md-select name="countrydrop" class="select-value" id="repeatSelect" ng-model="state.country_id" required>
+                    <md-select-header class="demo-select-header">
+                        <input ng-model="searchTerm" type="search" placeholder="Search for a Country.." class="demo-header-searchbox md-text">
+                    </md-select-header>
+                    <md-option ng-repeat="country in countryList | filter:searchTerm" value="{{country.id}}">{{country.name}}</md-option>
+                </md-select>
+
+            </md-input-container>
+            <md-input-container class="md-block" flex="50">
+                <label>Add State</label>
+                <input type="hidden" name="state_id" ng-model="state.id" />
+                <input ng-model="state.name" type="text" name="name" required />
+                <div ng-messages="stateform.name.$error && stateform.name.$dirty">
+                    <p ng-message="required">State Name is required</p>
+                </div>
+            </md-input-container>
+        </div>
+        <div class="serverErrors" ng-show="stateErrors && !stateErrors.errorMsg.length == 0">
+            <ul>
+                <li ng-repeat="error in stateErrors.errorMsg">
+                    {{error}}
+                </li>
+            </ul>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button Class="md-raised md-primary" type="submit" ng-click="saveState()" ng-disabled="stateform.$invalid">SUBMIT</md-button>
+            <md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+        </div>
+    </div>
+    </form>
+
+    <div style="margin-top: 1em;">
+        <div class="table-responsive">    
+			<table class="table">
+				<thead class="text_color">
+					<tr>
+                        <th>Sr. No.</th>                   
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="state in stateList track by $index">
+                    <td class="table_vertical">{{$index + 1}}</td>
+                    <td class="table_vertical">{{state.country_name}}</td>
+					<td class="table_vertical">{{state.name}}</td>
+					<td class="table_vertical">
+                        <span><a style="cursor:pointer;" ng-click="editState(state)"><md-icon><i class="material-icons">mode_edit</i></md-icon></a></span>
+                        <span><a style="cursor:pointer;" ng-click="deleteState(state)"><md-icon><i class="material-icons">delete</i></md-icon></a></span>
+					</td>
+				</tr>      
+				</tbody>
+			</table>
+        </div>
+    </div>
+</div>
+
+</div> -->

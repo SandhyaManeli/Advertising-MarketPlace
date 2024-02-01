@@ -1,0 +1,160 @@
+<div class="contbg" layout="column" flex>
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="feed-section">
+    <div class="section-inner">
+      <div style="margin-top: 1em;">
+          <div class="table-responsive">
+              <table class="table" ng-if="requestList.metroCampaignFeeds.length > 0">
+                <thead class="text_color">
+                  <tr>
+                    <!-- <th>CID</th> -->
+                    <th>Campaign ID</th>
+                    <th class="">Campaign Name</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                    <th class=""></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="request in requestList.metroCampaignFeeds">
+                    <td class="table_vertical">{{request.cid}}</td>
+                    <td class="table_vertical">{{request.name | capitalize}}</td>
+                    <td class="table_vertical">
+                      <span ng-show="request.status == 1121">{{request.contact_name}} has checked out a metro campaign.</span>
+                    </td>
+                    <td class="table_vertical">
+                      <a style="cursor:pointer;" ng-click="showCampaignDetailsPopup($event, request)" >
+                          <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                            <i class="material-icons">remove_red_eye</i>
+                          </md-icon>
+                        </a>
+                    </td>
+                    <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+          </div>
+      </div>
+      <!-- Metro feeds end -->
+
+      <div class="clearfix"></div>
+        <!-- <h4 class="text_color" layout-padding>OOH Campaign Feeds</h4> -->
+      
+        <!-- Campaign Proposals, Launch requests etc -->
+      <div ng-if="requestList.otherCampaignFeeds.length < 1" > 
+        <h3 class="m-2">There is no OOH campaigns available</h3>
+      </div>
+      <div style="margin-top: 1em;">
+          <div class="table-responsive">
+       <table class="table">
+        <thead class="text_color">
+          <tr>
+            <!-- <th>CID</th> -->
+            <th class="adjust_space">Campaign ID
+              <span class="d-inline" ng-class="'cid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("cid","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'cid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("cid","string")'><i class="fas fa-arrow-down"></i>
+              </span> 
+            </th>
+            <th class="adjust_space">Campaign Name
+              <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("name","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("name","string")'><i class="fas fa-arrow-down"></i>
+              </span> 
+            </th>
+            <th class="adjust_space">Details</th>
+            <th class="adjust_space">View Details</th>
+            <th class="adjust_space">Date Entered
+              <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'" ng-click='sortAsc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+              </span>
+              <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'" ng-click='sortDsc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+              </span> 
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  ng-repeat="request in requestList.otherCampaignFeeds" ng-style="{'color': request.colorcode}">
+            <td class="table_vertical">{{request.cid}}</td>
+            <td class="table_vertical">{{request.name | capitalize}}</td>
+            <td class="table_vertical">
+              <span ng-show="request.status == 600">{{request.contact_name}} has requested for Booking a Campaign.</span>
+              <span ng-show="request.status == 700">{{request.contact_name}} has Sold a Campaign.</span>
+              <span ng-show="request.status == 800">{{request.contact_name}} has Scheduled a Campaign.</span>              
+              <span ng-show="request.status == 1000">{{request.contact_name}} your Campaign is Closed.</span>
+            </td>
+            <td class="table_vertical todo_eye_res text-center">
+              <a style="cursor:pointer;"  ng-click="showCampaignDetailsPopup($event, request)">
+                  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                    <i class="material-icons">remove_red_eye</i>
+                  </md-icon>
+                </a>
+            </td>
+            <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <!-- Campaign Proposals, Launch requests etc end-->
+      <div ng-if="requestList.campaignSuggestionRequests.length < 1">
+        <h3 class="m-2">There is no suggest requests</h3>
+      </div>
+      <div class="clearfix"></div>
+      <hr ng-if="requestList.campaignSuggestionRequests.length > 0" /><br />
+      <h4 class="text_color" layout-padding ng-if="requestList.campaignSuggestionRequests.length > 0">Suggestion Requests</h4>
+      <br />
+
+      <!-- Campaign suggestion requests -->
+
+      <div style="margin-top: 1em; display: none;">
+          <div class="table-responsive">
+      <table class="table">
+        <thead class="text_color">
+          <tr>
+            <!-- <th>CID</th>
+            <th class="feeds_width">Camapaign Name</th> -->
+            <th>Details</th>
+            <th>Action</th>
+            <th class=""></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  ng-repeat="request in requestList.campaignSuggestionRequests">
+            <td class="table_vertical">
+              <span class="">{{request.user_full_name}} has requested for campaign suggestion.</span>
+            </td>
+            <td class="table_vertical">
+              <a style="cursor:pointer;" ng-click="showCampaignSuggestionRequestPopup($event, request)">
+                  <md-icon class="material-icons" role="img" aria-label="remove_red_eye">
+                    <i class="material-icons">remove_red_eye</i>
+                  </md-icon>
+                </a>
+            </td>
+            <td class="table_vertical">{{request.updated_at | dateFormat}}</td>
+          </tr>
+          
+        </tbody>
+      </table>
+      </div>
+      </div>
+      <!-- Campaign suggestion requests end -->
+    </div>
+  </div>
+</div>
+<style>
+  .highlight {
+      color: black;
+  }
+.nonhighlight{
+  color: #808080c2;
+}
+
+</style>

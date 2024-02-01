@@ -1,0 +1,127 @@
+<style>
+		.lnt_caln{
+			margin-top: 15px;
+			}
+			md-datepicker-button .md-button.md-icon-button{display:none}
+		.lnt_caln .md-datepicker-input-container {
+			border-bottom-color: rgb(255, 255, 255) !important;
+		}
+		.lnt_caln .md-datepicker-input-container ::placeholder {
+		  color: #fff !important;
+		}
+		.md-icon-button+.md-datepicker-input-container {
+			margin-left:0px !important;
+		}
+		.lnt_caln .md-datepicker-button{
+		display:none;
+		}
+		 .md-datepicker-triangle-button .md-datepicker-expand-triangle {
+			border-top-color: #fff !important;
+		}
+		.left_side_pack	md-datepicker {   white-space: unset;}
+		.font_size {
+			font-size: 18px !important;
+		}
+	.metro_page{
+		padding:0px;
+		padding-left:5px;
+	}
+		@media screen and (min-width:768px) and (max-width:  991px){
+			h3 {
+				font-size: 1.50rem;
+			}
+			.pop_height{
+				height: 680px;
+				overflow: auto;
+			}
+		}
+		@media screen and (max-width:575px){
+			md-dialog md-dialog-content{
+				border: 1px solid #fff;
+			}
+			.img_logo{
+				width: 114%;
+			}
+		}
+		</style>
+		<md-dialog layout-margin flex="50" flex-lg="60" flex-md="60" flex-sm="70" flex-xs="90" id="myDialog" class="pop_height">
+			<div layout="row" layout-margin>
+				<h4 class="md-body-2">{{metroPackages[0].format}} - {{metroPackages[0].corridor}}
+				</h4>
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closePackagePopup()">
+					<md-icon class="md-default-theme">
+						<i class="material-icons">close</i>
+					</md-icon>
+				</md-button>
+			</div>
+			<md-dialog-content>
+					<div class="row">
+				<div class="metro_page col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="gettingParentIndex in metroPackages" ng-if="$index<(metroPackages.length)/3+1">
+					<div layout-margin class="md-whiteframe-2dp" ng-repeat="metroPackage in metroPackages track by $index" ng-if="$index>=3*$parent.$index && $index <= 3*($parent.$index+1)-1">
+						<div class="one_week metro_package_bg{{($index + 1) % 6}}">
+							<div layout="row">
+								<div class="left_side_pack">
+									<p class="md-caption">
+										{{metroPackage.max_trains}} Trains<!-- - {{metroPackage.max_slots - metroPackage.selected_slots}} Slots -->
+									</p>
+									
+									<select name="day"  ng-model="metroPackage.days"  required="required" placeholder="Select days" ng-init="metroPackage.days = 7" >
+											
+											<option value = "7" ng-selected="true">7 Days</option>
+											<option value = "14">14 Days</option>
+											<option value = "28">28 Days</option>
+											<option value = "60">60 Days</option>
+											<option value = "90">90 Days</option>
+									</select>
+									<div class="form-group">
+											<div class="lnt_caln">
+												<md-datepicker ng-model="metroPackage.start_date" onkeydown="return false" md-placeholder="Start date" md-min-date="newDate"></md-datepicker>
+											</div>
+									</div>
+								
+									
+								</div>
+		
+								<div flex></div>
+								<div class="right_side_pack">
+									<p>{{metroPackage.max_slots * ((metroPackage.days)?metroPackage.days:7) }} Spots</p>
+									<h3 class="font_size"> Rs.{{metroPackage.price * ((metroPackage.days)?metroPackage.days:7) }}</h3>
+									
+									<div layout="row">
+										
+											
+											<md-button class="md-raised md-primary slect_btn" ng-if="!isAlreadySelected(metroPackage.id)" ng-click="shortlistMetroPackage(metroPackage)">Cart This</md-button>	
+		
+											<md-button class="md-raised md-primary slect_btn" ng-if="isAlreadySelected(metroPackage.id)" ng-click="deleteShortlistedMetroPackage(metroPackage.id)">Deselect This</md-button>
+									</div>
+								</div>
+							</div>
+							
+						
+						</div>
+					</div>
+				</div>
+			</div>
+				<div layout="row" layout-margin>
+					<div class="show_bug">
+						<p class="md-caption">
+							Estimated Budget for {{getEstBudgetForSelectedPackages().days}} Days, {{getEstBudgetForSelectedPackages().selected_trains}} Train, {{getEstBudgetForSelectedPackages().selected_slots}} Slots
+						</p>
+						<h2 class="text_color">
+							Rs. {{getEstBudgetForSelectedPackages().price}}
+						</h2>
+						<!--<md-button class="md-raised md-primary slect_btn" ng-disabled="select_package_var.length == 0" ng-click="shortlistMetroPackage(select_package_var)">Shortlist Campaign</md-button>	
+						 <md-button class="md-raised md-primary slect_btn">Shortlist</md-button> -->
+					</div>
+					<div flex></div>
+					<div class="logo_lnt">
+						<p class="md-caption">We are oﬃcial Partners to</p>
+						<img class="img_logo" src="assets/images/landt_logo.jpg" alt="landt_logo" />
+					</div>
+				</div>
+			</md-dialog-content>
+			<!-- <md-dialog-actions layout="row" layout-align="center center">
+			
+			</md-dialog-actions> -->
+		</md-dialog>

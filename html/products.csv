@@ -1,0 +1,35 @@
+"S No.",ID,Type,Title,Lat,Long,State,City,Zipcode,Price
+1,AMP_DT_ASI0007_000034,Digital,CID19/7,11111111,22222222,California,Dallas,90017,123456
+2,AMP_ST_ASI00031_000033,Static,Test-I/O,34.1381°,34.1381°,CA,"Los Angeles",90250,2000
+3,AMP_ST_ASI0001_000032,Static,Test-uid-Review,34.1381°,34.1381°,CA,"Los Angeles",90640,2000
+4,AMP_ST_ASI0001_000031,Static,"Mobile Billboard 007",4725,12,hgkj,"San Francisco",12453,10000
+5,AMP_ST_ASI0001_000030,Static,angular-app,11111,432,California,Dallas,90017bgbgb,1000
+6,AMP_DT_ASI000116_000029,Digital,Test5/7,111111,222222,USA,"Tampa-St. Pete(Sarasota)",123456,1000
+7,AMP_D/S_ASI000116_000028,Digital/Static,"DashBoard Test",111111,222222,USA,Lexington,123456,10000
+8,AMP_MD_ASI00031_000027,Media,Test-Seller-Dashboard,34.1414,34.1381°,CA,"Los Angeles",90640,2000
+9,AMP_ST_ASI000116_000026,Static,UidTest5/7,11111111,22222222,California,"Los Angeles",90017,1000
+10,AMP_DT_ASI0007_000025,Digital,Test-Jul-5th,34.1381°,34.1381°,CA,"Los Angeles",90746,5000
+11,AMP_ST_ASI7_000024,Static,Test-UID-SellerID,34.1414,34.1381°,CA,"Los Angeles",90746,2000
+12,AMP_72_D/S_000023,Digital/Static,Keyboard-test2/7,111111,222222,1000,"New Orleans",90017,1000
+13,AMP_Seller90_D/S_000022,Digital/Static,Test-UID-Shortcut,34.1414,34.1381°,CA,"Los Angeles",90640,2000
+14,AMP__Digital_000021,Digital,uid-sp9,34.0522,1182437,telangana,Wildwood,123456,1000
+15,AMP__Digital/Static_000020,Digital/Static,uid30/6test,11111111,22222222,California,"Tampa-St. Pete(Sarasota)",90017,20000
+16,AMP__Static_000019,Static,uniqueid-sp9-t1,11111111,22222222,US,"New York City",500085,50000000
+17,AMP__Static_000018,Static,uniqueid-sp9-test,11111111,22222222,telangana,"St. Louis",123456,5000000
+18,AMP__Static_000001,Static,Test-Seller-UniqueId,34.1414,34.1381°,CA,"Los Angeles",90746,2000
+19,AMP_SELLER123_Static_000001,Static,Test-UniqueID,37.7930,-118.3495,CA,"Los Angeles",90640,2000
+20,BA-012,Static,"Fixed Product",342342,t4353535,TS,"Los Angeles",500090,500
+21,BA-011,Digital,"Building Fixed Var",11111111,22222222,telangana,"Tampa-St. Pete(Sarasota)",123456,1000
+22,BA-010,Digital/Static,CalendarTest,11111111,22222222,telangana,Lexington,123456,10000
+23,BA-003,Static,"Mobile Billboard 15",4725,12,CA,"Los Angeles",92627,1000
+24,BA-009,Digital,Keaboard-01,111111,222222,USA,Louisville,123456,1000
+25,BA-002,Static,"Mobile Billboard",123456789,-75.3076720,andhra,"Los Angeles",456456,32580
+26,BA-008,Static,Test_Module,111111,222222,USA,"Los Angeles",123456,1000
+27,BA-001,Static,Test-Stripe,34.1381°,-118.3495,CA,"Los Angeles",90640,2000
+28,BA-007,Static,TRAIL_TEST_115,111111,222222,USA,"Los Angeles",123456,10000
+29,BA-006,Static,RT_500TRAIL,111111,222222,USA,"Los Angeles",123456,20000
+30,BA-005,Static,trail_3,12333333,1203.32201,"ANDHRA PRADESH","Los Angeles",518422,10000
+31,BA-004,Static,Trial-02,111111,222222,USA,"Los Angeles",123456,15000
+32,BA-003,Static,Trial-01,111111,222222,USA,"Los Angeles",123456,11000
+33,BA-002,Static,Test_2_Edit,x,"112° 4' 30.7024""W",1000,"Los Angeles",90017,30000
+34,BA-001,Static,Test_1,"33° 26' 53.6956""N",-72.93591°,"New York","Los Angeles",14202,30000

@@ -1,0 +1,32 @@
+<md-dialog flex="50" flex-xs="100">
+    <md-dialog-content >
+        <div class="md-dialog-content">
+            <form name="userForm" method="post" ng-submit="shareProducts()">
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input ng-model="product.email" type="email" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>User Name</label>
+                    <input ng-model="product.userName" type="text" />
+                </md-input-container>
+                <div layout="row" layout-align="center center">
+                    <div>
+                        <md-button ng-click="shareForm(ev)" class="md-raised">Cancel</md-button>
+                    </div>
+                    <div>
+                        <md-button type="submit" class="md-raised md-primary">Submit</md-button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+    <!-- <md-dialog-content ng-hide="formUnSubmit">
+        <div layout="column" layout-align="center center">
+            <h1 class="md-display-1">Successfully Submitted Your Product Request</h1>
+            <p class="md-subhead">Your Product Will Be Approved BillBoardIndia Shortly</p>
+            <P class="md-subhead">For More Detail Contact <a ng-href="mailto:info@billboardsindia.com">info@billboardsindia.com</a></P>
+            <md-button ng-click="shareForm(ev)" class="md-raised">Cancel</md-button>
+        </div>
+    </md-dialog-content> -->
+</md-dialog>

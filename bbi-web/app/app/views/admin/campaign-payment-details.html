@@ -1,0 +1,173 @@
+<style>
+  /* .md-button{
+            min-width: 64px!important;
+        }
+        md-list-item{
+            padding: 0 0px !important;
+        } */
+</style>
+<div ng-cloak flex="100" flex-xs="100" flex-sm="100" class="contbg">
+
+  <!-- share campaign sidenav -->
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2 sidenav-width" md-component-id="shareCampaignSidenav">
+    <div layout="row">
+      <div class="md-toolbar-tools">
+        <div flex></div>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+        </md-button>
+      </div>
+    </div>
+    <md-content layout-align="center center" layout-margin layout-padding>
+      <h3 class="md-headline">Share Campaign</h3>
+      <form name="shareCampaignForm">
+        <div layout="column">
+          <md-input-container class="md-block">
+            <label>Name</label>
+            <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+            <div ng-messages="shareCampaignForm.name.$error">
+              <div ng-message="required">Name is required.</div>
+              <div ng-message="pattern">Enter a valid Name.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="shareCampaign.email" name="email" type="email" required="required"
+              ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+            <div ng-messages="shareCampaignForm.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="pattern">Enter a valid Email Id.</div>
+            </div>
+          </md-input-container>
+          <md-button class="md-raised md-warn all_button" layout-fill
+            ng-click="shareCampaignToEmail($event, shareCampaign)">Share Campaign</md-button>
+        </div>
+      </form>
+    </md-content>
+  </md-sidenav>
+  <!-- share campaign sidenav ends -->
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="ml-2 mr-2 mt-2 mb-2 md-whiteframe-2dp contbg">
+    <div class="row" style="margin-left:0px; margin-right:0px;">
+      <div
+        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-1 payment_mng"
+        style="margin-top:14px;">
+        <p class="">Campaign ID</p>
+        <p class="md-caption mob_span"><b>{{campaignDetails.cid}}</b></p>
+      </div>
+      <div
+        class="col-xl-2 col-lg-2 col-md-4 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_mng"
+        style="margin-top:14px;">
+        <p class="">Campaign Name</p>
+        <p class="md-caption mob_span"><b>{{ campaignDetails.name | capitalize}}</b></p>
+      </div>
+      <div
+        class="col-xl-2 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-2 payment_nng"
+        style="margin-top:14px;">
+        <p class="">Number of Products</p>
+        <p class="md-caption mob_span mob_5"><b>{{ campaignDetails.no_of_products }}</b></p>
+      </div>
+      <div
+        class="col-xl-6 col-lg-2 col-md-2 col-sm-4 col-6 order-xl-1 order-lg-1 order-md-1 order-sm-1 order-4 payment_nng"
+        style="margin-top:1em;">
+        <!--<input class="check_payment" type="checkbox" /><span class="text-muted">Request Executive to collect cash / cheque</span> -->
+        <div class="dropdown" style="float: right;">
+          <md-button class="md-raised all_button" ng-href="/admin/admin-payment/{{campaignDetails.id}}" ng-hide="(campaignDetails.totalamount - campaignDetails.total_paid==0)?true:false">Purchase
+          </md-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="text_color">
+        <tr>
+            <th>Image</th>
+          <th>Mode of Payment</th>
+          <th>Paid</th>
+          <th>Reference</th>
+          <th>Received By</th>
+          <th>Comments</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="payment in campaignPayments.all_payments">
+            <td class="image_tdwidth">
+                <img ng-src="{{serverUrl + payment.image}}" alt="Smiley face"
+                class="requ_size img-thumbnail" style="width: 165px !important;height: 100px !important;"></td>
+          <td class="table_vertical">{{payment.type}}</td>
+          <td class="table_vertical"><span>$</span>{{payment.amount ||'0'|number : 2}}</td>
+          <td class="table_vertical">{{payment.reference_no}}</td>
+          <td class="table_vertical">{{payment.received_by}}</td>
+          <td class="table_vertical">{{payment.comment}}</td>
+          <td class="table_vertical">{{ payment.created_at | dateFormat}}</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <!-- table grid end -->
+  <div class="row border_quest mr-0 ml-0">
+  </div>
+  <div class="small-wrapper mt0">
+      <div class="smallContainer">
+        <div class="payment-summary">
+          <ul id="double">
+            <li class="col1">Tax:</li>
+            <li class="col2"><span>$</span>{{campaignDetails.tax_percentage_amount_total || '0' | number:2}}</li>
+            <li class="col1">Gross:</li>
+            <li class="col2"><span>$</span>{{campaignDetails.gross_fee_price || '0' | number:2}}</li>
+            <li class="col1">Total:</li>
+            <li class="col2"><span>$</span>{{campaignDetails.total_amount-campaignDetails.tax_percentage_amount_total || '0' |
+              number:2}}</li>
+            <li class="col1">Credit card Fee:</li>
+            <li class="col2"><span>$</span>{{campaignDetails.newprocessingfeeamtSum || '0' | number:2}}</li>
+            <li class="col1">Grand Total:</li>
+            <li class="col2">
+              <span>$</span>{{campaignDetails.total_amount+campaignDetails.newprocessingfeeamtSum+campaignDetails.gross_fee_price
+              || '0' | number:2}}</li>
+            <li class="col1">Paid :</li>
+            <li class="col2"><span>$</span>{{campaignDetails.total_paid ||'0'|number : 2}}</li>
+            <ul ng-if="refundDisplay" style="list-style: none;margin: 0;padding: 0;">
+              <li class="col1">Refund Amount :</li>
+              <li class="col2"><span>$</span>{{campaignDetails.refunded_amount ||'0'|number : 2}}</li>
+            </ul>
+          </ul>
+          <ul id="total">
+            <li class="col1">Balance :</li>
+            <li class="col2"><span>$</span>{{campaignDetails.balance ||'0'|number : 2}}</li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  <!-- <div class="row border_quest">
+      <div class="p-2 col-xl-8 col-lg-8 col-md-6 col-sm-6 col-xs-12 col-12" ng-if="campaignDetails.status == 100">
+          <div layout="column" class="payment_inner" style="float: right;">
+            <div layout="row">
+              <div class="md-body-1">We have received your request and working on blocking the products you
+                have selected.</div>
+            </div>
+            <div layout="row">
+              <div class="md-body-1">You'll soon hear from us.</div>
+            </div>
+          </div>
+      </div>
+  </div> -->
+</div>
+<script>
+  function addPayment() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  function addPayments() {
+    document.getElementById("myDropdownView").classList.toggle("show");
+  }
+</script>

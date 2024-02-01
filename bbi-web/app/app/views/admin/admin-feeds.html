@@ -1,0 +1,64 @@
+<div class="">
+    <div layout="column">
+        <div class="container pt-3">
+            <div class="row">
+              <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+                <button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+              </div>
+            </div>
+          </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="text_color">
+                    <tr>
+                        <th class="adjust_space" style="width:10%;">Name
+                            <span class="d-inline" ng-class="'name' == upArrowColour && sortType == 'Asccrfq'?'highlight': 'nonhighlight'" ng-click='sortAsccrfq("name","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'name' == downArrowColour && sortType == 'Dsccrfq'?'highlight': 'nonhighlight'" ng-click='sortDsccrfq("name","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="adjust_space" style="width:20%;">Email ID
+                            <span class="d-inline" ng-class="'email' == upArrowColour && sortType == 'Asccrfq'?'highlight': 'nonhighlight'" ng-click='sortAsccrfq("email","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'email' == downArrowColour && sortType == 'Dsccrfq'?'highlight': 'nonhighlight'" ng-click='sortDsccrfq("email","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="adjust_space" style="width:15%;">Subject
+                            <span class="d-inline" ng-class="'subject' == upArrowColour && sortType == 'Asccrfq'?'highlight': 'nonhighlight'" ng-click='sortAsccrfq("subject","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'subject' == downArrowColour && sortType == 'Dsccrfq'?'highlight': 'nonhighlight'" ng-click='sortDsccrfq("subject","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="adjust_space" style="width:20%;">Comments</th>
+                        <th class="adjust_space" style="width:20%;">Contact Number</th>
+                        <th class="adjust_space" style="width:15%;">Date Entered
+                            <span class="d-inline" ng-class="'updated_at' == upArrowColour && sortType == 'Asccrfq'?'highlight': 'nonhighlight'" ng-click='sortAsccrfq("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline" ng-class="'updated_at' == downArrowColour && sortType == 'Dsccrfq'?'highlight': 'nonhighlight'" ng-click='sortDsccrfq("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="Queries in QueriesData | limitTo:limit">
+                      <td class="table_vertical">{{Queries.name | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.email | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.subject | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.message | capitalize}}</td>
+                      <td class="table_vertical">{{Queries.contactno}}</td>
+                      <td class="table_vertical">{{Queries.updated_at | dateFormat}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .highlight {
+        color: black;
+    }
+.nonhighlight{
+    color: #808080c2;
+}
+
+</style>

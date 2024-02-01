@@ -1,0 +1,348 @@
+<style>
+	.address_section .form-group .has-error .form-control{
+border: 1px solid red
+	}
+</style>
+<div class="profile-details contbg" style=" padding-bottom: 20px">
+	<!-- <div class="profile_inner" layout="row" layout-xs="column" flex-offset-gt-sm="15" flex="70" flex-xs="100"
+		flex-sm="100">
+		<div>
+			<div ng-if="userProfile.user.profile_pic">
+				<img ng-src="{{serverUrl + userProfile.user.profile_pic}}" alt="team"
+					class="md-avatar profile__img center">
+			</div>
+			<div ng-if="!userProfile.user.profile_pic">
+				<img src="assets/images/product/user_avatar.png" alt="team" class="md-avatar profile__img">
+			</div>
+			<div style="position:relative">
+				<div type="file" ngf-select="uploadProfilePic()" ng-model="files.image" name="files.image"
+					accept="image/*" ngf-max-size="2MB" required>
+					<md-icon class="edit__icon" style="">
+						<i class="material-icons" style="color:#fff;">mode_edit</i>
+					</md-icon>
+				</div>
+			</div>
+		</div>
+		<div class="prof_name">
+			<h3>{{userProfile.user.name}}</h3>
+			<h4 class="md-caption"><span>Email: </span>{{userProfile.user.email}}</h4>
+			<h4 class="md-caption"><span>Phone: </span>(+91) {{userProfile.user.phone}}</h4>
+		</div>
+	</div> -->
+	<!-- <div>{{userProfile.user.email}}</div>
+	<div class="md-body-2" ng-if="userProfile.user.phone">
+		<span></span>
+		<md-icon>
+			<i class="material-icons">call</i>
+		</md-icon>
+		<span>Phone:</span>(+91) {{userProfile.user.phone}}
+	</div> -->
+	<!-- <div class="md-body-2"><span></span>
+		<md-icon><i class="material-icons">location_on</i></md-icon>
+		<span>Addres:</span>
+		<span>K67/68, Sonal Heavy Indl Est,
+			<br> Kanchapadaramchandra Lane Extn, Banjara Hills</span>
+	</div> -->
+	<!-- horizontal start here  -->
+
+	<!-- <md-divider></md-divider> -->
+	<div class="resp-padtop" ng-if="currStateName != 'owner.profile'"></div>
+	<div class="container">
+		<div class="row">
+		  <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+			<button type="button" class="btn btn-link back-btn" onclick="goBack()"> << Back</button>
+		  </div>
+		</div>
+	  </div>
+	<div class="user Campaigns__info" layout="column" flex-offset-gt-sm="5" flex="90" flex-xs="100" flex-sm="100" style="display: none;">
+		<h1>Campaigns Info</h1>
+		<md-divider></md-divider>
+		<div layout-padding class="profile-icons">
+			<md-list flex layout="row" layout-xs="column">
+				<md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row"
+							layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">lock_outline</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1">Insertion Orders</div>
+							<h4>{{userProfile.requested_campaigns_count}}</h4>
+						</div>
+					</div>
+				</md-list-item>
+				<md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row"
+							layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">lock_outline</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1">Scheduled</div>
+							<h4>{{userProfile.scheduled_campaigns_count}}</h4>
+						</div>
+					</div>
+				</md-list-item>
+				<md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row"
+							layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">autorenew</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1">Running </div>
+							<h4>{{userProfile.running_campaigns_count}}</h4>
+						</div>
+					</div>
+				</md-list-item>
+				<md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row"
+							layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">lock_outline</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1">Closed</div>
+							<h4>{{userProfile.closed_campaigns_count}}</h4>
+						</div>
+					</div>
+				</md-list-item>
+				<md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row"
+							layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">search</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1"> Total Inventory</div>
+							<h4>{{userProfile.product_count}}</h4>
+						</div>
+					</div>
+				</md-list-item>
+				<!-- <md-list-item>
+					<div>
+						<div class="md-grid-item-content" style="text-align:center" layout="column" layout-xs="row" layout-margin>
+							<span>
+								<md-icon>
+									<i class="material-icons">card_travel</i>
+								</md-icon>
+							</span>
+							<div class="md-body-1"> Invested </div>
+							<h4>N/A</h4>
+
+						</div>
+					</div>
+				</md-list-item> -->
+			</md-list>
+		</div>
+	</div>
+	<div class="user Campaigns__info__2 mt-5" flex-offset-gt-sm="5" flex="90" flex-xs="100" flex-sm="100">
+		<div class="container-fluid">
+
+			<!-- <div class="profile_header d-flex justify-content-between">
+				<h4>Your Profile</h4>
+				<h5>Please fill * fields</h5>
+			</div> -->
+
+			<div class="row">
+				<!-- <div class="row profile_header">
+					<div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+						<h4>Your Profile</h4>
+					</div>
+					<div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12">
+						<h5>Please fill * fields</h5>
+					</div>
+				</div> -->
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12 naming_section">
+					<h4 class="profile_header">Your Profile</h4>
+					<table class="pt-5 table table-borderless">
+						<tbody>
+							<tr>
+								<th>ID</th>
+								<td>{{userProfile.user.id}}</td>
+							</tr>
+							<tr>
+								<th>Your Name</th>
+								<td>{{userProfile.user.first_name}} {{userProfile.user.last_name}}</td>
+							</tr>
+							<tr>
+								<th>Company Name</th> 
+								<td>{{userProfile.user.company_name}}</td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>{{userProfile.user.email}}</td>
+							</tr>
+							<tr>
+								<th>Mobile</th>
+								<td>{{userProfile.user.phone}}</td>
+							</tr>
+							<tr>
+								<th>Password</th>
+								<td>********</td>
+							</tr>
+							<tr>
+								<th></th>
+								<td><a class="edit btn_edit-clr" data-toggle="modal" data-target="#editProfile" ng-click="editProfile(profileDetails)">Edit</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12 address_section">
+					<h4 class="profile_header_2">Please fill * fields</h4>
+					<div class="forms_section pt-3">
+						<form class="form-group" name="profileEditForm" novalidate="novalidate">
+							<div class="lable_width">
+								<label><span>*</span>Address</label>
+							</div>
+							<div class="input_width" ng-if="!disableSave" ng-class="{'has-error': profileEditForm.address.$invalid && profileEditForm.address.$dirty, 'has-success': profileEditForm.address.$valid }">
+								<input type="text"  style="text-transform: capitalize;" class="form-control" name="address" ng-model="additionalData.address"  required="required">
+							</div>
+							<div class="input_width input_font" ng-show="profileEditForm.address.$touched && profileEditForm.address.$invalid" style="color:red;display: none">
+								name is required.</div>
+							<div class="input_width input_font" ng-if="disableSave">
+								<p>{{userProfile.user.address}}</p>
+							</div>
+							<div class="clearfix"></div>
+							<div class="lable_width">
+								<label><span>*</span> Street</label>
+							</div>
+							<div class="input_width"  ng-if="!disableSave" ng-class="{'has-error': profileEditForm.street.$invalid && profileEditForm.street.$dirty, 'has-success': profileEditForm.street.$valid }">
+								<input type="text"  style="text-transform: capitalize;" class="form-control" name="street" ng-model="additionalData.street"  required="required">
+							</div>
+							<div class="input_width input_font" ng-show="profileEditForm.street.$touched && profileEditForm.street.$invalid" style="color:red;display: none">
+								street is required.</div>
+							<div class="input_width input_font" ng-if="disableSave">
+								{{userProfile.user.street}}
+							</div>
+							<div class="clearfix"></div>
+							<div class="lable_width">
+								<label><span>*</span> City</label>
+							</div>
+							<div class="input_width"  ng-if="!disableSave" ng-class="{'has-error': profileEditForm.city.$invalid && profileEditForm.city.$dirty, 'has-success': profileEditForm.city.$valid }">
+								<input type="text" style="text-transform: capitalize;" class="form-control" name="city" ng-model="additionalData.city"  required="required">
+							</div>
+							<div class="input_width input_font" ng-show="profileEditForm.city.$touched && profileEditForm.city.$invalid" style="color:red;display: none">
+								city is required.</div>
+							<div class="input_width input_font" ng-if="disableSave">
+								{{userProfile.user.city}}
+							</div>
+							<div class="clearfix"></div>
+							<div class="lable_width">
+								<label><span>*</span> Zip</label>
+							</div>
+							<div class="zipcode_width" ng-if="!disableSave" ng-class="{'has-error': profileEditForm.zipcode.$invalid && profileEditForm.zipcode.$dirty, 'has-success': profileEditForm.zipcode.$valid }">
+								<input type="text" class="form-control" name="zipcode" id="zipcode" only-numeric ng-model="additionalData.zipcode"  required="required">
+							</div>
+							<div class="input_width input_font" ng-show="profileEditForm.zipcode.$touched && profileEditForm.zipcode.$invalid" style="color:red;display: none">
+								zipcode is required.</div>
+							<div class="input_width input_font" ng-if="disableSave">
+								{{userProfile.user.zipcode}}
+							</div>
+							<div class="clearfix"></div>
+							<div class="lable_width">
+								<label class="text-md-left"><span>*</span> Website</label>
+							</div>
+							<div class="input_width" ng-if="!disableSave" ng-class="{'has-error': profileEditForm.website.$invalid && profileEditForm.website.$dirty, 'has-success': profileEditForm.website.$valid }">
+								<input type="url" class="form-control" ng-pattern="/^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/" name="homepage" id="website" ng-model="additionalData.website" required="required">
+								<p>eg:https://advertisingmarketplace.com/</p>
+							</div>
+							<div class="input_width input_font" ng-show="profileEditForm.website.$touched && profileEditForm.website.$invalid" style="color:red;display: none;">
+								website is required.</div>
+							<div class="input_width input_font" ng-if="disableSave">
+								{{userProfile.user.website}}
+							</div>
+							<div class="clearfix"></div>
+						</form>
+					</div>
+					<div class="row">
+						<div class="submit sub-width" ng-if="!disableSave">
+							<button type="submit" class="btn" ng-click="additionProfileData(additionalData)" ng-disabled="profileEditForm.$invalid">Submit</button>
+						</div>
+						<div class="submit sub-width" ng-if="disableSave">
+							<button type="submit" class="btn" ng-click="editAdditionalData(userProfile)">Edit</button>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+			<div class="modal-body">
+				<form name="profileEdit" novalidate="novalidate">
+					<div class="form-group" ng-class="{'has-error': profileEdit.first_name.$invalid && profileEdit.first_name.$dirty, 'has-success': profileEdit.first_name.$valid }">
+					  <label for="name">First Name</label>
+					  <input type="text" class="form-control" id="first_name" aria-describedby="emailHelp" ng-model="profileDetails.first_name" placeholder="Enter First Name"  required="required">
+					</div>
+					<div class="form-group">
+						<label for="name">last Name</label>
+						<input type="text" class="form-control" id="last_name" aria-describedby="emailHelp" ng-model="profileDetails.last_name" placeholder="Enter Last Name">
+					  </div>
+					  <div class="form-group" ng-hide="true">
+						<label for="name">Name</label>
+						<input type="text" class="form-control"  id="name" aria-describedby="emailHelp" ng-model="profileDetails.name" placeholder="Enter Name">
+					  </div>
+					<div class="form-group" ng-class="{'has-error': profileEdit.company_name.$invalid && profileEdit.company_name.$dirty, 'has-success': profileEdit.company_name.$valid }">
+						<label for="name">Company Name</label>
+						<input type="text" class="form-control" id="company_name" aria-describedby="emailHelp" ng-model="profileDetails.company_name" placeholder="Enter CompanyName" required="required">
+					  </div>
+					<div class="form-group">
+						<label for="email">Email</label>
+					<input type="email" class="form-control" id="email" disabled aria-describedby="emailHelp" ng-model="profileDetails.email" placeholder="Enter email" readonly>
+					  </div>
+					<div class="form-group">
+						<label for="mobile">Mobile</label>
+						<input type="text" class="form-control" disabled maxlength="12" id="mobile" ng-model="profileDetails.phone" aria-describedby="emailHelp" placeholder="Enter Number" readonly>
+					  </div>
+					  <p><strong>* Update Password from the "Change Password Link" link available in profile menu on top</strong></p>
+					  <!-- <div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" aria-describedby="emailHelp" ng-model="profileDetails.address" placeholder="Enter Address">
+					  </div>
+					  <div class="form-group">
+						<label for="street">Street</label>
+						<input type="text" class="form-control" id="street" aria-describedby="emailHelp" ng-model="profileDetails.street" placeholder="Enter street">
+					  </div>
+					  <div class="form-group">
+						<label for="city">City</label>
+						<input type="text" class="form-control" id="city" aria-describedby="emailHelp" ng-model="profileDetails.city" placeholder="Enter city">
+					  </div>
+					  <div class="form-group">
+						<label for="zip">Zip</label>
+						<input type="text" class="form-control" id="zip" aria-describedby="emailHelp" ng-model="profileDetails.zip" placeholder="Enter zip">
+					  </div>
+					  <div class="form-group">
+						<label for="website">Website</label>
+						<input type="text" class="form-control" id="website" aria-describedby="emailHelp" ng-model="profileDetails.website" placeholder="Provide Website">
+					  </div> -->
+
+				  </form>
+			</div>
+			<div class="modal-footer submit">
+				<button type="button" class="btn" ng-click="updateProfile(profileDetails)" ng-disabled="profileEdit.$invalid" >Save changes</button>
+			</div>
+		  </div>
+		</div>
+	  </div>
+</div>
+

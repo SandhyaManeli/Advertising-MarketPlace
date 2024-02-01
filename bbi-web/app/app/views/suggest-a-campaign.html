@@ -1,0 +1,17 @@
+<div class="row mr-0 ml-0" id="form-container">
+  <div class="col-10 col-sm-2 page-header text-center">
+      <!-- <h2>Suggest Campaign</h2> -->
+      <div id="status-buttons" class="text-center">
+        <a ui-sref-active="active" ui-sref=".product-detail"><span>Product Detail</span> </a>
+        <a ui-sref-active="active" ui-sref=".marketing-objectives"><span>Marketing objectives</span> </a>
+        <a ui-sref-active="active" ui-sref=".advertising-objectives"><span>Advertising objectives</span> </a>
+        <a ui-sref-active="active" ui-sref=".other-info"><span>Other BUYERS</span> </a>
+      </div>
+  </div>
+  <!-- use ng-submit to catch the form submission and use our Angular function -->
+  <form class="col-12 col-sm-10" id="signup-form" ng-submit="processForm()">
+      <!-- our nested state views will be injected here -->
+      <div id="suggest-views" ui-view></div>
+  </form>
+
+</div>

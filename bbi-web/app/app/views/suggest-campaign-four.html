@@ -1,0 +1,103 @@
+<div class="row" class="name-suggest mr-0 ml-0">
+    <!-- <div flex="25" flex-sm="100" flex-xs="100" layout="colmun">
+        <h3 class="md-subhead">Other Info</h3>
+    </div> -->
+    <div class="col-12 col-md-8" style="padding-left: 30px;">
+        <h3 class="md-body-2">
+            What Geographic region will  be advertising to with this Ad campaign?
+        </h3>
+        <textarea style="width:100%" rows="3" ng-model="suggestionRequest.geo_region"></textarea>
+        <p class="md-caption" style="margin-bottom:15px">
+            Tip:I would to place my advertisements in Hyderabad and Bangalore cities and in these cities I would like to
+            advertise in the commercial areas etc.
+        </p>
+        <div class="prefer">
+            <h3 class="md-body-2">
+                Would you prefer your own design for your ad-campaign or would you want us to design it?
+            </h3>
+            <md-input-container layout-fill  style="margin-bottom:15px">
+                <label>Select</label>
+                <md-select name="ad_design" ng-model="suggestionRequest.ad_design" required>
+                    <md-option value="client">My own</md-option>
+                    <md-option value="bbi">You design it</md-option>
+                </md-select>
+                <div class="errors" ng-messages="suggestMeform.ad_design.$error">
+                    <div ng-message="required">Required</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div class="duration">
+            <h3 class="md-body-2">
+                What would be your campaign duration?
+            </h3>
+            <md-input-container layout-fill style="margin-bottom:15px">
+                <label>Select</label>
+                <md-select name="duration" ng-model="suggestionRequest.duration" required>
+                    <md-option value="15">15 days</md-option>
+                    <md-option value="30">1 month</md-option>
+                    <md-option value="60">2 month</md-option>
+                    <md-option value="90">3 month</md-option>
+                    <md-option value="180">6 month</md-option>
+                    <md-option value="360">12 month</md-option>
+                    <md-option value="360+">more than 12 months (specify)</md-option>
+                </md-select>
+                <div class="errors" ng-messages="suggestMeform.duration.$error">
+                    <div ng-message="required">Required</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div class="adcamapgin">
+            <h3 class="md-body-2">
+                When would you like to start your ad campaign?
+            </h3>
+            <textarea style="width:100%" rows="3" ng-model="suggestionRequest.start_end_date"></textarea>
+            <p class="md-caption" style="margin-bottom:15px">
+                Tip: In the first quarter of 2018. (OR) 14-jan-2018
+            </p>
+        </div>
+        <div class="bugest">
+            <h3 class="md-body-2">
+                what would be your approximate budget for this campaign?
+            </h3>
+            <p class="caption">
+                Tip:based on your budget we will strategically plan your ad campaign
+            </p>
+            <md-input-container layout-fill style="margin-bottom:15px">
+                <label>Select budget Range</label>
+                <md-select name="est_budget" ng-model="suggestionRequest.est_budget" required>
+                    <md-option value="below 1 lakh">below 1 lakh</md-option>
+                    <md-option value="1-5 lakhs">1-5 lakhs</md-option>
+                    <md-option value="5-10 lakhs">5-10 lakhs</md-option>
+                    <md-option value="10-20 lakhs">10-20 lakhs</md-option>
+                    <md-option value="20-50 lakhs">20- 50 lakhs</md-option>
+                    <md-option value="more than 50 lakhs">more than 50 lakhs</md-option>
+                </md-select>
+                <div class="errors" ng-messages="suggestMeform.est_budget.$error">
+                    <div ng-message="required">Required</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div ng-repeat="suggestError in suggestCampaignErrors" ng-if="suggestCampaignErrors.length >= 1"
+            style="color:red;margin-left:15em">{{suggestError}}</div>
+        <div class="form-group row mt-5">
+            <div class="col-4">
+                <a ui-sref="index.suggest.advertising-objectives" class="suggest__btn suggest_btn_back float-left">
+                    <span>Back Section </span>
+                </a>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-block btn-info" style="color:#fff" ng-click="resetSuggestionForm()">
+                    Reset
+                </a>
+            </div>
+
+            <div class="col-4">
+                <a ng-click="sendSuggestionRequest($event)" class="suggest__btn suggest_btn_next float-right"
+                    style="color: #fff">
+                    Submit
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

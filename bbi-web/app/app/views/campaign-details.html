@@ -1,0 +1,2207 @@
+<style>
+    md-list-item {
+        padding: 0 0px !important;
+    }
+
+    padding-20 {
+        padding-left: 20px !important;
+    }
+
+    .sold-product {
+        color: red;
+    }
+
+    button.minus,
+    button.plus {
+        border: 0;
+        background-color: #fff;
+        color: #44596D !important;
+    }
+
+    button.submit[disabled],
+    button.minus[disabled],
+    button.plus[disabled] {
+        cursor: not-allowed;
+        background-color: #e5e4e4 !important;
+        color: #fff !important;
+    }
+
+    .select_res {
+        white-space: nowrap;
+    }
+
+    @media screen and (max-width: 2560px) {
+        .del-selectedWidth {
+            min-width: 93px;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        .dropdown-content_share {
+            position: inherit !important;
+        }
+    }
+
+    .close-Btn {
+        text-align: right;
+        padding: 0px 20px !important;
+        margin-top: 10px;
+    }
+
+    .for_blue_clr {
+        color: #007bff;
+    }
+
+    .Io-paraText {
+        margin-bottom: 1px;
+    }
+
+    .Io-paraText b {
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .Io-paraText span {
+        font-weight: normal;
+        font-size: 13px;
+    }
+
+    .border_1 {
+        border: none !important;
+    }
+
+    hr.new1 {
+        border: 15px solid #e0e0e0;
+        border-radius: 5px;
+        border-bottom: 0px solid #1f1209;
+    }
+
+    .main_head h3 {
+        text-align: center;
+        font-weight: 700;
+        padding: 20px;
+    }
+
+    .rfp_searchCriteria {
+        text-align: center;
+        background-color: #e6ff99
+    }
+
+    .requiredValidatitionError {
+        color: red;
+    }
+</style>
+
+<div class="container resp-padtop">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-link back-btn" onclick="goBack()">
+                << Back</button>
+        </div>
+    </div>
+</div>
+
+<div class="contbg" data-ng-init="onload()">
+    <div class="campaign_details mt-4">
+        <div class="row ml-0 mr-0">
+            <div class="col-12 col-sm-12 col-md-6">
+                <div class="contbg md-whiteframe-3dp p-2">
+                    <table class="table table-striped table-bordered mb-0 table_user">
+                        <tbody>
+                            <tr>
+                                <td><b>Campaign ID</b></td>
+                                <td>{{campaignDetails.cid|| "N/A"}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Campaign Name</b></td>
+                                <td>{{campaignDetails.name| capitalize}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Client Name</b></td>
+                                <td>
+                                    {{campaignDetails.first_name || "N/A" | capitalize}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Contact Number</b></td>
+                                <td>{{campaignDetails.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Email</b></td>
+                                <td>{{campaignDetails.email| capitalize}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6">
+                <div class="contbg md-whiteframe-3dp p-2 table_campmob">
+                    <table class="table table-striped table-bordered mb-0 table_user">
+                        <tbody>
+                            <tr>
+                                <td><b>Number of Products</b></td>
+                                <td>{{campaignDetails.products.length}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Date</b></td>
+                                <td>{{(campaignDetails.created_at| dateify | date: "dd-MM-yyyy") || "N/A"}}</td>
+                            </tr>
+                            <tr ng-if="campaignDetails.status == 1200">
+                                <td><b>Amount</b></td>
+                                <td>
+                                    <span>$</span>{{campaignDetails.totalamount || '0' | number : 2}}
+                                </td>
+                            </tr>
+                            <tr ng-if="campaignDetails.status != 1200">
+                                <td><b>Total Amount <span ng-if="campaignDetails.gross_fee_percentage > 0"> (+ Gross fee
+                                            Amount) </span></b></td>
+                                <td>
+                                    <span>$</span>{{campaignDetails.totalamount || '0' | number : 2}}
+                                </td>
+                            </tr>
+                            <!-- <tr> 
+                                <td><b>Pending Price</b></td>
+                                <td>
+                                    <span>$</span>{{PendingPay || '0' | number : 2}}
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <td><b>Paid Amount</b></td>
+                                <td>
+                                    <span>$</span>{{campaignDetails.total_paid || '0' | number : 2}}
+                                </td>
+                            </tr>
+                            <tr ng-if="campaignDetails.status == 1200 || campaignDetails.refunded_amount != 0">
+                                <td><b>Refund Amount</b></td>
+                                <td>
+                                    <span>$</span>{{campaignDetails.refunded_amount || '0' | number : 2}}
+                                </td>
+                            </tr>
+                            <tr ng-if="campaignDetails.status == 1200 || campaignDetails.refunded_amount != 0">
+                                <td><b>Balance Amount</b></td>
+                                <td>
+                                    <span>$</span>{{campaignDetails.total_paid - campaignDetails.refunded_amount || '0'
+                                    | number : 2}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Status</b></td>
+                                <td>{{campaignDetails.status| stringifyCampaignStatus }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+        layout-margin="layout-margin" class="book_campuser transfer_camp_res cpmcal cpm_res_popup cpm-responsive btn_res_trans">
+        <div class="button_leftright">
+            <div class="dropdown">
+                <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs md_button_responsive">
+                    Share Campaign
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm md_button_responsive"
+                    onclick="UsershareCampaign()" style="min-width: 38px;">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </md-button>
+                <div id="usershareDrop" class="dropdown-content_share contbg animated fadeInDown share_usercamp"
+                    style="padding:10px;">
+                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                onclick="UsershareCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
+                        </div>
+                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Share Campaign</h3><br>
+                        <form name="shareCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.receiver_name" class="form-control"
+                                        name="receiver_name" placeholder="Name" required="required" />
+                                    <div ng-messages="shareCampaignForm.name.$error">
+                                        <div ng-message="required">Name is required.</div>
+                                        <div ng-message="pattern">Enter a valid Name.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input ng-model="shareCampaign.email" name="email" class="form-control"
+                                        placeholder="Email" type="email" required="required"
+                                        ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                                    <div ng-messages="shareCampaignForm.email.$error">
+                                        <div ng-message="required">Email is required.</div>
+                                        <div ng-message="pattern">Enter a valid Email Id.</div>
+                                    </div>
+                                </div>
+                                <div class="offset-md-7 col-md-5 align_center_btns">
+                                    <md-button class="md-raised md-warn Upload_font" layout-fill
+                                        ng-click="shareCampaignToEmail($event, shareCampaign, campaignDetails.id)">Share
+                                        Campaign</md-button>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-click="selectedFormatIndex = 0">
+                <!-- <md-button class="dropbtn Upload_font hide-xs md_button_responsive"
+                    ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                    Download Quotation
+                    Download Quote
+                </md-button> -->
+                <md-button class="dropbtn Upload_font hide-xs md_button_responsive" data-toggle="modal"
+                    data-target="#OuatationModalView">View Quote
+                </md-button>
+                <!-- <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm md_button_responsive"
+                    ng-click="downloadAdminQuote(campaignDetails.id)" download
+                    style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                </md-button> -->
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm md_button_responsive"
+                    data-toggle="modal" data-target="#OuatationModalView"
+                    style="min-width: 38px;margin-left: 0px;margin-right: 0px;">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                </md-button>
+            </div>
+        </div>
+        <!-- <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-class="{'red':selectedFormatIndex == 1}"
+             ng-click="selectedFormatIndex = 1">
+                <md-button class="dropbtn Upload_font md_button_responsive"
+                    ng-click="downloadPDF(campaignDetails.id)" download>
+                    Download IO
+                </md-button>
+             </div>
+        </div> -->
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-click="selectedFormatIndex = 1">
+                <md-button class="dropbtn Upload_font md_button_responsive" data-toggle="modal"
+                    data-target="#downloadIOPopUp" ng-click="userProfileApi()">
+                    View IO
+                </md-button>
+            </div>
+        </div>
+        <!-- Download RFP PDF Button -->
+        <div class="button_leftright" style="cursor: pointer;">
+            <div class="md-grid-item-content hoarding-btn" ng-click="selectedFormatIndex = 1"
+                ng-if="campaignDetails.products.length == null && campaignDetails.cmp_type == 1">
+                <md-button class="dropbtn Upload_font" data-toggle="modal" data-target="#BuyerRFPModalView">
+                    View RFP
+                </md-button>
+                <!-- <md-button class="dropbtn Upload_font" ng-click="downloadRFPsearch(campaignDetails.id)"
+                    download>
+                    Download RFP
+                </md-button> -->
+                <!-- <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm"
+                    ng-click="downloadAdminpdf(campaignDetails.id)" download
+                    style="margin-left: 0px;margin-right: 0px;min-width: 38px;">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                </md-button> -->
+            </div>
+        </div>
+        <!-- Download PDF Button -->
+        <div class="button_leftright">
+            <div class="dropdown">
+                <!-- <md-button onclick="UserofferCampaign()" class="dropbtn Upload_font offer_btn_clr hide-xs"> -->
+                <md-button
+                    ng-if="(campaignDetails.status == 100 || campaignDetails.status == 1300) && offerDetails.showOfferButton && campaignDetails.products && campaignDetails.products.length"
+                    onclick="UserofferCampaign()" class="dropbtn Upload_font offer_btn_clr md_button_responsive">
+                    OFFER
+                </md-button>
+                <!-- <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UserofferCampaign()" style="min-width: 38px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </md-button> -->
+                <div id="userofferDrop"
+                    class="dropdown-content_share dropdown-content_offer contbg animated fadeInDown share_usercamp offer_res"
+                    style="padding:10px;">
+                    <form name="shareCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                onclick="UserofferCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
+                        </div>
+                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">OFFER</h3><br>
+                        <form name="shareCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <input ng-model="offerCampaigns.price" name="price" class="form-control"
+                                        placeholder="Price" type="text" only-numeric required />
+                                    <div ng-messages="shareCampaignForm.price.$error"
+                                        ng-if="shareCampaignForm.price.$touched" style="color:red">
+                                        <div ng-message="required">Price is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea ng-model="offerCampaigns.comments" name="comments" class="form-control"
+                                        placeholder="Comments (maximum 250 chars)" maxlength="250" type="comments"
+                                        required />
+                                    <div ng-messages="shareCampaignForm.comments.$error"
+                                        ng-if="shareCampaignForm.comments.$touched" style="color:red">
+                                        <div ng-message="required">Comments is
+                                            required</div>
+                                    </div>
+                                </div>
+                                <div class="offset-md-7 col-md-5 align_center_btns">
+                                    <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                        ng-click="makeOfferCampaignTo(campaignDetails.id)"
+                                        ng-disabled="shareCampaignForm.$invalid"> OFFER </md-button>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="button_leftright"
+            ng-if="(campaignDetails.status == 100 || campaignDetails.status == 1300) && !offerDetails.isAccepted && !offerDetails.isRequested">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue md_button_responsive"
+                    ng-click="gotoLocationPage(campaignDetails.id)">Add Product</md-button>
+            </div>
+        </div>
+        <div class="button_leftright" ng-hide="campaignDetails.products.length == null && campaignDetails.cmp_type == 1"
+            ng-if="(campaignDetails.status == 100 || campaignDetails.status == 1300) && !offerDetails.isAccepted && !offerDetails.isRequested">
+            <div class="md-grid-item-content hoarding-btn del_res" data-toggle="modal"
+                data-target="#exampleModalCenter">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-click="DeleteCampaignId(campaignProduct.id)">Delete Campaign
+                </md-button>
+            </div>
+        </div>
+        <div class="button_leftright">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-click="openExportCsvSlushBucket(campaignDetails)">Export CSV</md-button>
+            </div>
+        </div>
+        <div class="button_leftright"
+            ng-hide="campaignDetails.products.length == null && campaignDetails.cmp_type == 1">
+            <div class="md-grid-item-content" data-toggle="modal" data-target="#cloneCampaignModal">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin">Clone a
+                    Campaign</md-button>
+            </div>
+        </div>
+        <div class="button_leftright">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-if="campaignDetails.total_paid == 0 && campaignDetails.shortlistedsum != 0 && !offerDetails.isRequested && campaignDetails.products.length > 0"
+                    ng-click="grossViewPage()">Gross Fee
+                </md-button>
+            </div>
+        </div>
+        <div class="button_leftright">
+            <div class="md-grid-item-content">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin" data-toggle="modal"
+                    data-target="#findFormeModal"
+                    ng-if="campaignDetails.cmp_type == 1 && campaignDetails.products.length == null">Request External
+                    Search
+                </md-button>
+            </div>
+        </div>
+        <div class="button_leftright">
+            <div class="md-grid-item-content">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin" ng-click="refreshProductsRFP(campaignDetails.id)"
+                ng-if="campaignDetails.cmp_type == 1 && campaignDetails.products.length == null" >Refresh Products
+                </md-button>
+            </div>
+        </div>
+
+        <div class="button_leftright">
+            <div class="md-grid-item-content hoarding-btn">
+                <!--<md-button class="md-raised all_button md_button_responsive" ng-if="campaignDetails.total_paid == 0 && !offerDetails.isRequested" ng-href="/user-payment/{{campaignDetails.id}}">Purchase
+                </md-button>-->
+
+                <!-- <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-if="!campaignDetails.campaign_purchase_disable_status && campaignDetails.total_paid == 0 && campaignDetails.shortlistedsum != 0 && !offerDetails.isRequested"
+                    ng-click="gotoPaymentPage()">Purchase
+                </md-button> -->
+                <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-if="campaignDetails.total_paid == 0 && campaignDetails.shortlistedsum != 0 && !offerDetails.isRequested && campaignDetails.products.length > 0"
+                    ng-click="gotoPaymentPage()">Purchase
+                </md-button>
+            </div>
+        </div>
+        <div class="button_leftright">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin"
+                    ng-if="campaignDetails.total_paid != 0" ng-click="openChat()">Chat
+                </md-button>
+            </div>
+        </div>
+    
+        <div class="button_leftright">
+            <div class="dropdown">
+
+                <!-- <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs md_button_responsive">
+                    Share Campaign
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm md_button_responsive"
+                    onclick="UsershareCampaign()" style="min-width: 38px;">
+                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                </md-button> -->
+
+
+                <md-button
+                    ng-if="campaignDetails.total_paid == 0 && campaignDetails.email == 'richard.advertisingmarketplace@gmail.com'"
+                    onclick="TransferCampaign()" class="md-raised all_button md_button_responsive purchage_margin">
+                    Transfer Campaign
+                </md-button>
+
+
+                <div id="transferDrop"
+                    class="dropdown-content_share dropdown-content_offer dropdown-content_transfer contbg animated fadeInDown share_usercamp">
+                    <form name="transferCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                onclick="TransferCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
+                        </div>
+
+                        <h5 class="md-title" style="margin-top:-28px;margin-left: 11px; margin-bottom: 28px;">Are you
+                            Sure! you want Transfer this campaign ?</h5><br>
+                        <form name="transferCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <md-autocomplete style="top: -50px;" md-selected-item="$parent.emailObj"
+                                        md-search-text="searchedBuyer" placeholder="Search For Email"
+                                        md-items="item in searchableBuyers(searchedBuyer)" md-item-text="item.email"
+                                        md-min-length="3" md-menu-class="form-control md-whiteframe-3dp" name="Email">
+                                        <md-item-template>
+                                            <span md-highlight-text="searchedBuyer">{{item.email}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            No matches found.
+                                        </md-not-found>
+                                    </md-autocomplete>
+                                </div>
+                                <div class="form-group">
+                                    <textarea ng-model="$parent.comments" name="comments" class="form-control"
+                                        placeholder="Comments (maximum 250 chars)" maxlength="250" type="comments"
+                                        required />
+                                    <div ng-messages="transferCampaignForm.comments.$error"
+                                        ng-if="transferCampaignForm.comments.$touched" style="color:red">
+                                        <div ng-message="required">Comments is
+                                            required</div>
+                                    </div>
+                                </div>
+                                <div class="offset-md-7 col-md-5 align_center_btns">
+                                    <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                        ng-click="sendTransferCampaign(campaignDetails.id, emailObj)"
+                                        ng-disabled="transferCampaignForm.$invalid"> Transfer </md-button>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown" ng-if="hidestayconsistent">
+            <md-button ng-hide="campaignDetails.status == 600" onclick="DeleteCampaign()"
+                ng-disabled="disableDeleteCampaignRequest || disableDeleteProductRequest || campaignDetails.status == 1200"
+                class="dropbtn Upload_font offer_btn_clr md_button_responsive">
+                Delete Campaign Request
+            </md-button>
+            <div id="deleteDrop"
+                class="dropdown-content_share share_res del_camp_req_res contbg animated fadeInDown share_usercamp del_camp_req_responsive"
+                style="padding:10px;">
+                <form name="deleteCampaignForm" role="form" novalidate="novalidate">
+                    <div layout="colmun">
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="DeleteCampaign()">
+                            <md-icon class="md-default-theme">
+                                <i class="material-icons">close</i>
+                            </md-icon>
+                        </md-button>
+                    </div>
+                    <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Delete Campaign Request</h3>
+                    <br>
+                    <form name="deleteCampaignForm">
+                        <div layout="column" style="padding:10px;">
+                            <div class="form-group"
+                                ng-init="price=campaignDetails.total_paid - campaignDetails.refunded_amount">
+                                <input ng-model="price" name="price" class="form-control" placeholder="Price"
+                                    type="text" only-numeric required readonly />
+                                <div ng-messages="deleteCampaignForm.price.$error"
+                                    ng-if="deleteCampaignForm.price.$touched" style="color:red">
+                                    <div ng-message="required">Price is
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="user_query" name="userquery" class="form-control"
+                                    placeholder="user query" type="text" required />
+                                <div ng-messages="deleteCampaignForm.userquery.$error"
+                                    ng-if="deleteCampaignForm.user_query.$touched" style="color:red">
+                                    <div ng-message="required">Comments is
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="offset-md-5 col-md-7" style="padding-right: 0px;">
+                                <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                    ng-click="deleteCampaignRequest(campaignDetails.id)"
+                                    ng-disabled="deleteCampaignForm.$invalid"> Delete Campaign Request</md-button>
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised all_button md_button_responsive purchage_margin" 
+                ng-if="campaignDetails.total_paid == 0 && campaignDetails.email == 'richard.advertisingmarketplace@gmail.com'" data-toggle="modal" data-target="#transferCampaignModal"
+                ng-click="">Transfer Campaign
+            </md-button>
+            </div> -->
+    </div>
+</div>
+<div class="button_leftright">
+    <!-- <div class="dropdown">
+                <md-button onclick="UsershareCampaign()" class="dropbtn Upload_font hide-xs">
+                    Offering
+                </md-button>
+                <md-button class="dropbtn Upload_font hide-gt-lg hide-lg hide-md hide-sm" onclick="UsershareCampaign()" style="min-width: 38px;">
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </md-button>
+                <div id="usershareDrop" class="dropdown-content contbg animated fadeInDown share_usercamp"
+                    style="padding:10px;">
+                    <form name="forms.ownerCampaignForm" role="form" novalidate="novalidate">
+                        <div layout="colmun">
+                            <span flex></span>
+                            <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="UsershareCampaign()">
+                                <md-icon class="md-default-theme">
+                                    <i class="material-icons">close</i>
+                                </md-icon>
+                            </md-button>
+                        </div>
+                        <form name="shareCampaignForm">
+                            <div layout="column" style="padding:10px;">
+                                <div class="form-group">
+                                    <input class="form-control" name="customername"type="text"
+                                        placeholder="Customer Name">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="remove_line"  placeholder="comments" rows="3" cols="20"
+                                        ></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div ng-if="campaignDetails.products.length == 0">
+            <div class="md-grid-item-content hoarding-btn">
+                <md-button class="md-raised add_blue" ng-click="addNewProductToCampaign()">Add Products
+                </md-button>
+            </div>
+        </div> -->
+</div>
+
+<!-- <div layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+    layout-margin="layout-margin" class="book_campuser cpmcal cpm-responsive">
+    <div class="button_leftright" ng-if="hidestayconsistent">
+        <div class="dropdown">
+            <md-button ng-hide="campaignDetails.status == 600" onclick="DeleteCampaign()"
+                ng-disabled="disableDeleteCampaignRequest || disableDeleteProductRequest || campaignDetails.status == 1200"
+                class="dropbtn Upload_font offer_btn_clr md_button_responsive">
+                Delete Campaign Request
+            </md-button>
+            <div id="deleteDrop"
+                class="dropdown-content_share share_res contbg animated fadeInDown share_usercamp del_camp_req_responsive"
+                style="padding:10px;">
+                <form name="deleteCampaignForm" role="form" novalidate="novalidate">
+                    <div layout="colmun">
+                        <span flex></span>
+                        <md-button class="md-icon-button" aria-label="Close Side Panel" onclick="DeleteCampaign()">
+                            <md-icon class="md-default-theme">
+                                <i class="material-icons">close</i>
+                            </md-icon>
+                        </md-button>
+                    </div>
+                    <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Delete Campaign Request</h3>
+                    <br>
+                    <form name="deleteCampaignForm">
+                        <div layout="column" style="padding:10px;">
+                            <div class="form-group" ng-init="price=campaignDetails.total_paid - campaignDetails.refunded_amount">
+                                <input ng-model="price" name="price" class="form-control" placeholder="Price"
+                                    type="text" only-numeric required readonly />
+                                <div ng-messages="deleteCampaignForm.price.$error"
+                                    ng-if="deleteCampaignForm.price.$touched" style="color:red">
+                                    <div ng-message="required">Price is
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input ng-model="user_query" name="userquery" class="form-control"
+                                    placeholder="user query" type="text" required />
+                                <div ng-messages="deleteCampaignForm.userquery.$error"
+                                    ng-if="deleteCampaignForm.user_query.$touched" style="color:red">
+                                    <div ng-message="required">Comments is
+                                        required</div>
+                                </div>
+                            </div>
+                            <div class="offset-md-5 col-md-7" style="padding-right: 0px;">
+                                <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                    ng-click="deleteCampaignRequest(campaignDetails.id)"
+                                    ng-disabled="deleteCampaignForm.$invalid"> Delete Campaign Request</md-button>
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>  -->
+<div class="clearfix"></div>
+
+<!-- cpm start -->
+<div layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+    layout-margin="layout-margin" class="book_campuser cpmcal cpm-responsive">
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">Impressions Total -
+            {{campaignDetails.impressionSum || '0' | number : 0}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">CPM Total -
+            <span>$</span>{{campaignDetails.cpmval || '0' | number :2}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1"> Net Total -
+            <span>$</span>{{campaignDetails.shortlistedsum || '0' | number :2}}</span></h2>
+</div>
+
+<div ng-if="offerDetails.isAccepted" layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100" flex-sm="100"
+    flex-gt-sm="50" layout-margin="layout-margin" class="book_campuser cpmcal cpm-responsive cpm-responsive_sec_row">
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">Impressions Total -
+            {{campaignDetails.impressionSum || '0' | number : 0}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">CPM Total - <span>$</span>
+            {{campaignDetails.offercpmval || '0' | number :2}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">Offer Total -
+            <span>$</span>{{campaignDetails.offershortlistedsum || '0' | number :2}}
+        </span></h2>
+</div>
+<div ng-if="campaignDetails.gross_fee_percentage > 0" layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100"
+    flex-sm="100" flex-gt-sm="50" layout-margin="layout-margin"
+    class="book_campuser cpmcal cpm-responsive cpm-responsive_sec_row">
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">Impressions Total -
+            {{campaignDetails.impressionSum || '0' | number : 0}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1">CPM Total - <span>$</span>
+            {{campaignDetails.grosscpmval || '0' | number :2}}</span></h2>
+    <h2><span class="badge font-adjust badge-warning float-right mr-3 mb-1"> Gross Total -
+            <span>$</span>{{campaignDetails.grossshortlistedsum || '0' | number :2}}
+        </span></h2>
+</div>
+
+<div class="row ml-0 mr-0 mb-4 mt-4" ng-show="offerDetails.offers && offerDetails.offers.length">
+    <div class="contbg md-whiteframe-3dp p-2">
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0 table_user">
+                <tbody class="offer_price_status">
+                    <tr ng-if="offerDetails.offers && offerDetails.offers.length">
+                        <td class="text-center">
+                            <span><b>First Offer Details</b></span>
+                        </td>
+                        <td class="text-center" ng-if="offerDetails.offers.length && offerDetails.offers.length>1">
+                            <span><b>Second Offer Details</b></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="offerDetails.offers && offerDetails.offers.length">
+                        <td class="text-center">
+                            <h2><span class="badge font-adjust ">Offer Price - ${{offerDetails.offers[0].price ||
+                                    '0' | number :2}}</span></h2><br>
+                            <h2><span class="badge font-adjust ">Offer Status -
+                                    {{offerDetails.status[offerDetails.offers[0].status]}}</span></h2>
+                            <!-- <h2 ng-show="offerDetails.offers[0].message"><span class="badge font-adjust ">({{offerDetails.offers[0].message}})</span></h2> -->
+                            <h5 ng-show="offerDetails.offers[0].message">
+                                <span>({{offerDetails.offers[0].message}})</span>
+                            </h5>
+                        </td>
+                        <td class="text-center" ng-if="offerDetails.offers.length && offerDetails.offers.length>1">
+                            <h2><span class="badge font-adjust ">Offer Price - ${{offerDetails.offers[1].price ||
+                                    '0' | number :2}}</span></h2><br>
+                            <h2><span class="badge font-adjust ">Offer Status -
+                                    {{offerDetails.status[offerDetails.offers[1].status]}}</span></h2>
+                            <!-- <h2 ng-show="offerDetails.offers[1].message"><span class="badge font-adjust ">({{offerDetails.offers[1].message}})</span></h2> -->
+                            <h5 ng-show="offerDetails.offers[1].message">
+                                <span>({{offerDetails.offers[1].message}})</span>
+                            </h5>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead class="text_color">
+            <tr>
+                <th class="select_res" ng-hide="hidestayconsistent">
+                    <input type="checkbox" ng-model="selectAll"  ng-click="campaignDetailscheckAll(selectAll)">&nbsp;Select
+                    All
+                </th>
+
+                <th ng-show="hidestayconsistent" aria-hidden="true" class="ng-hide" style="width: 70px;">check box</th>
+                <th class="adjust_space">Product Details</th>
+                <!-- <th class="hide-xs"></th> -->
+                <th class="adjust_space"></th>
+                <th>Size</th>
+                <th>Length</th>
+                <!-- <th>Cost Per Point</th> -->
+                <th class="text-right">Impressions</th>
+                <th class="text-right padding-20">CPM</th>
+                <th class="adjust_space">Starting Date</th>
+                <th class="adjust_space">Ending Date</th>
+                <th class="text-right camp_price">Unit Price in $</th>
+                <th class="adjust_space text-center">Quantity Selected</th>
+                <th class="text-right camp_price">Product Price in $</th>
+                <th class="adjust_space text-center">Tax Amount $</th>
+                <th class="text-right camp_price">Total Price in $</th>
+                <th class="adjust_space text-right" ng-if="offerDetails.isAccepted">New Price in $</th>
+                <th>Status</th>
+                <th>
+                    <a data-toggle="modal" ng-show="selected && selected.length" data-target="#exampleModalCenterNew"
+                        ng-click='bulkDelete()' style="cursor: pointer;">
+                        <button type="button" class="all_button del-selectedWidth">Delete Selected!</button>
+                    </a>
+                    <div class="modal fade" id="exampleModalCenterNew" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Are you Sure! you want to
+                                        delete this Selected product ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer modal_top align_center_btns popup_shortlist"
+                                    style="padding-top: 20px;">
+                                    <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal"
+                                        ng-click="deleteCampaignList($event)">Yes</button>
+                                    <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div layout="row" flex-offset-gt-md="65" flex="30" flex-xs="100" flex-sm="100" flex-gt-sm="50"
+                        layout-margin="layout-margin" class="book_campuser cpmcal cpm-responsive">
+                        <div class="button_leftright" ng-if="hidestayconsistent">
+                            <div class="dropdown">
+                                <!--ng-click needed as price API is hitting-->
+                                <md-button ng-hide="campaignDetails.status == 600"
+                                    ng-disabled="(selectedids && !selectedids.length)" onclick="DeleteProduct()"
+                                    ng-click="ProductIdsCampaign(campaignDetails.id)"
+                                    class="dropbtn Upload_font md_button_responsive">
+                                    Delete Product Request
+                                </md-button>
+                                <div id="deleteDro"
+                                    class="dropdown-content_share del_prod contbg animated fadeInDown share_usercamp del_camp_req_responsive"
+                                    style="padding:10px;">
+                                    <form name="deleteProductForm" role="form" novalidate="novalidate">
+                                        <div layout="colmun">
+                                            <span flex></span>
+                                            <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                                onclick="DeleteProduct()">
+                                                <md-icon class="md-default-theme">
+                                                    <i class="material-icons">close</i>
+                                                </md-icon>
+                                            </md-button>
+                                        </div>
+                                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Delete Product
+                                            Request</h3><br>
+                                        <form name="deleteProductForm">
+                                            <div layout="column" style="padding:10px;">
+                                                <div class="form-group">
+                                                    <input ng-model="finaldelpurchaseamt" name="price"
+                                                        class="form-control" placeholder="Price" type="text" readonly />
+                                                    <!-- <div ng-messages="deleteProductForm.price.$error"
+                                                            ng-if="deleteProductForm.price.$touched" style="color:red">
+                                                            <div ng-message="required">Price is
+                                                                required</div>
+                                                        </div> -->
+                                                </div>
+                                                <div class="form-group">
+                                                    <input ng-model="comments" id="commentid" name="comments"
+                                                        class="form-control" placeholder="comments" type="text"
+                                                        required />
+                                                    <div ng-messages="deleteProductForm.comments.$error"
+                                                        ng-if="deleteProductForm.comments.$touched" style="color:red">
+                                                        <div ng-message="required">Comments is
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                                <div class="offset-md-5 col-md-7" style="padding-right: 0px;">
+                                                    <md-button class="md-raised md-warn Upload_font offer_btn_clr"
+                                                        layout-fill ng-click="deleteProductRequest(campaignDetails.id)"
+                                                        ng-disabled="deleteProductForm.$invalid"> Delete Product Request
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Use ng-if to conditionally display the message -->
+            <tr ng-if="campaignDetails.products == null">
+                <td colspan="17" class="text-center"><b>No Records Found</b></td>
+            </tr>
+            <tr ng-repeat="campaignProduct in campaignDetails.products"
+                ng-class="{'sold-product': campaignProduct.sold_status == 1}">
+                <!-- <td class="hide-xs image_tdwidth"> -->
+                <td class="table_vertical text-center" ng-hide="hidestayconsistent">
+                    <input type="checkbox" ng-model="campaignProduct.selected" ng-checked="exist(campaignProduct)"
+                        ng-click="toggleSelection(campaignProduct)">
+                </td>
+                <td ng-show="hidestayconsistent" class="table_vertical text-center">
+                    <input type="checkbox" ng-model="campaignProduct.chkbox"
+                        ng-disabled="(campaignProduct.deleteProductStatus && campaignProduct.deleteProductStatus == 101) || (campaignProduct.deleteProductStatus && campaignProduct.deleteProductStatus == 102) || disableDeleteCampaignRequest || campaignDetails.status == 1200"
+                        ng-click="selectSingle(campaignProduct.product_id)"
+                        ng-change="deletechProduct(campaignProduct.chkbox,campaignProduct.product_id,campaignProduct.productbookingid)">
+                </td>
+                <td class="image_tdwidth">
+                    <a ng-click="prodDetails(campaignProduct.product_id)">
+                        <img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face"
+                            class="requ_size img-thumbnail">
+                    </a>
+                </td>
+                <td class="table_address adjust_spaceC">
+                    <p class="">
+                        <b>Title</b>: <b>{{campaignProduct.title || "N/A"}}</b>
+                        <br>{{campaignProduct.siteNo}}
+                        <br><b>Address</b>: {{campaignProduct.address | capitalize}} {{campaignProduct.city |
+                        capitalize}}
+                        <br><b>State</b>: {{campaignProduct.state_name | capitalize}}
+                        <!-- <br><b style="color: #44596D;">Venue</b>: {{campaignProduct.venue | capitalize}} -->
+                        <br><b>Type</b>: {{campaignProduct.type || "N/A"}}
+                        <br><b>Facing</b>: {{campaignProduct.direction|| "N/A" | capitalize}}
+                        <br><b>Product Direction</b>: {{campaignProduct.imgdirection || "N/A"}}
+                        <span ng-if="campaignProduct.type === 'Digital Bulletin' && 'Transit'"><b>Number Of Slots</b>:
+                            {{campaignProduct.booked_slots || 'N/A'}}</span>
+                    </p>
+                </td>
+                <td class="camp_size table_vertical">{{campaignProduct.type != 'Media'?campaignProduct.panelSize :
+                    "N/A"}}</td>
+                <td class="table_vertical">{{campaignProduct.type == 'Media'?campaignProduct.length : "N/A"}}</td>
+                <!-- <td class="table_vertical">{{campaignProduct.type == 'Media'?campaignProduct.costperpoint : "N/A"}}</td> -->
+                <td class="table_vertical text-center padding-20">{{campaignProduct.secondImpression || '0' | number :
+                    0}}</td>
+                <td class="table_vertical text-right padding-20">${{campaignProduct.cpm || '0' | number : 2}}</td>
+                <!-- <td class="table_vertical">{{campaignProduct.booked_from| dateify | date: "dd-MM-yyyy"}} -->
+                <td class="table_vertical">{{campaignProduct.date.startDate}}
+                </td>
+                <!-- <td class="table_vertical">{{campaignProduct.booked_to| dateify | date: "dd-MM-yyyy"}} -->
+                <td class="table_vertical">{{campaignProduct.date.endDate}}
+                </td>
+                <td class="table_vertical text-right padding-20"><span>$</span>{{campaignProduct.price || '0' | number :
+                    2}}</td>
+                <td class="table_vertical text-center">{{campaignProduct.quantity}}
+                </td>
+                <td class="table_vertical text-right padding-20"><span>$</span>{{campaignProduct.price *
+                    campaignProduct.quantity || '0' | number : 2}}</td>
+                <td class="table_vertical text-center">
+                    <span ng-if="campaignProduct.tax_percentage_amount != 0">({{campaignProduct.tax_percentage ||
+                        '0'}}%)</span><span
+                        ng-if="campaignProduct.tax_percentage_amount == 0">({{'0'}}%)</span><br>{{campaignProduct.tax_percentage_amount
+                    || '0' | number : 2}}
+                </td>
+                <td class="table_vertical text-right padding-20">
+                    <span>$</span>{{(campaignProduct.price+campaignProduct.tax_percentage_amount_shortlist) *
+                    campaignProduct.quantity || '0' | number : 2}}
+                </td>
+                <td class="table_vertical text-right padding-20" ng-if="offerDetails.isAccepted">
+                    <!-- <p><span>$</span>{{(campaignProduct.price - (campaignProduct.price*offerDetails.offerPercentage/100)) || '0' | number :2}}</p> -->
+                    <p ng-if="offerDetails.isAccepted"><span>$</span>{{campaignProduct.offerpriceperselectedDates || '0'
+                        | number :2}}</p>
+                    <!-- <p ng-if="!campaignProduct.newPrice"><span>$</span>{{(campaignProduct.price - (campaignProduct.price*offerDetails.offerPercentage/100)) || '0' | number :2}}</p> -->
+                </td>
+                <td class="table_vertical camp_size">
+                    <p class="text_color md-caption" style="margin-top: 12px;"
+                        ng-if=" !campaignProduct.admin_price && !campaignProduct.sold_status && campaignDetails.status >= 300 && campaignDetails.status <= 500">
+                        <b>Quote Requested</b>
+                    </p>
+
+                    <!--<p class="text_color md-caption" style="margin-top: 12px;"
+                                        ng-if=" campaignProduct.admin_price && !campaignProduct.sold_status && campaignDetails.status >= 300 && campaignDetails.status <= 600">
+                                        <b>{{campaignDetails.status| stringifyCampaignStatus}} </b></p>
+                                    <p class="text_color md-caption" style="margin-top: 12px;"
+                                        ng-if="!campaignProduct.admin_price && !campaignProduct.sold_status && (campaignDetails.status < 300 || campaignDetails.status > 500)">
+                                        <b>{{campaignDetails.status| stringifyCampaignStatus}}</b></p>
+                                    <p class="text_color md-caption" style="margin-top: 12px;"
+                                        ng-if="campaignProduct.admin_price && !campaignProduct.sold_status && (campaignDetails.status < 300 || campaignDetails.status > 600)">
+                                        <b>{{campaignProduct.product_status| stringifyProductStatus}}</b></p>-->
+                    <!-- <p style="color: red; word-wrap: break-word; width: 200px;" ng-if="campaignProduct.sold_status"><strong>(This product has been already purchased and because of that 'purchased' button is not present. Deleting this product from this list shows the purchase button.)</strong></p> -->
+                    <p style="color: red; word-wrap: break-word; width: 200px;" ng-if="campaignProduct.sold_status">
+                        <strong>Sold out</strong>
+                    </p>
+                    <p ng-if="!campaignProduct.sold_status">
+                        <strong>Available</strong>
+                    </p>
+                </td>
+                <td class="table_vertical">
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info" data-toggle="modal"
+                        data-target="#myModal-{{campaignProduct.id}}"
+                        ng-if="campaignProduct.cancelation=='Yes' && campaignProduct.product_status !='600' && campaignDetails.status == 700">X</button>
+                    <!-- Modal -->
+                    <div id="myModal-{{campaignProduct.id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                                    <h4 class="modal-title">Inventory Cancel</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Cost Of Product : {{campaignProduct.admin_price}}</p>
+                                    <p>Cancellation Charges : <span>$</span>{{campaignProduct.cancellation_charge}}</p>
+                                    <p>Refund Amount :
+                                        <span>$</span>{{campaignProduct.admin_price-campaignProduct.cancellation_charge}}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"
+                                        ng-click="cancelProductFromCampaign(campaignProduct.id, campaignDetails.id)">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+
+
+                <td class="table_vertical">
+                    <input date-range-picker clear-on-cancel="true" min="startDate" max="endDate"
+                        ng-value="ranges.selectedDateRanges" ng-model="ranges.selectedDateRanges"
+                        custom-options="customOptions" class="form-control md-whiteframe-3dp date-picker"
+                        placeholder="Product date" type="text" name="date" options="mapProductOpts"
+                        id="booking_dates_picker-{{campaignProduct.id}}"
+                        style="visibility: hidden; margin-bottom: -20px; width:2px; height:2px;" />
+
+                    <button style="padding: 0px;"
+                        ng-hide="campaignDetails.status >= 400 && campaignDetails.status < 1300" type="button"
+                        class="btn" data-toggle="modal" data-target="#modifyProductModal-{{campaignProduct.id}}"
+                        ng-click="openProductEdit(campaignProduct, $event)">
+                        <i class="material-icons">edit</i>
+                    </button>
+
+                    <div class="modal" id="modifyProductModal-{{campaignProduct.id}}">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-3 adjust_space">Product</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-2"><b>:</b>
+                                                <span class="font-weight-bold">{{campaignProduct.siteNo}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-3 adjust_space">Dates Selected</p>
+                                        </div>
+                                        <!--<div class="col-6 adjust_space" style="outline:none;">
+                                                        <a class="font-weight-bold ml-2" id="calender-autolaod-div">
+                                                            : {{selectedDateRanges.startDate | dateFormatForSelected}}
+                                                            -{{selectedDateRanges.endDate | dateFormatForSelected}}
+                                                        </a>
+                                                        <div class="row">
+                                                            <div class="col-8">
+                                                        <a class="font-weight-bold ml-2" id="calender-autolaod-div"
+                                                            ng-repeat="selectedDates in selectedDateRanges">
+                                                            : {{selectedDates.startDate | dateFormatForSelected}} -{{selectedDates.endDate | dateFormatForSelected}} <br>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <i class="fas fa-pencil-alt" style="cursor:pointer;"
+                                                            ng-click="openCalendar(campaignProduct)"></i>
+                                                        </div>
+            
+                                                        </div> 
+                                                    </div>-->
+
+                                        <div class="col-6 adjust_space" style="outline:none;">
+
+                                            <!-- <a class="font-weight-bold ml-2" id="calender-autolaod-div">
+            
+                                                            : {{selectedDateRanges.startDate | dateFormatForSelected}}
+            
+                                                            -{{selectedDateRanges.endDate | dateFormatForSelected}}
+            
+                                                        </a> -->
+                                            <a class="font-weight-bold ml-2" id="calender-autolaod-div"
+                                                ng-repeat="selectedDates in selectedDateRanges">
+
+                                                : {{selectedDates.startDate | dateFormatForSelected}}
+                                                -{{selectedDates.endDate |
+                                                dateFormatForSelected}} <br></a>
+                                            <i class="fas fa-pencil-alt" style="cursor:pointer;margin-left: 10px;"
+                                                ng-click="openCalendar(campaignProduct)"></i>
+
+                                        </div>
+
+                                        <!-- <div class="col-12 pop_txt">
+                                                        <p class="mb-1 ml-3 text-danger font-weight-bold">NOTE: <span>While modifying date range. Select only one slot of date ranges as multiple slots are not supported here.</span></p>
+                                                    </div> -->
+
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-3 adjust_space">Available Quantity</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-2"><b>:</b>
+                                                <span class="font-weight-bold">{{availableQuantity}}</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="mb-1 ml-3 adjust_space">Quantity Selected</p>
+                                        </div>
+                                        <div class="d-flex align-items-center col-6 cursor_dis">
+                                            <button class="minus dis_minus" ng-disabled="selected.quantity < 2"
+                                                ng-click="selected.quantity=selected.quantity-1">
+                                                <i class="fa fa-minus" aria-hidden="true"></i>
+                                            </button>
+                                            <h2 ng-if="availableQuantity>=1" class="quantity ml-1 mr-1 select_range">
+                                                {{selected.quantity}}</h2>
+                                            <h2 ng-if="availableQuantity<=0" class="quantity ml-1 mr-1 select_range">0
+                                            </h2>
+                                            <button class="plus dis_plus"
+                                                ng-disabled="availableQuantity <= selected.quantity"
+                                                ng-click="selected.quantity=selected.quantity+1">
+                                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal footer -->
+                                <div ng-if="availableQuantity<=0" style="color: red; padding-left: 15px;">
+                                    <label><strong>NOTE</strong>: Available quantity is 0 and it cannot be
+                                        submit</label>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" ng-click="cancelProductDatesQuantity()"
+                                        data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary submit"
+                                        ng-click="updateProductDatesQuantity(campaignProduct)"
+                                        ng-disabled="availableQuantity<=0">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <a data-toggle="modal" data-target="#exampleModalCenter"
+                        ng-hide="campaignDetails.status >= 400 && campaignDetails.status < 1300"
+                        ng-click="conformDeleteProductFromCampaign(campaignProduct.id)"><i
+                            class="material-icons">delete_forever</i></a>
+
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault"
+                            role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title">Are you Sure! you want to
+                                        cancel this campaign ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-footer modal_top">
+                                    <button ng-hide="!selectCampaignId" type="button"
+                                        class="btn btn-secondary popup_yes" data-dismiss="modal"
+                                        ng-click="DeleteCampaign()">Yes</button>
+                                    <button ng-hide="!selectProductId" type="button" class="btn btn-secondary popup_yes"
+                                        data-dismiss="modal"
+                                        ng-click="deleteProductFromCampaign(campaignDetails.id,campaignProduct.price,campaignProduct.offerpriceperselectedDates)">Yes</button>
+                                    <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="cloneCampaignModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault"
+                            role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title">Are you Sure! you want to clone this campaign ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form name="cloneCampaignForm">
+                                    <div layout="column" style="padding: 10px;">
+                                        <div class="form-group"
+                                            ng-init="campaignDetails.campaignName = campaignDetails.name">
+                                            <input ng-model="campaignDetails.campaignName" name="name"
+                                                class="form-control" placeholder="name" type="text" required />
+                                            <div ng-messages="cloneCampaignForm.name.$error"
+                                                ng-if="cloneCampaignForm.name.$touched" style="color:red">
+                                                <div ng-message="required">Campaign name
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                        <div class="" style="padding-right: 0px;">
+                                            <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                                style="width: 30%;" data-dismiss="modal">Cancel</md-button>
+                                            <md-button class="md-raised md-warn Upload_font" layout-fill
+                                                data-dismiss="modal" style="width: 30%;"
+                                                ng-click="CloneCampaignRequest('cloneCampaignModal',campaignDetails.campaignName,campaignDetails)">Proceed
+                                            </md-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade " id="transferCampaignModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault"
+                            role="document">
+                            <div class="modal-content">
+                                <div class="modal-header modal_bottom">
+                                    <h5 class="modal-title">Are you Sure! you want Transfer this campaign ?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form name="transferCampaignForm">
+                                    <div layout="column" style="padding:10px;">
+                                        <div class="form-group">
+                                            <md-autocomplete md-selected-item="$parent.emailObj"
+                                                md-search-text="searchedBuyer" placeholder="Search For Email"
+                                                md-items="item in searchableBuyers(searchedBuyer)"
+                                                md-item-text="item.email" md-min-length="3"
+                                                md-menu-class="form-control md-whiteframe-3dp" name="Email">
+                                                <md-item-template>
+                                                    <span md-highlight-text="searchedBuyer">{{item.email}}</span>
+                                                </md-item-template>
+                                                <md-not-found>
+                                                    No matches found.
+                                                </md-not-found>
+                                            </md-autocomplete>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea ng-model="$parent.comments" name="comments" class="form-control"
+                                                placeholder="Comments (maximum 250 chars)" maxlength="250"
+                                                type="comments" required />
+                                            <div ng-messages="transferCampaignForm.comments.$error"
+                                                ng-if="transferCampaignForm.comments.$touched" style="color:red">
+                                                <div ng-message="required">Comments is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                        <div class="offset-md-7 col-md-5 align_center_btns">
+                                            <md-button class="md-raised md-warn Upload_font offer_btn_clr" layout-fill
+                                                ng-click="sendTransferCampaign(campaignDetails.id, emailObj)"
+                                                ng-disabled="transferCampaignForm.$invalid"> Transfer </md-button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+</div>
+</td>
+<!-- <td class="table_vertical">
+                                    <a ng-hide="campaignDetails.status >= 400"><i class="material-icons"
+                                    ng-click="deleteProductFromCampaign(campaignProduct.id, campaignDetails.id)">delete_forever</i></a>
+                                </td> -->
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal fade " id="findFormeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="card card-signin">
+                <div class="card-body">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal_bottom">
+                        <div class="text-center pb-3">
+                            <img src="assets/images/logo-png.jpg" class="login_img" alt="Smiley face">
+                        </div>
+                    </div>
+                    <h5>External Search is subject to the same terms and conditions as outlined in the AMP User
+                        Agreement.</h5>
+                    <h6><b>Campaign Name</b> : <span
+                            style="font-size: 14px; color: black;">{{campaignDetails.name}}</span> </h6>
+                    <hr class="my-3">
+                    <form class="form-signin mt-4" name="loginForm" novalidate>
+                        <div class="form-group row mr-0 ml-0">
+                            <!-- <div class="col-sm-12 form-group"
+                                ng-class="{'has-error': loginForm.budget_Rfp.$invalid && loginForm.budget_Rfp.$dirty, 'has-success': loginForm.budget_Rfp.$valid}">
+                                <label for="budget_Rfp" class="font-weight-bold for_required">Budget : <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                                <input type="number" id="budget_Rfp" name="budget_Rfp" ng-model="budget_Rfp" required placeholder="Enter your budget"/>
+                                <p class="help-block requiredValidatitionError" ng-if="loginForm.budget_Rfp.$invalid && loginForm.budget_Rfp.$dirty">
+                                    Please Enter Your Budget</p>
+                            </div> -->
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12 form-group"
+                                ng-class="{'has-error': loginForm.budget_Rfp.$invalid && loginForm.budget_Rfp.$dirty, 'has-success': loginForm.budget_Rfp.$valid}">
+                                <label class="font-weight-bold for_required">Budget<i class="fa fa-asterisk"
+                                        aria-hidden="true"></i></label>
+                                <input type="number" class="form-control md-whiteframe-3dp" id="budget_Rfp"
+                                    name="budget_Rfp" ng-model="budget_Rfp" required placeholder="Enter your budget" />
+                                <p class="help-block requiredValidatitionError"
+                                    ng-if="loginForm.budget_Rfp.$invalid && loginForm.budget_Rfp.$dirty">
+                                    Please Enter Your Budget</p>
+                                </p>
+                            </div>
+                            <div class="col-sm-12 form-group"
+                                ng-class="{'has-error': loginForm.password.$invalid && loginForm.password.$dirty, 'has-success': loginForm.password.$valid}">
+                                <textarea class="form-control  md-whiteframe-3dp" style="min-height:90px; resize: none;"
+                                    placeholder="place any additional information here" name="password"
+                                    ng-model="queryTxt" required />
+                                <p class="help-block requiredValidatitionError"
+                                    ng-if="loginForm.password.$invalid && loginForm.password.$dirty">
+                                    Please type your query</p>
+                            </div>
+                        </div>
+                        <div class="form-group text-right col-sm-12">
+                            <button class="btn login_margin all_button" layout-fill data-dismiss="modal" type="submit"
+                                style="width:100px" ng-click="findForMe(queryTxt,budget_Rfp,campaignDetails.id)"
+                                ng-disabled="loginForm.emails.$invalid || loginForm.password.$invalid || loginForm.budget_Rfp.$invalid"
+                                layout-fill="layout-fill" md-autofocus> Submit </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="downloadIOPopUp" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="RFP_logo">
+                        <img src="../assets/images/Logo-red-new.png" alt="" style="width:50%;">
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: right;">
+                        <md-button class="dropbtn Upload_font md_button_responsive"
+                            ng-click="downloadPDF(campaignDetails.id)" download>
+                            <i class="fa fa-file-pdf-o" style="font-size: 12px; padding: 2px;"></i> Download IO PDF
+                        </md-button>
+                    </div>
+
+                    <div class="mb-3">
+                        <h4 style="text-align: center;color: #007bff;letter-spacing:1px; font-weight: 600;">Insertion
+                            Order</h4>
+                    </div>
+                    <div>
+                        <h4 style="color:#990100;letter-spacing:1px;font-size: 15px;float:right; font-weight: 700;">
+                            Date: {{cdate | date:'MM-dd-yyyy'}} </h4>
+                        </p>
+                    </div>
+                    <div>
+                        <h4 style="float:left;width:100%;color:#990100;letter-spacing:1px; font-weight: 700;">Campaign
+                            Name:({{campaignDetails.name}}) ({{campaignDetails.cid}})</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered serialNumber">
+                            <thead>
+                                <tr class="srialNumberTd">
+                                    <th scope="col" class="text_wrap">Product ID</th>
+                                    <th scope="col" class="text_wrap">Type</th>
+                                    <th scope="col" class="text_wrap">DMA</th>
+                                    <th scope="col" class="text_wrap">Size</th>
+                                    <th scope="col" class="text_wrap">Product Title</th>
+                                    <th scope="col" class="text_wrap">Start Date</th>
+                                    <th scope="col" class="text_wrap">End Date</th>
+                                    <th scope="col" class="text_wrap">Unit Price($)</th>
+                                    <th scope="col" class="text_wrap">Quantity</th>
+                                    <th scope="col" class="text_wrap">Tax amount($)</th>
+                                    <th scope="col" class="text_wrap">Net Total($)</th>
+                                    <th scope="col" class="text_wrap" ng-if="campaignDetails.offer_applied_res == 1">New
+                                        price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Use ng-if to conditionally display the message -->
+                                <tr ng-if="campaignDetails.products == null">
+                                    <td colspan="12" class="text-center"><b>No Records Found</b></td>
+                                </tr>
+                                <tr ng-repeat="campaignProduct in campaignDetails.products">
+                                    <td class="text_wrap">{{campaignProduct.siteNo}}</td>
+                                    <td class="text_wrap">{{campaignProduct.type || "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.city}}</td>
+                                    <td class="text_wrap">{{campaignProduct.type != 'Media'?campaignProduct.panelSize :
+                                        "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.title || "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.date.startDate}}</td>
+                                    <td class="text_wrap">{{campaignProduct.date.endDate}}</td>
+                                    <td class="text_wrap">{{campaignProduct.price | number : 2}}</td>
+                                    <td class="text-center text_wrap">{{campaignProduct.quantity}}</td>
+                                    <td class="text-center text_wrap">({{campaignProduct.tax_percentage || '0' }})%
+                                        <br>{{campaignProduct.tax_percentage_amount}}</td>
+                                    <td class="text-center text_wrap">${{campaignProduct.price *
+                                        campaignProduct.quantity || '0' | number : 2}}</td>
+                                    <td ng-if="campaignDetails.offer_applied_res == 1" class="text_wrap">
+                                        {{(campaignProduct.offerprice+campaignProduct.tax_percentage_amount)| number :
+                                        2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row mt-2" style="border: 1px solid black; margin: auto;">
+                        <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                            <p><b>Terms:</b>{{campaignDetails.percentagevalue || '0' | number: 2}}% Due upon purchase
+                                (from purchase page)</p>
+                            <p>{{(100-campaignDetails.percentagevalue) || '0' | number: 2}}% Due upon invoice</p>
+                            <p><b>Art due date:</b> See Product details</p>
+                            <p><b>Restrictions:</b> See Product Details</p>
+                            <p><b>Cancellation:</b> See Product Details</p>
+                        </div>
+                        <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                            <p><b>Tax:</b> <span>$ {{campaignDetails.tax_percentage_amount_sum || '0' | number:
+                                    2}}</span></p>
+                            <p><b>Total:</b> <span>$
+                                    {{(campaignDetails.totalamount-campaignDetails.gross_fee_price-campaignDetails.tax_percentage_amount_sum)
+                                    || '0' | number: 2}}</span></p>
+                            <p><b>Gross fee ({{campaignDetails.gross_fee_percentage}}%):</b> <span>$
+                                    {{campaignDetails.gross_fee_price || '0'| number: 2}} </p>
+                            <p><b>Credit card Fee:</b> <span>$ {{campaignDetails.newprocessingfeeamtSum || '0' | number:
+                                    2}}</span> </p>
+                            <p><b>Grand Total:</b>
+                                {{(campaignDetails.totalamount+campaignDetails.newprocessingfeeamtSum) || '0' | number:
+                                2}}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-3" style="border: 1px solid black; margin: auto;">
+                        <p class="p-1" style="font-weight: normal;">2.Addresses. All notices, correspondence and
+                            invoices shall be sent to
+                            the addresses below.</p>
+                        <div class="row" style="margin: auto;">
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                                <p class="Io-paraText"><b>If to buyer: <span>{{campaignDetails.company_name}}</span>
+                                    </b></p>
+                                <p><b>Address:</b> <span
+                                        style="text-decoration: underline; white-space: pre;">{{campaignDetails.address}}
+                                        , {{userProfile.user.city}}</span> </p>
+                                <p class="Io-paraText"><b>Attn: </b><span
+                                        style="text-decoration: underline; white-space: pre;">{{campaignDetails.first_name
+                                        || "N/A" | capitalize}}</span> </p>
+                                <p><b>Email:</b> <span
+                                        style="text-decoration: underline; white-space: pre;">{{campaignDetails.email|
+                                        capitalize}}</span> </p>
+
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                                <p class="Io-paraText"><b>If to AMP: Advertising Marketplace, LLC</b></p>
+                                <p class="Io-paraText"><b> 28832 Via Buena Vista </b></p>
+                                <p class="Io-paraText"><b> San Juan Cap, CA 92675 </b></p>
+                                <p class="Io-paraText"><b> Attn: Richard McClemmy </b></p>
+                                <p class="Io-paraText"><b>mcclemmy.richard@gmail.com</b></p>
+                            </div>
+                        </div>
+                        <p class="p-1" style="font-weight: normal;">3. The attached Standard Terms and Conditions
+                            (“Standard Terms”) are
+                            incorporated as part of this Agreement, and Sponsor acknowledges
+                            that Sponsor has reviewed the Standard Terms and agrees to be bound by the provisions
+                            thereof. Should the
+                            Standard Terms conflict with the
+                            Main Agreement above then the IO shall govern</p>
+                        <p class="p-1" style="font-weight: normal;">4. This Agreement, once executed is not cancelable
+                            except by expiration
+                            or
+                            termination pursuant to the Standard Terms and Conditions.IN
+                            WITNESS WHEREOF, the parties, through their representatives, have executed this Agreement.
+                        </p>
+                        <div class="row" style="margin: auto;">
+                            <div class="col-md-4">
+                                <p><b>Buyer </b></p>
+                                <p><b>By: </b><span style="text-decoration: underline; white-space: pre;">
+                                        {{campaignDetails.first_name || "N/A" | capitalize}}</p>
+                                <p><b>Date: </b><span style="text-decoration: underline; white-space: pre;">{{cdate |
+                                        date:'MM-dd-yyyy'}}</span></p>
+                                <p><b>Its: </b><span style="text-decoration: underline; white-space: pre;"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><b>AMP </b></p>
+                                <p><b>BY: </b><span style="text-decoration: underline; white-space: pre;">Richard
+                                        McClemmy</span></p>
+                                <p><b>Date: </b><span style="text-decoration: underline; white-space: pre;">{{cdate |
+                                        date:'MM-dd-yyyy'}}</span></p>
+                                <p><b>Its: </b><span style="text-decoration: underline; white-space: pre;"></span></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><b>Seller </b></p>
+                                <p><b>BY: </b><span style="text-decoration: underline; white-space: pre;">Per User
+                                        Agreement</p>
+                                <p><b>Date: </b><span style="text-decoration: underline; white-space: pre;">{{cdate |
+                                        date:'MM-dd-yyyy'}} </span></p>
+                                <p><b>Its: </b><span style="text-decoration: underline; white-space: pre;"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-5" style="margin: auto;"
+                        ng-repeat="campaignProduct in campaignDetails.products_in_campaign">
+
+                        <hr class="new1">
+                        <div class="row" style="margin: auto;">
+                            <div class="col-12">
+                                <h4 style="margin-bottom:1rem; color:#990100;">Product Details</h4>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12">
+                                <div style="width: 100%; margin-top:0px; font-size: 11px;">
+                                    <div class="pdf-alignment">
+                                        <p class="Io-paraText"><b>AMP Product :</b> <span>
+                                                {{campaignProduct.siteNo}}</span> </p>
+                                        <p class="Io-paraText"><b>Type :</b> <span>{{campaignProduct.type ||
+                                                "N/A"}}</span> </p>
+                                        <p class="Io-paraText"><b>Title :</b> <span>{{campaignProduct.title ||
+                                                "N/A"}}</span></p>
+                                        <p class="Io-paraText des_text"><b>Description:</b>
+                                            {{campaignProduct.description || "N/A"}}</p>
+                                        <p class="Io-paraText"><b>Address 1 :</b>
+                                            <span>{{campaignProduct.address}}</span> </p>
+                                        <p class="Io-paraText"><b>Address 2 :</b> <span>{{campaignProduct.city}},
+                                                {{campaignProduct.state}}, {{campaignProduct.zipcode}}</span></p>
+                                        <p class="Io-paraText"><b>Country :</b>
+                                            <span>{{campaignProduct.country_name}}</span></p>
+                                        <p class="Io-paraText"><b>Location Description :</b>
+                                            <span>{{campaignProduct.locationDesc}}</span></p>
+                                        <p class="Io-paraText"> <b>Unit Quantity :</b>
+                                            <span>{{campaignProduct.unitQty}}</span></p>
+                                        <p class="Io-paraText"><b>Height :</b> <span>{{campaignProduct.height}} </span>
+                                            <b>Width :</b> <span> {{campaignProduct.width}}</span> </p>
+                                        <p class="Io-paraText"><b>Panel Size : </b>
+                                            <span>{{campaignProduct.panelSize}}</span></p>
+                                        <p class="Io-paraText"><b>Available 4-week Periods : </b><span>
+                                                {{campaignProduct.weekPeriod}}</span> <b>Rate Card (4 weeks):</b>
+                                            <span>${{campaignProduct.rateCard}}</span></p>
+                                        <p class="Io-paraText"><b>Fixed/Variable :</b> <span>{{campaignProduct.fix}}
+                                            </span> <b>Minimum Days :</b> <span> {{campaignProduct.minimumdays}}</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>Installation Cost :</b>
+                                            <span>${{campaignProduct.installCost}}</span> <b>Production Cost :</b>
+                                            <span>${{campaignProduct.productioncost}}</span> </p>
+                                        <p class="Io-paraText"><b>Product Direction :</b>
+                                            <span>{{campaignProduct.imgdirection}}</span> </p>
+                                        <p class="Io-paraText"><b>Illumination :</b>
+                                            <span>{{campaignProduct.lighting}}</span></p>
+                                        <p class="Io-paraText"><b>Facing :</b>
+                                            <span>{{campaignProduct.direction}}</span></p>
+                                        <p class="Io-paraText"><b>Latitude :</b> <span>{{campaignProduct.lat}}</span>
+                                            <b>Longitude :</b> <span>{{campaignProduct.lng}}</span></p>
+                                        <p class="Io-paraText"><b>Restrictions :</b>
+                                            <span>{{campaignProduct.notes}}</span></p>
+                                        <p class="Io-paraText"><b>Cancellation Policy :</b>
+                                            <span>{{campaignProduct.cancellation_policy}}</span> </p>
+                                        <p class="Io-paraText"><b>Payment Terms :</b>
+                                            <span>{{campaignProduct.cancellation_terms}}</span></p>
+                                        <p class="Io-paraText"><b>Median HHI :</b> <span
+                                                ng-if="campaignProduct.mediahhi != 'NaN'">$
+                                                {{campaignProduct.mediahhi}}</span></p>
+                                        <p class="Io-paraText"><b>Impression 18 - 49 :</b> <span
+                                                ng-if="campaignProduct.firstImpression != 'NaN'">{{campaignProduct.firstImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Adults 18 - 49 :</b> <span
+                                                ng-if="campaignProduct.firstcpm != 'NaN'">${{campaignProduct.firstcpm |
+                                                number:2}}</span><span
+                                                ng-if="campaignProduct.firstcpm == 'NaN'">$0.00</span></p>
+                                        <p class="Io-paraText"><b>Impression 18 - Plus :</b> <span
+                                                ng-if="campaignProduct.secondImpression != 'NaN'">{{campaignProduct.secondImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Adults 18 - Plus :</b> <span
+                                                ng-if="campaignProduct.cpm != 'NaN'"> ${{campaignProduct.cpm |
+                                                number:2}}</span><span ng-if="campaignProduct.cpm == 'NaN'">$0.00</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>Impression 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.thirdImpression != 'NaN'">{{campaignProduct.thirdImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>CPM Adults 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.thirdcpm != 'NaN'">{{campaignProduct.thirdcpm}}</span><span
+                                                ng-if="campaignProduct.thirdcpm == 'NaN'">$0.00</span> </p>
+                                        <p class="Io-paraText"><b>Impression (HA25 - HA54) :</b> <span
+                                                ng-if="campaignProduct.forthImpression != 'NaN'">{{campaignProduct.forthImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Hispanic 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.forthcpm != 'NaN'">${{campaignProduct.forthcpm |
+                                                number:2}}</span><span
+                                                ng-if="campaignProduct.forthcpm == 'NaN'">$0.00</span> </p>
+                                        <p class="Io-paraText"><b>Audited :</b> <span>{{campaignProduct.audited}}</span>
+                                            <b>Seller Id :</b> <span>{{campaignProduct.sellerId}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.Comments != ''"><b>Comments
+                                                    :</b> <span>{{campaignProduct.Comments}}</span></span> </p>
+                                        <p class="Io-paraText"><span ng-if="campaignProduct.billingYes"><b>AMP Bills
+                                                    :</b> <span>{{campaignProduct.billingYes}}</span></span>
+                                            <span ng-if="campaignProduct.billingNo"><b>AMP Bills :</b>
+                                                <span>{{campaignProduct.billingNo}}</span></span>
+                                            <span ng-if="campaignProduct.servicingYes"><b>AMP Serdfgdfgvices :</b>
+                                                <span>{{campaignProduct.servicingYes}}
+                                                    {{campaignProduct.offer_comments_data}}</span></span>
+                                            <span ng-if="campaignProduct.servicingNo"><b>AMP Sdfgdfervices :</b>
+                                                <span>{{campaignProduct.servicingNo}}
+                                                    {{campaignProduct.offer_comments_data}}</span></span>
+                                        </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.spotLength != ''"><b>Spot
+                                                    Length: </b> <span>{{campaignProduct.spotLength}}</span></span>
+                                            <span ng-if="campaignProduct.ageloopLength != ''"><b>Loop Length: </b>
+                                                <span>{{campaignProduct.ageloopLength}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.fliplength != ''"><b>Flip
+                                                    Length: </b> <span>{{campaignProduct.fliplength}}</span></p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.medium != ''"><b>Medium:
+                                                </b> <span>{{campaignProduct.medium}}</span> </p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.product_newAge != ''"><b>Product: </b>
+                                                <span>{{campaignProduct.product_newAge}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.file_type != ''"><b>File
+                                                    Type: </b> <span>{{campaignProduct.file_type}}</span> </p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.staticMotion != ''"><b>Static Motion: </b>
+                                                <span>{{campaignProduct.staticMotion}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.sound != ''"><b>Sound: </b>
+                                                <span>{{campaignProduct.sound}}</span></span> <span
+                                                ng-if="campaignProduct.network != ''"><b>Network: </b>
+                                                <span>{{campaignProduct.network}}</span></span> </p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.nationloc != ''"><b>National Local: </b>
+                                                <span>{{campaignProduct.nationloc}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.daypart != ''"><b>Day Part:
+                                                </b> <span>{{campaignProduct.daypart}}</span></span> <span
+                                                ng-if="campaignProduct.genre != ''"><b>Genre: </b>
+                                                <span>{{campaignProduct.genre}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.costperpoint != ''"><b>Cost
+                                                    Per Point: </b> <span>{{campaignProduct.costperpoint}}</span></span>
+                                            <span ng-if="campaignProduct.costperpoint != ''"><b>>Cost Per Point: </b>
+                                                <span>{{campaignProduct.costperpoint}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.placement != ''"><b>Ad
+                                                    Type: </b> <span>{{campaignProduct.placement}}</span> </p>
+                                    </div>
+                                    <div ng-repeat="campaignProducts in campaignDetails.products"
+                                        ng-if="campaignProducts.siteNo === campaignProduct.siteNo">
+                                        <div ng-if="campaignProducts.offer_comments.length > 0">
+                                            <div class="row mt-3" style="margin: auto;">
+                                                <p><b class="for_blue_clr">Deal Information:</b></p>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Offer Type</th>
+                                                            <th>Sender</th>
+                                                            <th>Comments</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            ng-repeat="campaignProductz in campaignProducts.offer_comments">
+                                                            <td>{{campaignProductz.offer_type}}</td>
+                                                            <td>{{campaignProductz.Sender}}</td>
+                                                            <td>{{campaignProductz.comment}}</td>
+                                                            <td>{{campaignProductz.final_status}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 my-auto">
+                                <div class="mb-3">
+                                    <img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face"
+                                        style="width: 100%;">
+                                </div>
+                                <div>
+                                    <img ng-src="{{ campaignProduct.mapImageUrl }}" alt="Google Map"
+                                        style="width: 100%;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3" style="margin: auto;">
+                            <div class="col-md-6">
+                                <p><b class="for_blue_clr">Billing:</b></p>
+                                <p class="Io-paraText">Richard Mcclemmy</p>
+                                <p class="Io-paraText"><b>Email: mcclemmy.richard@gmail.com</b></p>
+                                <p class="Io-paraText"><b>Phone: +(714)293-3883</b></p>
+                                <p class="Io-paraText"><b>Address:</b></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><b class="for_blue_clr">Servicing:</b></p>
+                                <p class="Io-paraText">Richard Mcclemmy</p>
+                                <p class="Io-paraText"><b>Email: mcclemmy.richard@gmail.com</b></p>
+                                <p class="Io-paraText"><b>Phone: +(714)293-3883</b></p>
+                                <p class="Io-paraText"><b>Address:</b></p>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <p style="color:#990100;font-size: 15px;margin-bottom: 0px;font-weight: 600;">Advertising
+                                Marketplace, LLC</p>
+                            <p style="font-size: 15px;margin-bottom: 0px; margin-top: 5px; font-weight: 600;">All Rights
+                                Reserved</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <hr class="new1">
+                        <h4 style="text-align: center; width:100%;color: #007bff;letter-spacing:1px; font-weight: 600;">
+                            AMP – Insertion Order - Standard Terms and Conditions</h4>
+                        <p>1. Media Placement: (a) Advertising Marketplace, LLC (“Agency”) is authorized to act as agent
+                            for its Buyer (“Buyer”) in dealing with media
+                            vendor (“Seller”) or vendors (“Sellers”) and other applicable parties and is authorized to
+                            enter into contracts and schedules for placement of
+                            media on behalf of Buyer for Sellers products and/or services. Unless otherwise agreed, all
+                            placements will be made in Buyer’s name and
+                            Agency represents it has the authority to act and is acting on behalf of its Buyer as an
+                            “agent for a disclosed principal”. (b) If media product
+                            included in this contract is no longer available for any reason, the Seller will offer a
+                            product or service of equal or better advertising value to be
+                            approved by Buyer and Agency. In the event that Buyer approves the new product, the term of
+                            this contract will be extended after the
+                            expiration date of this contract for a period that is equal to the time in which Buyer’s
+                            advertisement was not on display or delivered. If Buyer
+                            or Agency do not approve the new product, Agency, on behalf of its Buyer, reserves the right
+                            to, in its sole decision, cancel this contract in its
+                            entirety and or the portion of the contract Seller or Sellers are not able to deliver. Upon
+                            cancellation, the Seller will be responsible for
+                            reimbursing Agency or Buyer a sum equal to: (i) the pro-rata media cost paid by Agency/Buyer
+                            for the period of time in which Buyer’s
+                            advertisement was not on display; and (ii) the out of pocket costs incurred by Agency/Buyer
+                            prior to the date of termination for production
+                            and delivery of the advertising material, art or copy hereunder which was not delivered. (c)
+                            If Sellers product includes illumination of any type
+                            and illumination is suspended for any reason during the term of the contract, Agency/Buyer
+                            is entitled to a pro-rata credit equal to 25% of the
+                            daily value of the contracted time period during which illumination is suspended. If
+                            illumination is suspended in excess of three (3) days,
+                            Agency/Buyer shall have the right to terminate the contract and Seller or Sellers shall be
+                            obligated to reimburse Agency/Buyer a sum equal to
+                            the out of pocket costs incurred by Agency/Buyer prior to the date of termination for
+                            production and delivery of the advertising material.
+                            (d)All media must be posted within two (2) business days of the contracted start date
+                            pending receipt of materials by established deadline.</p>
+                        <p>2. Representations and Warranties: (a) Seller represents and warrants that (i) it has the
+                            full power and authority to enter into this contract and to
+                            perform the obligations contained in this agreement; and that (ii) it has conducted proper
+                            due diligence ensuring that necessary permission and/or
+                            permits for advertising messages are valid; (iii) that all advertiser messages are
+                            acceptable based on any permits/permissions required through the
+                            contract duration; and (iv) it will perform the services using professional care and skill.
+                            (b) Agency represents and warrants that (i) it has full power
+                            and authority to enter into this contract and (ii) Buyer has the necessary licenses and
+                            clearances to use the content contained in the advertising
+                            materials.</p>
+                        <p>3. Financial Terms: Buyer is solely liable for all such media billings placed and properly
+                            run on its behalf. Agency will have no financial liability for
+                            the media placed with Seller, except to the extent Agency has received payment from Buyer
+                            designated for Seller. Upon receipt of such funds,
+                            Agency will assume sole liability. Payment terms are net sixty (60) days unless otherwise
+                            agreed in writing but the parties. Except as otherwise
+                            provided in this contract, Agency is not responsible for payment of any taxes, late payment
+                            fees, or additional charges incurred by Seller. Agency
+                            does not issue payment prior to receipt of appropriate proof of performance including signed
+                            affidavits of performance, photos of executed media
+                            and all other applicable items.</p>
+                        <p>4. Confidentiality: Each party agrees to take reasonable precautions to protect from
+                            disclosure the confidential information that it receives from
+                            the other party. "Confidential information" includes Buyer information disclosed by Agency
+                            and any information that is disclosed in a manner that
+                            would reasonably suggest that the information is confidential, but does not include any
+                            information that: (i) is, or later rightfully becomes,
+                            available to the public; (ii) was in the recipient's rightful possession prior to receipt of
+                            the information from the discloser; (iii) is later disclosed to
+                            the recipient by a third party who, to the best of receiving party’s knowledge, has no
+                            obligation of confidentiality; (iv) is independently developed
+                            by the recipient without the use or benefit of the confidential information; or (v) is
+                            required to be disclosed under court order or other legal
+                            process.</p>
+                        <p>5. Cancellation: (a) Agency reserves the right to cancel all media up until fourteen (14)
+                            days prior to the commencement date of the contracted
+                            product(s). Once the contract is in effect, Agency reserves the right to cancel the
+                            remainder of the contract starting sixty (60) days from the date of
+                            notice without penalty or short rate. (b) Agency requires sixty (60) day notice of renewal
+                            from all Sellers. If this notice is not given by the Seller in
+                            writing and accepted by Agency in writing, the contracted media will expire on the final day
+                            of the contract. The terms herein supersede any
+                            automatic media renewal provisions that may be contained in any other documents executed
+                            between the parties.</p>
+                        <p>6. Responsibility: Buyer agrees that it will be solely responsible for the content of any and
+                            all advertising placed on its behalf by Agency, including
+                            but not limited to, ensuring that all advertisements supplied are not misleading,
+                            inaccurate, indecent, libelous or unlawful and that their placement
+                            or publication will not violate the rights of any third party. Seller agrees to facilitate
+                            copy approval with appropriate entities such as owner,
+                            landlord or any other authority necessary prior to posting date on behalf of Agency/Buyer.
+                        </p>
+                        <p style="font-size: 11px;">7. Indemnification: Seller and Buyer will indemnify, defend and hold
+                            the other party and Agency harmless from any and all claims, suits, actions,
+                            liabilities, expenses and costs relating to losses, claims,
+                            damages, liabilities, judgments, settlements or costs and expenses (including reasonable
+                            attorneys' fees) against the other party and Agency, their
+                            employees, directors or affiliates, arising out of or in connection with a breach of this
+                            contract (including its representations under Section 2(a) or
+                            its gross negligence or willful misconduct under this contract.</p>
+                        <p style="font-size: 11px;">8. Force Majeure: Each party will be excused from performing
+                            obligations contained in this contract while such performance is prevented by an
+                            act of God, fire, flood, earthquake, transportation disruption, war, insurrection, labor
+                            dispute, or any other occurrence beyond the reasonable
+                            control of that party. If such Force Majeure event continues for a period of thirty (30)
+                            days or longer, Agency and or Buyer shall have the right to
+                            terminate this contract and Seller will reimburse Agency an or Buyer for the period of time
+                            in which Buyer’s advertisement is not on display.</p>
+                        <p style="font-size: 11px;">9. General: (a) This contract contains the entire agreement between
+                            the parties relating to the advertising services and supersedes any previous
+                            agreements or understanding whether written or oral. No amendment, modification or waiver
+                            shall be made to this contract unless made in
+                            writing and signed by both parties. (b) If any provision of this contract is held to be
+                            invalid, illegal or unenforceable, the remaining provisions of the
+                            contract will remain in full force and effect. (c) This contract is also subject to the User
+                            Agreement and all Policies that the parties agreed to when
+                            registering with Agency. If there is a conflict between the User Agreement, Agencies
+                            Policies as outlined on Agencies website
+                            (www.advertisingmarketplace.com) and these Standard Terms and Conditions, these Standard
+                            Terms and Conditions shall prevail.</p>
+
+                    </div>
+                    <div class="col-12 mt-4">
+                        <p style="color:#990100;font-size: 15px;margin-bottom: 0px;font-weight: 600;">Advertising
+                            Marketplace, LLC</p>
+                        <p style="font-size: 15px;margin-bottom: 0px; margin-top: 5px; font-weight: 600;">All Rights
+                            Reserved</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="OuatationModalView" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                    <md-button class="dropbtn Upload_font md_button_responsive"
+                        ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                        <i class="fa fa-file-pdf-o" style="font-size: 12px; padding: 2px;"></i>  Download Quote PDF  
+                    </md-button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button> -->
+                <div class="modal-header">
+                    <div class="RFP_logo">
+                        <img src="../assets/images/Logo-red-new.png" alt="" style="width:50%;">
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: right;">
+                        <md-button class="dropbtn Upload_font md_button_responsive"
+                            ng-click="downloadAdminQuote(campaignDetails.id)" download>
+                            <i class="fa fa-file-pdf-o" style="font-size: 12px; padding: 2px;"></i> Download Quote PDF
+                        </md-button>
+                    </div>
+                    <div>
+                        <h4 style="float:left;width:100%;color:#990100;letter-spacing:1px; font-weight: 600;">Campaign
+                            Name:{{campaignDetails.name}}</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered serialNumber">
+                            <thead>
+                                <tr class="srialNumberTd">
+                                    <th scope="col" class="text_wrap">Product ID</th>
+                                    <th scope="col" class="text_wrap">Type</th>
+                                    <th scope="col" class="text_wrap">DMA</th>
+                                    <th scope="col" class="text_wrap">Size</th>
+                                    <th scope="col" class="text_wrap">Product Title</th>
+                                    <th scope="col" class="text_wrap">Start Date</th>
+                                    <th scope="col" class="text_wrap">End Date</th>
+                                    <th scope="col" class="text_wrap">Unit Price($)</th>
+                                    <th scope="col" class="text_wrap">Quantity</th>
+                                    <th scope="col" class="text_wrap">Product Price($)</th>
+                                    <th scope="col" class="text_wrap">Tax amount($)</th>
+                                    <th scope="col" class="text_wrap">Net Total($)</th>
+                                    <th scope="col" class="text_wrap" ng-if="campaignDetails.offer_applied_res == 1">New
+                                        price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Use ng-if to conditionally display the message -->
+                                <tr ng-if="campaignDetails.products == null">
+                                    <td colspan="12" class="text-center"><b>No Record Found</b></td>
+                                </tr>
+                                <tr ng-repeat="campaignProduct in campaignDetails.products">
+                                    <td class="text_wrap">{{campaignProduct.siteNo}}</td>
+                                    <td class="text_wrap">{{campaignProduct.type || "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.city}}</td>
+                                    <td class="text_wrap">{{campaignProduct.type != 'Media'?campaignProduct.panelSize :
+                                        "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.title || "N/A"}}</td>
+                                    <td class="text_wrap">{{campaignProduct.date.startDate}}</td>
+                                    <td class="text_wrap">{{campaignProduct.date.endDate}}</td>
+                                    <td class="text_wrap">{{campaignProduct.price | number : 2}}</td>
+                                    <td class="text-center text_wrap">{{campaignProduct.quantity}}</td>
+                                    <td class="text_wrap">{{campaignProduct.price *
+                                        campaignProduct.quantity || '0' | number : 2}}</td>
+                                    <td class="text-center text_wrap">({{campaignProduct.tax_percentage || '0' }})%
+                                        <br>{{campaignProduct.tax_percentage_amount}}</td>
+                                    <td class="text-center text_wrap">
+                                        ${{(campaignProduct.price+campaignProduct.tax_percentage_amount_shortlist) *
+                                        campaignProduct.quantity || '0' | number : 2}}</td>
+                                    <td ng-if="campaignDetails.offer_applied_res == 1" class="text_wrap text-center">
+                                        {{(campaignProduct.offerprice+campaignProduct.tax_percentage_amount)| number :
+                                        2}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-bordered">
+                            <tr style="border: 1px solid #8080808f;">
+                                <td class="border_1"
+                                    style="color:#990100; border-right-style: hidden; padding-left:10px;">
+                                    <b>Impressions Total - {{campaignDetails.impressionSum || '0' | number : 0}}</b>
+                                </td>
+                                <td class="border_1" style="color:#990100; border-right-style: hidden;"><b>CPM Total
+                                        -</b><b> ${{campaignDetails.campaign_cpmval || '0' | number : 2}}</b></td>
+                                <td class="border_1" style="color:#990100; border-right-style: hidden;"><b>Total
+                                        -</b><b> $ {{campaignDetails.act_budget || '0' | number : 2}}</b></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="mt-5" style="margin: auto;"
+                        ng-repeat="campaignProduct in campaignDetails.products_in_campaign">
+                        <hr class="new1">
+                        <div class="row" style="margin: auto;">
+                            <div class="col-12">
+                                <h4 style="margin-bottom:1rem; color:#990100;">Product Details</h4>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 mb-3">
+                                <div class="" style="width: 100%; margin-top:0px; font-size: 11px;">
+                                    <div class="pdf-alignment">
+                                        <p class="Io-paraText"><b>AMP Product :</b> <span>
+                                                {{campaignProduct.siteNo}}</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>Type :</b> <span>{{campaignProduct.type ||
+                                                "N/A"}}</span> </p>
+                                        <p class="Io-paraText"><b>Title :</b> <span>{{campaignProduct.title ||
+                                                "N/A"}}</span> </p>
+                                        <p class="Io-paraText des_text"><b>Description:</b>
+                                            {{campaignProduct.description || "N/A"}}</p>
+                                        <p class="Io-paraText"><b>Address 1
+                                                :</b><span>{{campaignProduct.address}}</span> </p>
+                                        <p class="Io-paraText"><b>Address 2 :</b> <span>{{campaignProduct.city}},
+                                                {{campaignProduct.state}}, {{campaignProduct.zipcode}}</span> </p>
+                                        <p class="Io-paraText"><b>Country :</b>
+                                            <span>{{campaignProduct.country_name}}</span> </p>
+                                        <p class="Io-paraText"> <b>Unit Quantity
+                                                :</b><span>{{campaignProduct.unitQty}}</span> </p>
+                                        <p class="Io-paraText"><b>Height :</b> <span>{{campaignProduct.height}}
+                                            </span><b>Width :</b> <span> {{campaignProduct.width}}</span></p>
+                                        <p class="Io-paraText"><b>Panel Size :
+                                            </b><span>{{campaignProduct.panelSize}}</span> </p>
+                                        <p class="Io-paraText"><b>Available 4-week Periods :
+                                            </b><span>{{campaignProduct.weekPeriod}}</span> </p>
+                                        <p class="Io-paraText"><b>Rate Card (4
+                                                weeks):</b><span>${{campaignProduct.rateCard}}</span> </p>
+                                        <p class="Io-paraText"><b>Fixed/Variable :</b>
+                                            <span>{{campaignProduct.fix}}</span></p>
+                                        <p class="Io-paraText"><b>Installation Cost :</b>
+                                            <span>${{campaignProduct.installCost}}</span> </p>
+                                        <p class="Io-paraText"><b>Production Cost
+                                                :</b><span>${{campaignProduct.productioncost}}</span> </p>
+                                        <p class="Io-paraText"><b>Product Direction :</b>
+                                            <span>{{campaignProduct.imgdirection}}</span> </p>
+                                        <p class="Io-paraText"><span
+                                                ng-if="campaignProduct.lighting != ''"><b>Illumination :</b>
+                                                <span>{{campaignProduct.lighting}}</span></span></p>
+                                        <p class="Io-paraText"><span ng-if="campaignProduct.direction != ''"><b>Facing
+                                                    :</b><span>{{campaignProduct.direction}}</span></span></p>
+                                        <p class="Io-paraText"><b>Latitude :</b> <span>{{campaignProduct.lat}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>Longitude :</b> <span>{{campaignProduct.lng}}</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>Restrictions :</b>
+                                            <span>{{campaignProduct.notes}}</span> </p>
+                                        <p class="Io-paraText"><b>Cancellation Policy :</b>
+                                            <span>{{campaignProduct.cancellation_policy}}</span></p>
+                                        <p class="Io-paraText"><b>Payment Terms :</b>
+                                            <span>{{campaignProduct.cancellation_terms}}</span></p>
+                                        <p class="Io-paraText"><b>Median HHI :</b> <span
+                                                ng-if="campaignProduct.mediahhi != 'NaN'">$
+                                                {{campaignProduct.mediahhi}}</span></p>
+                                        <p class="Io-paraText"><b>Impression 18 - 49 :</b> <span
+                                                ng-if="campaignProduct.firstImpression != 'NaN'">{{campaignProduct.firstImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Adults 18 - 49 :</b> <span
+                                                ng-if="campaignProduct.firstcpm != 'NaN'">${{campaignProduct.firstcpm |
+                                                number:2}}</span><span
+                                                ng-if="campaignProduct.firstcpm == 'NaN'">$0.00</span></p>
+                                        <p class="Io-paraText"><b>Impression 18 - Plus :</b> <span
+                                                ng-if="campaignProduct.secondImpression != 'NaN'">{{campaignProduct.secondImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Adults 18 - Plus :</b> <span
+                                                ng-if="campaignProduct.cpm != 'NaN'"> ${{campaignProduct.cpm |
+                                                number:2}}</span><span ng-if="campaignProduct.cpm == 'NaN'">$0.00</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>Impression 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.thirdImpression != 'NaN'">{{campaignProduct.thirdImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"><b>CPM Adults 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.thirdcpm != 'NaN'">${{campaignProduct.thirdcpm |
+                                                number:2}}</span><span
+                                                ng-if="campaignProduct.thirdcpm == 'NaN'">$0.00</span> </p>
+                                        <p class="Io-paraText"><b>Impression (HA25 - HA54) :</b> <span
+                                                ng-if="campaignProduct.forthImpression != 'NaN'">{{campaignProduct.forthImpression}}</span>
+                                        </p>
+                                        <p class="Io-paraText"> <b>CPM Hispanic 25 - 54 :</b> <span
+                                                ng-if="campaignProduct.forthcpm != 'NaN'">${{campaignProduct.forthcpm |
+                                                number:2}}</span><span
+                                                ng-if="campaignProduct.forthcpm == 'NaN'">$0.00</span> </p>
+                                        <p class="Io-paraText"><b>Audited :</b> <span>{{campaignProduct.audited}}</span>
+                                        </p>
+                                        <P class="Io-paraText"> <b>Seller Id :</b>
+                                            <span>{{campaignProduct.sellerId}}</span></P>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.Comments != ''"><b>Comments
+                                                    :</b> <span>{{campaignProduct.Comments}}</span></span> </p>
+                                        <p class="Io-paraText"><span ng-if="campaignProduct.billingYes"><b>AMP Bills
+                                                    :</b> <span>{{campaignProduct.billingYes}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.billingNo"><b>AMP Bills
+                                                    :</b> <span>{{campaignProduct.billingNo}}</span></span></p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.servicingYes"><b>AMP
+                                                    Services :</b> <span>{{campaignProduct.servicingYes}}</span></span>
+                                        </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.servicingNo"><b>AMP
+                                                    Services :</b> <span>{{campaignProduct.servicingNo}}</span></span>
+                                        </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.spotLength != ''"><b>Spot
+                                                    Length: </b> <span>{{campaignProduct.spotLength}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.fliplength != ''"><b>Flip
+                                                    Length: </b> <span>{{campaignProduct.fliplength}}</span></span></p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.ageloopLength != ''"><b>Loop Length: </b>
+                                                <span>{{campaignProduct.ageloopLength}}</span></span></p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.medium != ''"><b>Medium:
+                                                </b> <span>{{campaignProduct.medium}}</span> </p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.product_newAge != ''"><b>Product: </b>
+                                                <span>{{campaignProduct.product_newAge}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.file_type != ''"><b>File
+                                                    Type: </b> <span>{{campaignProduct.file_type}}</span> </p>
+                                        <p class="Io-paraText"><span
+                                                ng-if="campaignProduct.locationDesc != ''"><b>Location Description :</b>
+                                                <span>{{campaignProduct.locationDesc}}</span></p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.staticMotion != ''"><b>Static Motion: </b>
+                                                <span>{{campaignProduct.staticMotion}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.sound != ''"><b>Sound: </b>
+                                                <span>{{campaignProduct.sound}}</span></span> </p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.minimumdays != ''"><b>Minimum Days: </b>
+                                                <span>{{campaignProduct.minimumdays}}</span> </p>
+                                        <p class="Io-paraText"><span ng-if="campaignProduct.network != ''"><b>Network:
+                                                </b> <span>{{campaignProduct.network}}</span></span></p>
+                                        <p class="Io-paraText"> <span
+                                                ng-if="campaignProduct.nationloc != ''"><b>National Local: </b>
+                                                <span>{{campaignProduct.nationloc}}</span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.daypart != ''"><b>Day Part:
+                                                </b> <span>{{campaignProduct.daypart}}</span></span> </p>
+                                        <p class="Io-paraText"><span ng-if="campaignProduct.genre != ''"><b>Genre: </b>
+                                                <span>{{campaignProduct.genre}}</span></span></p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.costperpoint != ''"><b>Cost
+                                                    Per Point: </b> <span>{{campaignProduct.costperpoint}}</span></span>
+                                            <span ng-if="campaignProduct.costperpoint != ''"><b>>Cost Per Point: </b>
+                                                <span>{{campaignProduct.costperpoint}}</span></span> </p>
+                                        <p class="Io-paraText"> <span ng-if="campaignProduct.placement != ''"><b>Ad
+                                                    Type: </b> <span>{{campaignProduct.placement}}</span> </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 my-auto">
+                                <div class="mb-3">
+                                    <img ng-src="{{config.serverUrl + campaignProduct.image}}" alt="Smiley face"
+                                        style="width: 100%;">
+                                </div>
+                                <div>
+                                    <img ng-src="{{ campaignProduct.mapImageUrl }}" alt="Google Map"
+                                        style="width: 100%;">
+                                </div>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <p style="color:#990100;font-size: 15px;margin-bottom: 0px;font-weight: 600;">
+                                    Advertising Marketplace, LLC</p>
+                                <p style="font-size: 15px;margin-bottom: 0px; margin-top: 5px; font-weight: 600;">All
+                                    Rights Reserved</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bd-example-modal-lg" id="BuyerRFPModalView" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: right;" class="mb-3">
+                        <md-button class="md-raised all_button md_button_responsive purchage_margin" data-toggle="modal"
+                            data-target="#findFormeModal" data-dismiss="modal"
+                            ng-if="campaignDetails.cmp_type == 1 && campaignDetails.products.length == null">Request
+                            External Search
+                        </md-button>
+                        <md-button class="dropbtn Upload_font" ng-click="downloadRFPsearch(campaignDetails.id)"
+                            download>
+                            <i class="fa fa-file-pdf-o" style="font-size: 12px; padding: 2px;"></i> Download RFP PDF
+                        </md-button>
+                    </div>
+                    <div class="RFP_logo" style="text-align:center">
+                        <img src="../assets/images/Logo-red-new.png" alt="" style="width:25%;">
+                    </div>
+                    <div class="main_head">
+                        <h3>Request External Search</h3>
+                    </div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;"><b>AMP
+                            #:</b><span></span> </div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;">CAMPAIGN: <span>
+                            <span style="color: #000;">{{ campaignDetails.name | capitalize}}</span> </div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;">DEMO: <span
+                            style="color: #000;">{{ campaignDetails.rfp_search_criteria_preview.demo}}</span></div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;">FORMATS: <span
+                            style="color: #000;">{{
+                            campaignDetails.rfp_search_criteria_preview.product_type.toString()}}</span> </div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;">BUDGET: <span
+                            style="color: #000;">{{ (campaignDetails.rfp_search_criteria_preview.budget) ||
+                            "N/A"}}</span></div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px;">DEADLINE: <span
+                            style="color: #000;"><b>{{(campaignDetails.rfp_search_criteria_preview.due_date) ||
+                                "N/A"}}</b></span></div>
+                    <div class="rfp_data"
+                        style="float:left;width:100%;color:#990100;letter-spacing:1px;font-size: 15px; margin-bottom:15px">
+                        INSTRUCTIONS: <span style="color: #000;">{{
+                            campaignDetails.rfp_search_criteria_preview.instructions}}</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered serialNumber">
+                            <thead>
+                                <tr class="srialNumberTd">
+                                    <th scope="col" style="background-color:#e6ff99">EST'D FLIGHT START</th>
+                                    <th scope="col" class="rfp_searchCriteria">FLIGHT END</th>
+                                    <th scope="col" class="rfp_searchCriteria">CITY</th>
+                                    <th scope="col" class="rfp_searchCriteria">STATE</th>
+                                    <th scope="col" class="rfp_searchCriteria">FLIGHT DAYS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="campaign_dma_area in campaignDetails.area_rfp_details track by $index">
+                                    <td class="text-center">{{currentDateDataString[$index].dates_dma[0]}}</td>
+                                    <td class="text-center">{{currentDateDataString[$index].dates_dma[1]}}</td>
+                                    <td class="text-center">{{campaign_dma_area.city_name}}</td>
+                                    <td class="text-center">{{campaign_dma_area.state_name}}</td>
+                                    <td class="text-center">{{dates_dma_diff_data[$index]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p style="color: red; word-wrap: break-word;padding-left: 20px;"
+    ng-if="campaignDetails.campaign_purchase_disable_status"><strong>Note: *This product has been already purchased and
+        because of that 'purchased' button is not present. Deleting this product from this list shows the purchase
+        button.</strong></p>
+<!-- table grid end -->
+<div class="row border_quest mr-0 ml-0">
+</div>
+<div ng-if="campaignDetails.status == 100|| campaignDetails.status == 1300">
+    <div style="float: right;">
+        <div class="payment-summary">
+            <!--<md-button class="md-raised all_button purchase_buyer_res" ng-if="campaignDetails.total_paid == 0 && !offerDetails.isRequested" ng-href="/user-payment/{{campaignDetails.id}}">Purchase
+            </md-button>-->
+
+            <md-button class="md-raised all_button purchase_buyer_res"
+                ng-if="campaignDetails.total_paid == 0 && campaignDetails.shortlistedsum != 0 && !offerDetails.isRequested && campaignDetails.products.length > 0"
+                ng-click="gotoPaymentPage()">Purchase
+            </md-button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    function UsershareCampaign() {
+        document.getElementById("usershareDrop").classList.toggle("show");
+    }
+    function UserofferCampaign() {
+        document.getElementById("userofferDrop").classList.toggle("show");
+    }
+    function DeleteCampaign() {
+        document.getElementById("deleteDrop").classList.toggle("show");
+    }
+    function DeleteProduct() {
+        document.getElementById("deleteDro").classList.toggle("show");
+        document.getElementById("commentid").value = '';
+    }
+    function TransferCampaign() {
+        document.getElementById("transferDrop").classList.toggle("show");
+    }
+</script>

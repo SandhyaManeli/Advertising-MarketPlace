@@ -1,0 +1,412 @@
+<div class="container resp-padtop">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+            <button type="button" class="btn btn-link back-btn" onclick="goBack()">
+                << Back</button>
+        </div>
+    </div>
+</div>
+<div ng-if="lazy.pageNo > 0 && !userSavedCampaigns.length && !http2_loading" class="d-flex justify-content-center mt-5">
+    <h1 style="color: #BC2535;">
+        You haven't Saved Any Campaigns
+    </h1>
+</div>
+<div layout="column" class="contbg" ng-show="userSavedCampaigns.length > 0">
+    <div layout="row" class="" layout-padding>
+        <div class="md-title text_color"><b>Saved Campaigns</b></div>
+        <div flex></div>
+        <!-- <div class="form-group saved_camp hide-xs"> -->
+        <div class="form-group saved_camp">
+            <input type="search" class="form-control md-whiteframe-3dp" ng-model="activeUserCampaign.name"
+                placeholder="search Campaign">
+        </div>
+    </div>
+    <div>
+        <div class="table-responsive" id="campaign-table">
+            <table class="table mb-0">
+                <thead>
+                    <tr class="text_color">
+                        <!-- <th>CID</th> -->
+                        <th class="camp_saved">Campaign ID
+                            <span class="d-inline"
+                                ng-class="'cid' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"
+                                ng-click='sortAsc("cid","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline"
+                                ng-class="'cid' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'"
+                                ng-click='sortDsc("cid","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="camp_saved">Campaign Name
+                            <span class="d-inline"
+                                ng-class="'name' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"
+                                ng-click='sortAsc("name","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline"
+                                ng-class="'name' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'"
+                                ng-click='sortDsc("name","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <!-- <th>Start Date</th> -->
+                        <th class="text-center camp_saved">Number of Products
+                            <span class="d-inline"
+                                ng-class="'product_count' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"
+                                ng-click='sortAsc("product_count","number")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline"
+                                ng-class="'product_count' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'"
+                                ng-click='sortDsc("product_count","number")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <!-- <th>Paid</th> -->
+                        <th class="text-right padding-20 camp_saved">Total Price in $
+                            <span class="d-inline"
+                                ng-class="'act_budget' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"
+                                ng-click='sortAsc("act_budget","number")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline"
+                                ng-class="'act_budget' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'"
+                                ng-click='sortDsc("act_budget","number")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="text-center camp_saved">View Details</th>
+                        <th class="text-center camp_saved">Edit Campaign Name</th>
+                        <th class="text-center camp_saved">Date Entered
+                            <span class="d-inline"
+                                ng-class="'updated_at' == upArrowColour && sortType == 'Asc'?'highlight': 'nonhighlight'"
+                                ng-click='sortAsc("updated_at","string")'><i class="fas fa-arrow-up"></i>
+                            </span>
+                            <span class="d-inline"
+                                ng-class="'updated_at' == downArrowColour && sortType == 'Dsc'?'highlight': 'nonhighlight'"
+                                ng-click='sortDsc("updated_at","string")'><i class="fas fa-arrow-down"></i>
+                            </span>
+                        </th>
+                        <th class="text-center camp_saved">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="contbg">
+
+                    <tr ng-repeat="activeUserCampaign in userSavedCampaigns | filter : activeUserCampaign.name">
+                        <td class="table_vertical">{{activeUserCampaign.cid || "N/A"}}</td>
+                        <td class="table_vertical">{{activeUserCampaign.name}}</td>
+                        <td class="text-center table_vertical">{{activeUserCampaign.product_count || "0"}}</td>
+                        <td class="text-right text-nowrap padding-20 table_vertical">
+                            <span>$</span>{{activeUserCampaign.act_budget || '0' | number:2}}
+                        </td>
+                        <td class="text-center table_vertical">
+                            <md-menu md-position-mode="target-right target">
+                                <div class="dropdown dropleft">
+                                    <button type="button" class="pop_view dropdown-toggle drp_btn"  ng-hide="activeUserCampaign.transfer_status == 1"
+                                    data-toggle="dropdown">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </button>
+                                    <div class="dropdown-menu popViewAligment">
+                                        <a class="dropdown-item pop_view dropactive"
+                                            ng-href="/campaign-details/{{activeUserCampaign.id}}/1"
+                                            style="font-size:11px;">
+                                            <i class="material-icons"
+                                                style="vertical-align: middle;margin-right: 10px;">remove_red_eye</i>View
+                                            Details
+                                        </a>
+                                        <a class="dropdown-item pop_view dropactive"
+                                            ng-click="toggleShareCampaignSidenav(activeUserCampaign.id)"
+                                            style="font-size:11px;">
+                                            <i class="material-icons"
+                                                style="vertical-align: middle;margin-right: 10px;">share</i>Share
+                                            Campaign
+                                        </a>
+                                        <a class="dropdown-item pop_view dropactive" style="font-size:11px;"
+                                            ng-click="CloneCampaign('CloneCampaign-'+$index, activeUserCampaign)">
+                                            <i class="material-icons"
+                                                style="vertical-align: middle;margin-right: 10px;">system_update_alt</i>Clone
+                                            a Campaign
+                                        </a>
+                                    </div>
+                                    <div id="CloneCampaign-{{$index}}"
+                                        class="dropdown-content_share dropdown-content_edit contbg animated fadeInDown share_usercamp del_camp_r">
+                                        <div layout="colmun">
+                                            <span flex></span>
+                                            <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                                ng-click="CloneCampaign('CloneCampaign-'+$index)">
+                                                <md-icon class="md-default-theme">
+                                                    <i class="material-icons">close</i>
+                                                </md-icon>
+                                            </md-button>
+                                        </div>
+                                        <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Clone a
+                                            Campaign</h3><br>
+                                        <form name="cloneCampaignForm">
+                                            <div layout="column" style="padding:10px;">
+                                                <div class="form-group"
+                                                    ng-init="activeUserCampaign.campaignName = activeUserCampaign.name">
+                                                    <input ng-model="activeUserCampaign.campaignName" name="name"
+                                                        class="form-control" placeholder="name" type="text" required />
+                                                    <div ng-messages="cloneCampaignForm.name.$error"
+                                                        ng-if="cloneCampaignForm.name.$touched" style="color:red">
+                                                        <div ng-message="required">Campaign name
+                                                            required</div>
+                                                    </div>
+                                                </div>
+                                                <div class="" style="padding-right: 0px;">
+                                                    <md-button class="md-raised md-warn Upload_font offer_btn_clr"
+                                                        layout-fill style="width: 30%;"
+                                                        ng-click="CloneCampaign('CloneCampaign-'+$index)">Cancel</md-button>
+                                                    <md-button class="md-raised md-warn Upload_font" layout-fill
+                                                        style="width: 30%;"
+                                                        ng-click="CloneCampaignRequest('CloneCampaign-'+$index,activeUserCampaign.campaignName,activeUserCampaign)">Proceed
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </md-menu>
+                        </td>
+                        <td class="text-center table_vertical">
+                            <div layout="row" class="book_campuser cpmcal">
+                                <div class="button_leftright">
+                                    <div class="dropdown">
+                                        <!--<md-button ng-click="EditCampaign('deleteDropp-'+$index)" ng-click="popup(activeUserCampaign)"  class="dropbtn Upload_font offer_btn_clr md_button_responsive">
+                                            Edit Campaign Name
+                                        </md-button>-->
+                                        <div class="pencil_icon_align">
+                                            <span class="input-group-addon" style="padding: 7px 4px; cursor: pointer;"  ng-hide="activeUserCampaign.transfer_status == 1"
+                                                ng-click="EditCampaign('deleteDropp-'+$index, activeUserCampaign)">
+                                                <i class="fa fa-pencil" aria-hidden="true" style="font-size: 13px;"></i>
+                                            </span>
+                                        </div>
+
+                                        <div id="deleteDropp-{{$index}}"
+                                            class="dropdown-content_share  dropdown-content_edit contbg animated fadeInDown share_usercamp del_camp_r"
+                                            style="padding:10px;">
+                                            <form name="editCampaignForm" role="form" novalidate="novalidate">
+                                                <div layout="colmun">
+                                                    <span flex></span>
+                                                    <md-button class="md-icon-button" aria-label="Close Side Panel"
+                                                        ng-click="EditCampaign('deleteDropp-'+$index)">
+                                                        <md-icon class="md-default-theme">
+                                                            <i class="material-icons">close</i>
+                                                        </md-icon>
+                                                    </md-button>
+                                                </div>
+                                                <h3 class="md-title" style="margin-top:-28px;margin-left: 11px;">Edit
+                                                    Campaign Name</h3><br>
+                                                <form name="editCampaignForm">
+                                                    <div layout="column" style="padding:10px;">
+                                                        <div class="form-group">
+                                                            <input ng-model="currentName.name" name="name"
+                                                                class="form-control" placeholder="name" type="text"
+                                                                required />
+                                                            <div ng-messages="editCampaignForm.name.$error"
+                                                                ng-if="editCampaignForm.name.$touched"
+                                                                style="color:red">
+                                                                <div ng-message="required">Campaign name
+                                                                    required</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="" style="padding-right: 0px;">
+                                                            <md-button
+                                                                class="md-raised md-warn Upload_font offer_btn_clr"
+                                                                layout-fill
+                                                                ng-click="EditCampaignRequest(currentName.id, 'deleteDropp-'+$index)"
+                                                                ng-disabled="editCampaignForm.$invalid"
+                                                                style="width: 30%;">Submit </md-button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="button_leftright">  -->
+                                <!-- <div class="md-grid-item-content hoarding-btn"> -->
+                                <!-- <md-button class="md-raised all_button md_button_responsive" ng-click="DeleteCampaign(campaignProduct.id)" ng-if="!hidestayconsistent">Stay Consistent
+                                    </md-button> -->
+                                <!-- <md-button class="md-raised all_button md_button_responsive" ng-click="DeleteCampaign(campaignProduct.id)" ng-if="!hidestayconsistent">Delete Campaign
+                                    </md-button> -->
+                                <!-- <md-button class="md-raised md-primary all_button book_campownerbutton" ng-if="(campaignDetails.total_paid != 0 && campaignDetails.status != 700)" ng-click="confirmCampaignBooking(campaignDetails.id);notifyUsershortlistedProduct(productIDlist)">Request Campaign</md-button> -->
+                                <!-- </div> -->
+                                <!-- </div> -->
+                            </div>
+                        </td>
+                        <td class="text-center table_vertical">
+                            <span class="text_color md-caption">{{activeUserCampaign.updated_at| dateFormat}}</span>
+                        </td>
+                        <td class="text-center table_vertical">
+                            <span ng-click="camptureSavedCampaignId(activeUserCampaign.id)" class="input-group-addon"  ng-hide="activeUserCampaign.transfer_status == 1"
+                                style="padding: 7px 4px; cursor: pointer;" data-toggle="modal"
+                                data-target="#delteCampaignModal">
+                                <i class="fa fa-trash" aria-hidden="true" style="font-size: 13px;"></i>
+                            </span>
+                            <md-button ng-click="camptureSavedCampaignId(activeUserCampaign.id)" data-toggle="modal" data-target="#transferCampaignAccepted" class="md-raised md-warn Upload_font" ng-show="activeUserCampaign.transfer_status == 1" >Accept</md-button>
+                            <md-button ng-click="camptureSavedCampaignId(activeUserCampaign.id)" data-toggle="modal" data-target="#transferCampaignRejected" class="md-raised md-warn Upload_font" ng-show="activeUserCampaign.transfer_status == 1" >Reject</md-button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- share campaign sidenav -->
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+        <div layout="row">
+            <div class="md-toolbar-tools">
+                <div flex></div>
+                <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+                    <md-tooltip>Close Side Panel</md-tooltip>
+                    <md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+        </div>
+        <md-content layout-align="center center" layout-margin layout-padding>
+            <h3 class="md-headline">Share Campaign</h3>
+            <form name="shareCampaignForm">
+                <div layout="column">
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+                        <div ng-messages="shareCampaignForm.name.$error">
+                            <div ng-message="required">Name is required.</div>
+                            <div ng-message="pattern">Enter a valid Name.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email</label>
+                        <input ng-model="shareCampaign.email" name="email" type="email" required="required"
+                            ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+                        <div ng-messages="shareCampaignForm.email.$error">
+                            <div ng-message="required">Email is required.</div>
+                            <div ng-message="pattern">Enter a valid Email Id.</div>
+                        </div>
+                    </md-input-container>
+                    <md-button class="md-raised md-warn all_button" layout-fill
+                        ng-click="shareCampaignToEmail($event, shareCampaign,currentShareCampaign)">Share Campaign
+                    </md-button>
+                </div>
+            </form>
+        </md-content>
+    </md-sidenav>
+    <!-- share campaign sidenav ends -->
+
+    <div class="modal fade" id="delteCampaignModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md modalDefault" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal_bottom">
+                    <!--<h5 class="modal-title">Are you Sure! you want to
+                    cancel this booking ?</h5>-->
+                    <h5 class="modal-title">Are you Sure! you want to
+                        cancel this campaign ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer modal_top">
+                    <button type="button" class="btn btn-secondary popup_yes" data-dismiss="modal"
+                        ng-click="deleteSavedCampaign(campaignIdToBeDeleted)">Yes</button>
+                    <button type="button" data-dismiss="modal" class="btn popup_no">No</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="transferCampaignAccepted" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal_bottom">
+                    <h5 class="modal-title">Transfer Campaign Accepted</h5> 
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer modal_top">
+                    <textarea class="form-control" name="comments" class="form-control"
+                     rows="3" ng-model="commentsRequested" autocomplete="off"
+                     placeholder="Comments (maximum 250 chars)" maxlength="250" type="comments"></textarea>
+                    <button type="button" data-dismiss="modal" class="btn popup_no">Cancel</button>
+                    <button type="button" class="btn btn-accepted popup_yes" data-dismiss="modal"
+                    ng-disabled="!commentsRequested" ng-click="acceptTransferCampaign(campaignIdToBeDeleted)">Accept</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="transferCampaignRejected" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header modal_bottom">
+                    <h5 class="modal-title">Transfer Campaign Rejected</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer modal_top">
+                    <textarea class="form-control" name="comments" class="form-control"
+                     rows="3" ng-model="commentsRequested" autocomplete="off"
+                     placeholder="Comments (maximum 250 chars)" maxlength="250" type="comments"></textarea>
+                    <button type="button" data-dismiss="modal" class="btn popup_no">Cancel</button>
+                    <button type="button" class="btn btn-accepted popup_yes" 
+                    ng-disabled="!commentsRequested" ng-click="rejectTransferCampaign(campaignIdToBeDeleted)">Reject</button>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<style>
+    .highlight {
+        color: black;
+    }
+
+    .nonhighlight {
+        color: #808080c2;
+    }
+
+    .padding-20 {
+        padding-right: 20px !important;
+    }
+    .table-responsive{
+        max-height: 550px;
+    }
+
+    @media only screen and (min-width: 992px) and (max-width: 1024px) {
+        .table-responsive{
+             max-height: 550px;
+         }
+
+    }
+    @media only screen and (min-width: 1025px) and (max-width: 1440px) {
+        .table-responsive{
+             max-height: 650px;
+         }
+
+    }
+
+    @media only screen and (min-width: 1700px) and (max-width: 2560px) {
+        .table-responsive{
+             max-height: 700px;
+         }
+
+    }
+
+</style>
+<script>
+    function UsersaveCampaign() {
+        document.getElementById("usersavedDropdown").classList.toggle("show");
+    }
+</script>
+<script type="text/javascript">
+    function ShowHideDiv() {
+        var chkYes = document.getElementById("chkYes");
+        var dvPassport = document.getElementById("dvPassport");
+        dvPassport.style.display = chkYes.checked ? "block" : "none";
+    }
+    /*
+    function EditCampaign(elId) {
+        document.getElementById(elId).classList.toggle("show");
+    }
+    */
+</script>

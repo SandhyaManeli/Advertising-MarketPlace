@@ -1,0 +1,972 @@
+<div layout="column" layout-fill="layout-fill" class="campagin_page">
+	<md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo hs-lg hide-gt-md hide-md">
+		<img ng-src="assets/images/owner/owner_logo.png" width="140" alt="owner logo">
+	</md-button>
+	<!-- <md-tabs md-dynamic-height class="padding_cmp">
+
+		<md-tab label="User Metro">
+			<div style="margin-top: 1em;">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr class="text_color">
+								<th>CID</th>
+								<th class="">Campaign Name</th>
+								<th>Start Date</th>
+								<th class="text-center">No of Products </th>
+								<th class="text-center">Paid</th>
+								<th class="text-center">Total Budget</th>
+								<th></th>
+								<th class=""></th>
+							</tr>
+						</thead>
+						<tbody class="">
+							<tr ng-repeat="uMetrCamp in userMetroCampaigns">
+								<td class="table_vertical">{{uMetrCamp.cid}}</td>
+								<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
+								<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+								<td class="text-center table_vertical">{{uMetrCamp.product_count || "0"}}</td>
+								<td class="text-center table_vertical">{{uMetrCamp.campaign_paid}}</td>
+								<td class="text-center table_vertical">{{uMetrCamp.Metrototalamount}}</td>
+								<td class="text-center table_vertical">
+									<md-menu md-position-mode="target-right target">
+										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+											<md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+										</md-button>
+										<md-menu-content width="2">
+											<md-menu-item>
+												<md-button class="pop_view" ng-href="/admin/metro-campaign/{{uMetrCamp.id}}">
+													<div layout="row">
+														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">View Details</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+													<div layout="row">
+														<md-icon><i class="material-icons">share</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{uMetrCamp.id}}">
+													<div layout="row">
+														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+										</md-menu-content>
+									</md-menu>
+								</td>
+								<td class="text-center table_vertical">
+									<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+		
+				</div>
+			</div>
+		</md-tab>
+		<md-tab label="Admin Metro">
+				<div class="md-title" layout="row">
+						<div flex></div>
+						<div flex="20">
+								<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex >
+										<input type="text" ng-model="search" placeholder="Search..." class="hide-xs form-control md-whiteframe-z1" style="border-radius:0px;height:33px;float:right;margin-top: 4px;">
+									</div>
+						</div>
+						<div class="hide-xs" layout="row">
+						  <div flex></div>
+						  <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+								<div class="dropdown hide-xs">
+										<md-button class="md-raised all_button" onclick="adminmetroCampaign()">Create Campaign</md-button>
+										<div id="adminmetroDrop" class="dropdown-content contbg animated fadeInDown">
+											<form name="metroCampaignForm" role="form" novalidate="novalidate">
+												<div layout="colmun">
+													<span flex></span>
+													<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="adminmetroCampaign()">
+														<md-icon class="md-default-theme">
+															<i class="material-icons">close</i>
+														</md-icon>
+													</md-button>
+												</div>
+												<h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
+												<h3 class="md-title">Let's start Campaign</h3>
+												<div layout="row" layout-margin layout-align="center center" class="">
+													<div id="dvPassport" style="width:100%;">
+														<li>
+															<div class="form-group">
+																<input ng-model="metroCampaign.name" name="campaign_name" class="form-control md-whiteframe-3dp" type="text"
+																 placeholder="Campaign name" required="required">
+																<div ng-messages="metroCampaignForm.campaign_name.$error" ng-if="metroCampaignForm.campaign_name.$touched"
+																 style="color:red;font-size: 12px;">
+																	<div ng-message="required">Campaign name is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
+																 placeholder="Organization name" required="required">
+																<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red;font-size: 12px;">
+																	<div ng-message="required">Organization name is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control md-whiteframe-3dp"
+																 type="text" minlength="10" maxlength="10" placeholder="Phone number" required="required"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+																<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched"
+																 style="color:red;font-size: 12px;">
+																	<div ng-message="required">Phone number is required.</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
+																 type="text" required placeholder="Enter Your Mail Id" required="required" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)">
+																<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
+																 style="color:red;font-size: 12px;">
+																	<div ng-message="required">Email is required.</div>
+																	<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
+																	<div ng-message="pattern">Enter a valid Email</div>
+																</div>
+															</div>
+														</li>
+														<li>
+															<div class="form-group ">
+																<input ng-model="ownerCampaign.org_contact_refered" only-letters-input name="refered" class="form-control md-whiteframe-3dp"
+																 type="text" maxlength="10" placeholder="Referred By" required="required">
+																<div ng-messages="forms.metroCampaignForm.refered.$error" style="color:red;font-size: 12px;" ng-if="forms.metroCampaignForm.refered.$touched">
+																	<div ng-message="required">Referred By is required.</div>
+																	<div ng-message="maxlength">Referred By must have 10 characters.</div>
+																</div>
+															</div>
+														</li>
+													</div>
+												</div>
+												<md-button class="md-raised all_button" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.metroCampaignForm.$invalid">
+													Create Campaign
+												</md-button>
+											</form>
+										</div>
+									</div>
+						  </div>
+						</div>
+					  </div>
+			<div style="margin-top: 1em;">
+				<div class="table-responsive">
+					<table class="table ">
+						<thead>
+							<tr class="text_color">
+								<th>CID</th>
+								<th class="">Campaign Name</th>
+								<th>Start Date</th>
+								<th class="text-center">No of Products </th>
+								<th class="text-center">Paid</th>
+								<th class="text-center">Total Budget</th>
+								<th></th>
+								<th class=""></th>
+							</tr>
+						</thead>
+						<tbody class="">
+							<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search">
+								<td class="table_vertical">{{aMetrCamp.cid}}</td>
+								<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
+								<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+								<td class="text-center table_vertical">{{aMetrCamp.product_count}}</td>
+								<td class="text-center table_vertical">{{aMetrCamp.campaign_paid}}</td>
+								<td class="text-center table_vertical">{{aMetrCamp.act_budget}}</td>
+								<td class="text-center table_vertical">
+									<md-menu md-position-mode="target-right target">
+										<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+											<md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon>
+										</md-button>
+										<md-menu-content width="2">
+											<md-menu-item>
+												<md-button class="pop_view" ng-href="/admin/metro-campaign/{{aMetrCamp.id}}">
+													<div layout="row">
+														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">View Details</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(aMetrCamp.id)">
+													<div layout="row">
+														<md-icon><i class="material-icons">share</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
+													<div layout="row">
+														<md-icon><i class="material-icons" >delete_forever</i></md-icon>
+														<p style="margin:auto 10px auto 10px">Delete</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+											<md-menu-item>
+												<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{aMetrCamp.id}}">
+													<div layout="row">
+														<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+														<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+													</div>
+												</md-button>
+											</md-menu-item>
+										</md-menu-content>
+									</md-menu>
+								</td>
+								<td class="text-center table_vertical">
+									<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</div>
+			</div>
+		</md-tab>		
+	</md-tabs> -->
+
+
+
+
+
+
+	<md-tabs md-dynamic-height md-stretch-tabs>
+			<md-tab label="User Metro">
+					<div class="md-title" layout="row">
+							<div flex></div>
+							<div flex="20">
+									<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex >
+											<input type="text" ng-model="search" placeholder="Search..." class="hide-xs form-control md-whiteframe-z1" style="border-radius:0px;height:33px;float:right;margin-top: 4px;">
+										</div>
+							</div>
+					</div>
+			  <md-tabs md-dynamic-height md-stretch-tabs>
+				 <!-- <md-tab label="Requested Proposals"> -->
+					<md-tab label="Requested Insertion Order">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products </th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="uMetrCamp in userMetroCampaigns | filter:search" ng-if="uMetrCamp.status <= 1121">
+										<td class="table_vertical">{{uMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.product_count || "0"}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.Metrototalamount}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Scheduled">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products </th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="uMetrCamp in userMetroCampaigns | filter:search" ng-if="uMetrCamp.status == 1131">
+										<td class="table_vertical">{{uMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.product_count || "0"}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.Metrototalamount}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Running">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products</th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr ng-repeat="uMetrCamp in userMetroCampaigns | filter:search" ng-if="uMetrCamp.status == 1141">
+										<td class="table_vertical">{{uMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.product_count || "0"}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.Metrototalamount}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Closed">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products </th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr ng-repeat="uMetrCamp in userMetroCampaigns | filter:search" ng-if="uMetrCamp.status == 1151">
+										<td class="table_vertical">{{uMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{uMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{uMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.product_count || "0"}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{uMetrCamp.Metrototalamount}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(uMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{uMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{uMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+
+			  </md-tabs>
+			</md-tab>
+			<md-tab label="Admin Metro">
+					<div class="md-title" layout="row">
+							<div flex></div>
+							<div flex="20">
+									<div id="CampaignSsearchInput" layout-align="center start" layout="column" flex >
+											<input type="text" ng-model="search" placeholder="Search..." class="hide-xs form-control md-whiteframe-z1" style="border-radius:0px;height:33px;float:right;margin-top: 4px;">
+										</div>
+							</div>
+							<div class="hide-xs" layout="row">
+							  <div flex></div>
+							  <div layout="column" flex="10" layout-align="center end" style="float:right; margin-right:10px;">
+									<div class="dropdown hide-xs">
+											<md-button class="md-raised all_button" onclick="adminmetroCampaign()">SHOP</md-button>
+											<div id="adminmetroDrop" class="dropdown-content contbg animated fadeInDown">
+												<form name="metroCampaignForm" role="form" novalidate="novalidate">
+													<div layout="colmun">
+														<span flex></span>
+														<md-button class="md-icon-button" aria-label="Close Side Panel" onclick="adminmetroCampaign()">
+															<md-icon class="md-default-theme">
+																<i class="material-icons">close</i>
+															</md-icon>
+														</md-button>
+													</div>
+													<h3 class="md-body-2" style="margin-top:-31px !important;">Great,</h3>
+													<h3 class="md-title">Let's start Campaign</h3>
+													<div layout="row" layout-margin layout-align="center center" class="">
+														<div id="dvPassport" style="width:100%;">
+															<li>
+																<div class="form-group">
+																	<input ng-model="metroCampaign.name" name="campaign_name" class="form-control md-whiteframe-3dp" type="text"
+																	 placeholder="Campaign name" required="required">
+																	<div ng-messages="metroCampaignForm.campaign_name.$error" ng-if="metroCampaignForm.campaign_name.$touched"
+																	 style="color:red;font-size: 12px;">
+																		<div ng-message="required">Campaign name is required.</div>
+																	</div>
+																</div>
+															</li>
+															<li>
+																<div class="form-group ">
+																	<input ng-model="metroCampaign.org_name" name="org_name" class="form-control md-whiteframe-3dp" type="text"
+																	 placeholder="Organization name" required="required">
+																	<div ng-messages="metroCampaignForm.org_name.$error" ng-if="metroCampaignForm.org_name.$touched" style="color:red;font-size: 12px;">
+																		<div ng-message="required">Organization name is required.</div>
+																	</div>
+																</div>
+															</li>
+															<li>
+																<div class="form-group ">
+																	<input ng-model="metroCampaign.org_contact_phone" only-numeric name="org_contact_phone" class="form-control md-whiteframe-3dp"
+																	 type="text" minlength="10" maxlength="10" placeholder="Phone number" required="required"  ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/">
+																	<div ng-messages="metroCampaignForm.org_contact_phone.$error" ng-if="metroCampaignForm.org_contact_phone.$touched"
+																	 style="color:red;font-size: 12px;">
+																		<div ng-message="required">Phone number is required.</div>
+																	</div>
+																</div>
+															</li>
+															<li>
+																<div class="form-group ">
+																	<input ng-model="metroCampaign.org_contact_email" name="org_contact_email" class="form-control md-whiteframe-3dp"
+																	 type="text" required placeholder="Enter Your Mail Id" required="required" ng-pattern="(?!^[.+&'_-]*@.*$)(^[_\w\d+&'-]+(\.[_\w\d+&'-]*)*@[\w\d-]+(\.[\w\d-]+)*\.(([\d]{1,3})|([\w]{2,}))$)">
+																	<div ng-messages="metroCampaignForm.org_contact_email.$error" ng-if="metroCampaignForm.org_contact_email.$touched"
+																	 style="color:red;font-size: 12px;">
+																		<div ng-message="required">Email is required.</div>
+																		<div ng-message="maxlength">Email shouldn't exceed 50 characters. </div>
+																		<div ng-message="pattern">Enter a valid Email</div>
+																	</div>
+																</div>
+															</li>
+															<li>
+																<div class="form-group ">
+																	<input ng-model="ownerCampaign.org_contact_refered" only-letters-input name="refered" class="form-control md-whiteframe-3dp"
+																	 type="text" maxlength="10" placeholder="Referred By" required="required">
+																	<div ng-messages="forms.metroCampaignForm.refered.$error" style="color:red;font-size: 12px;" ng-if="forms.metroCampaignForm.refered.$touched">
+																		<div ng-message="required">Referred By is required.</div>
+																		<div ng-message="maxlength">Referred By must have 10 characters.</div>
+																	</div>
+																</div>
+															</li>
+														</div>
+													</div>
+													<md-button class="md-raised all_button" layout-fill ng-click="saveMetroCampaign(metroCampaign)" ng-disabled="forms.metroCampaignForm.$invalid">
+														SHOP
+													</md-button>
+												</form>
+											</div>
+										</div>
+							  </div>
+							</div>
+						  </div>
+			  <md-tabs md-dynamic-height md-stretch-tabs>
+				 <!-- <md-tab label="Requested Proposals"> -->
+					<md-tab label="Requested Insertion Order">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table ">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products </th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search" ng-if="aMetrCamp.status<= 1121">
+										<td class="table_vertical">{{aMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.product_count}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.act_budget}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{aMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(aMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons" >delete_forever</i></md-icon>
+																<p style="margin:auto 10px auto 10px">Delete</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{aMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Scheduled">
+					<div style="margin-top: 1em;">
+						<div class="table-responsive">
+							<table class="table ">
+								<thead>
+									<tr class="text_color">
+										<th>Campaign ID</th>
+										<th class="">Campaign Name</th>
+										<th>Start Date</th>
+										<th class="text-center">Number of Products </th>
+										<th class="text-center">Paid</th>
+										<th class="text-center">Total Price</th>
+										<th></th>
+										<th class=""></th>
+									</tr>
+								</thead>
+								<tbody class="">
+									<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search" ng-if="aMetrCamp.status == 1131">
+										<td class="table_vertical">{{aMetrCamp.cid}}</td>
+										<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
+										<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.product_count}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.campaign_paid}}</td>
+										<td class="text-center table_vertical">{{aMetrCamp.act_budget}}</td>
+										<td class="text-center table_vertical">
+											<md-menu md-position-mode="target-right target">
+												<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+													<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+												</md-button>
+												<md-menu-content width="2">
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/metro-campaign/{{aMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">View Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(aMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons">share</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
+															<div layout="row">
+																<md-icon><i class="material-icons" >delete_forever</i></md-icon>
+																<p style="margin:auto 10px auto 10px">Delete</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+													<md-menu-item>
+														<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{aMetrCamp.id}}">
+															<div layout="row">
+																<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+															</div>
+														</md-button>
+													</md-menu-item>
+												</md-menu-content>
+											</md-menu>
+										</td>
+										<td class="text-center table_vertical">
+											<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Running">
+						<div style="margin-top: 1em;">
+							<div class="table-responsive">
+								<table class="table ">
+									<thead>
+										<tr class="text_color">
+											<th>Campaign ID</th>
+											<th class="">Campaign Name</th>
+											<th>Start Date</th>
+											<th class="text-center">Number of Products </th>
+											<th class="text-center">Paid</th>
+											<th class="text-center">Total Price</th>
+											<th></th>
+											<th class=""></th>
+										</tr>
+									</thead>
+									<tbody class="">
+										<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search" ng-if="aMetrCamp.status == 1141">
+											<td class="table_vertical">{{aMetrCamp.cid}}</td>
+											<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
+											<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+											<td class="text-center table_vertical">{{aMetrCamp.product_count}}</td>
+											<td class="text-center table_vertical">{{aMetrCamp.campaign_paid}}</td>
+											<td class="text-center table_vertical">{{aMetrCamp.act_budget}}</td>
+											<td class="text-center table_vertical">
+												<md-menu md-position-mode="target-right target">
+													<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+														<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+													</md-button>
+													<md-menu-content width="2">
+														<md-menu-item>
+															<md-button class="pop_view" ng-href="/admin/metro-campaign/{{aMetrCamp.id}}">
+																<div layout="row">
+																	<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																	<p style="margin:0 4px;font-size:11px;">View Details</p>
+																</div>
+															</md-button>
+														</md-menu-item>
+														<md-menu-item>
+															<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(aMetrCamp.id)">
+																<div layout="row">
+																	<md-icon><i class="material-icons">share</i></md-icon>
+																	<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+																</div>
+															</md-button>
+														</md-menu-item>
+														<md-menu-item>
+															<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
+																<div layout="row">
+																	<md-icon><i class="material-icons" >delete_forever</i></md-icon>
+																	<p style="margin:auto 10px auto 10px">Delete</p>
+																</div>
+															</md-button>
+														</md-menu-item>
+														<md-menu-item>
+															<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{aMetrCamp.id}}">
+																<div layout="row">
+																	<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																	<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+																</div>
+															</md-button>
+														</md-menu-item>
+													</md-menu-content>
+												</md-menu>
+											</td>
+											<td class="text-center table_vertical">
+												<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</md-tab>
+					<md-tab label="Closed">
+							<div style="margin-top: 1em;">
+								<div class="table-responsive">
+									<table class="table ">
+										<thead>
+											<tr class="text_color">
+												<th>Campaign ID</th>
+												<th class="">Campaign Name</th>
+												<th>Start Date</th>
+												<th class="text-center">Number of Products </th>
+												<th class="text-center">Paid</th>
+												<th class="text-center">Total Price</th>
+												<th></th>
+												<th class=""></th>
+											</tr>
+										</thead>
+										<tbody class="">
+											<tr ng-repeat="aMetrCamp in adminMetroCampaigns | filter:search" ng-if="aMetrCamp.status == 1151">
+												<td class="table_vertical">{{aMetrCamp.cid}}</td>
+												<td class="text-left table_vertical">{{aMetrCamp.name | capitalize}}</td>
+												<td class="table_vertical">{{aMetrCamp.start_date | dateify | date:'dd-MM-yyyy'}}</td>
+												<td class="text-center table_vertical">{{aMetrCamp.product_count}}</td>
+												<td class="text-center table_vertical">{{aMetrCamp.campaign_paid}}</td>
+												<td class="text-center table_vertical">{{aMetrCamp.act_budget}}</td>
+												<td class="text-center table_vertical">
+													<md-menu md-position-mode="target-right target">
+														<md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+															<!-- <md-icon md-menu-origin><i class="fa fa-ellipsis-v"></i></md-icon> -->
+															<md-icon md-menu-origin><i class="fa fa-eye" aria-hidden="true"></i></md-icon>
+														</md-button>
+														<md-menu-content width="2">
+															<md-menu-item>
+																<md-button class="pop_view" ng-href="/admin/metro-campaign/{{aMetrCamp.id}}">
+																	<div layout="row">
+																		<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																		<p style="margin:0 4px;font-size:11px;">View Details</p>
+																	</div>
+																</md-button>
+															</md-menu-item>
+															<md-menu-item>
+																<md-button class="pop_view" ng-click="toggleShareCampaignSidenav(aMetrCamp.id)">
+																	<div layout="row">
+																		<md-icon><i class="material-icons">share</i></md-icon>
+																		<p style="margin:0 4px;font-size:11px;">Share Campaign</p>
+																	</div>
+																</md-button>
+															</md-menu-item>
+															<md-menu-item>
+																<md-button class="pop_view" ng-click="deleteMetroCampaign(aMetrCamp.id)">
+																	<div layout="row">
+																		<md-icon><i class="material-icons" >delete_forever</i></md-icon>
+																		<p style="margin:auto 10px auto 10px">Delete</p>
+																	</div>
+																</md-button>
+															</md-menu-item>
+															<md-menu-item>
+																<md-button class="pop_view" ng-href="/admin/campaign-payment-details/{{aMetrCamp.id}}">
+																	<div layout="row">
+																		<md-icon><i class="material-icons">remove_red_eye</i></md-icon>
+																		<p style="margin:0 4px;font-size:11px;">Payment Details</p>
+																	</div>
+																</md-button>
+															</md-menu-item>
+														</md-menu-content>
+													</md-menu>
+												</td>
+												<td class="text-center table_vertical">
+													<span class="text_color md-caption">{{aMetrCamp.updated_at | timeify | date:'HH:mm a'}}</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</md-tab>
+		
+			  </md-tabs>
+			</md-tab>
+		  </md-tabs>
+	<!-- share campaign sidenav -->
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="shareCampaignSidenav">
+	<div layout="row">
+		<div class="md-toolbar-tools">
+			<div flex></div>
+			<md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="toggleShareCampaignSidenav()">
+				<md-tooltip>Close Side Panel</md-tooltip>
+				<md-icon class="md-default-theme"><i class="material-icons">close</i></md-icon>
+			</md-button>
+		</div>
+	</div>
+	<md-content layout-align="center center" layout-margin layout-padding>
+		<h3 class="md-headline">Share Campaign</h3>
+		<form name="shareCampaignForm">
+			<div layout="column">
+				<md-input-container class="md-block">
+					<label>Name</label>
+					<input ng-model="shareCampaign.receiver_name" name="receiver_name" required="required" />
+					<div ng-messages="shareCampaignForm.name.$error">
+						<div ng-message="required">Name is required.</div>
+						<div ng-message="pattern">Enter a valid Name.</div>
+					</div>
+				</md-input-container>
+				<md-input-container class="md-block">
+					<label>Email</label>
+					<input ng-model="shareCampaign.email" name="email" type="email" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/" />
+					<div ng-messages="shareCampaignForm.email.$error">
+						<div ng-message="required">Email is required.</div>
+						<div ng-message="pattern">Enter a valid Email Id.</div>
+					</div>
+				</md-input-container>
+				<md-button class="md-raised md-warn all_button" layout-fill ng-click="shareCampaignToEmail($event, shareCampaign,currentAdminShareCampaign)">Share Campaign</md-button>
+			</div>
+		</form>
+	</md-content>
+  </md-sidenav>
+  <!-- share campaign sidenav ends -->
+</div>
+
+<!-- <script>
+	function myFunction() {
+		document.getElementById("myDropdown").classList.toggle("show");
+	}
+	function myFunctions() {
+		document.getElementById("myDropdownView").classList.toggle("show");
+	}
+</script> -->
+<script>
+		function adminmetroCampaign() {
+			document.getElementById("adminmetroDrop").classList.toggle("show");
+		}
+	</script>

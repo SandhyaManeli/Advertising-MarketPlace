@@ -1,0 +1,82 @@
+<md-dialog flex-xs="100" flex="60" flex-md="60" flex-sm="80">
+	<md-dialog-content>
+		<md-content class="md-padding">
+			<div layout="row" layout-xs="column" layout-sm="row" layout-gt-sm="row" layout-margin>
+        <div layout="column" flex="50" flex-xs="100">
+          <div style="width:150px; margin:10px auto;">
+            <img src="assets/images/product/user_avatar.png" style="width:150px;margin: auto;" ng-if="!selectedUser.profile_pic">
+            <img ng-src="{{serverUrl + userProfile.user.profile_pic}}" style="width:150px;margin: auto;" ng-if="selectedUser.profile_pic">
+          </div>
+          <table class="table table-striped table_user">
+            <tbody>
+              <tr>
+                <th>ID</th>
+                <td>{{selectedUser.user_details.id}}</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td>{{selectedUser.user_details.name}}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{selectedUser.user_details.email}}</td>
+              </tr>
+              <tr>
+                <th>Phone</th>
+                <td>{{selectedUser.user_details.phone}}</td>
+              </tr>
+              <tr>
+                <th>Activated</th>
+                <td>{{selectedUser.user_details.activated | boolToYesNo}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div layout="column" flex="50" flex-xs="100">
+          <div class="table-responsive" style="height:400px; overflow:auto;">
+            <table class="table table-striped table-bordered ">
+              <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <!-- <th>Actions</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="role in allRoles">
+                  <td>
+                    <input type="checkbox" ng-checked="selectedRolesForUser.indexOf(role.id) > -1" ng-click="toggleRoleSelectionForUser(role.id)" />
+                  </td>
+                  <td>{{role.display_name}}</td>
+                  <td>{{role.description}}</td>
+                  <!-- <td>
+                    <span>
+                      assign this permission to role 
+                      <a ng-href="#" ng-click=""><md-icon><i class="material-icons">subdirectory_arrow_left</i></md-icon></a>
+                    </span>
+                  </td> -->
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div layout="row">
+        <div layout="column" flex="50">
+          <div layout="row" layout-align="begin center">
+            <md-button Class="md-raised register_btn cancel_mob" ng-click="closeMdDialog()">Cancel</md-button>
+          </div>
+        </div>
+        <div layout="column" flex="50">
+          <div layout="row" layout-align="end center">
+              <md-button Class="md-raised register_btn" ng-click="resendUserInviteEmail()">Resend Email</md-button>
+              <md-button Class="md-raised register_btn" ng-click="updateRolesForUser()">Update Roles</md-button>
+              <md-button Class="md-raised md-primary all_button" type="submit" ng-click="toggleSuperAdminActivation(selectedUser.user_details.mongo_id)" ng-if="!selectedUser.user_details.activated">Activate</md-button>
+              <md-button Class="md-raised md-primary all_button" type="submit" ng-click="toggleSuperAdminActivation(selectedUser.user_details.mongo_id)" ng-if="selectedUser.user_details.activated">Deactivate</md-button>
+          </div>
+        </div>
+      </div>
+		</md-content>
+	</md-dialog-content>
+</md-dialog>

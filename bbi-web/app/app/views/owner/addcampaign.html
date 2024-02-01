@@ -1,0 +1,95 @@
+<!-- 
+<md-dialog flex="50"  flex-lg="50" flex-md="50" flex-xs="100" flex-sm="70" >
+  <form ng-cloak name="signup">
+    <md-toolbar>
+      <div  class="md-toolbar-tools md-whiteframe-4dp" style="background:#980000 !important">
+        <button class="md-icon-button md-button show-xs md-ink-ripple hide-gt-xs" type="button"  ng-click="closeMdDialog()" show-xs="show-xs" hide-gt-xs="hide-gt-xs"><md-icon md-svg-icon="images/1493121180_Arrow_Back.svg" class="ng-scope" aria-hidden="true"></md-icon></button>
+        <span  class="md-title">Add Campaign</span>
+        <span flex="flex" hide-xs="hide-xs" show-gt-xs="show-gt-xs" class="hide-xs show-gt-xs flex"></span>
+        <button class="md-icon-button md-button show-gt-xs md-ink-ripple hide-xs" type="button"  ng-click="closeMdDialog()" hide-xs="hide-xs" show-gt-xs="show-gt-xs">X<div class="md-ripple-container"></div></button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout="row" layout-sm="row" layout-lg="row" layout-md="row" layout-xs="column" layout-margin="layout-margin">
+        <div layout="column" flex="50" flex-xs="100" flex-sm=50 flex-md="50" flex-lg="50">
+          <md-input-container class="md-block">
+              <label>Campaign Name</label>
+              <input ng-model="user.userName" type="text" name="uname" minlength="2" md-maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
+              <div ng-messages="signup.uname.$error">
+                <div ng-message="required">Campaign Name is required.</div>
+                <div ng-message="minlength">Campaign Name must have 2 characters.</div>
+                <div ng-message="maxlength">Campaign Name shouldn't exceed 20 characters. </div>
+                <div ng-message="pattern">Campaign Name should contain only Alpha Numeric and _ - . symbols.</div>
+              </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Client Name</label>
+            <input ng-model="user.userName" type="text" name="uname" minlength="2" md-maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]$/"/>
+            <div ng-messages="signup.uname.$error">
+              <div ng-message="required">Client Name is required.</div>
+              <div ng-message="minlength">Client Name must have 2 characters.</div>
+              <div ng-message="maxlength">Client Name shouldn't exceed 30 characters. </div><div ng-message="pattern">Client Name should contain only Alpha Numeric and _ - . symbols.</div>
+            </div>
+          </md-input-container>
+          <md-input-container>
+                <md-datepicker ng-model="ctrl.myDate" md-placeholder="Start Date "></md-datepicker>
+          </md-input-container>
+          <md-input-container class="md-block">
+            <label>Client Email</label>
+            <input ng-model="user.email" name="email" type="email" minlength="8" md-maxlength="30" required="required" ng-pattern="/^[A-Za-z]+[A-Za-z0-9._-]+[A-Za-z0-9]+@[a-z0-9]+.[A-Za-z]{2,4}$/"/>
+            <div ng-messages="signup.email.$error">
+              <div ng-message="required">Email is required.</div>
+              <div ng-message="minlength">Email must have 8 characters.</div>
+              <div ng-message="maxlength">Email shouldn't exceed 30 characters. </div>
+              <div ng-message="pattern">Enter a valid Email Id.</div>
+              </div>
+          </md-input-container>
+        </div>
+        <div layout="column" flex="5"></div>
+        <div layout="column" flex="50" flex-xs="100" flex-sm=50 flex-md="50" flex-lg="50">
+          <md-input-container class="md-block">
+            <label>Company Name</label>
+            <input ng-model="user.companyName" type="text" name="cname" minlength="2" md-maxlength="30" required="required"/>
+            <div ng-messages="signup.cname.$error">
+              <div ng-message="required">Company Name is required.</div>
+              <div ng-message="minlength">Company Name must have 2 characters.</div>
+              <div ng-message="maxlength">Company Name shouldn't exceed 30 characters.</div>
+            </div>
+          </md-input-container>
+          <md-input-container class="md-block">
+              <label>Phone No</label>
+              <input ng-model="user.phoneNo" type="text" name="pno" minlength="10" md-maxlength="10" ng-pattern="/^[0-9]{10}$/" required="required"/>
+              <div ng-messages="signup.pno.$error">
+                <div ng-message="required">Phone No is required.</div>
+                <div ng-message="minlength">Phone No must have 10 characters.</div>
+                <div ng-message="maxlength">Phone No shouldn't exceed 10 characters.</div>
+                <div ng-message="pattern">Phone No should be only numbe.</div>
+              </div>
+          </md-input-container>
+          <md-input-container>
+                <md-datepicker ng-model="ctr.myDate" md-placeholder="End date"></md-datepicker>
+          </md-input-container>
+
+          <md-input-container class="md-block">
+              <label>Estimated Budget</label>
+              <input ng-model="user.budget" type="text" name="budget" required="required" md-maxlength="10"/>
+              <div ng-messages="signup.budget.$error">
+                <div ng-message="required">estimated budget required.</div>
+              </div>
+          </md-input-container>
+        
+        </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center">
+      <md-button Class="md-raised md-primary" ng-click="submit()">
+      SUBMIT
+      </md-button>
+      <md-button Class="md-raised" ng-click="closeMdDialog()">
+       CANCEL
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
+
+ -->

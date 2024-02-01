@@ -1,0 +1,67 @@
+<div layout="column">
+        <div layout="row" class="" layout-padding>
+    
+            <div class="md-caption text_color"><b>This Product Shortlisted In - {{adminprod.camapigns_count}} Campaigns</b> </div>
+            <div flex></div>
+            <!-- <div>
+                <md-button class="md-raised md-primary">ADD NEW PRODUCT</md-button>
+            </div> -->
+        </div>
+        <section class="product_">
+            <div class="row mr-0 ml-0 product_ineer">
+                <div class="col-md-4">
+                    <div class="produt_img">
+                        <!-- <img src={{shortlistedproduct.product_detail.image}} alt="produt_img" class="img-thumbnail"/> -->
+                        <img ng-src="{{serverUrl + shortlistedproduct.product_detail.image}}" alt="Smiley face" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="product_detailes">
+                        <p class="mb-0 md-body-2">{{shortlistedproduct.product_detail.siteNo}} - {{shortlistedproduct.product_detail.area_name}} ({{shortlistedproduct.product_detail.panelSize}})</p>
+                        <p class="mb-0"><b style="color: #44596D;">Address</b>: {{shortlistedproduct.product_detail.address}}</p>
+                        <p class="mb-0"><b style="color: #44596D;">Facing</b>: {{shortlistedproduct.product_detail.direction}}</p>
+                        <p class="mb-0"><b style="color: #44596D;">Type</b>: {{shortlistedproduct.product_detail.format_name}}</p>
+    
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 2em;">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr class="text_color">
+                                <!-- <th>CID</th> -->
+                                <th>Campaign ID</th>
+                                <th>Campaign Name</th>
+                                <th>Start Date</th>
+                                <th>Number of Products </th>
+                                <th class="text-center">Paid</th>
+                                <th class="text-center">Total Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody class="">
+                
+                            <tr ng-repeat="product in shortlistedproduct.campaign_list">
+                                <td class="table_vertical">{{product.cid}}</td>
+                                <td class="table_vertical">{{product.name | capitalize}}</td>
+                                <td class="table_vertical">{{product.created_at | dateify | date:'dd-MM-yyyy'}}</td>
+                                <td class="table_vertical">{{product.no_products}}</td>
+                                <td class="text-center table_vertical"><span>$</span>{{product.total_paid}}</td>
+                                <td class="text-center table_vertical"><span>$</span>{{product.est_budget}}</td>                               
+                                <!-- <td class="text-center table_vertical">
+                                    <a href="#/admin/campaign-proposal-summary/{{productId}}">
+                                        <i class="material-icons">remove_red_eye</i>
+                                    </a>
+                                </td> -->
+                                <td class="text-center table_vertical">
+                                    <!-- <span class="text_color md-caption">{{product.updated_at}}</span> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+            </div>
+        </section>
+    </div>

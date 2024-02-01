@@ -1,0 +1,145 @@
+<md-toolbar class="md-menu-toolbar header">
+    <div class="md-toolbar-tools">
+      <md-button ng-click="closeSidenav()" aria-label="menu" show-sm show-xs hide-gt-sm class="md-icon-button">
+        <md-icon md-svg-icon="assets/images/core/menu.svg"> </md-icon>
+      </md-button>
+      <md-button aria-label="locations" href="#/" md-no-ink style="background:transparent" class="logo"><img ng-src="assets/images/core/billboards1.png" width="100%" height="100%"></md-button><span flex></span>
+      <md-menu-bar class="main-menu">
+          <a ui-sref="admin.add-products">admin</a>
+          <md-button aria-label="whyoutdoor"  ng-click="whatwedo()" ng-if="!footerhide">what we do</md-button>
+          <md-button aria-label="formats" ng-click="formate()" ng-if="!footerhide">formats</md-button>
+          <md-button aria-label="locations" ng-click="whyOutdoor()" ng-if="!footerhide">why outdoor</md-button>
+          <md-button aria-label="about" ng-click="contactus()" ng-if="!footerhide">contact</md-button>
+          <!-- <md-button aria-label="pricing" href="#/pricing">pricing</md-button> -->
+
+        <!--notification button -->
+        <md-button aria-label="notifications" class="md-icon-button" ng-click="closeSideNavPanel()" ng-show="browabillboard">
+          <md-icon><i class="material-icons">notifications</i></md-icon>
+        </md-button>
+        <!-- profile button start-->
+        <md-menu ng-show="browabillboard">
+          <md-button aria-label="userimage" class="md-fab md-mini md-avatar "ng-click="$mdOpenMenu($event)" >
+            <img ng-src="assets/images/product/person.png" class=" ">
+          </md-button>
+          <md-menu-content  width="3" style="z-index:99">
+            <md-menu-item>
+              <md-button >Chanikya varma</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button aria-label="campagin" href="/campagin">Campaign</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button>Account</md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="logOut()"
+              >Sign Out</md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <!-- profile button end-->
+        <!-- <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)">
+                    BOOK NOW
+        </md-button> -->
+        
+
+      <md-button aria-label="location" class=" md-primary md-raised" ng-click="showTabDialog($event)" ng-show="!browabillboard">
+          BOOK NOW
+      </md-button>
+      <md-button aria-label="location" class=" md-primary md-raised" ng-show="browabillboard && !footerhide"><a href="/location">
+          Browse BillBoards</a>
+      </md-button>
+      <md-button aria-label="location" class=" md-primary md-raised" ng-if="footerhide && browabillboard"  ng-click="suggestMe()" >
+        Request Me
+      </md-button>
+
+      </md-menu-bar>
+    </div>
+  </md-toolbar>
+  <md-sidenav md-component-id="left" class="md-sidenav-left" hide-gt-sm>
+    <header layout="column" layout-padding layout-margin>
+      <a ng-href="#/"><img ng-src="assets/images/core/billboards1.png" style="margin-top:15px"></a>
+    </header>
+    <md-content flex layout="column" role="navigation">
+      <md-menu-item flex layout="column">
+        <md-button ng-href="/whyoutdoor">WHAT WE DO</md-button>
+      </md-menu-item>
+
+      <md-menu-item flex layout="column">
+        <md-button ng-href="/formats">FORMATS</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button ng-href="/location">WHY OUTDOOR</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button href="#">CONTACT</md-button>
+      </md-menu-item>
+      <md-menu-item flex layout="column">
+        <md-button href="/pricing">PRICING</md-button>
+      </md-menu-item>
+
+  </md-sidenav>
+  <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools">
+        <h2>
+          <span>Notifications</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+          <md-tooltip>Close Side Panel</md-tooltip>
+          <md-icon class="md-default-theme">X</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content layout-padding="">
+      Notifications Panel
+    </md-content>
+  </md-sidenav>
+
+<div ui-view></div>
+
+<!-- Footer Section-->
+<footer >
+    <div layout="row" layout-xs="column" align="center center" class="footmain" style="background: #202020" ng-if="!footerhide">
+    <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-xs="row" class="fmson">
+        <md-button class="md-icon-button fabicon" aria-label="facebook">
+        <md-icon md-svg-src="assets/images/icons/facebook.svg" class="fab-icon" href="https://www.facebook.com/"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button  fabicon" aria-label="google plus">
+        <md-icon md-svg-src="assets/images/icons/google plus.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button  fabicon" aria-label="skype">
+        <md-icon md-svg-src="assets/images/icons/skype.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button  fabicon" aria-label="linkedin">
+        <md-icon md-svg-src="assets/images/icons/linkedin.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+        <md-icon md-svg-src="assets/images/icons/vimeo.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button  fabicon" aria-label="vimeo">
+        <md-icon md-svg-src="assets/images/icons/rss.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button fabicon" aria-label="tumblr">
+        <md-icon md-svg-src="assets/images/icons/tumblr.svg"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button  fabicon" aria-label="twitter">
+        <md-icon md-svg-src="assets/images/icons/twitter.svg"></md-icon>
+        </md-button>
+    </div>
+    <div flex="50" flex-md="50" flex-sm="50" flex-xs="100" layout-align-xs="start start" layout-align="end center" layout-xs="column"
+        layout="column">
+        <p class="md-body-2 text">Billboardsindia @Copyrights 2017. All rights reserved.</p>
+    </div>
+
+    </div>
+    <md-button class="goToTop md-fab md-mini bottom-btn" style="display:none;background-color:rgb(198, 40, 40)" />
+    <md-icon style="color: #fff;">^</md-icon>
+    </md-button> 
+
+</footer>

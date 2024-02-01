@@ -1,0 +1,63 @@
+<style>
+    .gross-header {
+        background-color: #44596D !important;
+    }
+
+    .btn-cancel {
+        background: #bc2535 !important;
+         color: #FFFFFF !important;
+         min-height: 30px;
+        line-height: 30px;
+        border-radius: 0.25rem !important;
+    }
+    .btn-save{
+        color: #fff !important;
+        background: #44596D !important;
+        min-height: 30px;
+        line-height: 30px;
+        border-radius: 0.25rem !important;
+    }
+
+</style>
+<md-dialog aria-label="Gross-Fee">
+    <form name="groosPriceForm">
+        <md-toolbar class="gross-header">
+            <div class="md-toolbar-tools">
+                <h2>Gross Fee Percentage (%)</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                     <!-- <md-icon aria-label="Close dialog">X</md-icon> -->
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+
+            <div class="p-2 d-flex">
+                <label style="font-size: 17px;">Gross Status: </label>
+                <select style="width: 50%;" id="grossType" ng-options="grossType.name for grossType in grossTypes"
+                    ng-model="gross.type" name="type" class="form-control" ng-change="grossPercentageChoiceChanged()">
+                    <option value="">select</option>
+                    <option value="{{grossType[0].name}}">
+                        {{grossType.name}}
+                    </option>
+                </select>
+            </div>
+            <div class="p-2" ng-hide="gross.type.name!= 'Yes'">
+                <label style="font-size: 17px;">Gross Percentage (%) : </label>
+                <input type="number" ng-model="grossPercantage" ng-keydown="percantageHandler()"
+                    ng-change="percantageChangeHandler()">
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" class="btn-cancel">
+                cancel
+            </md-button>
+            <md-button ng-disabled="!grossPercantage && gross.type.name!= 'No'" ng-click="gotoPaymentsPage()" class="btn-save">
+                Save
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,151 @@
+<link rel="stylesheet" type="text/css" href="assets/css/owner-main.css" />
+<!-- <<<<<<<<<<<<<<<<<<<<<<<New Code>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+<div layout="column" flex style="position:relative;min-height:100%;">
+    <header class="main__header" style="position: fixed;width:100%;    z-index: 99;">
+        <nav class="air_d_header air_d_2019">
+            <div class="aire_d_bar">
+                <div class="aire_d_bar_inner">
+                    <button class="menu_toggler mobile_btn d-block d-sm-block d-md-block d-lg-none d-xl-none" ng-click="toggleOwnerLeftSidenav()" id="mobileBtn">
+                        <span><i class="fas fa-bars"></i></span>
+                    </button>
+                    <!-- <button class="mobile_btn_close d-block d-sm-block d-md-block d-lg-none d-xl-none" id="closeBtn">
+                        <span><i class="fas fa-times"></i></span>
+                    </button> -->
+                    <a href="#/agency/acampagins" class="air_d_logo">
+                        <img src="assets/images/Logo.png" alt="logo" width="140px" />
+                    </a>
+                </div>
+                <div class="aire_d_sub">
+            
+                    <!-- <ul class="air_d__sub-nav air_main_menu" style="margin-right:10px">
+                        <li class="s-depth1-wrap"><a ng-href="/metro" class="s-btn-toggler">Metro</a></li>
+                    </ul> -->
+                    <ul class="air_d__utility">
+                        
+                        <div class="dropdown s_login">
+                            <button type="button" class=" saved_campaign dropdown-toggle d-none d-sm-none d-md-block" data-toggle="dropdown">
+                                Saved Campaign (2)
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 180px;">
+                                <div class="notification_header ">
+                                    <h3 class="text_color">You have 2 Campaigns</h3>
+                                </div>
+                                <!-- <div ng-repeat="activeUserCampaign in ownerNotifs.slice(0, 3)"> -->
+                                 <div ng-repeat="activeUserCampaign in ownerNotifs.slice(0, 3)">
+                                    <a ng-href="#/agency/acampaign-details">
+                                    <div class="notification_desc pl-3">
+                                        <p>Campagins closed</p>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </a>
+                            </div>
+                                <div class="notification_bottom"> <a ng-href="#/agency/asaved-campaigns"> See all campaigns</a> </div>
+
+                            </div>
+                        </div>
+                        <div class="dropdown s_login">
+                            <button type="button" class="dropdown-toggle bell_icon" data-toggle="dropdown" style="position: relative">
+                                <span class="s-ico-login" style="color: #000"><i class="fa fa-bell"
+                                    aria-hidden="true"></i><span class="badge badge-primary" style="position: absolute;top: 0;right: 0;">11</span></span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="width: 190px;">
+                                <div class="notification_header">
+                                    <h3 class="" style="font-size:12px"><b>You have <span id="notification1-count">0</span> new notification</b></h3>
+                                </div>
+                                <div id="notification-id-0"></div>
+                                <div id="notification-id-1"></div>
+                                <div id="notification-id-2"></div>
+                                <div class="notification_bottom"  >
+                                    <a ng-href="#/agency/agency-notifications">See all notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown s_login">
+                            <button type="button" class=" fst_letter dropdown-toggle" data-toggle="dropdown">
+                                <!-- {{loggedInUser.firstName.slice(0, 1)}} -->
+                                A
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" style="padding:10px 0  20px">
+                                <a class="dropdown-item" ng-href="#/profile">Agency</a> 
+                                <a class="dropdown-item" ng-href="#/agency/acampaigns"> Campaigns</a>
+                                <a class="dropdown-item" ng-href="#/agency/apayments"> Payments</a>
+                                <a class="dropdown-item" ng-href="#/location"> Switch view</a>
+                                <a class="d-block d-sm-block d-md-none dropdown-item" ng-href="#/agency/asaved-campaigns">Saved Campaign</a>
+                                <a class="dropdown-item" ng-href="#/reset_password" style="margin-bottom:15px"> Change Password</a>
+                                <a ng-click="logout()" class="logout_color" style="    margin: 0 0 0 18px;"> Logout</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class=""></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!--toolbar end -->
+    <!-- sidenav start -->
+    <div layout="row" flex style="position:relative;">
+        <md-sidenav class="md-sidenav-left owner__sidenav scrollbar__style md-whiteframe-z2" md-component-id="ownerLeftSidenav"
+                    md-is-locked-open="$mdMedia('min-width: 991px')" style="width: 180px;background: #44596D !important;height:100vh;position: fixed;margin-top: 65px;">
+            <!-- <md-toolbar  style="min-height: 65px !important;">
+                                                    <img class="png-icon" src="assets/images/billboards.png">
+                                    </md-toolbar>  -->
+            <header style="min-height:55px !important" class="contbg">
+                <md-button aria-label="" ng-href="#owner/home" md-no-ink style="background:transparent" class="logo">
+                    <img ng-src="assets/images/owner/agency_logo.png" width="140" alt="owner logo">
+                </md-button>
+            </header>
+            <!-- <md-divider></md-divider> -->
+            <md-content class="sidenav-content" style="background: #44596D !important">
+                <div>
+                    <div style="width: 100% !important;">
+                        <md-list class="owners-menu">
+
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/agency/ashortlistproduct" ng-class="{'active-link': currStateName == 'owner.feeds'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    shortlistproduct(5)
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="nv-nav-item">
+                                <md-button ng-href="#/agency/acampagins" ng-class="{'active-link': currStateName == 'owner.campaigns'}"  ng-click="closeMenuSidenavIfMobile()">
+                                        Campaigns
+                                </md-button>
+                            </md-menu-item>
+                            <!-- campagin start -->
+                           
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/agency/ahoarding-list" ng-class="{'active-link': currStateName == 'owner.hoarding-list'}"
+                                           ng-click="changeHoardingList(); closeMenuSidenavIfMobile()">
+                                    Inventory List
+                                </md-button>
+                            </md-menu-item>
+
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/agency/apayments" ng-class="{'active-link': currStateName == 'owner.payments'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    Payments
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item class="nv-nav-item">
+                                <md-button class="side_navlist" ng-href="#/owner/{{clientSlug}}/bbisupport" ng-class="{'active-link': currStateName == 'owner.bbisupport'}"
+                                           ng-click="closeMenuSidenavIfMobile()">
+                                    BBA Support
+                                </md-button>
+                            </md-menu-item>
+                       
+                        </md-list>
+                    </div>
+                </div>
+            </md-content>
+        </md-sidenav>
+        <ui-view class="main_view" flex></ui-view>
+        <!-- <div layout="column" layout-align="center center" style="position:absolute; bottom: 0px;width: 100%;background: #CCC">
+            <div style="padding: 5px 0;">Powered by PeopleTech Group</div>
+        </div> -->
+    </div>
+</div>
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>

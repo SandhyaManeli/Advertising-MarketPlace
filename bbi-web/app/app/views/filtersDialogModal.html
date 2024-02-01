@@ -1,0 +1,431 @@
+<style>
+    @media screen and (max-width:575px) {
+        md-content {
+            overflow: inherit;
+        }
+    }
+
+    .md-chips .md-chip-input-container {
+        margin-top: 0px;
+    }
+
+    md-content.md-default-theme,
+    md-content {
+        width: 100% !important;
+    }
+
+    md-select .md-select-value {
+        border-bottom: none;
+    }
+
+
+    .cardMax-width {
+        max-width: 95% !important;
+    }
+
+    .md-select-menu-container {
+        z-index: 900;
+    }
+
+    .form_width {
+        border-radius: 10px;
+        margin-top: 80px;
+        background: #767680;
+        height: 90vh;
+    }
+
+    .filter_bgColor {
+        height: 100%;
+        width: 100%;
+        position: fixed;
+    }
+
+    .accordion-button::after {
+        content: "\f107";
+        color: black;
+        right: 2rem;
+        position: absolute;
+        font-family: "FontAwesome"
+    }
+
+    .accordion-button[aria-expanded="true"]::after {
+        content: "\f106";
+    }
+
+    .card {
+        margin-bottom: 7px;
+        background: #F1F3F9;
+    }
+
+    .accordion>.card>.card-header {
+        border-radius: 0;
+        margin-bottom: 0px;
+        cursor: pointer;
+    }
+
+    md-content.md-default-theme,
+    md-content {
+        color: rgba(0, 0, 0, 0.87);
+        background-color: #767680;
+    }
+
+    .filetrsPopContent .material-icons {
+        color: #CAC4D0;
+    }
+
+    .engage-card {
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 2px 2px 6px 1px #e3e3e3;
+        min-height: 145px;
+        margin-right: 1rem;
+        border-radius: 15px;
+    }
+
+    .card-content {
+        margin-top: auto;
+    }
+
+    .input-textSave-bgColor {
+        border: 1px solid #fff;
+        width: 20%;
+        margin-left: 16px;
+        background: none;
+        padding: 5px;
+        font-size: 14px;
+        color: #fff;
+        outline: none;
+    }
+
+    .save-icon button {
+        margin-left: 1rem;
+        background: #2F6FED !important;
+    }
+
+    .selected-type {
+        background-color: #dae0e2;
+    }
+
+    .pill-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .pill-button {
+        background-color: #ddd;
+        border: none;
+        color: black;
+        padding: 7px 14px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 16px;
+    }
+
+    .pill-button:hover {
+        box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .active-pill {
+        background-color:dodgerblue;
+        color: white;
+    }
+</style>
+<div id="myDropdown" class="filter_bgColor">
+    <md-dialog class="form_width cardMax-width md-padding" flex-xs="100" flex="35" flex-md="40" flex-sm="60">
+        <md-dialog-content>
+            <div class="d-flex justify-content-between filetrsPopContent">
+                <h4 style="color: #CAC4D0;">
+                    <button type="button" class="btn" ng-click="resetProduct()">
+                        <i class="material-icons">arrow_back</i>
+                    </button>Filters
+                </h4>
+                <md-button class="md-icon-button " aria-label="Close Side Panel rfp_md_icon" ng-click="resetProduct()">
+                    <md-icon class="md-default-theme close_rg"><i class="material-icons">close</i></md-icon>
+                </md-button>
+            </div>
+            <!-- Dynamically generate pills -->
+            <div class="pill-container">
+                <div ng-repeat="pill in pillData" class="pill-button" ng-click="loadDataForPill(pill.id)"
+                ng-class="{ 'active-pill': pill.id === selectedPillId }" >
+                    {{ pill.search_criteria_name }}
+                </div>
+            </div>
+            <form ng-submit="saveFilterSet()" name="filterForm" novalidate="novalidate">
+                <md-content class="md-padding ">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseOne">
+                                    Advertising Types
+                                </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <!-- Add ng-click to the buttons representing advertising types -->
+                                    <!-- <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+                                        <div class="row" style="margin-left: 0px; margin-right: 0px">
+                                            <div class="col-sm-3 col-3"
+                                                style="padding-right: 0px; padding-left: 0px; text-align: center"
+                                                ng-repeat="format in formatGroup track by $index" class="formatgridpart">
+                                                <md-button class="md-grid-item-content mt-1 mb-1"
+                                                    ng-click="toggleAdvertisingType(format.id)"
+                                                    ng-class="{'selected-type' : isAdvertisingTypeSelected(format.id)}"
+                                                    style="margin: 0px; padding: 0px;">
+                                                    <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                                                    <div class="md-caption">{{format.name}}</div>
+                                                </md-button>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div ng-repeat="formatGroup in formatGrid" class="formatinnerpart">
+                                        <div class="row" style="margin-left:0px;margin-right:0px">
+                                            <div class="col-sm-4 col-4"
+                                                style="padding-right:0px;padding-left:0px; text-align: center"
+                                                ng-repeat="format in formatGroup track by $index"
+                                                class="formatgridpart">
+                                                <div ng-cloak>
+                                                    <md-button class="md-grid-item-content mt-1 mb-1"
+                                                        ng-click="toggleAdvertisingType(format.id)"
+                                                        ng-class="{'selected-type' : isAdvertisingTypeSelected(format.id)}"
+                                                        ng-if="format" style="margin:0px;padding :0px;">
+                                                        <img ng-src="{{serverUrl + format.image}}" class="img-size">
+                                                        <div class="md-caption">{{format.name}}</div>
+                                                    </md-button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseTwo">
+                                    Impressions
+                                </h5>
+                            </div>
+
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <!-- Add an input field for numbers only -->
+                                    <div class="form-group">
+                                        <label for="impressionsInput">Number of Impressions:</label>
+                                        <input type="number" class="form-control" id="impressionsInput"
+                                            ng-model="product_impressions" required style="width: 30%;"
+                                            placeholder="Please Enter Impressions">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseThree">
+                                    Size
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <!-- Input field for Height -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group row m-0">
+                                                <label for="heightInput" class="my-auto">Height : </label>
+                                                <div>
+                                                    <input type="number" class="form-control" id="heightInput"
+                                                        ng-model="size.height" required placeholder="Height">
+                                                </div>
+                                                <div>
+                                                    <select name="productType" ng-model="productType"
+                                                        class="Pixels_feets md-whiteframe-3dp"
+                                                        ng-init="productType ='pixels'">
+                                                        <option value="pixels" class="select_border" selected>pixels
+                                                        </option>
+                                                        <option value="feet" class="select_border">feet</option>
+                                                        <option value="Line Inches" class="select_border">Line Inches
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group row m-0 mt-2">
+                                                <label for="widthInput" class="my-auto">Width : </label>
+                                                <div>
+                                                    <input type="number" class="form-control" id="widthInput"
+                                                        ng-model="size.width" required placeholder="Width">
+                                                </div>
+                                                <div>
+                                                    <select name="productType" ng-model="productType"
+                                                        class="Pixels_feets md-whiteframe-3dp"
+                                                        ng-init="productType ='pixels'">
+                                                        <option value="pixels" class="select_border" selected>pixels
+                                                        </option>
+                                                        <option value="feet" class="select_border">feet</option>
+                                                        <option value="Line Inches" class="select_border">Line Inches
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseFour">
+                                    CPM Range
+                                </h5>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <div class="form-group">
+                                        <label for="cpmInput">CPM Range:</label>
+                                        <input type="text" placeholder="Please Enter CPM Range" class="form-control"
+                                            id="cpmInput" ng-model="product_cpm" required style="width: 30%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingFive">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseFive">
+                                    Text Search
+                                </h5>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <div class="form-group">
+                                        <label for="textSearchInput">Enter Text to Search:</label>
+                                        <input type="text" placeholder="Type here to search" class="form-control"
+                                            id="textSearchInput" ng-model="product_search" style="width: 30%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingSix">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseSix">
+                                    DMA
+                                </h5>
+                            </div>
+                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <div class="form-group">
+                                        <!-- <label for="dmaCodeInput">DMA Code:</label>
+                                        <input type="text" placeholder="Enter DMA Code" class="form-control"
+                                            id="dmaCodeInput" ng-model="product_dma" style="width: 30%;"> -->
+                                        <md-autocomplete md-min-length="3" md-selected-item="areaObj"
+                                            ng-blur="selectSearchedArea()" md-search-text="searchedArea"
+                                            md-items="item in searchableAreas(searchedArea)"
+                                            md-item-text="item.city_name" md-clear-button="true" style=" width: 30%;"
+                                            name="Area" md-menu-class="form-control md-whiteframe-3dp" required>
+                                            <md-item-template>
+                                                <span class="item-title"></span>
+                                                <span class="item-metadata">
+                                                    <span><strong>{{item.city_name}}</strong></span>
+                                                    <span><strong>{{item.state_name}}</strong></span>
+                                                </span>
+                                            </md-item-template>
+                                            <md-not-found>No matches found. </md-not-found>
+                                        </md-autocomplete>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingSeven">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseSeven">
+                                    Latitude, Longitude and Radius
+                                </h5>
+                            </div>
+                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <!-- Input field for Latitude -->
+                                    <div class="form-group">
+                                        <label for="latitudeInput">Latitude:</label>
+                                        <input type="text" placeholder="Enter Latitude" class="form-control"
+                                            id="latitudeInput" ng-model="product_lat" style="width: 30%;">
+                                    </div>
+                                    <!-- Input field for Longitude -->
+                                    <div class="form-group">
+                                        <label for="longitudeInput">Longitude:</label>
+                                        <input type="text" placeholder="Enter Longitude" class="form-control"
+                                            id="longitudeInput" ng-model="product_long" style="width: 30%;">
+                                    </div>
+                                    <!-- Input field for Radius -->
+                                    <div class="form-group">
+                                        <label for="radiusInput">Radius:</label>
+                                        <input type="text" placeholder="Enter Radius" class="form-control"
+                                            id="radiusInput" ng-model="product_radius" style="width: 30%;">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header" id="headingEight">
+                                <h5 class="mb-0 accordion-button" data-toggle="collapse" data-target="#collapseEight">
+                                    Availability Date / Date Range
+                                </h5>
+                            </div>
+                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight"
+                                data-parent="#accordionExample">
+                                <div class="card-body" style="border-bottom: 1px solid #ccc;">
+                                    <div class="row ml-0 mr-0 form-group">
+                                        <div class="col-md-6 text-center mt-2 map_cal">
+                                            <md-datepicker class="form-control " ng-model="product_startDate"
+                                                md-placeholder="Start Date"></md-datepicker>
+                                        </div>
+                                        <div class="col-md-6 text-center mt-2 map_cal ">
+                                            <md-datepicker class="form-control " ng-model="product_endDate"
+                                                md-placeholder="End Date" md-min-date="booked_from"></md-datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-3 d-flex">
+                        <label for="" style="font-size: 16px; color: #FFFFFF;">Like your options? Name this set and save
+                            this filter set to use now or in the future:</label>
+                        <input type="text" class="input-textSave-bgColor" ng-model="search_criteria_name" required>
+                        <!-- <div class="save-icon">
+                            <button class="md-raised all_button md_button_responsive purchage_margin md-button " type="submit">{{ isEditing ? 'update' : 'save' }}</button>
+                        </div> -->
+                        <div class="save-icon">
+                            <button type="submit"
+                                class="md-raised all_button md_button_responsive purchage_margin md-button "
+                                type="submit" ng-if="!getDataResponse.length">
+                                Save
+                            </button>
+                            <button type="submit"
+                                class="md-raised all_button md_button_responsive purchage_margin md-button "
+                                type="submit" ng-if="getDataResponse.length">
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </md-content>
+            </form>
+        </md-dialog-content>
+    </md-dialog>
+</div>

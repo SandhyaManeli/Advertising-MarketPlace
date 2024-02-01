@@ -1,0 +1,67 @@
+<!-- <div layout="column" layout-fill="layout-fill">
+
+	<form name="countryForm" novalidate>
+		<div layout="row" layout-margin layout-padding flex="80" >
+
+				<md-input-container class="md-block" layout-fill="layout-fill" style="margin-top: 20px">
+					<label>Enter Country Name</label>
+					<input ng-model="country.name" type="text" name="countryname" required/>
+					<input type="hidden" name="country_id" ng-model="country.id" />
+					<div ng-messages="countryForm.countryname.$error" ng-if="!$scope.countryForm.name == null">
+						<p ng-message="required">Please complete this field.</p>
+					</div>
+					<div ng-messages="country.$error">
+						<div ng-message="required">Country Name is required</div>
+					</div>
+				</md-input-container>
+				<div class="serverErrors" ng-if="saveCountryErrors && !saveCountryErrors.length == 0">
+					<ul>
+						<li ng-repeat="error in saveCountryErrors">
+							{{error}}
+						</li>
+					</ul>
+				</div>
+			
+			<div>
+				<md-button Class="md-raised md-primary" type="submit" ng-click="saveCountry()" ng-disabled="countryForm.$invalid">SUBMIT</md-button>
+				<md-button Class="md-raised" ng-click="closeMdDialog()">CANCEL</md-button>
+			</div>
+		</div>
+	</form>
+	<div style="margin-top: 1em; margin-bottom:1em;">
+		<div class="table-responsive">
+			<table class="table">
+				<thead class="text_color">
+					<tr>
+						<th>Sr. No.</th>
+						<th>Country</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="country in countryList track by $index">
+						<td class="table_vertical">{{$index + 1}}</td>
+						<td class="table_vertical">{{country.name}}</td>
+						<td class="table_vertical">
+							<span>
+								<a style="cursor:pointer;" ng-click="editCountry(country)">
+									<md-icon>
+										<i class="material-icons">mode_edit</i>
+									</md-icon>
+								</a>
+							</span>
+							<span>
+								<a style="cursor:pointer;" ng-click="deleteCountry(country)">
+									<md-icon>
+										<i class="material-icons">delete</i>
+									</md-icon>
+								</a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</div> -->
